@@ -1,0 +1,7 @@
+
+
+1. picking a color pallete
+// goto: https://coolors.co/visualizer/
+// choose a pallete, click export and get the hex codes
+// go to the file: constants/theme.ts and tell claude to replace the colors in the current theme with what youve picked or do it yourself if you're tuff
+
