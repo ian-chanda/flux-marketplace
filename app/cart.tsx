@@ -32,7 +32,7 @@ export default function CartScreen() {
           <View style={styles.itemContainer}>
             <Image source={item.image} style={styles.image} />
             <View style={styles.itemInfo}>
-              <ThemedText type="subtitle">{item.name}</ThemedText>
+              <ThemedText type="default" style={{fontWeight: "bold"}}>{item.name}</ThemedText>
               <ThemedText type="price_font">{item.price}</ThemedText>
               <ThemedText type="small_price_font">Postage: {item.postage}</ThemedText>
             </View>
@@ -65,7 +65,7 @@ export default function CartScreen() {
           </View>
             <View style={[styles.button, { backgroundColor: colors.accent }]}>
             <Pressable onPress={() => alert('Proceeding to checkout...')}>
-            <ThemedText type="defaultSemiBold" darkColor="white" >Checkout</ThemedText>
+            <ThemedText type="ButtonText" darkColor="white" >Checkout</ThemedText>
             </Pressable>
           </View>
         </View>
@@ -120,9 +120,5 @@ const styles = StyleSheet.create({
         marginTop: 10,
         alignSelf: "center",
     },
-    buttonText: {
-        color: "#fff",
-        fontSize: 16,
-        fontWeight: "bold",
-    },
+    
 });

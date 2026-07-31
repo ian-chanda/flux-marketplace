@@ -5,7 +5,7 @@ import { useThemeColor } from '@/hooks/use-theme-color';
 export type ThemedTextProps = TextProps & {
   lightColor?: string;
   darkColor?: string;
-  type?: 'default' | 'title' | 'defaultSemiBold' | 'subtitle' | 'link' | 'price_font' | 'small_price_font';
+  type?: 'default' |'defaultBold' | 'title' | 'defaultSemiBold' | 'subtitle' | 'link' | 'price_font' | 'small_price_font'| 'ButtonText';
 };
 
 export function ThemedText({
@@ -23,11 +23,13 @@ export function ThemedText({
         { color },
         type === 'default' ? styles.default : undefined,
         type === 'title' ? styles.title : undefined,
+        type === 'defaultBold' ? styles.defaultBold: undefined,
         type === 'defaultSemiBold' ? styles.defaultSemiBold : undefined,
         type === 'subtitle' ? styles.subtitle : undefined,
         type === 'link' ? styles.link : undefined,
         type === 'price_font' ? styles.price_font : undefined,
         type === 'small_price_font' ? styles.small_price_font: undefined,
+        type === 'ButtonText' ? styles.ButtonText: undefined,
         style,
       ]}
       {...rest}
@@ -39,6 +41,11 @@ const styles = StyleSheet.create({
   default: {
     fontSize: 16,
     lineHeight: 24,
+  },
+  defaultBold: {
+    fontSize: 16,
+    lineHeight: 24,
+    fontWeight: "bold"
   },
   defaultSemiBold: {
     fontSize: 16,
@@ -69,4 +76,9 @@ const styles = StyleSheet.create({
     color: "gray",
     fontWeight: "bold",
   },
+    ButtonText: {
+      color: "#fff",
+      fontSize: 17,
+      fontWeight: "bold",
+    },
 });
