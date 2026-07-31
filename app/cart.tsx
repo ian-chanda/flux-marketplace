@@ -49,7 +49,7 @@ export default function CartScreen() {
         <View>
           <View style={{ flexDirection: "column",gap: 10, paddingHorizontal: 20, marginBottom: 30, marginTop: 10}}>
             <View style={{ flexDirection: "row", justifyContent: "space-between", paddingBottom: 10, borderBottomWidth: 1, borderBottomColor: colors.surface }}>
-              <ThemedText type="defaultSemiBold">Price</ThemedText>
+              <ThemedText type="defaultSemiBold">Subtotal</ThemedText>
               <ThemedText type="price_font">K200</ThemedText>
 
             </View>
@@ -58,7 +58,7 @@ export default function CartScreen() {
               <ThemedText type="price_font">K400</ThemedText>
             </View>
             <View style={{ flexDirection: "row", justifyContent: "space-between", paddingBottom: 10, borderBottomWidth: 1, borderBottomColor: colors.surface }}>
-              <ThemedText type="defaultSemiBold">Postage</ThemedText>
+              <ThemedText type="defaultSemiBold">Total</ThemedText>
               <ThemedText type="price_font">K300</ThemedText>
             </View>
           </View>
