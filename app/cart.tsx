@@ -21,7 +21,7 @@ export default function CartScreen() {
         {/*Top bar*/}
       <View style={styles.topBar}>
         <Pressable onPress={() => router.back()} style={styles.backButton}>
-          <MaterialIcons name="chevron-left" size={33} color="black" />
+          <MaterialIcons name="chevron-left" size={33} color="color.accent" />
         </Pressable>
         <ThemedText type='subtitle'>Your Cart</ThemedText>
       </View>
