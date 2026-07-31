@@ -1,6 +1,7 @@
 import { useTheme } from "@/hooks/useTheme";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { Text } from "@react-navigation/elements";
+import { router } from "expo-router";
 import { useState } from "react";
 import { FlatList, Image, Pressable, StatusBar, StyleSheet, TextInput, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -32,7 +33,7 @@ export default function Index() {
                     <MaterialIcons name="search" size={24} color={colors.accent} />
                 </View>
                 <View style={styles.cart}>
-                    <Pressable onPress={() => alert("cart pressed!")}>
+                    <Pressable onPress={() => router.push('/cart')}>
                         <MaterialIcons name="shopping-cart" size={33} color={colors.accent} />
                     </Pressable>
                 </View>
@@ -54,7 +55,7 @@ export default function Index() {
     );
 }
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create({ 
     topBar: {
         flexDirection: "row",
         justifyContent: "center",
@@ -116,6 +117,20 @@ const styles = StyleSheet.create({
     image: {
         width: 200,
         height: 150,
-    }
+    },
+    //Buttom Styles
+    button: {
+        backgroundColor: "#e91e63",
+        paddingVertical: 10,
+        paddingHorizontal: 20,
+        borderRadius: 5,
+        alignItems: "center",
+        marginTop: 10,
+    },
+    buttonText: {
+        color: "#fff",
+        fontSize: 16,
+        fontWeight: "bold",
+    },
 })
 

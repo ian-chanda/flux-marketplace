@@ -5,13 +5,13 @@ import { useThemeColor } from '@/hooks/use-theme-color';
 export type ThemedTextProps = TextProps & {
   lightColor?: string;
   darkColor?: string;
-  type?: 'default' | 'title' | 'defaultSemiBold' | 'subtitle' | 'link';
+  type?: 'default' | 'title' | 'defaultSemiBold' | 'subtitle' | 'link' | 'price_font' | 'small_price_font';
 };
 
 export function ThemedText({
   style,
-  lightColor,
-  darkColor,
+  lightColor = "#F5F5F7",
+  darkColor = "#191919",
   type = 'default',
   ...rest
 }: ThemedTextProps) {
@@ -26,6 +26,8 @@ export function ThemedText({
         type === 'defaultSemiBold' ? styles.defaultSemiBold : undefined,
         type === 'subtitle' ? styles.subtitle : undefined,
         type === 'link' ? styles.link : undefined,
+        type === 'price_font' ? styles.price_font : undefined,
+        type === 'small_price_font' ? styles.small_price_font: undefined,
         style,
       ]}
       {...rest}
@@ -56,5 +58,15 @@ const styles = StyleSheet.create({
     lineHeight: 30,
     fontSize: 16,
     color: '#0a7ea4',
+  },
+  price_font: {
+    fontSize: 17,
+    color: "black",
+    fontWeight: "bold",
+  },
+  small_price_font: {
+    fontSize: 10,
+    color: "gray",
+    fontWeight: "bold",
   },
 });
