@@ -33,7 +33,7 @@ export default function CartScreen() {
             <View style={styles.itemInfo}>
               <Text style={styles.name_font}>{item.name}</Text>
               <Text style={styles.price_font}>{item.price}</Text>
-              <Text style={styles.postage_font}>{item.postage}</Text>
+              <Text style={styles.postage_font}>Postage: {item.postage}</Text>
             </View>
                 <View style={{ paddingLeft: 110}}>
                 <Pressable onPress={()=> alert('Item deleted')}>
