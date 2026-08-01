@@ -47,7 +47,7 @@ const [ SelectPayment, setSelectedPayment] = useState<string | null>(null);
                   </View>
               </View>
               { SelectPayment === 'airtel' || SelectPayment === 'mtn' || SelectPayment === 'zamtel' ? (
-                <View style={[styles.phoneField, {backgroundColor: colors.surface}, {borderColor: colors.accent}, {borderWidth: 1}]}>
+                <View style={[styles.phoneField, {backgroundColor: colors.surface}]}>
                   <TextInput placeholder="Enter phone number" keyboardType="phone-pad" maxLength={10} placeholderTextColor={colors.placeholder} style={{textAlign: "center"}}/>
                 </View>
               ): null
@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
   flexDirection: "row",
   justifyContent: "center",
   alignItems: "center",
-  marginBottom: 160,
+  marginBottom: 145,
   paddingHorizontal: 10,
   paddingVertical: 15,
   width: '65%',   
