@@ -51,7 +51,6 @@ export default function CartScreen() {
             <View style={{ flexDirection: "row", justifyContent: "space-between", paddingBottom: 10, borderBottomWidth: 1, borderBottomColor: colors.surface }}>
               <ThemedText type="defaultSemiBold">Subtotal</ThemedText>
               <ThemedText type="price_font">K200</ThemedText>
-
             </View>
             <View style={{ flexDirection: "row", justifyContent: "space-between", paddingBottom: 10, borderBottomWidth: 1, borderBottomColor: colors.surface }}>
               <ThemedText type="defaultSemiBold">Postage</ThemedText>
@@ -64,7 +63,7 @@ export default function CartScreen() {
           </View>
           </View>
             <View style={[styles.button, { backgroundColor: colors.accent }]}>
-            <Pressable onPress={() => alert('Proceeding to checkout...')}>
+            <Pressable onPress={() => router.push("/payment")}>
             <ThemedText type="ButtonText" darkColor="white" >Checkout</ThemedText>
             </Pressable>
           </View>
@@ -111,7 +110,6 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
   },
-      //Buttom Styles
     button: {
         paddingVertical: 20,
         paddingHorizontal: 100,
