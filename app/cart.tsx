@@ -1,4 +1,6 @@
+import Button from "@/components/Button";
 import { ThemedText } from "@/components/themed-text";
+import { TopBar } from '@/components/topBar';
 import { useTheme } from "@/hooks/useTheme";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { router } from "expo-router";
@@ -19,12 +21,7 @@ export default function CartScreen() {
     <SafeAreaView
       style={{ backgroundColor: colors.background, flex: 1 }}>
         {/*Top bar*/}
-      <View style={styles.topBar}>
-        <Pressable onPress={() => router.back()} style={styles.backButton}>
-          <MaterialIcons name="chevron-left" size={33} color="color.accent" />
-        </Pressable>
-        <ThemedText type='subtitle'>Your Cart</ThemedText>
-      </View>
+        <TopBar title="Cart" />
       {/*Item scrollable*/}
       <FlatList
         data={items}
@@ -32,7 +29,7 @@ export default function CartScreen() {
           <View style={styles.itemContainer}>
             <Image source={item.image} style={styles.image} />
             <View style={styles.itemInfo}>
-              <ThemedText type="subtitle">{item.name}</ThemedText>
+              <ThemedText type="default" style={{fontWeight: "bold"}}>{item.name}</ThemedText>
               <ThemedText type="price_font">{item.price}</ThemedText>
               <ThemedText type="small_price_font">Postage: {item.postage}</ThemedText>
             </View>
@@ -51,7 +48,6 @@ export default function CartScreen() {
             <View style={{ flexDirection: "row", justifyContent: "space-between", paddingBottom: 10, borderBottomWidth: 1, borderBottomColor: colors.surface }}>
               <ThemedText type="defaultSemiBold">Subtotal</ThemedText>
               <ThemedText type="price_font">K200</ThemedText>
-
             </View>
             <View style={{ flexDirection: "row", justifyContent: "space-between", paddingBottom: 10, borderBottomWidth: 1, borderBottomColor: colors.surface }}>
               <ThemedText type="defaultSemiBold">Postage</ThemedText>
@@ -63,11 +59,7 @@ export default function CartScreen() {
             </View>
           </View>
           </View>
-            <View style={[styles.button, { backgroundColor: colors.accent }]}>
-            <Pressable onPress={() => alert('Proceeding to checkout...')}>
-            <ThemedText type="defaultSemiBold" darkColor="white" >Checkout</ThemedText>
-            </Pressable>
-          </View>
+          <Button title="Checkout" onPress={() => router.push("/payment")} />
         </View>
     </SafeAreaView>
   );
@@ -111,18 +103,5 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
   },
-      //Buttom Styles
-    button: {
-        paddingVertical: 20,
-        paddingHorizontal: 100,
-        borderRadius: 60,
-        alignItems: "center",
-        marginTop: 10,
-        alignSelf: "center",
-    },
-    buttonText: {
-        color: "#fff",
-        fontSize: 16,
-        fontWeight: "bold",
-    },
+  
 });

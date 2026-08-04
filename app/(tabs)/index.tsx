@@ -118,19 +118,5 @@ const styles = StyleSheet.create({
         width: 200,
         height: 150,
     },
-    //Buttom Styles
-    button: {
-        backgroundColor: "#e91e63",
-        paddingVertical: 10,
-        paddingHorizontal: 20,
-        borderRadius: 5,
-        alignItems: "center",
-        marginTop: 10,
-    },
-    buttonText: {
-        color: "#fff",
-        fontSize: 16,
-        fontWeight: "bold",
-    },
 })
 
