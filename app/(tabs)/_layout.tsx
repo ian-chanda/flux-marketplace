@@ -10,7 +10,12 @@ export default function Layout() {
         <Tabs
             screenOptions={{
                 tabBarActiveTintColor: colors.accent,
-                tabBarStyle: { backgroundColor: colors.background },
+                tabBarStyle: { 
+                    height: 80,
+                    backgroundColor: colors.background, 
+                    marginTop: -40
+                },
+                    
 
             }}
         >

@@ -1,27 +1,21 @@
+import Button from "@/components/Button";
 import { ThemedText } from "@/components/themed-text";
+import { TopBar } from '@/components/topBar';
 import { useTheme } from "@/hooks/useTheme";
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import { router } from "expo-router";
 import { useState } from "react";
 import { Image, Pressable, ScrollView, StyleSheet, TextInput, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-export default function PaymentSreen () {
+export default function PaymentScreen () {
 const { colors } =  useTheme()
 const [ SelectPayment, setSelectedPayment] = useState<string | null>(null);
     return (
         <SafeAreaView
         style={{backgroundColor: colors.background, flex: 1}}>
           <ScrollView
-          
           contentContainerStyle={{flexGrow: 2}}
           keyboardShouldPersistTaps="handled">
-              <View style={styles.topBar}>
-                  <Pressable onPress={() => router.back()} style={styles.backButton}>
-                  <MaterialIcons name="chevron-left" size={33} color="color.accent" />
-                  </Pressable>
-              <ThemedText type='subtitle'>Payment Method</ThemedText>
-              </View>
+              <TopBar title="Payment Method" />
               <View style={styles.shipping}>
                   <ThemedText type="defaultBold">Delivery Address</ThemedText>
                   <View style={styles.location_container}>
@@ -56,11 +50,7 @@ const [ SelectPayment, setSelectedPayment] = useState<string | null>(null);
                 <ThemedText type="subtitle">Total:</ThemedText>
                 <ThemedText type="subtitle">K569.87</ThemedText>
               </View>
-                <View style={[styles.button, { backgroundColor: colors.accent }]}>
-                  <Pressable onPress={() => alert("please wait..")}>
-                  <ThemedText type="ButtonText" darkColor="white" >Confirm Order</ThemedText>
-                  </Pressable>
-                </View>
+              <Button title="Pay Now" onPress={() => alert("Processing payment...")} />
           </ScrollView>
         </SafeAreaView>
     )
