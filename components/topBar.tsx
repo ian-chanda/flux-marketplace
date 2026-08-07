@@ -55,6 +55,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginTop: 20,
+    paddingBottom: 20
   },
   backButton: {
     flex: 1,

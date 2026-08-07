@@ -40,8 +40,7 @@ export default function SellingScreen() {
               </View>
               <View style={[styles.VerifyContainer, {marginTop: 1}]}>
                 <MaterialIcons name="circle" size={15} color={"black"} style={styles.verifyImage} />
-                <ThemedText type="defaultSmall" >Member since</ThemedText>
-                <ThemedText type="defaultSmall"> 22 jan 2022</ThemedText>
+                <ThemedText type="defaultSmall" >Member since 22 jan 2026</ThemedText>
               </View> 
           </View>
         </View>
@@ -69,7 +68,7 @@ export default function SellingScreen() {
           <ActionButton
           title='Notifications'
           Icon='notifications'
-          onPress={() => alert("Add listing")}
+          onPress={() => router.push("/notifications")}
           />
         </View>  
         </View>
