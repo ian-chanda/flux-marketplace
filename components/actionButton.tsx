@@ -6,15 +6,16 @@ import { ThemedText } from "./themed-text";
 export type ActionButtonProps  = {
     title: string;
     Icon: ComponentProps<typeof MaterialIcons>["name"];
+    onPress: () => void;
 }
 
-export default function ActionButton ({title, Icon}: ActionButtonProps) {
+export default function ActionButton ({title, Icon, onPress}: ActionButtonProps) {
     const { colors } = useTheme();
     return (
         <View 
         style={[styles.ButtonContainer, styles.shadow, {backgroundColor: colors.accent}]}>
             <Pressable
-            onPress={()=> alert("Notifications")}
+            onPress={onPress}
             style={{flexDirection: "row", alignItems: "center"}}
             >
               <MaterialIcons name={Icon} size={30} color={colors.background} style={{marginRight: 5}} />
