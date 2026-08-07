@@ -4,6 +4,7 @@ import DashPad from '@/components/DashPad';
 import { ThemedText } from '@/components/themed-text';
 import { useTheme } from '@/hooks/useTheme';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import { router } from 'expo-router';
 import { Image, ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -51,19 +52,24 @@ export default function SellingScreen() {
           {/*row buttons*/}
           <ActionButton
           title = "Add Listing"
-          Icon="add"/>
+          Icon="add"
+          onPress={() => alert("Add listing")}/>
+          
           <ActionButton
           title="Messages"
-          Icon="mail"/>
+          Icon="mail"
+          onPress={() => router.push("/messages")}/>
         </View>
         <View
         style={[styles.InfoCOntainer, {backgroundColor: colors.background}]}>
           <ActionButton
           title="View Listings"
-          Icon='dashboard'/>
+          Icon='dashboard'
+          onPress={() => alert("Add listing")}/>
           <ActionButton
           title='Notifications'
           Icon='notifications'
+          onPress={() => alert("Add listing")}
           />
         </View>  
         </View>
