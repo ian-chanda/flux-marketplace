@@ -46,6 +46,7 @@ const styles = StyleSheet.create({
   defaultSmall: {
     fontSize: 11,
     lineHeight: 20,
+    
   },
   defaultBold: {
     fontSize: 16,
@@ -56,6 +57,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 24,
     fontWeight: '600',
+    opacity: 0.6
   },
   title: {
     fontSize: 32,

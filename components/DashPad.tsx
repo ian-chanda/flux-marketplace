@@ -28,8 +28,7 @@ export default function DashPad({ title, value, subIconColor, mainIcon, subTitle
             
             }}>
         <View
-        style={{padding: 5, backgroundColor: colors.surface, borderRadius: 50, width: 50, height: 50, justifyContent: "center", alignItems: "center"}}>
-            <MaterialIcons name={mainIcon} size={30} color={colors.accent} />
+        style={{padding: 5, justifyContent: "center", alignItems: "center"}}>
         </View>
         <View
         style={{flex: 1, marginLeft: 10, marginTop: 9}}>
