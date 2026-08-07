@@ -1,81 +1,158 @@
+import { BookmarkBadge } from "@/components/bookmark-badge";
+import { CustomHeader } from "@/components/customHeader";
+import { SearchBarButton } from "@/components/searchBarButton";
+import { ThemedText } from "@/components/themed-text";
+import { ThemedView } from "@/components/themed-view";
 import { useTheme } from "@/hooks/useTheme";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { Text } from "@react-navigation/elements";
 import { router } from "expo-router";
 import { useState } from "react";
+import { ScrollView } from "react-native";
+import { TouchableOpacity } from "react-native";
 import { FlatList, Image, Pressable, StatusBar, StyleSheet, TextInput, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 
-const products = [
-    { id: 1, name: "Product 1", Desc: 'new', image: 'url', price: "K2" },
-    { id: 2, name: "Product 2", Desc: 'pre-owned', image: 'url', price: "K3" },
-    { id: 3, name: "Product 3", Desc: 'used-like new', image: 'url', price: "K4" },
-    { id: 4, name: "Product 4", Desc: 'new', image: 'url', price: "K5" },
-]
+type buttonTypes = {
+    icon: any;
+    title: string;
+}
 
-export default function Index() {
-    const [Number, onChangeNumber] = useState('');
+const SmallIconButton = ({ icon, title }: buttonTypes) => {
     const { colors } = useTheme()
 
     return (
-        <SafeAreaView
-            style={{ backgroundColor: colors.background, flex: 1 }}>
-            <View style={styles.topBar}>
-                <View style={[styles.search_container, { backgroundColor: colors.surface }]}>
-                    <TextInput
-                        style={[styles.input, { color: colors.text, backgroundColor: colors.surface}]}
-                        onChangeText={onChangeNumber}
-                        value={Number}
-                        placeholderTextColor={colors.background}
-                        placeholder="Search.."
-                    />
+        <TouchableOpacity style={{
+            flexShrink: 0,
+            flexDirection: 'row',
+            paddingHorizontal: 10,
+            height: 35,
+            gap: 3,
+            alignItems: 'center',
+            backgroundColor: colors.surface,
+            borderRadius: 100,
+        }}>
+            <MaterialIcons name={icon} size={18} color={colors.accent} />
+            <ThemedText type="mediumFaded">{title}</ThemedText>
+        </TouchableOpacity>
+    )
+}
 
-                    <MaterialIcons name="search" size={24} color={colors.accent} />
-                </View>
+const products = [
+    { id: 1, name: "Product THREEE HUNDRED AND NIGETU", Desc: 'new', image: 'url', price: "K2" },
+    { id: 2, name: "Product 2", Desc: 'pre-owned', image: 'url', price: "K3" },
+    { id: 3, name: "Product 3", Desc: 'used-like new', image: 'url', price: "K4" },
+    { id: 4, name: "Product 4", Desc: 'new', image: 'url', price: "K5" },
+    { id: 5, name: "Product 3", Desc: 'used-like new', image: 'url', price: "K4" },
+    { id: 6, name: "Product 3", Desc: 'used-like new', image: 'url', price: "K4" },
+    { id: 7, name: "Product 3", Desc: 'used-like new', image: 'url', price: "K4" },
+]
+
+export default function Index() {
+    const { colors } = useTheme()
+    const [bookmarked, setBookmarked] = useState<Record<number, boolean>>({});
+
+    const toggleBookmark = (id: number) => {
+        setBookmarked(prev => ({ ...prev, [id]: !prev[id] }));
+    };
+
+    return (
+        <ThemedView isTabVisible={true}>
+            <CustomHeader>
+                <SearchBarButton placeholder="search..." width={'85%'} />
                 <View style={styles.cart}>
                     <Pressable onPress={() => router.push('/cart')}>
                         <MaterialIcons name="shopping-cart" size={33} color={colors.accent} />
+                        {/* badge */}
+                        <View style={{
+                            position: 'absolute',
+                            backgroundColor: colors.accent,
+                            top: -10,
+                            right: -5,
+                            borderRadius: 100,
+                            width: 20,
+                            height: 20,
+                            alignItems: 'center',
+                            justifyContent: 'center'
+                        }}>
+                            <ThemedText type="defaultSmall" style={{ color: colors.background }}>3</ThemedText>
+                        </View>
                     </Pressable>
                 </View>
+            </CustomHeader>
+
+            <ScrollView
+                showsHorizontalScrollIndicator={false}
+                horizontal
+                style={{
+                    flexGrow: 0,
+                    paddingVertical: 10,
+                }} contentContainerStyle={{
+                    paddingHorizontal: 5,
+                    gap: 10
+                }}
+            >
+                <SmallIconButton icon="favorite-outline" title="saved" />
+                <SmallIconButton icon="sell" title="selling" />
+                <SmallIconButton icon="sell" title="bitches" />
+                <SmallIconButton icon="sell" title="selling" />
+                <SmallIconButton icon="sell" title="selling" />
+            </ScrollView>
+
+
+            <View style={{ paddingHorizontal: 10, flex: 1 }}>
+                <FlatList
+                    data={products}
+                    numColumns={2}
+                    columnWrapperStyle={{ justifyContent: 'space-between' }}
+                    contentContainerStyle={{ gap: 16 }}
+                    renderItem={({ item }) => (
+                        <View style={styles.product_card}>
+
+                            <View>
+                                <BookmarkBadge
+                                    bookmarked={bookmarked[item.id]}
+                                    onPress={() => toggleBookmark(item.id)}
+                                />
+                                <Image
+                                    source={require('../../assets/images/dino.jpg')}
+                                    style={styles.image}
+                                    resizeMode="cover"
+                                />
+                            </View>
+
+                            <ThemedText type="smallFaded">{item.Desc}</ThemedText>
+                            <ThemedText type="defaultBold" numberOfLines={1}>{item.name}</ThemedText>
+                            <ThemedText type="mediumBold" >{item.price}</ThemedText>
+                        </View>
+                    )}
+                    keyExtractor={(item) => item.id.toString()}
+                />
             </View>
-            <FlatList
-                data={products}
-                numColumns={2}
-                renderItem={({ item }) => (
-                    <View style={styles.product_bound}>
-                        <Image source={{ uri: item.image }} style={styles.image} />
-                        <Text style={styles.name_font}>{item.name}</Text>
-                        <Text style={styles.desc_font}>{item.Desc}</Text>
-                        <Text style={styles.price_font}>{item.price}</Text>
-                    </View>
-                )}
-                keyExtractor={(item) => item.id.toString()}
-            />
-        </SafeAreaView>
+        </ThemedView>
     );
 }
 
-const styles = StyleSheet.create({ 
+const styles = StyleSheet.create({
     topBar: {
         flexDirection: "row",
         justifyContent: "center",
         alignItems: "center",
         gap: 15,
-        paddingHorizontal: 15,
-        paddingVertical: 15,
+        paddingHorizontal: 10,
+        paddingVertical: 10,
     },
     safe_area: {
         flex: 1,
         backgroundColor: "#e91e63",
     },
     search_container: {
-        flex: 1,
+        width: '90%',
         flexDirection: "row",
         alignItems: "center",
-        justifyContent: 'center',
+        justifyContent: 'space-between',
         borderRadius: 30,
         paddingHorizontal: 10,
-        paddingVertical: 6,
+        paddingVertical: 12,
     },
     search_icon: {
         position: "absolute",
@@ -97,10 +174,9 @@ const styles = StyleSheet.create({
         //flex: 1,
         paddingTop: StatusBar.currentHeight,
     },
-    product_bound: {
-        flex: 1,
-        margin: 10,
-        borderRadius: 8
+    product_card: {
+        width: '45%',
+        borderRadius: 8,
 
     },
     name_font: {
@@ -115,8 +191,9 @@ const styles = StyleSheet.create({
         fontSize: 15,
     },
     image: {
-        width: 200,
+        width: '100%',
         height: 150,
+        borderRadius: 8,
     },
 })
 
