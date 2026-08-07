@@ -4,8 +4,8 @@ import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { useTheme } from '@/hooks/useTheme';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import { router } from 'expo-router';
-import { useState } from 'react';
+import { router, useLocalSearchParams } from 'expo-router';
+import { useEffect, useState } from 'react';
 import {
   FlatList, View,
   TouchableOpacity, StyleSheet
@@ -31,17 +31,27 @@ export default function SearchScreen() {
   const { colors } = useTheme()
   const [searchValue, setSearchValue] = useState('')
   const [activeTab, setActiveTab] = useState<'recent' | 'saved'>('recent')
+  const {value} = useLocalSearchParams()
+
+  useEffect(() => {
+    if(value && value !== "search...")
+      setSearchValue(value as string)
+
+  }, [value])
 
   const tabData = activeTab === 'recent' ? RecentTabData : SavedTabData;
 
   return (
-    <ThemedView isTabViisble style={{paddingHorizontal: 10}}>
+    <ThemedView isTabVisible style={{ paddingHorizontal: 10 }}>
 
       <CustomSearchBar
         width={'100%'}
         searchValue={searchValue}
         setSearchValue={setSearchValue}
-        onSearch={() => router.push('/search-results')}
+        onSearch={() => router.push({
+          pathname: '/results',
+          params: {query: searchValue}
+        })}
       />
 
       {/* TABS */}
@@ -77,11 +87,16 @@ export default function SearchScreen() {
 
       <FlatList
         data={tabData}
-        contentContainerStyle={{gap: 10}}
+        contentContainerStyle={{ gap: 10 }}
         renderItem={({ item }) => (
           <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-            <TouchableOpacity>
-              <ThemedText type="default" numberOfLines={1}>{item.name}</ThemedText>
+            <TouchableOpacity
+              onPress={() => router.push({
+                pathname: '/results',
+                params: { query: item.name}
+              })}
+            >
+              <ThemedText type="defaultFaded" numberOfLines={1}>{item.name}</ThemedText>
             </TouchableOpacity>
             <TouchableOpacity>
               <MaterialIcons name="close" size={20} color={colors.accent} />

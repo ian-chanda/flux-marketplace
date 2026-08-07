@@ -1,4 +1,5 @@
 import { BookmarkBadge } from "@/components/bookmark-badge";
+import { CustomHeader } from "@/components/customHeader";
 import { SearchBarButton } from "@/components/searchBarButton";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
@@ -30,8 +31,8 @@ const SmallIconButton = ({ icon, title }: buttonTypes) => {
             backgroundColor: colors.surface,
             borderRadius: 100,
         }}>
-            <MaterialIcons name={icon} size={20} color={colors.accent} />
-            <ThemedText>{title}</ThemedText>
+            <MaterialIcons name={icon} size={18} color={colors.accent} />
+            <ThemedText type="mediumFaded">{title}</ThemedText>
         </TouchableOpacity>
     )
 }
@@ -55,9 +56,8 @@ export default function Index() {
     };
 
     return (
-        <ThemedView isTabViisble={true}>
-
-            <View style={styles.topBar}>
+        <ThemedView isTabVisible={true}>
+            <CustomHeader>
                 <SearchBarButton placeholder="search..." width={'85%'} />
                 <View style={styles.cart}>
                     <Pressable onPress={() => router.push('/cart')}>
@@ -67,7 +67,7 @@ export default function Index() {
                             position: 'absolute',
                             backgroundColor: colors.accent,
                             top: -10,
-                            right: -10,
+                            right: -5,
                             borderRadius: 100,
                             width: 20,
                             height: 20,
@@ -78,16 +78,18 @@ export default function Index() {
                         </View>
                     </Pressable>
                 </View>
-            </View>
-
+            </CustomHeader>
 
             <ScrollView
                 showsHorizontalScrollIndicator={false}
-                horizontal 
-                style={{ 
+                horizontal
+                style={{
                     flexGrow: 0,
-                    paddingVertical: 10
-                }} contentContainerStyle={{ gap: 10 }}
+                    paddingVertical: 10,
+                }} contentContainerStyle={{
+                    paddingHorizontal: 5,
+                    gap: 10
+                }}
             >
                 <SmallIconButton icon="favorite-outline" title="saved" />
                 <SmallIconButton icon="sell" title="selling" />
@@ -97,7 +99,7 @@ export default function Index() {
             </ScrollView>
 
 
-            <View style={{paddingHorizontal: 10, flex: 1}}>
+            <View style={{ paddingHorizontal: 10, flex: 1 }}>
                 <FlatList
                     data={products}
                     numColumns={2}
@@ -118,9 +120,9 @@ export default function Index() {
                                 />
                             </View>
 
-                            <ThemedText type="small_price_font">{item.Desc}</ThemedText>
-                            <ThemedText type="subtitle" numberOfLines={1}>{item.name}</ThemedText>
-                            <ThemedText type="price_font" >{item.price}</ThemedText>
+                            <ThemedText type="smallFaded">{item.Desc}</ThemedText>
+                            <ThemedText type="defaultBold" numberOfLines={1}>{item.name}</ThemedText>
+                            <ThemedText type="mediumBold" >{item.price}</ThemedText>
                         </View>
                     )}
                     keyExtractor={(item) => item.id.toString()}

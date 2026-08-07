@@ -1,11 +1,12 @@
 import { BookmarkBadge } from '@/components/bookmark-badge';
+import { CustomHeader } from '@/components/customHeader';
 import { CustomSearchBar } from '@/components/customSearchBar';
 import { SearchBarButton } from '@/components/searchBarButton';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { useTheme } from '@/hooks/useTheme';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import { router } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 import { useState } from 'react';
 import { Image } from 'react-native';
 import { FlatList, Text, TouchableOpacity, View } from 'react-native';
@@ -25,47 +26,29 @@ const search_results = [
 export default function ProfileScreen() {
 	const { colors } = useTheme()
 	const [bookmarked, setBookmarked] = useState<Record<number, boolean>>({});
+	const { query } = useLocalSearchParams()
 
 	const toggleBookmark = (id: number) => {
 		setBookmarked(prev => ({ ...prev, [id]: !prev[id] }));
 	};
 
 	return (
-		<ThemedView isTabViisble={false}>
+		<ThemedView isTabVisible>
 
 			{/* header */}
-			<View style={{
-				flexDirection: 'row',
-				height: 60,
-				width: '100%',
-				justifyContent: 'space-evenly',
-				alignItems: 'center'
-			}}>
-				<TouchableOpacity
-					onPress={() => router.back()}
-					style={{
-						width: 40,
-						height: 50,
-						borderRadius: 12,
-						backgroundColor: colors.surface,
-						alignItems: 'center',
-						justifyContent: 'center'
-					}}
-				>
-					<MaterialIcons name='chevron-left' color={colors.accent} size={24} />
-				</TouchableOpacity>
-
+			<CustomHeader showBack>
 				<SearchBarButton
-					width={'70%'}
-					placeholder='searched item'
+					width={'85%'}
+					placeholder={query ? query as string : 'searched item'}
 				/>
-			</View>
+
+			</CustomHeader>
 			<View style={{ flex: 1, marginTop: 10, paddingHorizontal: 5 }}>
 				<FlatList
 					data={search_results}
 					contentContainerStyle={{ gap: 16 }}
 					renderItem={({ item }) => (
-						<View style={{ flexDirection: 'row', gap: 10 }}>
+						<TouchableOpacity style={{ flexDirection: 'row', gap: 10 }}>
 
 							<View>
 
@@ -76,14 +59,14 @@ export default function ProfileScreen() {
 								/>
 							</View>
 							<View style={{ flex: 1 }}>
-								<ThemedText type='small_price_font'>{item.Desc}</ThemedText>
-								<ThemedText type='defaultBold' ellipsizeMode='tail'>
+								<ThemedText type='smallFaded'>{item.Desc}</ThemedText>
+								<ThemedText type='mediumBold' ellipsizeMode='tail'>
 									{item.name}
 								</ThemedText>
-								<ThemedText type='subtitle'>{item.price}</ThemedText>
-								<ThemedText type='default'>{item.delivery ? item.delivery : "contact for delivery"}</ThemedText>
+								<ThemedText type='defaultBold'>{item.price}</ThemedText>
+								<ThemedText type='mediumFaded'>{item.delivery ? item.delivery : "contact for delivery"}</ThemedText>
 							</View>
-						</View>
+						</TouchableOpacity>
 					)}
 					keyExtractor={(item) => item.id.toString()}
 				/>

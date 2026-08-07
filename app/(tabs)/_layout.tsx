@@ -37,12 +37,13 @@ export default function Layout() {
                 }} />
 
             <Tabs.Screen
-                name="search"
+                name="(search)"
                 options={{
-                    title: "Search",
                     headerShown: false,
-                    tabBarIcon: ({ color }) => <MaterialIcons name="search" size={24} color={color} />
-                }} />
+                    title: "Search",
+                    tabBarIcon: ({ color }) => <MaterialIcons name="search" size={24} color={color} />,
+                }}
+            />
 
             <Tabs.Screen
                 name="settings"

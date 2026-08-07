@@ -9,7 +9,10 @@ export const SearchBarButton = ({ placeholder, width }: { placeholder: string, w
 	const { colors } = useTheme()
 	return (
 		<TouchableOpacity
-			onPress={() => router.push('/(tabs)/search')}
+			onPress={() => router.push({
+				pathname: '/(tabs)/(search)',
+				params: {value: placeholder}
+			})}
 			style={[
 				styles.search_container, {
 					width: width,
@@ -20,7 +23,6 @@ export const SearchBarButton = ({ placeholder, width }: { placeholder: string, w
 
 			<MaterialIcons name="search" size={24} color={colors.accent} />
 		</TouchableOpacity>
-
 	)
 }
 
