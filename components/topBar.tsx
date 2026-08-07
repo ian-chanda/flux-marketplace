@@ -16,6 +16,7 @@ export function TopBar({ title }: TopBarProps) {
       <Pressable onPress={() => router.back()} style={styles.backButton}>
         <MaterialIcons name="chevron-left" size={33} color={colors.accent} />
       </Pressable>
+
       <ThemedText type='subtitle'>{title}</ThemedText>
     </View>
   );
