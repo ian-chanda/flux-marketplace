@@ -45,8 +45,8 @@ export default function ProfileScreen() {
     <ThemedView isTabVisible style={{}}>
       <CustomHeader title="My Profile">
         <View style={{ flexDirection: 'row', alignItems: 'center', gap: 15 }}>
-          <IconButton icon={"notifications"} onPress={() => { }} badgeValue='9+' />
-          <IconButton icon={"shopping-cart"} onPress={() => { }} badgeValue='2' />
+          <IconButton icon={"notifications"} onPress={() => router.push('/notifications')} badgeValue='9+' />
+          <IconButton icon={"shopping-cart"} onPress={() => router.push('/cart')} badgeValue='2' />
         </View>
       </CustomHeader>
 
@@ -70,7 +70,10 @@ export default function ProfileScreen() {
               borderRadius: 100
             }} />
             <View style={{}}>
-              <ThemedText type='largeBold'>Admin Admin</ThemedText>
+              <View style={{flexDirection: 'row', alignItems: 'center', gap: 5}}>
+                <ThemedText type='largeBold'>Admin Admin</ThemedText>
+                <MaterialIcons name='verified' color={colors.text} size={15}/>
+              </View>
               <ThemedText type='small'>@admin9003</ThemedText>
             </View>
           </View>
