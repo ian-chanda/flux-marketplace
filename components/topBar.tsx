@@ -8,18 +8,21 @@ import { ThemedText } from './themed-text';
 export type TopBarProps = {
   title: string;
   showSearch?: boolean;
+  showBackButton?: boolean;  // ← Add this
 };
 
-export function TopBar({ title, showSearch = false }: TopBarProps) {
+export function TopBar({ title, showSearch = false, showBackButton = true }: TopBarProps) {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchText, setSearchText] = useState('');
   const { colors } = useTheme();
 
   return (
     <View style={styles.topBar}>
-      <Pressable onPress={() => router.back()} style={styles.backButton}>
-        <Ionicons name="chevron-back" size={30} color={colors.accent} />
-      </Pressable>
+      {showBackButton && (  // ← Add this
+        <Pressable onPress={() => router.back()} style={styles.backButton}>
+          <Ionicons name="chevron-back" size={30} color={colors.accent} />
+        </Pressable>
+      )}
 
       {showSearch && isSearchOpen ? (
         <TextInput
@@ -40,7 +43,7 @@ export function TopBar({ title, showSearch = false }: TopBarProps) {
             setIsSearchOpen(!isSearchOpen);
             if (isSearchOpen) setSearchText('');
           }}
-          style={[styles.searchButton, { backgroundColor: colors.surface }]}
+          style={[styles.searchButton, { backgroundColor: colors.surface }, {marginBottom: 20}]}
         >
           <Ionicons name={isSearchOpen ? "close" : "search"} size={24} color={colors.accent} />
         </Pressable>

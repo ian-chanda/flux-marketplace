@@ -46,11 +46,11 @@ export default function Layout() {
             />
 
             <Tabs.Screen
-                name="settings"
+                name="messages"
                 options={{
-                    title: "Settings",
+                    title: "Messages",
                     headerShown: false,
-                    tabBarIcon: ({ color }) => <MaterialIcons name="settings" size={24} color={color} />
+                    tabBarIcon: ({ color }) => <MaterialIcons name="mail" size={24} color={color} />
                 }} />
 
             <Tabs.Screen

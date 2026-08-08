@@ -55,22 +55,10 @@ export default function SellingScreen() {
           onPress={() => alert("Add listing")}/>
           
           <ActionButton
-          title="Messages"
-          Icon="mail"
-          onPress={() => router.push("/messages")}/>
-        </View>
-        <View
-        style={[styles.InfoCOntainer, {backgroundColor: colors.background}]}>
-          <ActionButton
           title="View Listings"
           Icon='dashboard'
-          onPress={() => alert("Add listing")}/>
-          <ActionButton
-          title='Notifications'
-          Icon='notifications'
-          onPress={() => router.push("/notifications")}
-          />
-        </View>  
+          onPress={() => router.push("/viewListings")}/>
+        </View> 
         </View>
         {/*stats*/}
         <View
