@@ -1,5 +1,6 @@
 import { BookmarkBadge } from "@/components/bookmark-badge";
 import { CustomHeader } from "@/components/customHeader";
+import { IconButton } from "@/components/iconButton";
 import { SearchBarButton } from "@/components/searchBarButton";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
@@ -59,25 +60,7 @@ export default function Index() {
         <ThemedView isTabVisible={true}>
             <CustomHeader>
                 <SearchBarButton placeholder="search..." width={'85%'} />
-                <View style={styles.cart}>
-                    <Pressable onPress={() => router.push('/cart')}>
-                        <MaterialIcons name="shopping-cart" size={33} color={colors.accent} />
-                        {/* badge */}
-                        <View style={{
-                            position: 'absolute',
-                            backgroundColor: colors.accent,
-                            top: -10,
-                            right: -5,
-                            borderRadius: 100,
-                            width: 20,
-                            height: 20,
-                            alignItems: 'center',
-                            justifyContent: 'center'
-                        }}>
-                            <ThemedText type="defaultSmall" style={{ color: colors.background }}>3</ThemedText>
-                        </View>
-                    </Pressable>
-                </View>
+                <IconButton icon={"shopping-cart"} badgeValue="3" onPress={() => {}}/>
             </CustomHeader>
 
             <ScrollView
