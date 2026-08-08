@@ -1,8 +1,7 @@
 import { ThemedText } from "@/components/themed-text";
 import { TopBar } from "@/components/topBar";
 import { useTheme } from "@/hooks/useTheme";
-import { router } from "expo-router";
-import { FlatList, Image, Pressable, StyleSheet, View } from "react-native";
+import { FlatList, Image, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const notifications = [
@@ -27,12 +26,12 @@ export default function Notifications () {
             <FlatList
             data={notifications}
             renderItem={({ item }) => (
-            <Pressable
-            onPress={() => router.push("/messages/${item.id}")}>
+
+ 
                     <View
-                    style={{flexDirection: "column"}}>
+                    style={{flexDirection: "column", borderBlockColor: colors.surface}}>
                         <View
-                        style={styles.itemContainer}>
+                        style={[styles.itemContainer, {borderBlockColor: colors.surface}]}>
                             <View>
                                 <Image source={item.icon} style={styles.image}/>
                             </View>
@@ -52,7 +51,6 @@ export default function Notifications () {
                             </View>
                         </View>
                     </View>
-                </Pressable>
             )}/>
         </SafeAreaView>
     )
