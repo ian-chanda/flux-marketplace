@@ -72,13 +72,13 @@ export default function ChatScreen() {
                         <View style={styles.topBar}>
                         <View style={[styles.search_container, { backgroundColor: colors.surface }]}>
                             <TextInput
-                                style={[styles.input, { color: colors.text, backgroundColor: colors.surface}]}
-                                multiline={true}
-                                onChangeText={onChangeNumber}
-                                value={Number}
-                                placeholderTextColor={colors.placeholder}
-                                keyboardType="default"
-                                placeholder="Message.."
+                                    style={[styles.input, { color: colors.text, backgroundColor: colors.surface}]}
+                                    multiline={true}
+                                    onChangeText={onChangeNumber}
+                                    value={Number}
+                                    placeholderTextColor={colors.placeholder}
+                                    keyboardType="default"
+                                    placeholder="Message.."
                             />
                             <Pressable
                             onPress={()=>alert("add media")}>
@@ -151,12 +151,12 @@ const styles = StyleSheet.create({
         marginHorizontal: 30,
         marginLeft: 30
     },
-        input: {
-        flex: 1,
-        paddingHorizontal: 15,
-        paddingVertical: 12,
-        alignItems: 'center',
-        width: "100%",
-        borderRadius: 20,
-    },
+            input: {
+            flex: 1,
+            paddingHorizontal: 15,
+            paddingVertical: 12,
+            alignItems: 'center',
+            width: "100%",
+            borderRadius: 20,
+        },
 })

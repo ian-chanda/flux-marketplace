@@ -81,7 +81,6 @@ export default function Index() {
                 <SmallIconButton icon="sell" title="selling" />
             </ScrollView>
 
-
             <View style={{ paddingHorizontal: 10, flex: 1 }}>
                 <FlatList
                     data={products}
@@ -90,7 +89,6 @@ export default function Index() {
                     contentContainerStyle={{ gap: 16 }}
                     renderItem={({ item }) => (
                         <View style={styles.product_card}>
-
                             <View>
                                 <BookmarkBadge
                                     bookmarked={bookmarked[item.id]}
