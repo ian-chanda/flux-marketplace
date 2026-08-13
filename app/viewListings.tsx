@@ -1,8 +1,8 @@
+import { CustomHeader } from "@/components/customHeader";
 import { ThemedText } from "@/components/themed-text";
-import { TopBar } from "@/components/topBar";
+import { ThemedView } from "@/components/themed-view";
 import { useTheme } from "@/hooks/useTheme";
 import { FlatList, Image, StyleSheet, TouchableOpacity, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 const listings = [
     {id: 1, icon: require("../assets/images/ph.jpg"), name: "JBL Flip 6", status: "Sold", Price: "K2,000"},
@@ -20,12 +20,12 @@ const listings = [
 export default function ViewListings () {
     const { colors } = useTheme();
     return (
-        <SafeAreaView
-        
-        style={{flex: 1}}>
-            <TopBar 
+        <ThemedView
+        isTabVisible={false}
+        style={{paddingBottom: 10}}>
+            <CustomHeader
             title="Your listings"
-            showSearch={true}/>
+            showBack={true}/>
             <FlatList
             data={listings}
             renderItem={({ item }) => (
@@ -78,7 +78,7 @@ export default function ViewListings () {
                 
                 </TouchableOpacity>
             )}/>
-        </SafeAreaView>
+        </ThemedView>
         
     )
 }

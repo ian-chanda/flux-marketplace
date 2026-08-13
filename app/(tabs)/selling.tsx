@@ -52,8 +52,7 @@ export default function SellingScreen() {
           <ActionButton
           title = "Add Listing"
           Icon="add"
-          onPress={() => alert("Add listing")}/>
-          
+          onPress={()=> router.push("/addListings")}/>
           <ActionButton
           title="View Listings"
           Icon='dashboard'
