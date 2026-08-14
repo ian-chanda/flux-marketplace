@@ -5,7 +5,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 
 export type ThemedViewProps = ViewProps & {
-  isTabVisible: boolean;
+  isTabVisible?: boolean;
 };
 
 
