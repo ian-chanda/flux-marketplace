@@ -1,17 +1,12 @@
 import { BookmarkBadge } from '@/components/bookmark-badge';
 import { CustomHeader } from '@/components/customHeader';
-import { CustomSearchBar } from '@/components/customSearchBar';
 import { SearchBarButton } from '@/components/searchBarButton';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { useTheme } from '@/hooks/useTheme';
-import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import { router, useLocalSearchParams } from 'expo-router';
+import { useLocalSearchParams } from 'expo-router';
 import { useState } from 'react';
-import { Image } from 'react-native';
-import { FlatList, Text, TouchableOpacity, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-
+import { FlatList, Image, TouchableOpacity, View } from 'react-native';
 
 const search_results = [
 	{ id: 1, name: "Product THREEE HUNDRED AND NIGETU", Desc: 'new', image: 'url', price: "K2", delivery: "" },

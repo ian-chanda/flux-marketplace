@@ -1,10 +1,10 @@
 import { ThemedText } from "@/components/themed-text";
+import { ThemedView } from "@/components/themed-view";
 import { TopBar } from "@/components/topBar";
 import { useTheme } from "@/hooks/useTheme";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { router } from "expo-router";
 import { FlatList, Image, Pressable, StyleSheet, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 const flags = [
     {id: 1, sender: "iLoveBolls", subject: "Iphone 23 Pro max", lastmessage: "How much?", date: "25 jun", product: require("/Users/hermes/mobile_dev/flux/assets/images/ph.jpg"), profile: require("/Users/hermes/mobile_dev/flux/assets/images/pfp.jpg")},
@@ -27,7 +27,8 @@ const flags = [
 export default function Messages () {
     const { colors } = useTheme();
     return (
-        <SafeAreaView>
+        <ThemedView
+        isTabVisible={false}>
             <TopBar 
             title="Messages"
             showSearch={true}
@@ -71,7 +72,7 @@ export default function Messages () {
                     </View>
                 </Pressable>
             )}/>
-        </SafeAreaView>
+        </ThemedView>
     )
 }
 

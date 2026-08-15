@@ -82,8 +82,8 @@ export default function AddListings() {
         </View>
         {/*item details*/}
         <KeyboardAvoidingView
-            behavior={Platform.OS === "ios" ? "padding" : "height"}
-            keyboardVerticalOffset={0}>
+            behavior={"padding"}
+            keyboardVerticalOffset={Platform.OS === "ios" ? 100 : 50}>
           <View style={styles.container}>
             <View style={[styles.header, {flexDirection:"column"}]}>
           <SectionHeader
