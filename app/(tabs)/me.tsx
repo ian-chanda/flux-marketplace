@@ -13,7 +13,11 @@ import { Image } from 'react-native';
 import { Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-const CardButton = ({ attrIcon, attribute }: { attrIcon: any, attribute: string }) => {
+const CardButton = ({ attrIcon, attribute, onPress }: {
+  attrIcon: any,
+  attribute: string,
+  onPress: () => void
+}) => {
   const { colors } = useTheme()
   return (
     <TouchableOpacity style={{
@@ -24,8 +28,10 @@ const CardButton = ({ attrIcon, attribute }: { attrIcon: any, attribute: string 
       height: 55,
       backgroundColor: colors.surface,
       justifyContent: 'space-between'
-    }}>
-      <View style={{ flexDirection: 'row', gap: 10, alignItems: 'center'}}>
+    }}
+      onPress={() => onPress()}
+    >
+      <View style={{ flexDirection: 'row', gap: 10, alignItems: 'center' }}>
         <MaterialIcons name={attrIcon} size={20} color={colors.text} />
         <ThemedText> {attribute} </ThemedText>
       </View>
@@ -70,9 +76,9 @@ export default function ProfileScreen() {
               borderRadius: 100
             }} />
             <View style={{}}>
-              <View style={{flexDirection: 'row', alignItems: 'center', gap: 5}}>
+              <View style={{ flexDirection: 'row', alignItems: 'center', gap: 5 }}>
                 <ThemedText type='largeBold'>Admin Admin</ThemedText>
-                <MaterialIcons name='verified' color={colors.text} size={15}/>
+                <MaterialIcons name='verified' color={colors.text} size={15} />
               </View>
               <ThemedText type='small'>@admin9003</ThemedText>
             </View>
@@ -100,10 +106,10 @@ export default function ProfileScreen() {
 
         <View style={{ gap: 10, marginBottom: 10 }}>
           <ThemedText type='defaultBold'>Shopping</ThemedText>
-          <CardButton attrIcon={"favorite-outline"} attribute='saved' />
-          <CardButton attrIcon={"money"} attribute='purchases' />
-          <CardButton attrIcon={"history"} attribute='recently viewed' />
-          <CardButton attrIcon={"settings"} attribute='Settings' />
+          <CardButton attrIcon={"favorite-outline"} attribute='saved' onPress={() => router.push('/saved')}/>
+          <CardButton attrIcon={"money"} attribute='purchases' onPress={() => router.push('/purchases')}/>
+          <CardButton attrIcon={"history"} attribute='recently viewed' onPress={() => router.push('/recents')}/>
+          <CardButton attrIcon={"settings"} attribute='Settings' onPress={() => router.push('/settings')}/>
         </View>
 
         <Button title='Logout' onPress={() => { }} />

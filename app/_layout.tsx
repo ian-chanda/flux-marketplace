@@ -16,6 +16,10 @@ export default function RootLayout() {
         <Stack.Screen name="modals/category" options={{
           presentation: "modal"
         }}/>
+        <Stack.Screen name="(me)/settings" options={{ headerShown: false }} />
+        <Stack.Screen name="(me)/profile" options={{ headerShown: false }} />
+        <Stack.Screen name="(me)/purchases" options={{ headerShown: false }} />
+        <Stack.Screen name="(me)/saved" options={{ headerShown: false }} />
       </Stack>
     </ThemeProvider>
   );

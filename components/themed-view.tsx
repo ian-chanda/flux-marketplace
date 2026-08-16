@@ -17,7 +17,7 @@ export function ThemedView({ style, isTabVisible, ...otherProps }: ThemedViewPro
     flex: 1,
     backgroundColor: colors.background,
     paddingTop: insets.top,
-    paddingBottom: insets.bottom + 30,
+    paddingBottom: insets.bottom + (isTabVisible ? 30 : 0),
 
   }, style]} {...otherProps} />;
 }

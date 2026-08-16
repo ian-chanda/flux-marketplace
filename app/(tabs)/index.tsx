@@ -59,7 +59,7 @@ export default function Index() {
     return (
         <ThemedView isTabVisible={true}>
             <CustomHeader>
-                <SearchBarButton placeholder="search..." width={'85%'} />
+                <SearchBarButton placeholder="search..." width={'95%'} />
                 <IconButton icon={"shopping-cart"} badgeValue="3" onPress={() => {}}/>
             </CustomHeader>
 

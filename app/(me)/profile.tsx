@@ -101,7 +101,7 @@ export default function ProfileScreen() {
 	const { colors } = useTheme()
 	const [selectedTab, setSelectedTab] = useState<ProfileTab>('About')
 	return (
-		<ThemedView isTabVisible style={{ paddingHorizontal: 10, gap: 10 }}>
+		<ThemedView isTabVisible={false} style={{ paddingHorizontal: 10, gap: 10 }}>
 			<CustomHeader showBack title="Profile" />
 
 			<View style={{ paddingTop: 10, marginBottom: 50 }}>
@@ -116,12 +116,12 @@ export default function ProfileScreen() {
 					}}
 				/>
 				{/* profile image */}
-				<View style={{ position: 'absolute', bottom: -50, left: 20 }}>
+				<View style={{ position: 'absolute', bottom: -30, left: 15 }}>
 					<Image
 						source={require('@/assets/images/dino.jpg')}
 						style={{
-							width: 150,
-							height: 150,
+							width: 120,
+							height: 120,
 							borderRadius: 100,
 							borderWidth: 4,
 							borderColor: colors.background
@@ -203,7 +203,7 @@ export default function ProfileScreen() {
 				showsVerticalScrollIndicator={false}
 			>
 				{selectedTab === 'About' && (
-					<View>
+					<View style={{gap: 5}}>
 						<View style={{ flexDirection: 'row', gap: 5 }}>
 							<ThemedText type="defaultFaded">Location:</ThemedText>
 							<ThemedText type="default">Lusaka, Zambia</ThemedText>
