@@ -25,7 +25,7 @@ const CardButton = ({ attrIcon, attribute }: { attrIcon: any, attribute: string 
       backgroundColor: colors.surface,
       justifyContent: 'space-between'
     }}>
-      <View style={{ flexDirection: 'row', gap: 10 }}>
+      <View style={{ flexDirection: 'row', gap: 10, alignItems: 'center'}}>
         <MaterialIcons name={attrIcon} size={20} color={colors.text} />
         <ThemedText> {attribute} </ThemedText>
       </View>
