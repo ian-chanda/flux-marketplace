@@ -6,12 +6,9 @@ import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import { useTheme } from "@/hooks/useTheme";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import { Text } from "@react-navigation/elements";
 import { router } from "expo-router";
 import { useState } from "react";
-import { ScrollView } from "react-native";
-import { TouchableOpacity } from "react-native";
-import { FlatList, Image, Pressable, StatusBar, StyleSheet, TextInput, View } from "react-native";
+import { FlatList, Image, ScrollView, StatusBar, StyleSheet, TouchableOpacity, View } from "react-native";
 
 type buttonTypes = {
     icon: any;
@@ -59,10 +56,9 @@ export default function Index() {
     return (
         <ThemedView isTabVisible={true}>
             <CustomHeader>
-                <SearchBarButton placeholder="search..." width={'95%'} />
-                <IconButton icon={"shopping-cart"} badgeValue="3" onPress={() => {}}/>
+                <SearchBarButton placeholder="search..." width={'85%'} />
+                <IconButton icon={"shopping-cart"} badgeValue="3" onPress={() => router.push("/cart")}/>
             </CustomHeader>
-
             <ScrollView
                 showsHorizontalScrollIndicator={false}
                 horizontal

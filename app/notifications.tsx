@@ -1,8 +1,8 @@
 import { ThemedText } from "@/components/themed-text";
+import { ThemedView } from "@/components/themed-view";
 import { TopBar } from "@/components/topBar";
 import { useTheme } from "@/hooks/useTheme";
 import { FlatList, Image, StyleSheet, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 const notifications = [
     {id: 1, icon: require("../assets/images/pfp.jpg"), header: "Price drop", content: "Take a look at how this looks. Did you know you can list multple items at once"},
@@ -20,7 +20,11 @@ const notifications = [
 export default function Notifications () {
     const { colors } = useTheme();
     return (
-        <SafeAreaView>
+        <ThemedView
+        isTabVisible={ false }
+        style={{
+            paddingBottom: 0
+        }}>
             <TopBar 
             title="Notifications"/>
             <FlatList
@@ -52,7 +56,7 @@ export default function Notifications () {
                         </View>
                     </View>
             )}/>
-        </SafeAreaView>
+        </ThemedView>
     )
 }
 
