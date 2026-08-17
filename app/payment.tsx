@@ -14,11 +14,14 @@ const [ SelectPayment, setSelectedPayment] = useState<string | null>(null);
         <ThemedView
         isTabVisible={false}
         style={{
-      paddingBottom: 4
+      paddingBottom: 40
     }}>
           <ScrollView
           contentContainerStyle={{flexGrow: 2}}
-          keyboardShouldPersistTaps="handled">
+          keyboardShouldPersistTaps="handled"
+          style={{
+            paddingBottom: 0
+          }}>
               <TopBar title="Payment Method" />
                 <View style={styles.shipping}>
                     <ThemedText type="defaultBold">Delivery Address</ThemedText>
@@ -57,7 +60,7 @@ const [ SelectPayment, setSelectedPayment] = useState<string | null>(null);
                 <ThemedText type="subtitle">Total:</ThemedText>
                 <ThemedText type="subtitle">K569.87</ThemedText>
               </View>
-              <Button title="Pay Now" onPress={() => alert("Processing payment...")} />
+              <Button title="Pay Now" onPress={() => alert("Processing payment...")}/>
           </ScrollView>
         </ThemedView>
     )
@@ -143,7 +146,7 @@ const styles = StyleSheet.create({
   flexDirection: "row",
   justifyContent: "center",
   alignItems: "center",
-  marginBottom: 170,
+  marginBottom: 120,
   paddingHorizontal: 10,
   paddingVertical: 15,
   width: '65%',   

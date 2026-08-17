@@ -53,7 +53,7 @@ export default function Index() {
         setBookmarked(prev => ({ ...prev, [id]: !prev[id] }));
     };
 
-    return (
+    return(
         <ThemedView isTabVisible={true}>
             <CustomHeader>
                 <SearchBarButton placeholder="search..." width={'85%'} />

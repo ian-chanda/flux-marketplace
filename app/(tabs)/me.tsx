@@ -7,17 +7,17 @@ import { DarkModeToggle } from '@/components/toggleButton';
 import { useTheme } from '@/hooks/useTheme';
 import { MaterialIcons } from '@expo/vector-icons';
 import { router } from 'expo-router';
-import { ScrollView } from 'react-native';
-import { TouchableOpacity, View } from 'react-native';
-import { Image } from 'react-native';
-import { Text } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { Image, ScrollView, TouchableOpacity, View } from 'react-native';
 
+<<<<<<< HEAD
 const CardButton = ({ attrIcon, attribute, onPress }: {
   attrIcon: any,
   attribute: string,
   onPress: () => void
 }) => {
+=======
+const CardButton = ({ attrIcon, onPress, attribute }: { attrIcon: any, attribute: string, onPress: ()=> void }) => {
+>>>>>>> 7f7a3f28a66730c179f755f07888248993eb6bfe
   const { colors } = useTheme()
   return (
     <TouchableOpacity style={{
@@ -29,9 +29,14 @@ const CardButton = ({ attrIcon, attribute, onPress }: {
       backgroundColor: colors.surface,
       justifyContent: 'space-between'
     }}
+<<<<<<< HEAD
       onPress={() => onPress()}
     >
       <View style={{ flexDirection: 'row', gap: 10, alignItems: 'center' }}>
+=======
+    onPress={onPress}>
+      <View style={{ flexDirection: 'row', gap: 10, alignItems: 'center'}}>
+>>>>>>> 7f7a3f28a66730c179f755f07888248993eb6bfe
         <MaterialIcons name={attrIcon} size={20} color={colors.text} />
         <ThemedText> {attribute} </ThemedText>
       </View>
@@ -106,10 +111,10 @@ export default function ProfileScreen() {
 
         <View style={{ gap: 10, marginBottom: 10 }}>
           <ThemedText type='defaultBold'>Shopping</ThemedText>
-          <CardButton attrIcon={"favorite-outline"} attribute='saved' onPress={() => router.push('/saved')}/>
-          <CardButton attrIcon={"money"} attribute='purchases' onPress={() => router.push('/purchases')}/>
-          <CardButton attrIcon={"history"} attribute='recently viewed' onPress={() => router.push('/recents')}/>
-          <CardButton attrIcon={"settings"} attribute='Settings' onPress={() => router.push('/settings')}/>
+          <CardButton attrIcon={"favorite-outline"} attribute='saved' onPress={()=> router.push("/me/saved")}/>
+          <CardButton attrIcon={"money"} attribute='purchases' onPress={()=> router.push("/me/purchases")}/>
+          <CardButton attrIcon={"history"} attribute='recently viewed' onPress={()=> alert("On to you, bro")}/>
+          <CardButton attrIcon={"settings"} attribute='Settings' onPress={()=> alert("You wish")}/>
         </View>
 
         <Button title='Logout' onPress={() => { }} />
