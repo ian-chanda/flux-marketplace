@@ -7,13 +7,9 @@ import { DarkModeToggle } from '@/components/toggleButton';
 import { useTheme } from '@/hooks/useTheme';
 import { MaterialIcons } from '@expo/vector-icons';
 import { router } from 'expo-router';
-import { ScrollView } from 'react-native';
-import { TouchableOpacity, View } from 'react-native';
-import { Image } from 'react-native';
-import { Text } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { Image, ScrollView, TouchableOpacity, View } from 'react-native';
 
-const CardButton = ({ attrIcon, attribute }: { attrIcon: any, attribute: string }) => {
+const CardButton = ({ attrIcon, onPress, attribute }: { attrIcon: any, attribute: string, onPress: ()=> void }) => {
   const { colors } = useTheme()
   return (
     <TouchableOpacity style={{
@@ -24,7 +20,8 @@ const CardButton = ({ attrIcon, attribute }: { attrIcon: any, attribute: string 
       height: 55,
       backgroundColor: colors.surface,
       justifyContent: 'space-between'
-    }}>
+    }}
+    onPress={onPress}>
       <View style={{ flexDirection: 'row', gap: 10, alignItems: 'center'}}>
         <MaterialIcons name={attrIcon} size={20} color={colors.text} />
         <ThemedText> {attribute} </ThemedText>
@@ -100,10 +97,10 @@ export default function ProfileScreen() {
 
         <View style={{ gap: 10, marginBottom: 10 }}>
           <ThemedText type='defaultBold'>Shopping</ThemedText>
-          <CardButton attrIcon={"favorite-outline"} attribute='saved' />
-          <CardButton attrIcon={"money"} attribute='purchases' />
-          <CardButton attrIcon={"history"} attribute='recently viewed' />
-          <CardButton attrIcon={"settings"} attribute='Settings' />
+          <CardButton attrIcon={"favorite-outline"} attribute='saved' onPress={()=> router.push("/me/saved")}/>
+          <CardButton attrIcon={"money"} attribute='purchases' onPress={()=> router.push("/me/purchases")}/>
+          <CardButton attrIcon={"history"} attribute='recently viewed' onPress={()=> alert("On to you, bro")}/>
+          <CardButton attrIcon={"settings"} attribute='Settings' onPress={()=> alert("You wish")}/>
         </View>
 
         <Button title='Logout' onPress={() => { }} />
