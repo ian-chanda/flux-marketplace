@@ -4,6 +4,7 @@ import { ThemedText } from "@/components/themed-text"
 import { ThemedView } from "@/components/themed-view"
 import { useTheme } from "@/hooks/useTheme"
 import { MaterialIcons } from "@expo/vector-icons"
+import { router } from "expo-router"
 import { useState } from "react"
 import { TouchableOpacity } from "react-native"
 import { Image, ScrollView, View } from "react-native"
@@ -30,7 +31,7 @@ const FeedbackMessage = ({ img, name, when, msg, feedbackType }:
 					<ThemedText type="smallFaded">-</ThemedText>
 					<ThemedText type="smallFaded">{when}</ThemedText>
 				</View>
-				<ThemedText>{feedbackType}</ThemedText>
+				<ThemedText type="smallFaded">{feedbackType}</ThemedText>
 			</View>
 			<ThemedText>{msg}</ThemedText>
 		</View>
@@ -101,7 +102,7 @@ export default function ProfileScreen() {
 	const { colors } = useTheme()
 	const [selectedTab, setSelectedTab] = useState<ProfileTab>('About')
 	return (
-		<ThemedView isTabVisible style={{ paddingHorizontal: 10, gap: 10 }}>
+		<ThemedView isTabVisible={false} style={{ paddingHorizontal: 10, gap: 10 }}>
 			<CustomHeader showBack title="Profile" />
 
 			<View style={{ paddingTop: 10, marginBottom: 50 }}>
@@ -116,12 +117,12 @@ export default function ProfileScreen() {
 					}}
 				/>
 				{/* profile image */}
-				<View style={{ position: 'absolute', bottom: -50, left: 20 }}>
+				<View style={{ position: 'absolute', bottom: -30, left: 15 }}>
 					<Image
 						source={require('@/assets/images/dino.jpg')}
 						style={{
-							width: 150,
-							height: 150,
+							width: 120,
+							height: 120,
 							borderRadius: 100,
 							borderWidth: 4,
 							borderColor: colors.background
@@ -139,7 +140,7 @@ export default function ProfileScreen() {
 					<ThemedText type='smallFaded'>@admin9003</ThemedText>
 				</View>
 
-				<IconButton icon={'edit'} onPress={() => { }} badgeValue="" />
+				<IconButton icon={'edit'} onPress={() => router.push('/editProfile')} badgeValue="" />
 			</View>
 
 			<View style={{
@@ -155,18 +156,18 @@ export default function ProfileScreen() {
 
 			}}>
 				<View>
-					<ThemedText type="subtitle">Attribute</ThemedText>
-					<ThemedText type="mediumFaded">Value</ThemedText>
+					<ThemedText type="medium">Response Time</ThemedText>
+					<ThemedText type="mediumFaded">~3yrs</ThemedText>
 				</View>
-				<View style={{ height: '80%', width: 2, backgroundColor: colors.accent }} />
+				<View style={{ height: '80%', width: 1, backgroundColor: colors.accent }} />
 				<View>
-					<ThemedText type="subtitle">Attribute</ThemedText>
-					<ThemedText type="mediumFaded">Value</ThemedText>
+					<ThemedText type="medium">Successful Sales</ThemedText>
+					<ThemedText type="mediumFaded">0</ThemedText>
 				</View>
-				<View style={{ height: '80%', width: 2, backgroundColor: colors.accent }} />
+				<View style={{ height: '80%', width: 1, backgroundColor: colors.accent }} />
 				<View>
-					<ThemedText type="subtitle">Attribute</ThemedText>
-					<ThemedText type="mediumFaded">Value</ThemedText>
+					<ThemedText type="medium">Rating</ThemedText>
+					<ThemedText type="mediumFaded">1.5</ThemedText>
 				</View>
 			</View>
 
@@ -203,7 +204,7 @@ export default function ProfileScreen() {
 				showsVerticalScrollIndicator={false}
 			>
 				{selectedTab === 'About' && (
-					<View>
+					<View style={{gap: 5}}>
 						<View style={{ flexDirection: 'row', gap: 5 }}>
 							<ThemedText type="defaultFaded">Location:</ThemedText>
 							<ThemedText type="default">Lusaka, Zambia</ThemedText>

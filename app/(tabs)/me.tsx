@@ -1,6 +1,8 @@
 import Button from '@/components/Button';
+import { CardButtonRow } from '@/components/cardButtonRow';
 import { CustomHeader } from '@/components/customHeader';
 import { IconButton } from '@/components/iconButton';
+import { SettingsSection } from '@/components/settingsSection';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { DarkModeToggle } from '@/components/toggleButton';
@@ -8,29 +10,6 @@ import { useTheme } from '@/hooks/useTheme';
 import { MaterialIcons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import { Image, ScrollView, TouchableOpacity, View } from 'react-native';
-
-const CardButton = ({ attrIcon, onPress, attribute }: { attrIcon: any, attribute: string, onPress: ()=> void }) => {
-  const { colors } = useTheme()
-  return (
-    <TouchableOpacity style={{
-      flexDirection: 'row',
-      alignItems: 'center',
-      padding: 10,
-      borderRadius: 15,
-      height: 55,
-      backgroundColor: colors.surface,
-      justifyContent: 'space-between'
-    }}
-    onPress={onPress}>
-      <View style={{ flexDirection: 'row', gap: 10, alignItems: 'center'}}>
-        <MaterialIcons name={attrIcon} size={20} color={colors.text} />
-        <ThemedText> {attribute} </ThemedText>
-      </View>
-
-      <MaterialIcons name='chevron-right' size={20} color={colors.accent} />
-    </TouchableOpacity>
-  )
-}
 
 export default function ProfileScreen() {
 
@@ -50,7 +29,7 @@ export default function ProfileScreen() {
       <ScrollView contentContainerStyle={{ paddingHorizontal: 20, gap: 16 }}>
 
         <TouchableOpacity
-          onPress={() => router.push('/profile')}
+          onPress={() => router.push('/me/profile')}
           style={{
             flexDirection: 'row',
             alignItems: 'center',
@@ -67,9 +46,9 @@ export default function ProfileScreen() {
               borderRadius: 100
             }} />
             <View style={{}}>
-              <View style={{flexDirection: 'row', alignItems: 'center', gap: 5}}>
+              <View style={{ flexDirection: 'row', alignItems: 'center', gap: 5 }}>
                 <ThemedText type='largeBold'>Admin Admin</ThemedText>
-                <MaterialIcons name='verified' color={colors.text} size={15}/>
+                <MaterialIcons name='verified' color={colors.text} size={15} />
               </View>
               <ThemedText type='small'>@admin9003</ThemedText>
             </View>
@@ -78,30 +57,34 @@ export default function ProfileScreen() {
           <MaterialIcons name='chevron-right' size={20} color={colors.accent} />
         </TouchableOpacity>
 
-        <TouchableOpacity style={{
-          flexDirection: 'row',
-          alignItems: 'center',
-          padding: 10,
-          borderRadius: 15,
-          height: 55,
-          backgroundColor: colors.surface,
-          justifyContent: 'space-between'
-        }}>
-          <View style={{ flexDirection: 'row', gap: 10 }}>
-            <MaterialIcons name={isDark ? 'dark-mode' : 'light-mode'} size={20} color={colors.text} />
-            <ThemedText> {isDark ? "Dark mode" : "Light mode"} </ThemedText>
-          </View>
+        <CardButtonRow
+          icon={isDark ? "dark-mode" : "light-mode"}
+          label={isDark ? "Dark mode" : "Light mode"}
+          right={<DarkModeToggle />}
+        />
 
-          <DarkModeToggle />
-        </TouchableOpacity>
-
-        <View style={{ gap: 10, marginBottom: 10 }}>
-          <ThemedText type='defaultBold'>Shopping</ThemedText>
-          <CardButton attrIcon={"favorite-outline"} attribute='saved' onPress={()=> router.push("/me/saved")}/>
-          <CardButton attrIcon={"money"} attribute='purchases' onPress={()=> router.push("/me/purchases")}/>
-          <CardButton attrIcon={"history"} attribute='recently viewed' onPress={()=> alert("On to you, bro")}/>
-          <CardButton attrIcon={"settings"} attribute='Settings' onPress={()=> alert("You wish")}/>
-        </View>
+        <SettingsSection title='Shopping'>
+          <CardButtonRow
+            icon={"favorite-outline"}
+            label='saved'
+            onPress={() => router.push("/me/saved")}
+          />
+          <CardButtonRow
+            icon={"money"}
+            label='purchases'
+            onPress={() => router.push("/me/purchases")}
+          />
+          <CardButtonRow
+            icon={"history"}
+            label='recently viewed'
+            onPress={() => router.push('/me/recents')}
+          />
+          <CardButtonRow
+            icon={"settings"}
+            label='Settings'
+            onPress={() => router.push('/me/settings')}
+          />
+        </SettingsSection>
 
         <Button title='Logout' onPress={() => { }} />
 

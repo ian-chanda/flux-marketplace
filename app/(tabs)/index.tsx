@@ -1,6 +1,7 @@
 import { BookmarkBadge } from "@/components/bookmark-badge";
 import { CustomHeader } from "@/components/customHeader";
 import { IconButton } from "@/components/iconButton";
+import { ProductCardV } from "@/components/productCardV";
 import { SearchBarButton } from "@/components/searchBarButton";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
@@ -57,7 +58,7 @@ export default function Index() {
         <ThemedView isTabVisible={true}>
             <CustomHeader>
                 <SearchBarButton placeholder="search..." width={'85%'} />
-                <IconButton icon={"shopping-cart"} badgeValue="3" onPress={() => router.push("/cart")}/>
+                <IconButton icon={"shopping-cart"} badgeValue="3" onPress={() => router.push("/cart")} />
             </CustomHeader>
             <ScrollView
                 showsHorizontalScrollIndicator={false}
@@ -84,23 +85,12 @@ export default function Index() {
                     columnWrapperStyle={{ justifyContent: 'space-between' }}
                     contentContainerStyle={{ gap: 16 }}
                     renderItem={({ item }) => (
-                        <View style={styles.product_card}>
-                            <View>
-                                <BookmarkBadge
-                                    bookmarked={bookmarked[item.id]}
-                                    onPress={() => toggleBookmark(item.id)}
-                                />
-                                <Image
-                                    source={require('../../assets/images/dino.jpg')}
-                                    style={styles.image}
-                                    resizeMode="cover"
-                                />
-                            </View>
-
-                            <ThemedText type="smallFaded">{item.Desc}</ThemedText>
-                            <ThemedText type="defaultBold" numberOfLines={1}>{item.name}</ThemedText>
-                            <ThemedText type="mediumBold" >{item.price}</ThemedText>
-                        </View>
+                        <ProductCardV
+                            bookmarked={bookmarked[item.id]}
+                            desc={item.Desc}
+                            name={item.name}
+                            price={item.price}
+                        />
                     )}
                     keyExtractor={(item) => item.id.toString()}
                 />
