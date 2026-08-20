@@ -4,6 +4,7 @@ import { ThemedText } from "@/components/themed-text"
 import { ThemedView } from "@/components/themed-view"
 import { useTheme } from "@/hooks/useTheme"
 import { MaterialIcons } from "@expo/vector-icons"
+import { router } from "expo-router"
 import { useState } from "react"
 import { TouchableOpacity } from "react-native"
 import { Image, ScrollView, View } from "react-native"
@@ -30,7 +31,7 @@ const FeedbackMessage = ({ img, name, when, msg, feedbackType }:
 					<ThemedText type="smallFaded">-</ThemedText>
 					<ThemedText type="smallFaded">{when}</ThemedText>
 				</View>
-				<ThemedText>{feedbackType}</ThemedText>
+				<ThemedText type="smallFaded">{feedbackType}</ThemedText>
 			</View>
 			<ThemedText>{msg}</ThemedText>
 		</View>
@@ -139,7 +140,7 @@ export default function ProfileScreen() {
 					<ThemedText type='smallFaded'>@admin9003</ThemedText>
 				</View>
 
-				<IconButton icon={'edit'} onPress={() => { }} badgeValue="" />
+				<IconButton icon={'edit'} onPress={() => router.push('/editProfile')} badgeValue="" />
 			</View>
 
 			<View style={{
@@ -155,18 +156,18 @@ export default function ProfileScreen() {
 
 			}}>
 				<View>
-					<ThemedText type="subtitle">Attribute</ThemedText>
-					<ThemedText type="mediumFaded">Value</ThemedText>
+					<ThemedText type="medium">Response Time</ThemedText>
+					<ThemedText type="mediumFaded">~3yrs</ThemedText>
 				</View>
-				<View style={{ height: '80%', width: 2, backgroundColor: colors.accent }} />
+				<View style={{ height: '80%', width: 1, backgroundColor: colors.accent }} />
 				<View>
-					<ThemedText type="subtitle">Attribute</ThemedText>
-					<ThemedText type="mediumFaded">Value</ThemedText>
+					<ThemedText type="medium">Successful Sales</ThemedText>
+					<ThemedText type="mediumFaded">0</ThemedText>
 				</View>
-				<View style={{ height: '80%', width: 2, backgroundColor: colors.accent }} />
+				<View style={{ height: '80%', width: 1, backgroundColor: colors.accent }} />
 				<View>
-					<ThemedText type="subtitle">Attribute</ThemedText>
-					<ThemedText type="mediumFaded">Value</ThemedText>
+					<ThemedText type="medium">Rating</ThemedText>
+					<ThemedText type="mediumFaded">1.5</ThemedText>
 				</View>
 			</View>
 

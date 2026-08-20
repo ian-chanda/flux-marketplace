@@ -1,23 +1,32 @@
 import { useTheme } from '@/hooks/useTheme';
-import { Pressable, StyleSheet, View } from 'react-native';
+import { ActivityIndicator, Pressable, StyleSheet, View } from 'react-native';
 import { ThemedText } from './themed-text';
+import { TouchableOpacity } from 'react-native';
 
 export type ButtonProps = {
     title: string;
+    loading?: boolean;
+    disabled?: boolean;
     onPress: () => void;
 }
 
-export default function Button({ title, onPress }: ButtonProps) {
+export default function Button({ title, loading = false, disabled = false, onPress }: ButtonProps) {
     const { colors } = useTheme();
 
     return (
-        <View>
-            <View style={[styles.button, { backgroundColor: colors.accent }]}> 
-                <Pressable onPress={onPress}>
-                    <ThemedText type="ButtonText" darkColor="white">{title}</ThemedText>
-                </Pressable>
-            </View>
-        </View>
+        <TouchableOpacity
+            style={[styles.button, { backgroundColor: disabled ? colors.disabled : colors.accent }]}
+            disabled={disabled}
+            onPress={() => onPress()}
+        >
+            {loading ?
+                <ActivityIndicator size={24} color={colors.background} />
+                :
+                <ThemedText type="ButtonText" darkColor={colors.background}>
+                    {title}
+                </ThemedText>
+            }
+        </TouchableOpacity>
     )
 }
 

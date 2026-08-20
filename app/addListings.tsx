@@ -30,56 +30,56 @@ export default function AddListings() {
   }
 
   return (
-    <ThemedView isTabVisible={false} style={{ paddingBottom: 4 }}>
+    <ThemedView isTabVisible={false} style={{ flex: 1, paddingBottom: 4 }}>
       <CustomHeader title="Add listing" showBack={true} />
-      <ScrollView>
-        <View style={[styles.container]}>
-          <SectionHeader
-            icon="image"
-            title="Details"
-            iconColor={colors.accent} />
-          <View style={{ marginLeft: 10 }}>
-            <ThemedText type="smallFaded">
-              Add up to 6 photos. The first will be your cover image.
-            </ThemedText>
-          </View>
-          <View style={styles.imageHoler}>
-            <Pressable onPress={() => alert("select photos")}>
-              <View style={styles.photoButton}>
-                <View
-                  style={{
-                    justifyContent: "flex-start",
-                    padding: 10,
-                  }}>
-                  <MaterialIcon name="add" color={colors.accent} size={75} />
-                  <View style={{ paddingRight: 10 }}>
-                    <ThemedText type="defaultFaded">Add photos</ThemedText>
+      <KeyboardAvoidingView
+        style={{ flex: 1 }}
+        behavior={Platform.OS === "ios" ? "padding" : 'height'}
+        keyboardVerticalOffset={Platform.OS === "ios" ? 90 : 0}
+      >
+        <ScrollView contentContainerStyle={{flexGrow: 1}}>
+          <View style={[styles.container]}>
+            <SectionHeader
+              icon="image"
+              title="Details"
+              iconColor={colors.accent} />
+            <View style={{ marginLeft: 10 }}>
+              <ThemedText type="smallFaded">
+                Add up to 6 photos. The first will be your cover image.
+              </ThemedText>
+            </View>
+            <View style={styles.imageHoler}>
+              <Pressable onPress={() => alert("select photos")}>
+                <View style={styles.photoButton}>
+                  <View
+                    style={{
+                      justifyContent: "flex-start",
+                      padding: 10,
+                    }}>
+                    <MaterialIcon name="add" color={colors.accent} size={75} />
+                    <View style={{ paddingRight: 10 }}>
+                      <ThemedText type="defaultFaded">Add photos</ThemedText>
+                    </View>
                   </View>
                 </View>
-              </View>
-            </Pressable>
-            <View
-              style={{
-                flexDirection: "column",
-                justifyContent: "center",
-                gap: 20,
-                padding: 10,
-              }}>
-              <View style={styles.ImagePl}>
-                <MaterialIcon name="add" color={"gray"} style={{ padding: 10 }} />
-              </View>
-              <View style={styles.ImagePl}>
-                <MaterialIcon name="add" color={"gray"} style={{ padding: 10 }} />
+              </Pressable>
+              <View
+                style={{
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  gap: 20,
+                  padding: 10,
+                }}>
+                <View style={styles.ImagePl}>
+                  <MaterialIcon name="add" color={"gray"} style={{ padding: 10 }} />
+                </View>
+                <View style={styles.ImagePl}>
+                  <MaterialIcon name="add" color={"gray"} style={{ padding: 10 }} />
+                </View>
               </View>
             </View>
           </View>
-        </View>
-        {/*item details*/}
-        <KeyboardAvoidingView
-          style={{ flex: 1 }}
-          behavior={Platform.OS === "ios" ? "padding" : 'height'}
-          keyboardVerticalOffset={0}
-        >
+          {/*item details*/}
           <View style={styles.container}>
             <View style={[styles.header, { flexDirection: "column" }]}>
               <SectionHeader
@@ -309,11 +309,12 @@ export default function AddListings() {
               title="Color"
               showBorder={false} />
           </View>
-        </KeyboardAvoidingView>
-        <Button
-          title="Publish"
-          onPress={() => alert("published")} />
-      </ScrollView>
+          <Button
+            title="Publish"
+            onPress={() => alert("published")}
+          />
+        </ScrollView>
+      </KeyboardAvoidingView>
     </ThemedView>
   )
 }

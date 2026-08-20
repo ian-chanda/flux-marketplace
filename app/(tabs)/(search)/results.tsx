@@ -1,5 +1,6 @@
 import { BookmarkBadge } from '@/components/bookmark-badge';
 import { CustomHeader } from '@/components/customHeader';
+import { ProductCardH } from '@/components/productCardH';
 import { SearchBarButton } from '@/components/searchBarButton';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
@@ -43,25 +44,12 @@ export default function ProfileScreen() {
 					data={search_results}
 					contentContainerStyle={{ gap: 16 }}
 					renderItem={({ item }) => (
-						<TouchableOpacity style={{ flexDirection: 'row', gap: 10 }}>
-
-							<View>
-
-								<BookmarkBadge bookmarked={bookmarked[item.id]} onPress={() => toggleBookmark(item.id)} />
-								<Image
-									source={require('@/assets/images/dino.jpg')}
-									style={{ borderRadius: 12, width: 150, height: 150 }}
-								/>
-							</View>
-							<View style={{ flex: 1 }}>
-								<ThemedText type='smallFaded'>{item.Desc}</ThemedText>
-								<ThemedText type='mediumBold' ellipsizeMode='tail'>
-									{item.name}
-								</ThemedText>
-								<ThemedText type='defaultBold'>{item.price}</ThemedText>
-								<ThemedText type='mediumFaded'>{item.delivery ? item.delivery : "contact for delivery"}</ThemedText>
-							</View>
-						</TouchableOpacity>
+						<ProductCardH
+							bookmarked={bookmarked[item.id]}
+							desc={item.Desc}
+							name={item.name}
+							price={item.price}
+						/>
 					)}
 					keyExtractor={(item) => item.id.toString()}
 				/>

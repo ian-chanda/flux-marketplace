@@ -1,11 +1,10 @@
 import { CustomHeader } from "@/components/customHeader";
 import { ThemedView } from "@/components/themed-view";
 
-export default function SavedScreen() {
+export default function HelpScreen() {
 	return (
 		<ThemedView>
-			<CustomHeader showBack title="Saved"/>
-
+			<CustomHeader showBack title="HELLLLPPPP" />
 		</ThemedView>
 	)
 }
