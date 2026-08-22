@@ -67,7 +67,7 @@ export const CustomInputField = ({
 
 	return (
 		<View style={{ gap: 6 }}>
-			{label ? <ThemedText type="defaultBold">{label}</ThemedText> : null}
+			{label ? <ThemedText type="defaultFaded">{label}</ThemedText> : null}
 
 			<View
 				style={{

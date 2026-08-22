@@ -41,9 +41,9 @@ export default function DelievryAddressScreen() {
 			<FlatList
 				data={addresses}
 				style={{ paddingHorizontal: 10 }}
-				contentContainerStyle={{ gap: 20 }}
+				contentContainerStyle={{ gap: 30 }}
 				renderItem={({ item }) => (
-					<View style={{ gap: 5, paddingBottom: 10, borderBottomWidth: 1, borderColor: colors.disabled }}>
+					<View style={{ gap: 5, paddingBottom: 30, borderBottomWidth: 1, borderColor: colors.disabled }}>
 						<CardButtonRow
 							label={item.name}
 							onPress={() => router.push('/settings/address/[id]')}

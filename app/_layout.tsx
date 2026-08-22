@@ -4,11 +4,12 @@ import { Stack } from 'expo-router';
 
 export default function RootLayout() {
 
-  const { colors } = useTheme()
 
   return (
     <ThemeProvider>
       <Stack screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="auth/login" options={{ headerShown: false }} />
+        <Stack.Screen name="auth/signup" options={{ headerShown: false }} />
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="modals/location" options={{
           presentation: "modal"
