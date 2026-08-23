@@ -5,7 +5,7 @@ import { ThemedText } from '@/components/themed-text';
 import { useTheme } from '@/hooks/useTheme';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { router } from 'expo-router';
-import { Image, ScrollView, StyleSheet, View } from 'react-native';
+import { Image, ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 
@@ -21,29 +21,32 @@ export default function SellingScreen() {
     }}
       >
         {/*Profile Section*/} 
-        <View style={[styles.container, styles.shadow, {backgroundColor: colors.background}]}>
-          <Image source={require("../../assets/images/dino.jpg")} style={styles.profileImage} />
-          <View style={styles.profileInfo}>
-            <ThemedText type="defaultBold">John Doe</ThemedText>
-            <ThemedText type="defaultSmall">@johndoe12</ThemedText>
-            <View style={[styles.VerifyContainer, {backgroundColor: colors.shadowColor}]}>
-              <MaterialIcons name="verified" size={15} color={colors.accent} style={styles.verifyImage} />
-              <ThemedText type='small_price_font'>verified seller</ThemedText>
-            </View>
-
-                <View
-                style={styles.VerifyContainer}
-                >
-                <MaterialIcons name="star-outline" size={15} color={"gold"} style={styles.verifyImage} />
-                <ThemedText type="defaultSmall" >130</ThemedText>
-                <ThemedText type="defaultSmall" > Successful Sales</ThemedText>
+      <TouchableOpacity
+      onPress={() => router.push("/me/profile")}>
+          <View style={[styles.container, styles.shadow, {backgroundColor: colors.background}]}>
+            <Image source={require("../../assets/images/dino.jpg")} style={styles.profileImage} />
+            <View style={styles.profileInfo}>
+              <ThemedText type="defaultBold">John Doe</ThemedText>
+              <ThemedText type="defaultSmall">@johndoe12</ThemedText>
+              <View style={[styles.VerifyContainer, {backgroundColor: colors.shadowColor}]}>
+                <MaterialIcons name="verified" size={15} color={colors.accent} style={styles.verifyImage} />
+                <ThemedText type='small_price_font'>verified seller</ThemedText>
               </View>
-              <View style={[styles.VerifyContainer, {marginTop: 1}]}>
-                <MaterialIcons name="circle" size={15} color={"black"} style={styles.verifyImage} />
-                <ThemedText type="defaultSmall" >Member since 22 jan 2026</ThemedText>
-              </View> 
+
+                  <View
+                  style={styles.VerifyContainer}
+                  >
+                  <MaterialIcons name="star-outline" size={15} color={"gold"} style={styles.verifyImage} />
+                  <ThemedText type="defaultSmall" >130</ThemedText>
+                  <ThemedText type="defaultSmall" > Successful Sales</ThemedText>
+                </View>
+                <View style={[styles.VerifyContainer, {marginTop: 1}]}>
+                  <MaterialIcons name="circle" size={15} color={"black"} style={styles.verifyImage} />
+                  <ThemedText type="defaultSmall" >Member since 22 jan 2026</ThemedText>
+                </View> 
+            </View>
           </View>
-        </View>
+      </TouchableOpacity>
         {/* middle row action buttons*/}
         <View
         style={styles.ButtonGrid}>
