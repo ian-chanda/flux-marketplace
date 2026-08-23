@@ -1,6 +1,7 @@
 import { CardButtonRow } from "@/components/cardButtonRow";
 import { CheckBox } from "@/components/checkbox";
 import { CustomHeader } from "@/components/customHeader";
+import { IconButton } from "@/components/iconButton";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import { useTheme } from "@/hooks/useTheme";
@@ -34,13 +35,15 @@ export default function DelievryAddressScreen() {
 
 	return (
 		<ThemedView>
-			<CustomHeader showBack title="Addresses" />
+			<CustomHeader showBack title="Addresses">
+				<IconButton icon={"add"} badgeValue="" onPress={() => router.push('/settings/address/[id]')}/>
+			</CustomHeader>
 			<FlatList
 				data={addresses}
 				style={{ paddingHorizontal: 10 }}
-				contentContainerStyle={{ gap: 20 }}
+				contentContainerStyle={{ gap: 30 }}
 				renderItem={({ item }) => (
-					<View style={{ gap: 5, paddingBottom: 10, borderBottomWidth: 1, borderColor: colors.disabled }}>
+					<View style={{ gap: 5, paddingBottom: 30, borderBottomWidth: 1, borderColor: colors.disabled }}>
 						<CardButtonRow
 							label={item.name}
 							onPress={() => router.push('/settings/address/[id]')}

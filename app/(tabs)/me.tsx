@@ -86,7 +86,7 @@ export default function ProfileScreen() {
           />
         </SettingsSection>
 
-        <Button title='Logout' onPress={() => { }} />
+        <Button title='Logout' onPress={() => router.push('/auth/login')} />
 
       </ScrollView>
     </ThemedView>
