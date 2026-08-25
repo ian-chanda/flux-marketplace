@@ -1,5 +1,4 @@
 import { ThemeProvider } from '@/contexts/theme-context';
-import { useTheme } from '@/hooks/useTheme';
 import { Stack } from 'expo-router';
 
 export default function RootLayout() {
@@ -17,6 +16,8 @@ export default function RootLayout() {
         <Stack.Screen name="modals/category" options={{
           presentation: "modal"
         }}/>
+        <Stack.Screen name="modals/itemInformation" options={{presentation: "modal"}}/>
+        <Stack.Screen name="modals/userDescription" options={{ presentation: "modal"}}/>
         <Stack.Screen name="me/settings" options={{ headerShown: false }} />
         <Stack.Screen name="me/profile" options={{ headerShown: false }} />
         <Stack.Screen name="me/purchases" options={{ headerShown: false }} />
