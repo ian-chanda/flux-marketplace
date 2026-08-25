@@ -1,20 +1,19 @@
-import { StyleSheet, View } from "react-native"
+import { router } from "expo-router"
+import { Image, StyleSheet, TouchableOpacity, View } from "react-native"
 import { BookmarkBadge } from "./bookmark-badge"
-import { Image } from "react-native"
 import { ThemedText } from "./themed-text"
-import { TouchableOpacity } from "react-native"
 
 type prodCardTypes = {
+	id: number,
 	bookmarked: boolean,
 	img?: any,
 	desc: string,
 	name: string,
-	price: string
-}
+	price: string,}
 
-export const ProductCardV = ({ bookmarked, desc, name, price }: prodCardTypes) => {
+export const ProductCardV = ({ id, bookmarked, desc, name, price }: prodCardTypes) => {
 	return (
-		<TouchableOpacity style={styles.product_card} onPress={() => { }}>
+		<TouchableOpacity style={styles.product_card} onPress={()=> router.push(`/product/${id}`)}>
 			<View>
 				<BookmarkBadge
 					bookmarked={bookmarked}

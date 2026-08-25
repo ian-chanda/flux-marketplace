@@ -1,7 +1,6 @@
 import { useTheme } from '@/hooks/useTheme';
-import { ActivityIndicator, Pressable, StyleSheet, View } from 'react-native';
+import { ActivityIndicator, StyleSheet, TouchableOpacity } from 'react-native';
 import { ThemedText } from './themed-text';
-import { TouchableOpacity } from 'react-native';
 
 export type ButtonProps = {
     title: string;
@@ -22,7 +21,7 @@ export default function Button({ title, loading = false, disabled = false, onPre
             {loading ?
                 <ActivityIndicator size={24} color={colors.background} />
                 :
-                <ThemedText type="ButtonText" darkColor={colors.background}>
+                <ThemedText type="ButtonText" numberOfLines={1} darkColor={colors.background}>
                     {title}
                 </ThemedText>
             }
@@ -38,5 +37,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         marginTop: 10,
         alignSelf: "center",
+        minWidth: '80%',
+        maxWidth: '80%'
     },
 });

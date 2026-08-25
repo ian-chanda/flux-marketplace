@@ -1,4 +1,3 @@
-import { BookmarkBadge } from "@/components/bookmark-badge";
 import { CustomHeader } from "@/components/customHeader";
 import { IconButton } from "@/components/iconButton";
 import { ProductCardV } from "@/components/productCardV";
@@ -9,7 +8,7 @@ import { useTheme } from "@/hooks/useTheme";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { router } from "expo-router";
 import { useState } from "react";
-import { FlatList, Image, ScrollView, StatusBar, StyleSheet, TouchableOpacity, View } from "react-native";
+import { FlatList, ScrollView, StatusBar, StyleSheet, TouchableOpacity, View } from "react-native";
 
 type buttonTypes = {
     icon: any;
@@ -86,6 +85,7 @@ export default function Index() {
                     contentContainerStyle={{ gap: 16 }}
                     renderItem={({ item }) => (
                         <ProductCardV
+                        id={item.id}
                             bookmarked={bookmarked[item.id]}
                             desc={item.Desc}
                             name={item.name}
