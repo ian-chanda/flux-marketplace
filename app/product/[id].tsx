@@ -104,8 +104,8 @@ export default function Product() {
                     borderRadius: 50
                 }}>
                     <TouchableOpacity
-                    onPress={()=> alert("messaging seller")}>
-                        <Ionicons style= {{paddingHorizontal: 50}} color={colors.accent} name="mail-outline" size={35}/>
+                    onPress={()=> router.push("/messages/${item.id}")}>
+                        <Ionicons style= {{paddingHorizontal: 30}} color={colors.accent} name="mail-outline" size={35}/>
                     </TouchableOpacity>
                 </View>
                 </View>

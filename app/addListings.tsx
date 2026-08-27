@@ -301,8 +301,12 @@ export default function AddListings() {
             <SectionHeader
               icon="options"
               title="Additional details (Optional)" />
+            <FormField 
+              title="Condition"/>
             <FormField
               title="Brand" />
+            <FormField 
+            title="RAM"/>
             <FormField
               title="Model" />
             <FormField
