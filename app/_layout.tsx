@@ -1,10 +1,12 @@
 import { ThemeProvider } from '@/contexts/theme-context';
 import { Stack } from 'expo-router';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 export default function RootLayout() {
 
 
   return (
+    <GestureHandlerRootView style={{ flex: 1 }}>
     <ThemeProvider>
       <Stack screenOptions={{ headerShown: false }}>
         <Stack.Screen name="auth/login" options={{ headerShown: false }} />
@@ -18,6 +20,7 @@ export default function RootLayout() {
         }}/>
         <Stack.Screen name="modals/itemInformation" options={{presentation: "modal"}}/>
         <Stack.Screen name="modals/userDescription" options={{ presentation: "modal"}}/>
+        <Stack.Screen name = "modals/profile" options = {{ presentation: "modal"}}/>
         <Stack.Screen name="me/settings" options={{ headerShown: false }} />
         <Stack.Screen name="me/profile" options={{ headerShown: false }} />
         <Stack.Screen name="me/purchases" options={{ headerShown: false }} />
@@ -25,5 +28,6 @@ export default function RootLayout() {
         <Stack.Screen name="editProfile" options={{ headerShown: false }} />
       </Stack>
     </ThemeProvider>
+    </GestureHandlerRootView>
   );
 };

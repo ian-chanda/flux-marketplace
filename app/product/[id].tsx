@@ -71,7 +71,7 @@ export default function Product() {
                 </View>
 
                 <TouchableOpacity
-                onPress={() => router.push('/me/profile')}
+                onPress={() => router.push("/modals/profile")}
             style={{
                 flexDirection: 'row',
                 alignItems: 'center',

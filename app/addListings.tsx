@@ -33,9 +33,10 @@ export default function AddListings() {
     <ThemedView isTabVisible={false} style={{ flex: 1, paddingBottom: 4 }}>
       <CustomHeader title="Add listing" showBack={true} />
       <KeyboardAvoidingView
-        style={{ flex: 1 }}
+        style={{ paddingBottom: 50 }}
         behavior={Platform.OS === "ios" ? "padding" : 'height'}
-        keyboardVerticalOffset={Platform.OS === "ios" ? 90 : 0}
+        keyboardVerticalOffset={0}
+        
       >
         <ScrollView contentContainerStyle={{flexGrow: 1}}>
           <View style={[styles.container]}>
