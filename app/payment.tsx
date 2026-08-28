@@ -5,7 +5,7 @@ import { TopBar } from '@/components/topBar';
 import { useTheme } from "@/hooks/useTheme";
 import { router } from "expo-router";
 import { useState } from "react";
-import { Image, Pressable, ScrollView, StyleSheet, TextInput, TouchableOpacity, View } from "react-native";
+import { Image, KeyboardAvoidingView, Platform, Pressable, ScrollView, StyleSheet, TextInput, TouchableOpacity, View } from "react-native";
 
 export default function PaymentScreen () {
 const { colors } =  useTheme()
@@ -35,8 +35,8 @@ const [ SelectPayment, setSelectedPayment] = useState<string | null>(null);
                         </View>
                     </View>
                   </TouchableOpacity>
-                    <View style={{paddingTop: 40}}>
-                      <ThemedText type="defaultBold">Select Payment Method</ThemedText>
+                    <View style={{paddingTop: 20}}>
+                      <ThemedText type="defaultBold" >Select Payment Method</ThemedText>
                       <View style={styles.paymentBound}>
                         <Pressable onPress={() => setSelectedPayment('airtel')}>
                         <Image source={require("../assets/images/airtel.jpg")} style={[styles.paymentImages, styles.card]}/>
@@ -50,12 +50,22 @@ const [ SelectPayment, setSelectedPayment] = useState<string | null>(null);
                       </View>
                     </View>
                 </View>
-              { SelectPayment === 'airtel' || SelectPayment === 'mtn' || SelectPayment === 'zamtel' ? (
-                <View style={[styles.phoneField, {backgroundColor: colors.surface}]}>
-                  <TextInput placeholder="Enter phone number" keyboardType="phone-pad" maxLength={10} placeholderTextColor={colors.placeholder} style={{textAlign: "center"}}/>
-                </View>
-              ): null
-              }
+              <KeyboardAvoidingView
+                behavior={Platform.OS === "ios" ? "padding" : "height"}
+                keyboardVerticalOffset={0}
+                style={{ paddingTop: 20}}
+              >
+                { SelectPayment === 'airtel' || SelectPayment === 'mtn' || SelectPayment === 'zamtel' ? (
+                  <View style={[styles.phoneField, {backgroundColor: colors.surface}]}>
+                    <TextInput placeholder="Enter phone number"
+                    keyboardType="phone-pad" 
+                    maxLength={10} 
+                    placeholderTextColor={colors.placeholder} 
+                    style={{textAlign: "center"}}/>
+                  </View>
+                ): null
+                }
+              </KeyboardAvoidingView>
               <View style={{ flexDirection: "row", justifyContent: "space-between", paddingBottom: 25, paddingHorizontal: 125, paddingVertical: 25, borderBottomWidth: 1, borderTopWidth: 1, borderTopColor: colors.surface, borderBottomColor: colors.surface }}>
                 <ThemedText type="subtitle">Total:</ThemedText>
                 <ThemedText type="subtitle">K569.87</ThemedText>
@@ -100,10 +110,11 @@ const styles = StyleSheet.create({
     paddingLeft: 30
   },
   paymentBound: {
-    flex: 1,
     flexDirection: "row",
+    justifyContent: "center",
+    maxWidth: "90%",
     gap: 50,
-    paddingTop: 20,
+    paddingTop: 10
   },
   paymentImages: {
     width: 70,
