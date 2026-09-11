@@ -33,6 +33,7 @@ export default function ProfileScreen() {
 		year: "numeric",
 	}) : "00 jan 0000";
 
+
 	return (
 		<ThemedView isTabVisible={false} style={{ paddingHorizontal: 10, gap: 10 }}>
 			<CustomHeader showBack title="Profile" />
@@ -40,8 +41,9 @@ export default function ProfileScreen() {
 			<View style={{ paddingTop: 10, marginBottom: 50 }}>
 				{/* header image */}
 				<Image
-					source={header ? { uri: header } :
-						require('@/assets/images/dino.jpg')}
+					source={header
+						? { uri: `${header}?v=${userData?.updated_at}` }
+						: require('@/assets/images/dino.jpg')}
 					style={{
 						width: '100%',
 						height: 150,
@@ -52,8 +54,9 @@ export default function ProfileScreen() {
 				{/* profile image */}
 				<View style={{ position: 'absolute', bottom: -30, left: 15 }}>
 					<Image
-						source={avatar ? { uri: avatar } :
-							require('@/assets/images/dino.jpg')}
+						source={avatar
+							? { uri: `${avatar}?v=${userData?.updated_at}` }
+							: require('@/assets/images/dino.jpg')}
 						style={{
 							width: 120,
 							height: 120,

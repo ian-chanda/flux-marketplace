@@ -10,6 +10,7 @@ import { updateProfile, updateProfileImages } from "@/services/users"
 import { MaterialIcons } from "@expo/vector-icons"
 import { router } from "expo-router"
 import { useEffect, useState } from "react"
+import { ActivityIndicator } from "react-native"
 import { Platform, Image, KeyboardAvoidingView, ScrollView, TouchableOpacity, View } from "react-native"
 
 // Small edit-badge that sits on top of an image (header banner or avatar)
@@ -50,7 +51,7 @@ export default function EditProfileScreen() {
 	const [saving, setSaving] = useState(false)
 	const { user } = useAuth()
 	const { pickImage } = useImagePicker()
-	const { userData } = useUser()
+	const { userData, loading } = useUser()
 
 	const validate = () => {
 		const next: typeof errors = {}
@@ -96,12 +97,24 @@ export default function EditProfileScreen() {
 	}
 
 	useEffect(() => {
+		if(!userData) return
 		setName(userData?.name ?? "")
 		setAvatarImage(userData?.avatar_url ?? "")
 		setHeaderImage(userData?.header_url ?? "")
 		setUsername(userData?.username ?? "")
 		setContact(userData?.phone_number ?? "")
-	}, [])
+	}, [userData])
+
+	if (loading) {
+		return (
+			<ThemedView isTabVisible={false}
+				style={{ paddingHorizontal: 10, gap: 10, alignItems: 'center', justifyContent: 'center' }}
+			>
+				<ActivityIndicator size={24} />
+
+			</ThemedView>
+		)
+	}
 
 
 	return (
