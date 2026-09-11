@@ -5,3 +5,661 @@
 // choose a pallete, click export and get the hex codes
 // go to the file: constants/theme.ts and tell claude to replace the colors in the current theme with what youve picked or do it yourself if you're tuff
 
+
+
+backend:
+user: 
+	-> db need:
+		- name
+		- username
+		- location
+		- contact number
+		- delivery address(es)
+		- avatar_url
+		- feedback
+		- feedback_stats
+		- preferences //for what they like to buy or search for
+		- search history, saved searches, saved sellers, saved items
+		- purchase history
+		- recently viewed
+		- cart
+		- messages //ill think about the structure of this later
+
+> PRETTY COOL APP STRUCTURE
+>
+utils      - pure/general-purpose functions
+services   - talks to Supabase / external APIs
+hooks      - React state + reusable application behavior
+screen     - coordinates the UI
+
+src/
+├── app/
+│
+├── components/
+│   ├── ui/
+│   ├── profile/
+│   ├── listings/
+│   └── selling/
+│
+├── contexts/
+│   ├── AuthContext.tsx       ← you already have
+│   └── ThemeContext.tsx      ← if you need it
+│
+├── hooks/
+│   ├── useAuth.ts
+│   ├── useUser.ts            ← next
+│   ├── useListings.ts
+│   ├── useCart.ts
+│   └── useOrders.ts
+│
+├── services/
+│   ├── supabase.ts
+│   ├── users.ts              ← next
+│   ├── listings.ts
+│   ├── cart.ts
+│   ├── orders.ts
+│   └── reviews.ts
+│
+├── types/
+│   └── database.ts
+│
+├── utils/
+│   ├── formatDate.ts
+│   ├── formatCurrency.ts
+│   └── validation.ts
+│
+└── constants/
+    └── ...
+
+
+
+> ROADMAP
+Legend:
+[ ] Not started
+[~] In progress
+[x] Done
+
+Roles:
+[FE] Frontend / UI / React Native / Expo
+[BE] Backend / Supabase / PostgreSQL / RLS
+[BOTH] Frontend + Backend integration
+[DESIGN] Product/UI decisions
+
+
+============================================================
+PHASE 0 — PROJECT FOUNDATION
+============================================================
+
+[BOTH]
+[x] Agree on overall app architecture
+[ ] Agree on naming conventions
+[x] Agree on folder structure
+[ ] Agree on Git branching / commit conventions
+[ ] Decide how environment variables/secrets are handled
+
+[FE]
+[x] Set up Expo Router structure
+[x] Set up theme system
+[x] Set up reusable UI components
+[x] Set up shared typography
+[ ] Set up shared spacing/layout conventions
+[x] Set up reusable buttons/inputs/cards/etc.
+[ ] Set up loading/empty/error UI states
+
+[BE]
+[x] Create Supabase project
+[x] Configure database
+[x] Configure auth providers
+[ ] Configure storage
+[~] Generate TypeScript database types
+[ ] Document database conventions
+
+
+============================================================
+PHASE 1 — AUTHENTICATION & USERS
+============================================================
+
+[BE]
+[x] Configure Supabase Auth
+[x] Create public.users table
+[x] Link public.users.id -> auth.users.id
+[x] Add users trigger
+[x] Add username uniqueness
+[x] Add appropriate defaults
+[ ] Configure RLS for users
+[ ] Configure profile update policies //idk wtf this is
+[~] Configure avatar storage
+[~] Test signup -> public.users creation
+[~] Test login/logout/session persistence
+
+[FE]
+[x] AuthContext
+[~] Login screen
+[~] Signup screen
+[ ] Forgot password
+[ ] Auth loading state
+[ ] Auth error handling
+[~] Protected routes
+[~] Profile screen
+[~] Profile editing
+[~] Avatar upload
+[~] Username editing
+[~] Phone number editing
+
+[BOTH]
+[x] Connect AuthContext to Supabase session
+[~] Connect ProfileScreen to public.users
+[~] Test new account creation
+[~] Test profile updates
+[~] Test logout/login persistence
+
+
+============================================================
+PHASE 2 — DATA ACCESS ARCHITECTURE
+============================================================
+
+[FE]
+[x] Create services/
+[x] Create users service
+[ ] Create listings service
+[ ] Create cart service
+[ ] Create orders service
+[ ] Create reviews service
+[ ] Create messages service
+[ ] Create useUser hook
+[ ] Create useListings hook
+[ ] Create useCart hook
+[ ] Create useOrders hook
+[ ] Create useReviews hook
+[ ] Create useMessages hook
+[ ] Establish loading/error conventions
+[ ] Establish mutation conventions
+
+[BE]
+[~] Generate/update Supabase TypeScript types
+[ ] Document important database relationships
+[ ] Document RLS policy conventions
+
+[BOTH]
+[ ] Decide how server state will be cached
+[ ] Decide whether/when to introduce TanStack Query
+[ ] Establish API/data-fetching conventions
+
+
+============================================================
+PHASE 3 — LISTINGS
+============================================================
+
+[DESIGN]
+[ ] Define what information a listing needs
+[ ] Define listing creation flow
+[ ] Define listing editing flow
+[ ] Define listing states
+[ ] Define categories
+[ ] Define pricing model
+[ ] Define condition options
+[ ] Define location requirements
+[ ] Define listing images requirements
+
+[BE]
+[ ] Create listings table
+[ ] Create listing_images table
+[ ] Create categories table if needed
+[ ] Create listing/category relationships
+[ ] Add seller relationship
+[ ] Add listing status
+[ ] Add timestamps
+[ ] Add indexes
+[ ] Add constraints
+[ ] Configure listing RLS
+[ ] Configure listing image storage
+[ ] Configure image access policies
+[ ] Create listing-related queries/functions if needed
+
+[FE]
+[ ] Listing model/types
+[ ] ListingCard
+[ ] ListingGrid/List
+[ ] Listing detail screen
+[ ] Add listing screen
+[ ] Edit listing screen
+[ ] Image picker
+[ ] Image preview/reordering
+[ ] Category picker
+[ ] Price input
+[ ] Condition selector
+[ ] Location input
+[ ] Listing validation
+[ ] Listing loading state
+[ ] Listing empty state
+[ ] Listing error state
+
+[BOTH]
+[ ] Create listing
+[ ] Read listing
+[ ] Update listing
+[ ] Delete/archive listing
+[ ] Upload listing images
+[ ] Test seller ownership
+[ ] Test RLS
+
+
+============================================================
+PHASE 4 — SEARCH & DISCOVERY
+============================================================
+
+[DESIGN]
+[ ] Define search behavior
+[ ] Define filters
+[ ] Define sorting
+[ ] Define categories
+[ ] Define search result behavior
+[ ] Decide what search history should contain
+[ ] Decide what saved searches should contain
+
+[BE]
+[ ] Implement listing search
+[ ] Add indexes for search
+[ ] Implement category filtering
+[ ] Implement price filtering
+[ ] Implement location filtering
+[ ] Implement sorting
+[ ] Create search history table
+[ ] Create saved searches table
+[ ] Configure RLS
+[ ] Optimize search queries
+
+[FE]
+[ ] Search screen
+[ ] Search input
+[ ] Search results
+[ ] Filters
+[ ] Sorting
+[ ] Search history UI
+[ ] Clear search history
+[ ] Save search
+[ ] Saved searches screen
+[ ] Recently viewed listings
+
+[BOTH]
+[ ] Test search performance
+[ ] Test filtering
+[ ] Test saved searches
+[ ] Test search history
+
+
+============================================================
+PHASE 5 — SAVED ITEMS / SELLERS
+============================================================
+
+[BE]
+[ ] Create saved_items table
+[ ] Create saved_sellers table
+[ ] Add unique constraints
+[ ] Add RLS policies
+
+[FE]
+[ ] Save/unsave listing
+[ ] Save/unsave seller
+[ ] Saved items screen
+[ ] Saved sellers screen
+[ ] Saved state on ListingCard
+[ ] Saved state on ListingScreen
+
+[BOTH]
+[ ] Test duplicate saves
+[ ] Test deleting saved items
+[ ] Test RLS
+
+
+============================================================
+PHASE 6 — CART
+============================================================
+
+[DESIGN]
+[ ] Decide whether users can have multiple carts
+[ ] Decide cart expiration behavior
+[ ] Decide inventory behavior
+[ ] Decide whether quantity is supported
+[ ] Decide whether sellers can have multiple items per cart
+
+[BE]
+[ ] Create carts table
+[ ] Create cart_items table
+[ ] Add listing relationships
+[ ] Add quantity
+[ ] Add price snapshot if required
+[ ] Add constraints
+[ ] Add RLS
+[ ] Implement cart operations
+
+[FE]
+[ ] CartContext OR cart hook
+[ ] Add to cart
+[ ] Remove from cart
+[ ] Change quantity
+[ ] Cart screen
+[ ] Cart item component
+[ ] Cart total
+[ ] Empty cart state
+[ ] Cart loading state
+
+[BOTH]
+[ ] Test add/remove
+[ ] Test quantity changes
+[ ] Test unavailable listings
+[ ] Test seller ownership/business rules
+
+
+============================================================
+PHASE 7 — ORDERS / CHECKOUT
+============================================================
+
+[DESIGN]
+[ ] Define checkout flow
+[ ] Define order states
+[ ] Define payment flow
+[ ] Define delivery/pickup options
+[ ] Define cancellation rules
+[ ] Define refund rules
+[ ] Define seller order workflow
+
+[BE]
+[ ] Create orders table
+[ ] Create order_items table
+[ ] Create order status system
+[ ] Store necessary price snapshots
+[ ] Store seller information snapshots if required
+[ ] Implement order creation
+[ ] Implement order status transitions
+[ ] Add RLS
+[ ] Prevent unauthorized order modifications
+[ ] Add database constraints
+[ ] Add transactional logic where needed
+
+[FE]
+[ ] Checkout screen
+[ ] Address selection
+[ ] Delivery/pickup selection
+[ ] Order summary
+[ ] Order confirmation
+[ ] Order history
+[ ] Order detail
+[ ] Order status timeline
+[ ] Cancel order UI if supported
+[ ] Seller order management UI
+
+[BOTH]
+[ ] Test complete checkout
+[ ] Test failed checkout
+[ ] Test cancellation
+[ ] Test order status transitions
+[ ] Test permissions
+
+
+============================================================
+PHASE 8 — SELLER / SELLING
+============================================================
+
+[DESIGN]
+[ ] Define seller profile
+[ ] Define seller statistics
+[ ] Define seller dashboard
+[ ] Define seller performance metrics
+[ ] Define seller verification
+[ ] Define seller earnings model
+
+[BE]
+[ ] Determine which seller statistics are derived
+[ ] Create queries/views for seller statistics if needed
+[ ] Calculate successful sales
+[ ] Calculate rating
+[ ] Calculate response time
+[ ] Calculate active listings
+[ ] Calculate listing views
+[ ] Calculate earnings
+[ ] Configure seller permissions
+[ ] Add seller-specific RLS
+
+[FE]
+[ ] Selling dashboard
+[ ] Seller header
+[ ] Seller performance
+[ ] Active listings
+[ ] Listing management
+[ ] Sales/orders
+[ ] Earnings
+[ ] Seller reviews
+[ ] Seller statistics
+[ ] Seller verification display
+
+[BOTH]
+[ ] Verify statistics against real data
+[ ] Test seller permissions
+[ ] Test seller/non-seller behavior
+
+
+============================================================
+PHASE 9 — REVIEWS / FEEDBACK
+============================================================
+
+[DESIGN]
+[ ] Decide review model
+[ ] Decide rating scale
+[ ] Decide when users can review
+[ ] Decide whether reviews can be edited
+[ ] Decide whether sellers can respond
+[ ] Decide positive/neutral/negative classification
+
+[BE]
+[ ] Create reviews table
+[ ] Add reviewer relationship
+[ ] Add reviewed seller/listing relationship
+[ ] Add order relationship
+[ ] Prevent invalid reviews
+[ ] Prevent duplicate reviews if required
+[ ] Add RLS
+[ ] Create rating aggregation queries
+[ ] Create seller rating statistics
+
+[FE]
+[ ] Review creation
+[ ] Review display
+[ ] Rating display
+[ ] Feedback categories
+[ ] Seller feedback screen
+[ ] Review loading/empty states
+
+[BOTH]
+[ ] Test review permissions
+[ ] Test rating calculations
+
+
+============================================================
+PHASE 10 — MESSAGING
+============================================================
+
+[DESIGN]
+[ ] Define conversation model
+[ ] Define message model
+[ ] Define buyer/seller conversation rules
+[ ] Define unread behavior
+[ ] Define message status
+[ ] Define attachments if needed
+
+[BE]
+[ ] Create conversations table
+[ ] Create conversation_participants table if needed
+[ ] Create messages table
+[ ] Configure RLS
+[ ] Configure realtime
+[ ] Configure message ordering
+[ ] Configure unread/read state
+[ ] Configure attachment storage if needed
+
+[FE]
+[ ] Conversation list
+[ ] Chat screen
+[ ] Message bubble
+[ ] Message input
+[ ] Unread indicators
+[ ] Read state
+[ ] Realtime message updates
+[ ] Attachment UI if needed
+
+[BOTH]
+[ ] Test buyer -> seller messaging
+[ ] Test seller -> buyer messaging
+[ ] Test realtime
+[ ] Test permissions
+[ ] Test blocked/deleted listings
+
+
+============================================================
+PHASE 11 — NOTIFICATIONS
+============================================================
+
+[DESIGN]
+[ ] Define notification types
+[ ] Define notification priorities
+[ ] Define notification retention
+
+[BE]
+[ ] Create notifications table
+[ ] Add notification generation logic
+[ ] Configure RLS
+[ ] Configure push notification infrastructure
+[ ] Configure notification preferences
+
+[FE]
+[ ] Notification screen
+[ ] Notification badge
+[ ] Notification navigation
+[ ] Notification preferences
+[ ] Push notification handling
+
+[BOTH]
+[ ] Test notification triggers
+[ ] Test deep links
+
+
+============================================================
+PHASE 12 — SECURITY / DATABASE HARDENING
+============================================================
+
+[BE]
+[ ] Review every table's RLS
+[ ] Review every INSERT policy
+[ ] Review every UPDATE policy
+[ ] Review every DELETE policy
+[ ] Review storage policies
+[ ] Review auth configuration
+[ ] Review exposed database functions
+[ ] Review SECURITY DEFINER functions
+[ ] Review search_path settings
+[ ] Add database constraints
+[ ] Add indexes
+[ ] Remove unnecessary exposed fields
+[ ] Test unauthorized access
+[ ] Test cross-user data access
+[ ] Test seller/buyer permissions
+
+[BOTH]
+[ ] Test app using multiple accounts
+[ ] Test malicious/invalid input
+[ ] Test expired/deleted resources
+
+
+============================================================
+PHASE 13 — PERFORMANCE / POLISH
+============================================================
+
+[FE]
+[ ] Optimize images
+[ ] Add image compression
+[ ] Add pagination/infinite scrolling
+[ ] Optimize FlatLists
+[ ] Reduce unnecessary renders
+[ ] Add skeleton/loading states
+[ ] Add proper error states
+[ ] Improve keyboard handling
+[ ] Test different screen sizes
+[ ] Test Android
+[ ] Test iOS
+
+[BE]
+[ ] Review slow queries
+[ ] Add missing indexes
+[ ] Optimize joins
+[ ] Review database functions
+[ ] Review storage performance
+[ ] Review realtime usage
+[ ] Review database size
+
+[BOTH]
+[ ] Test poor network conditions
+[ ] Test offline/reconnection behavior
+[ ] Test large datasets
+
+
+============================================================
+PHASE 14 — TESTING
+============================================================
+
+[FE]
+[ ] Test authentication flows
+[ ] Test navigation
+[ ] Test forms
+[ ] Test listing creation
+[ ] Test search
+[ ] Test cart
+[ ] Test checkout
+[ ] Test messaging
+[ ] Test reviews
+
+[BE]
+[ ] Test database constraints
+[ ] Test RLS policies
+[ ] Test database functions
+[ ] Test triggers
+[ ] Test order transactions
+[ ] Test seller permissions
+
+[BOTH]
+[ ] End-to-end buyer flow
+[ ] End-to-end seller flow
+[ ] New user flow
+[ ] Returning user flow
+[ ] Failed network flow
+[ ] Invalid input flow
+
+
+============================================================
+PHASE 15 — RELEASE
+============================================================
+
+[BOTH]
+[ ] Finalize production environment
+[ ] Configure production Supabase
+[ ] Configure production environment variables
+[ ] Configure app identifiers
+[ ] Configure app icons
+[ ] Configure splash screen
+[ ] Configure builds
+[ ] Configure OTA/update strategy
+[ ] Configure analytics if needed
+[ ] Configure crash reporting
+[ ] Privacy policy
+[ ] Terms of service
+[ ] Account deletion flow
+[ ] Final security review
+[ ] Final database backup strategy
+[ ] Production smoke test
+[ ] Release Android build
+[ ] Release iOS build
+[ ] Monitor production
+
+
+
+
+

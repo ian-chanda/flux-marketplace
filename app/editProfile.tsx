@@ -1,14 +1,17 @@
 import Button from "@/components/Button"
 import { CustomHeader } from "@/components/customHeader"
 import { CustomInputField } from "@/components/customInput"
-import { ThemedText } from "@/components/themed-text"
 import { ThemedView } from "@/components/themed-view"
+import { useAuth } from "@/contexts/auth-context"
+import { useImagePicker } from "@/hooks/use-pick-image"
+import { useUser } from "@/hooks/use-user"
 import { useTheme } from "@/hooks/useTheme"
+import { updateProfile, updateProfileImages } from "@/services/users"
 import { MaterialIcons } from "@expo/vector-icons"
 import { router } from "expo-router"
-import { useState } from "react"
-import { Platform } from "react-native"
-import { Image, KeyboardAvoidingView, ScrollView, TouchableOpacity, View } from "react-native"
+import { useEffect, useState } from "react"
+import { ActivityIndicator } from "react-native"
+import { Platform, Image, KeyboardAvoidingView, ScrollView, TouchableOpacity, View } from "react-native"
 
 // Small edit-badge that sits on top of an image (header banner or avatar)
 const EditImageBadge = ({ onPress, size = 28 }: { onPress: () => void, size?: number }) => {
@@ -46,9 +49,9 @@ export default function EditProfileScreen() {
 
 	const [errors, setErrors] = useState<{ name?: string; username?: string; contact?: string }>({})
 	const [saving, setSaving] = useState(false)
-
-	const pickImage = async (onPicked: (uri: string) => void, aspect: [number, number]) => {
-	}
+	const { user } = useAuth()
+	const { pickImage } = useImagePicker()
+	const { userData, loading } = useUser()
 
 	const validate = () => {
 		const next: typeof errors = {}
@@ -66,11 +69,53 @@ export default function EditProfileScreen() {
 
 		setSaving(true)
 		try {
+
+			await updateProfile({
+				userId: user?.id as string,
+				name: name,
+				username: username,
+				phoneNumber: contact
+			})
+
+			if (avatarImage && headerImage) {
+				await updateProfileImages({
+					userId: user?.id as string,
+					avatarUri: avatarImage,
+					headerUri: headerImage
+				})
+			}
+
+			console.log("profile updated!")
 			router.back()
-		} finally {
+		} catch (error: any) {
+			console.log("error editing profile: ", error.message)
+
+		}
+		finally {
 			setSaving(false)
 		}
 	}
+
+	useEffect(() => {
+		if(!userData) return
+		setName(userData?.name ?? "")
+		setAvatarImage(userData?.avatar_url ?? "")
+		setHeaderImage(userData?.header_url ?? "")
+		setUsername(userData?.username ?? "")
+		setContact(userData?.phone_number ?? "")
+	}, [userData])
+
+	if (loading) {
+		return (
+			<ThemedView isTabVisible={false}
+				style={{ paddingHorizontal: 10, gap: 10, alignItems: 'center', justifyContent: 'center' }}
+			>
+				<ActivityIndicator size={24} />
+
+			</ThemedView>
+		)
+	}
+
 
 	return (
 		<ThemedView isTabVisible={false} style={{ paddingHorizontal: 10, gap: 10 }}>
@@ -84,7 +129,8 @@ export default function EditProfileScreen() {
 				<ScrollView contentContainerStyle={{ gap: 20, paddingBottom: 100 }} showsVerticalScrollIndicator={false}>
 					<View style={{ paddingTop: 10, marginBottom: 50 }}>
 						{/* header image */}
-						<TouchableOpacity onPress={() => pickImage(setHeaderImage, [16, 9])} activeOpacity={0.85}>
+						<TouchableOpacity
+							onPress={() => pickImage(setHeaderImage)} activeOpacity={0.85}>
 							<Image
 								source={headerImage ? { uri: headerImage } : require("@/assets/images/dino.jpg")}
 								style={{
@@ -101,13 +147,13 @@ export default function EditProfileScreen() {
 									right: 10,
 								}}
 							>
-								<EditImageBadge onPress={() => pickImage(setHeaderImage, [16, 9])} />
+								<EditImageBadge onPress={() => pickImage(setHeaderImage)} />
 							</View>
 						</TouchableOpacity>
 
 						{/* profile image */}
 						<View style={{ position: "absolute", bottom: -30, left: 15 }}>
-							<TouchableOpacity onPress={() => pickImage(setAvatarImage, [1, 1])} activeOpacity={0.85}>
+							<TouchableOpacity onPress={() => pickImage(setAvatarImage)} activeOpacity={0.85}>
 								<Image
 									source={avatarImage ? { uri: avatarImage } : require("@/assets/images/dino.jpg")}
 									style={{
@@ -119,7 +165,7 @@ export default function EditProfileScreen() {
 									}}
 								/>
 								<View style={{ position: "absolute", bottom: 4, right: 4 }}>
-									<EditImageBadge onPress={() => pickImage(setAvatarImage, [1, 1])} />
+									<EditImageBadge onPress={() => pickImage(setAvatarImage)} />
 								</View>
 							</TouchableOpacity>
 						</View>

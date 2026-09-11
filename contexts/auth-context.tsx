@@ -71,7 +71,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
 
     if (error) throw error
 
-    return data?.session.user.user_metadata.isOnboard
+    return true
   }
 
   const signUp = async (email: string, password: string) => {
