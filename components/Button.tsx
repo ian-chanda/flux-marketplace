@@ -32,7 +32,7 @@ export default function Button({ title, loading = false, disabled = false, onPre
 const styles = StyleSheet.create({
     button: {
         paddingVertical: 20,
-        paddingHorizontal: 100,
+        paddingHorizontal: 2,
         borderRadius: 60,
         alignItems: "center",
         marginTop: 10,
