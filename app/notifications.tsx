@@ -21,38 +21,21 @@ export default function Notifications () {
     const { colors } = useTheme();
     return (
         <ThemedView
-        isTabVisible={ false }
-        style={{
-            paddingBottom: 0
-        }}>
+        isTabVisible={ false }>
             <TopBar 
             title="Notifications"/>
             <FlatList
             data={notifications}
+            keyExtractor={(item) => item.id.toString()}
             renderItem={({ item }) => (
-
- 
                     <View
-                    style={{flexDirection: "column", borderBlockColor: colors.surface}}>
-                        <View
-                        style={[styles.itemContainer, {borderBlockColor: colors.surface}]}>
-                            <View>
-                                <Image source={item.icon} style={styles.image}/>
-                            </View>
-                            <View
-                            style={{flexDirection: "column"}}>
-                                <View
-                                style = {{flexDirection: "row"
-                                }}>
-                                    <View 
-                                    style={{flexDirection:"row"}}>
-                                        <ThemedText type="defaultSemiBold">{item.header}</ThemedText>
-                                    </View>
-                                </View>
-                                <View style={{flexDirection: "row", width: "90%"}}>
-                                    <ThemedText>{item.content}</ThemedText>
-                                </View>
-                            </View>
+                    style={[styles.itemContainer, { borderBottomColor: colors.surface }]}>
+                        <Image source={item.icon} style={styles.image}/>
+                        <View style={styles.info}>
+                            <ThemedText type="defaultSemiBold">{item.header}</ThemedText>
+                            <ThemedText type="smallFaded" style={styles.content}>
+                                {item.content}
+                            </ThemedText>
                         </View>
                     </View>
             )}/>
@@ -66,13 +49,18 @@ const styles = StyleSheet.create({
         alignItems: "center",
         padding: 10,
         borderBottomWidth: 1,
-        borderBottomColor: "#ccc",
-  },
-
-  image: {
-    width: 60,
-    height: 60,
-    borderRadius: 25,
-    marginRight: 20
-  }
+    },
+    image: {
+        width: 60,
+        height: 60,
+        borderRadius: 25,
+        marginRight: 20,
+    },
+    info: {
+        flex: 1,
+        gap: 4,
+    },
+    content: {
+        lineHeight: 18,
+    },
 })
