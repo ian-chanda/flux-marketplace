@@ -35,38 +35,28 @@ export default function Messages () {
             showBackButton={false}/>
             <FlatList
             data={flags}
+            keyExtractor={(item) => item.id.toString()}
             renderItem={({ item }) => (
             <Pressable
-            onPress={() => router.push("/messages/${item.id}")}>
+            onPress={() => router.push(`/messages/${item.id}`)}>
                     <View
-                    style={{flexDirection: "column"}}>
-                        <View
-                        style={[styles.itemContainer, {borderBlockColor: colors.surface}]}>
-                            <View>
-                                <Image source={item.product} style={styles.image}/>
-                                <View>
-                                    <Image source={item.profile} style={{width: 30, height: 30, borderRadius: 50, position: "absolute", bottom: 0, right: 10}}/>
-                                </View>
+                    style={[styles.itemContainer, { borderBottomColor: colors.surface }]}>
+                        <View>
+                            <Image source={item.product} style={styles.image}/>
+                            <Image source={item.profile} style={styles.avatar}/>
+                        </View>
+                        <View style={styles.info}>
+                            <View style={styles.header}>
+                                <ThemedText type="defaultSemiBold" numberOfLines={1} style={styles.sender}>
+                                    {item.sender}
+                                </ThemedText>
+                                <ThemedText type="smallFaded">{item.date}</ThemedText>
                             </View>
-                            <View
-                            style={{flexDirection: "column"}}>
-                                <View
-                                style = {{flexDirection: "row"
-                                }}>
-                                    <View 
-                                    style={{flexDirection:"row"}}>
-                                        <ThemedText type="defaultSemiBold">{item.sender}</ThemedText>
-                                    </View>
-                                    <View
-                                    style={{position: "absolute", left: 230}}>
-                                        <ThemedText type="defaultSemiBold">{item.date}</ThemedText>
-                                    </View>
-                                </View>
-                                <View style={{flexDirection: "row", width: "90%"}}>
-                                    {/*Logic for read and delivered...should be herrrrrrr*/}
-                                    <MaterialIcons name="done-all" size={13} color={colors.accent} style={{paddingTop: 8, paddingRight: 10}}/>
-                                    <ThemedText>{item.lastmessage}</ThemedText>
-                                </View>
+                            <View style={styles.messageRow}>
+                                <MaterialIcons name="done-all" size={14} color={colors.accent} />
+                                <ThemedText type="smallFaded" numberOfLines={1} style={styles.lastMessage}>
+                                    {item.lastmessage}
+                                </ThemedText>
                             </View>
                         </View>
                     </View>
@@ -82,13 +72,40 @@ const styles = StyleSheet.create({
         alignItems: "center",
         padding: 10,
         borderBottomWidth: 1,
-        borderBottomColor: "#ccc",
-  },
-
-  image: {
-    width: 60,
-    height: 60,
-    borderRadius: 25,
-    marginRight: 20
-  }
+    },
+    image: {
+        width: 60,
+        height: 60,
+        borderRadius: 25,
+        marginRight: 20,
+    },
+    avatar: {
+        width: 30,
+        height: 30,
+        borderRadius: 50,
+        position: "absolute",
+        bottom: 0,
+        right: 10,
+    },
+    info: {
+        flex: 1,
+        gap: 4,
+    },
+    header: {
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+        gap: 10,
+    },
+    sender: {
+        flex: 1,
+    },
+    messageRow: {
+        flexDirection: "row",
+        alignItems: "center",
+        gap: 6,
+    },
+    lastMessage: {
+        flex: 1,
+    },
 })
