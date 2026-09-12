@@ -1,44 +1,126 @@
+import { AdditionalDetails, AdditionalDetailsModal } from "@/components/additionalDetailsModal";
 import Button from "@/components/Button";
 import { CustomHeader } from "@/components/customHeader";
-import { FormField } from "@/components/formFiled";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import { SectionHeader } from "@/components/titleBar";
+import { useAuth } from "@/contexts/auth-context";
 import { useTheme } from "@/hooks/useTheme";
+import { getCategory } from "@/lib/listingDraft";
+import { createListing, uploadListingImages } from "@/services/listings";
 import { Ionicons } from "@expo/vector-icons";
 import MaterialIcon from "@expo/vector-icons/MaterialIcons";
-import { router } from "expo-router";
-import { useState } from "react";
-import { KeyboardAvoidingView, Platform, Pressable, ScrollView, StyleSheet, TextInput, TouchableOpacity, View } from "react-native";
+import * as ImagePicker from "expo-image-picker";
+import { router, useFocusEffect } from "expo-router";
+import { useCallback, useState } from "react";
+import { Alert, Image, KeyboardAvoidingView, Platform, Pressable, ScrollView, StyleSheet, TextInput, TouchableOpacity, View } from "react-native";
 
 export default function AddListings() {
   const { colors } = useTheme();
+  const { user } = useAuth();
+
   const [itemDetails, setItemDetails] = useState("");
   const [itemName, setItemName] = useState("");
   const [itemPrice, setItemPrice] = useState("");
   const [selectedCondition, setSelectedCondition] = useState<string | null>(null);
-  const conditions = ['New', 'Like New', 'Used', 'Fair'];
+  const [images, setImages] = useState<string[]>([]);
+  const [category, setCategory] = useState<string>(getCategory() ?? "");
+  const [additional, setAdditional] = useState<AdditionalDetails>({});
+  const [showAdditional, setShowAdditional] = useState(false);
   const [selectedOption, setSelectedOption] = useState('delivery');
+  const [submitting, setSubmitting] = useState(false);
+
+  const conditions = ['New', 'Like New', 'Used', 'Fair'];
 
   const options = [
     { id: 'delivery', title: 'Delivery Available', description: "You'll deliver the item to the buyer", icon: 'checkmark-circle' },
     { id: 'pickup', title: 'Buyer Pickup', description: 'Buyer will pick up the item', icon: 'ellipse-outline' }
   ];
 
-  function onChangeNumber(text: string): void {
-    setItemDetails(text)
-  }
+  useFocusEffect(
+    useCallback(() => {
+      setCategory(getCategory() ?? "");
+    }, [])
+  );
+
+  const pickImages = async () => {
+    const permission = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    if (!permission.granted) {
+      Alert.alert("Permission needed", "Allow photo library access to add photos to your listing.");
+      return;
+    }
+
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsMultipleSelection: true,
+      selectionLimit: 6 - images.length,
+      quality: 0.7,
+    });
+
+    if (!result.canceled && result.assets) {
+      const uris = result.assets.map((asset) => asset.uri);
+      setImages((prev) => [...prev, ...uris].slice(0, 6));
+    }
+  };
+
+  const filledAdditionalCount = Object.values(additional).filter((v) => v && v.trim()).length;
+
+  const publish = async () => {
+    if (!itemName.trim() || !itemDetails.trim() || !itemPrice.trim()) {
+      Alert.alert("Missing details", "Please add a title, description and price.");
+      return;
+    }
+
+    if (!category) {
+      Alert.alert("Missing category", "Pick a category for your item.");
+      return;
+    }
+
+    const price = parseFloat(itemPrice);
+    if (isNaN(price) || price <= 0) {
+      Alert.alert("Invalid price", "Enter a price greater than 0.");
+      return;
+    }
+
+    if (!user) return;
+
+    setSubmitting(true);
+    try {
+      const imageUrls = images.length ? await uploadListingImages(images, user.id) : [];
+
+      const listing = await createListing({
+        userId: user.id,
+        title: itemName.trim(),
+        description: itemDetails.trim(),
+        price,
+        category,
+        condition: selectedCondition,
+        images: imageUrls,
+        attributes: additional,
+        location: "Kabulonga, Lusaka",
+        delivery: selectedOption === "delivery",
+        pickup: selectedOption === "pickup",
+      });
+
+      router.replace(`/product/${listing.id}`);
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Something went wrong. Try again.";
+      Alert.alert("Couldn't publish", message);
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   return (
-    <ThemedView isTabVisible={false} style={{ flex: 1, paddingBottom: 4 }}>
+    <ThemedView isTabVisible={false} style={{ flex: 1, paddingBottom: 10 }}>
       <CustomHeader title="Add listing" showBack={true} />
       <KeyboardAvoidingView
         style={{ paddingBottom: 50 }}
         behavior={Platform.OS === "ios" ? "padding" : 'height'}
         keyboardVerticalOffset={0}
-        
       >
-        <ScrollView contentContainerStyle={{flexGrow: 1}}>
+        <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+          {/*photos*/}
           <View style={[styles.container]}>
             <SectionHeader
               icon="image"
@@ -50,7 +132,7 @@ export default function AddListings() {
               </ThemedText>
             </View>
             <View style={styles.imageHoler}>
-              <Pressable onPress={() => alert("select photos")}>
+              <Pressable onPress={pickImages}>
                 <View style={styles.photoButton}>
                   <View
                     style={{
@@ -59,24 +141,28 @@ export default function AddListings() {
                     }}>
                     <MaterialIcon name="add" color={colors.accent} size={75} />
                     <View style={{ paddingRight: 10 }}>
-                      <ThemedText type="defaultFaded">Add photos</ThemedText>
+                      <ThemedText type="defaultFaded">
+                        {images.length ? "Add more" : "Add photos"}
+                      </ThemedText>
                     </View>
                   </View>
                 </View>
               </Pressable>
               <View
                 style={{
-                  flexDirection: "column",
-                  justifyContent: "center",
-                  gap: 20,
+                  flexDirection: "row",
+                  flexWrap: "wrap",
+                  gap: 10,
                   padding: 10,
+                  maxWidth: 170,
                 }}>
-                <View style={styles.ImagePl}>
-                  <MaterialIcon name="add" color={"gray"} style={{ padding: 10 }} />
-                </View>
-                <View style={styles.ImagePl}>
-                  <MaterialIcon name="add" color={"gray"} style={{ padding: 10 }} />
-                </View>
+                {images.map((uri, index) => (
+                  <TouchableOpacity
+                    key={`${uri}-${index}`}
+                    onPress={() => setImages((prev) => prev.filter((_, i) => i !== index))}>
+                    <Image source={{ uri }} style={styles.thumb} />
+                  </TouchableOpacity>
+                ))}
               </View>
             </View>
           </View>
@@ -125,21 +211,42 @@ export default function AddListings() {
               </View>
               <TouchableOpacity
                 onPress={() => router.push("/modals/category")}>
+                <View style={[styles.header, styles.categoryRow, { paddingTop: 20, borderTopWidth: 0.5, borderTopColor: "#D3D3D3" }]}>
+                  <View style={{ flexDirection: "row", gap: 7, alignItems: "center" }}>
+                    <MaterialIcon name="label" size={24} color={colors.accent} />
+                    <ThemedText type="defaultBold">
+                      Category
+                      <ThemedText type="defaultBold" style={{ color: colors.accent }}> *</ThemedText>
+                    </ThemedText>
+                  </View>
+                  <View style={{ flexDirection: "row", alignItems: "center", gap: 6 }}>
+                    <ThemedText type="default" style={{ color: category ? colors.accent : colors.placeholder }}>
+                      {category || "Select"}
+                    </ThemedText>
+                    <Ionicons name="chevron-forward" size={24} color={"#D4D4D4"} />
+                  </View>
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => setShowAdditional(true)}>
                 <View style={[styles.header, { paddingTop: 20, borderTopWidth: 0.5, borderTopColor: "#D3D3D3" }]}>
-                  <MaterialIcon name="label" size={24} color={colors.accent} />
+                  <Ionicons name="options" size={24} color={colors.accent} />
                   <ThemedText type="defaultBold">
-                    Category
-                    <ThemedText type="defaultBold" style={{ color: colors.accent }}> *</ThemedText>
+                    Additional details (Optional)
                   </ThemedText>
                   <View
                     style={{
                       flex: 1,
                       flexDirection: "row",
-                      justifyContent: "flex-end"
+                      justifyContent: "flex-end",
+                      alignItems: "center",
+                      gap: 6
                     }}>
+                    {filledAdditionalCount > 0 && (
+                      <ThemedText type="smallFaded">{filledAdditionalCount} filled</ThemedText>
+                    )}
                     <Ionicons name="chevron-forward" size={24} color={"#D4D4D4"} />
                   </View>
-
                 </View>
               </TouchableOpacity>
             </View>
@@ -230,7 +337,6 @@ export default function AddListings() {
                 flex: 1,
                 flexDirection: "row",
                 paddingBottom: 20
-
               }}>
               <View
                 style={{
@@ -240,9 +346,7 @@ export default function AddListings() {
                 <ThemedText type="smallFaded">Your location</ThemedText>
                 <ThemedText type="defaultBold">Kabulonga, Lusaka</ThemedText>
               </View>
-              <View
-                style={{
-                }}>
+              <View>
                 <TouchableOpacity
                   onPress={() => router.push("/modals/location")}
                   style={{
@@ -294,34 +398,26 @@ export default function AddListings() {
               ))}
             </View>
           </View>
-          <View
-            style={[
-              styles.container,
-              { flexDirection: "column", paddingBottom: 12 }
-            ]}>
-            <SectionHeader
-              icon="options"
-              title="Additional details (Optional)" />
-            <FormField 
-              title="Condition"/>
-            <FormField
-              title="Brand" />
-            <FormField 
-            title="RAM"/>
-            <FormField
-              title="Model" />
-            <FormField
-              title="Color"
-              showBorder={false} />
-          </View>
+          <View style={{ paddingBottom: 70 }}>
           <Button
-            title="Publish"
-            onPress={() => alert("published")}
+            title={submitting ? "Publishing..." : "Publish"}
+            loading={submitting}
+            disabled={submitting}
+            onPress={publish}
           />
+          </View>
         </ScrollView>
       </KeyboardAvoidingView>
+
+      <AdditionalDetailsModal
+        visible={showAdditional}
+        values={additional}
+        onClose={() => setShowAdditional(false)}
+        onSave={(values) => setAdditional(values)}
+      />
+
     </ThemedView>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -347,12 +443,10 @@ const styles = StyleSheet.create({
     paddingRight: 10,
     borderRadius: 15,
   },
-  ImagePl: {
-    borderWidth: 1,
-    borderColor: "gray",
-    borderStyle: "dashed",
+  thumb: {
+    width: 55,
+    height: 55,
     borderRadius: 10,
-    padding: 20,
   },
   shadow: {
     shadowColor: "#000",
@@ -368,6 +462,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     gap: 7,
     margin: 10,
+  },
+  categoryRow: {
+    justifyContent: "space-between",
+    alignItems: "center",
   },
   input: {
     flex: 1,

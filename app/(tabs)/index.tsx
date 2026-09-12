@@ -4,11 +4,12 @@ import { ProductCardV } from "@/components/productCardV";
 import { SearchBarButton } from "@/components/searchBarButton";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
+import { useListings } from "@/hooks/useListings";
 import { useTheme } from "@/hooks/useTheme";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import { router } from "expo-router";
-import { useState } from "react";
-import { FlatList, ScrollView, StatusBar, StyleSheet, TouchableOpacity, View } from "react-native";
+import { router, useFocusEffect } from "expo-router";
+import { useCallback, useRef, useState } from "react";
+import { ActivityIndicator, FlatList, RefreshControl, ScrollView, StatusBar, StyleSheet, TouchableOpacity, View } from "react-native";
 
 type buttonTypes = {
     icon: any;
@@ -35,21 +36,23 @@ const SmallIconButton = ({ icon, title }: buttonTypes) => {
     )
 }
 
-const products = [
-    { id: 1, name: "Product THREEE HUNDRED AND NIGETU", Desc: 'new', image: 'url', price: "K2" },
-    { id: 2, name: "Product 2", Desc: 'pre-owned', image: 'url', price: "K3" },
-    { id: 3, name: "Product 3", Desc: 'used-like new', image: 'url', price: "K4" },
-    { id: 4, name: "Product 4", Desc: 'new', image: 'url', price: "K5" },
-    { id: 5, name: "Product 3", Desc: 'used-like new', image: 'url', price: "K4" },
-    { id: 6, name: "Product 3", Desc: 'used-like new', image: 'url', price: "K4" },
-    { id: 7, name: "Product 3", Desc: 'used-like new', image: 'url', price: "K4" },
-]
-
 export default function Index() {
     const { colors } = useTheme()
-    const [bookmarked, setBookmarked] = useState<Record<number, boolean>>({});
+    const { listings, loading, refreshing, error, load, refresh } = useListings();
+    const [bookmarked, setBookmarked] = useState<Record<string, boolean>>({});
+    const isFirstFocus = useRef(true);
 
-    const toggleBookmark = (id: number) => {
+    useFocusEffect(
+        useCallback(() => {
+            if (isFirstFocus.current) {
+                isFirstFocus.current = false;
+                return;
+            }
+            load(true);
+        }, [load])
+    );
+
+    const toggleBookmark = (id: string) => {
         setBookmarked(prev => ({ ...prev, [id]: !prev[id] }));
     };
 
@@ -72,28 +75,49 @@ export default function Index() {
             >
                 <SmallIconButton icon="favorite-outline" title="saved" />
                 <SmallIconButton icon="sell" title="selling" />
-                <SmallIconButton icon="sell" title="bitches" />
-                <SmallIconButton icon="sell" title="selling" />
-                <SmallIconButton icon="sell" title="selling" />
+                <SmallIconButton icon="sell" title="phones" />
+                <SmallIconButton icon="sell" title="gaming" />
             </ScrollView>
 
             <View style={{ paddingHorizontal: 10, flex: 1 }}>
-                <FlatList
-                    data={products}
-                    numColumns={2}
-                    columnWrapperStyle={{ justifyContent: 'space-between' }}
-                    contentContainerStyle={{ gap: 16 }}
-                    renderItem={({ item }) => (
-                        <ProductCardV
-                        id={item.id}
-                            bookmarked={bookmarked[item.id]}
-                            desc={item.Desc}
-                            name={item.name}
-                            price={item.price}
-                        />
-                    )}
-                    keyExtractor={(item) => item.id.toString()}
-                />
+                {loading ? (
+                    <View style={styles.center}>
+                        <ActivityIndicator size="large" color={colors.accent} />
+                    </View>
+                ) : error ? (
+                    <View style={styles.center}>
+                        <ThemedText type="defaultFaded">Could not load listings</ThemedText>
+                        <TouchableOpacity onPress={refresh} style={{ marginTop: 10 }}>
+                            <ThemedText type="defaultBold" style={{ color: colors.accent }}>Try again</ThemedText>
+                        </TouchableOpacity>
+                    </View>
+                ) : listings.length === 0 ? (
+                    <View style={styles.center}>
+                        <ThemedText type="defaultFaded">No listings yet. Be the first to post one!</ThemedText>
+                    </View>
+                ) : (
+                    <FlatList
+                        data={listings}
+                        numColumns={2}
+                        columnWrapperStyle={{ justifyContent: 'space-between', gap: 10 }}
+                        contentContainerStyle={{ gap: 16, paddingBottom: 20 }}
+                        refreshControl={
+                            <RefreshControl refreshing={refreshing} onRefresh={refresh} tintColor={colors.accent} />
+                        }
+                        renderItem={({ item }) => (
+                            <ProductCardV
+                                id={item.id}
+                                bookmarked={bookmarked[item.id]}
+                                img={item.images?.[0]}
+                                desc={item.condition ?? item.category}
+                                name={item.title}
+                                price={`K${item.price}`}
+                                onBookmark={() => toggleBookmark(item.id)}
+                            />
+                        )}
+                        keyExtractor={(item) => item.id}
+                    />
+                )}
             </View>
         </ThemedView>
     );
@@ -111,6 +135,12 @@ const styles = StyleSheet.create({
     safe_area: {
         flex: 1,
         backgroundColor: "#e91e63",
+    },
+    center: {
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center",
+        gap: 8,
     },
     search_container: {
         width: '90%',
@@ -138,13 +168,11 @@ const styles = StyleSheet.create({
         marginBottom: 2,
     },
     scroll_container: {
-        //flex: 1,
         paddingTop: StatusBar.currentHeight,
     },
     product_card: {
         width: '45%',
         borderRadius: 8,
-
     },
     name_font: {
         fontSize: 20,
@@ -163,4 +191,3 @@ const styles = StyleSheet.create({
         borderRadius: 8,
     },
 })
-
