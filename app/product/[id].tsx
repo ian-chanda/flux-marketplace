@@ -4,194 +4,220 @@ import { IconButton } from "@/components/iconButton";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import { useTheme } from "@/hooks/useTheme";
+import { getListing } from "@/services/listings";
+import { getUserProfile } from "@/services/users";
+import { Listing } from "@/types/listing";
+import { UserData } from "@/types/user";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
-import { router } from "expo-router";
-import { FlatList, Image, ScrollView, StyleSheet, TouchableOpacity, View } from "react-native";
+import { router, useLocalSearchParams } from "expo-router";
+import { useEffect, useState } from "react";
+import { ActivityIndicator, FlatList, Image, ScrollView, StyleSheet, TouchableOpacity, View } from "react-native";
 
-const images = [
-    {id: 1, image: require("@/assets/images/ph.jpg")},
-    {id: 2, image: require("@/assets/images/ph.jpg")},
-    {id: 3, image: require("@/assets/images/ph.jpg")},
-    {id: 4, image: require("@/assets/images/ph.jpg")},
-    {id: 5, image: require("@/assets/images/ph.jpg")},
-    {id: 6, image: require("@/assets/images/ph.jpg")}
-]
+const attributeLabels: Record<string, string> = {
+  brand: "Brand",
+  model: "Model",
+  ram: "RAM",
+  storage: "Storage",
+  color: "Color",
+};
 
 export default function Product() {
-    const { colors } = useTheme()
+    const { colors } = useTheme();
+    const { id } = useLocalSearchParams<{ id: string }>();
+    const [listing, setListing] = useState<Listing | null>(null);
+    const [seller, setSeller] = useState<UserData | null>(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<Error | null>(null);
+
+    useEffect(() => {
+        async function load() {
+            if (!id) return;
+            try {
+                const listingData = await getListing(id);
+                setListing(listingData);
+
+                const { data: sellerData } = await getUserProfile(listingData.user_id);
+                if (sellerData) setSeller(sellerData as UserData);
+            } catch (err) {
+                setError(err as Error);
+            } finally {
+                setLoading(false);
+            }
+        }
+        load();
+    }, [id]);
+
+    if (loading) {
+        return (
+            <ThemedView style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+                <ActivityIndicator size="large" color={colors.accent} />
+            </ThemedView>
+        );
+    }
+
+    if (error || !listing) {
+        return (
+            <ThemedView style={{ flex: 1, alignItems: "center", justifyContent: "center", gap: 10 }}>
+                <ThemedText type="defaultFaded">Could not load this listing.</ThemedText>
+                <TouchableOpacity onPress={() => router.back()}>
+                    <ThemedText type="defaultBold" style={{ color: colors.accent }}>Go back</ThemedText>
+                </TouchableOpacity>
+            </ThemedView>
+        );
+    }
+
+    const images = listing.images?.length ? listing.images : [];
+    const attributes = Object.entries(listing.attributes ?? {});
+
     return (
         <ThemedView
-        style={{
-            paddingHorizontal: 10,
-            paddingBottom: 60
-        }}>
+            style={{
+                paddingHorizontal: 10,
+                paddingBottom: 60
+            }}>
             <CustomHeader
                 showBack
             >
                 <View style={{ flexDirection: 'row', alignItems: 'center', gap: 15 }}>
-                    <IconButton icon={"share"} onPress={() => router.push('/notifications')} badgeValue=""/>
+                    <IconButton icon={"share"} onPress={() => router.push('/notifications')} badgeValue="" />
                     <IconButton icon={"shopping-cart"} onPress={() => router.push('/cart')} badgeValue='2' />
                 </View>
             </CustomHeader>
-            <View
-            style={
-                styles.all_images
-            }>
-                <ScrollView
-                showsHorizontalScrollIndicator={false}>
-                    <FlatList 
-                    horizontal
-                    data={images}
-                    pagingEnabled
-                    showsHorizontalScrollIndicator={true}
-                    renderItem={({item}) => (
-                        <View
-                            style={styles.image_container}>
-                            <Image style = {styles.mainImage} source={require("@/assets/images/ph.jpg")} />
-                        </View>
-                    )}/>
-                
-                <FlatList
-                horizontal
-                data={images}
-                showsHorizontalScrollIndicator={true}
-                renderItem={({item}) => (
-                    <View
-                    style={styles.image_container}>
-                    <Image style = {styles.secondaryImages} source={require("@/assets/images/ph.jpg")} />
-                    </View>
-                )}>
-                </FlatList>
+            <ScrollView showsVerticalScrollIndicator={false}>
+                {images.length > 0 && (
+                    <>
+                        <FlatList
+                            horizontal
+                            data={images}
+                            pagingEnabled
+                            showsHorizontalScrollIndicator={false}
+                            renderItem={({ item }) => (
+                                <Image source={{ uri: item }} style={styles.mainImage} resizeMode="cover" />
+                            )}
+                            keyExtractor={(item, index) => `${item}-${index}`}
+                        />
+                        <FlatList
+                            horizontal
+                            data={images}
+                            showsHorizontalScrollIndicator={false}
+                            renderItem={({ item }) => (
+                                <Image source={{ uri: item }} style={styles.secondaryImages} resizeMode="cover" />
+                            )}
+                            keyExtractor={(item, index) => `thumb-${item}-${index}`}
+                        />
+                    </>
+                )}
                 <View>
-                <ThemedText type="subtitle">Apple Iphone SE 2022 3rd Gen</ThemedText>
-                <ThemedText type="subtitle">RAM 16GB</ThemedText>
-                <ThemedText>Condition: New</ThemedText>
-                <ThemedText style ={{paddingVertical: 10}} type="title">ZMW 500</ThemedText>
-                <ThemedText style ={{paddingVertical: 10}} type="default">Approx ZMW 520</ThemedText>
+                    <ThemedText type="subtitle">{listing.title}</ThemedText>
+                    {listing.condition && (
+                        <ThemedText>Condition: {listing.condition}</ThemedText>
+                    )}
+                    <ThemedText type="defaultFaded">{listing.location}</ThemedText>
+                    <ThemedText style={{ paddingVertical: 10 }} type="subtitle">
+                        K{listing.price}
+                    </ThemedText>
                 </View>
+
+                {attributes.length > 0 && (
+                    <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 8 }}>
+                        {attributes.map(([key, value]) => (
+                            <View
+                                key={key}
+                                style={{
+                                    paddingHorizontal: 12,
+                                    paddingVertical: 6,
+                                    borderRadius: 50,
+                                    backgroundColor: colors.surface,
+                                }}>
+                                <ThemedText type="smallFaded">
+                                    {attributeLabels[key] ?? key}: {value}
+                                </ThemedText>
+                            </View>
+                        ))}
+                    </View>
+                )}
 
                 <TouchableOpacity
-                onPress={() => router.push("/modals/profile")}
-            style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-                padding: 10,
-                paddingVertical: -15, 
-                borderRadius: 15,
-                backgroundColor: colors.surface,
-                justifyContent: 'space-between',
-                marginBottom: 15
-            }}
+                    onPress={() => router.push({ pathname: "/modals/profile", params: { id: listing.user_id } })}
+                    style={{
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        padding: 12,
+                        borderRadius: 15,
+                        backgroundColor: colors.surface,
+                        justifyContent: 'space-between',
+                        marginVertical: 15
+                    }}
                 >
-                <View style={{ flexDirection: 'row', gap: 16, alignItems: 'center', paddingVertical: 20 }}>
-                <Image source={require('@/assets/images/dino.jpg')} style={{
-                width: 50,
-                height: 50,
-                borderRadius: 100
-                }} />
-                <View style={{
+                    <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
+                        <Image
+                            source={seller?.avatar_url ? { uri: seller.avatar_url } : require('@/assets/images/dino.jpg')}
+                            style={styles.avatar}
+                        />
+                        <View style={{ gap: 2 }}>
+                            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
+                                <ThemedText type="defaultBold" numberOfLines={1}>
+                                    {seller?.name ?? "Seller"}
+                                </ThemedText>
+                                {seller?.is_verified && (
+                                    <MaterialIcons name="verified" size={15} color={colors.accent} />
+                                )}
+                            </View>
+                            <ThemedText type="smallFaded">
+                                {seller?.username ? `@${seller.username}` : "Flux seller"}
+                            </ThemedText>
+                        </View>
+                    </View>
+                    <Ionicons name="chevron-forward" size={24} color="#D4D4D4" />
+                </TouchableOpacity>
 
-                }}>
-                <View style={{ flexDirection: 'row', alignItems: 'center', gap: 5 }}>
-                    <ThemedText type='largeBold'>@onezambiaman</ThemedText>
-                    <MaterialIcons name='verified' color={colors.text} size={15} />
-                </View>
-                <ThemedText type='small'>91 successful sales</ThemedText>
-                </View>
-                <View
-                style={{
-                    backgroundColor: colors.surface,
-                    borderRadius: 50
-                }}>
+                <ThemedText type="default" style={{ paddingBottom: 15 }}>
+                    {listing.description}
+                </ThemedText>
+
+                {attributes.length > 0 && (
                     <TouchableOpacity
-                    onPress={()=> router.push("/messages/${item.id}")}>
-                        <Ionicons style= {{paddingHorizontal: 30}} color={colors.accent} name="mail-outline" size={35}/>
+                        onPress={() => router.push({ pathname: "/modals/itemInformation", params: { id: listing.id } })}>
+                        <View style={{ paddingTop: 15, paddingBottom: 20, justifyContent: "center", flexDirection: "column" }}>
+                            <View style={{ flexDirection: "row", justifyContent: "space-between", gap: 40, paddingHorizontal: 5 }}>
+                                <ThemedText type="subtitle">Item Information</ThemedText>
+                                <Ionicons name="chevron-forward" size={24} />
+                            </View>
+                        </View>
                     </TouchableOpacity>
-                </View>
-                </View>
-            </TouchableOpacity>
-            <Button 
-            title="Buy Now"
-            onPress={() => router.push("/payment")}/>
+                )}
 
-            <Button 
-            title="Add to Cart"
-            onPress={() => router.push("/payment")}/>
-            <TouchableOpacity
-            onPress={()=> router.push("/modals/itemInformation")}>
-                <View
-                style={{
-                    paddingTop: 30,
-                    justifyContent: "center",
-                    flexDirection: "column"
-                }}>
-                    <View
-                    style={{
-                        flexDirection: "row",
-                        justifyContent: "space-between",
-                        gap: 40,
-                        paddingHorizontal: 20
-                        
-                    }}>
-                        <ThemedText type="subtitle">Item Information</ThemedText>
-                        <Ionicons name="chevron-forward" size={24}/>
-                    </View>
-                </View>
-            </TouchableOpacity>
+                <Button
+                    title="Buy Now"
+                    onPress={() => router.push("/payment")}
+                />
 
-            <TouchableOpacity
-            onPress={()=> router.push("/modals/userDescription")}>
-                <View
-                style={{
-                    paddingTop: 30,
-                    justifyContent: "center",
-                    flexDirection: "column"
-                }}>
-                    <View
-                    style={{
-                        flexDirection: "row",
-                        justifyContent: "space-between",
-                        gap: 40,
-                        paddingHorizontal: 20
-                        
-                    }}>
-                        <ThemedText type="subtitle">User Description</ThemedText>
-                        <Ionicons name="chevron-forward" size={24}/>
-                    </View>
-                </View>
-            </TouchableOpacity>
-            <View
-            style={{
-                paddingBottom: 30
-            }}>
-                
-            </View>
-            
+                <Button
+                    title="Add to Cart"
+                    onPress={() => router.push("/payment")}
+                />
             </ScrollView>
-            </View>
-        
         </ThemedView>
     )
 }
 
 const styles = StyleSheet.create({
-    all_images: {
-        flexDirection: "column"
-    },
-    image_container: {
-        flexDirection: "row",
-        justifyContent: "center",
-        borderColor: "black",
-        padding: 5,
-    },
     mainImage: {
         width: 360,
         height: 350,
-        borderRadius: 20
+        borderRadius: 20,
+        marginRight: 10,
     },
     secondaryImages: {
         width: 70,
         height: 70,
-        borderRadius: 20
-    }
+        borderRadius: 20,
+        marginRight: 10,
+        marginVertical: 10,
+    },
+    avatar: {
+        width: 44,
+        height: 44,
+        borderRadius: 22,
+    },
 })

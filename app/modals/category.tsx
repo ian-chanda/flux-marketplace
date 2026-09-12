@@ -2,6 +2,7 @@ import { CustomSearchBar } from "@/components/customSearchBar";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import { useTheme } from "@/hooks/useTheme";
+import { getCategory, setCategory } from "@/lib/listingDraft";
 import { Ionicons } from "@expo/vector-icons";
 import { router } from 'expo-router';
 import { useState } from "react";
@@ -22,16 +23,21 @@ const categories = [
 
 export default function Category() {
     const [searchValue, setSearchValue] = useState("");
-    const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
     const { colors } = useTheme();
+
+    const savedCategory = getCategory();
+    const [selectedId, setSelectedId] = useState<number | null>(
+        categories.find((c) => c.name === savedCategory)?.id ?? null
+    );
 
     const filteredCategories = categories.filter((category) =>
         category.name.toLowerCase().includes(searchValue.toLowerCase())
     );
 
-    const handleSelectCategory = (categoryId: number) => {
-        setSelectedCategory(categoryId); 
-        router.back(); 
+    const handleSelectCategory = (categoryId: number, categoryName: string) => {
+        setSelectedId(categoryId);
+        setCategory(categoryName);
+        router.back();
     };
 
     return(
@@ -49,10 +55,10 @@ export default function Category() {
             data={filteredCategories}  // ← Use filtered data
             renderItem={({ item }) => (
                 <TouchableOpacity
-                onPress={() => handleSelectCategory(item.id)}
+                onPress={() => handleSelectCategory(item.id, item.name)}
                 style={[
                     styles.field,
-                    selectedCategory === item.id && { 
+                    selectedId === item.id && { 
                         backgroundColor: colors.surface,
                         borderWidth: 1,
                         borderColor: colors.accent,
@@ -71,7 +77,7 @@ export default function Category() {
                 <ThemedText>{item.name}</ThemedText>
 	            </View>
                 <View>
-                    {selectedCategory === item.id && (
+                    {selectedId === item.id && (
                         <Ionicons name="checkmark" size={20} color={colors.accent} />
                     )}
 	            </View>
