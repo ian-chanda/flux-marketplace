@@ -52,17 +52,16 @@ export default function Category() {
             />
             <FlatList
             style={{paddingTop: 50}}
-            data={filteredCategories}  // ← Use filtered data
+            data={filteredCategories} 
             renderItem={({ item }) => (
                 <TouchableOpacity
                 onPress={() => handleSelectCategory(item.id, item.name)}
                 style={[
                     styles.field,
                     selectedId === item.id && { 
-                        backgroundColor: colors.surface,
                         borderWidth: 1,
-                        borderColor: colors.accent,
-                        borderRadius: 0
+                        borderColor: colors.surface,
+                        borderRadius: 23
                     }
                 ]}>
                     <View
@@ -74,12 +73,13 @@ export default function Category() {
                 style={[styles.icon, {backgroundColor: colors.surface}]}>
                 <Ionicons name={item.icon as any} size={20} color={colors.accent}/> 
                 </View>
-                <ThemedText>{item.name}</ThemedText>
-	            </View>
-                <View>
-                    {selectedId === item.id && (
-                        <Ionicons name="checkmark" size={20} color={colors.accent} />
-                    )}
+                <View
+                style={{
+                    justifyContent: "center",
+                    alignItems: "flex-start"
+                }}>
+                    <ThemedText>{item.name}</ThemedText>
+                </View>
 	            </View>
                 </TouchableOpacity>
             )}
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         paddingHorizontal: 10,
         paddingVertical: 10,
-        borderRadius: 8
+        borderRadius: 23
     },
     icon : {
         padding: 8,

@@ -5,6 +5,7 @@ import ActionButton from '@/components/actionButton';
 import { CardButtonRow } from '@/components/cardButtonRow';
 import DashPad from '@/components/DashPad';
 import { ThemedText } from '@/components/themed-text';
+import { useUser } from '@/hooks/use-user';
 import { useTheme } from '@/hooks/useTheme';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { router } from 'expo-router';
@@ -98,6 +99,15 @@ const FeedbackMessage = ({ img, name, when, msg, feedbackType }:
 
 export default function SellingScreen() {
   const { colors } = useTheme();
+  const { userData } = useUser();
+
+  const avatar = userData?.avatar_url
+    ? { uri: userData.avatar_url }
+    : require("../../assets/images/dino.jpg");
+  const sellerName = userData?.name ?? "Seller";
+  const sellerUsername = userData?.username
+    ? `@${userData.username}`
+    : "@username";
 
   return (
     <SafeAreaView
@@ -130,7 +140,7 @@ export default function SellingScreen() {
             ]}
           >
             <Image
-              source={require("../../assets/images/dino.jpg")}
+              source={avatar}
               style={styles.profileImage}
             />
 
@@ -143,23 +153,27 @@ export default function SellingScreen() {
                 }}
               >
                 <ThemedText type="defaultBold">
-                  John Doe
+                  {sellerName}
                 </ThemedText>
 
-                <MaterialIcons
-                  name="verified"
-                  size={15}
-                  color={colors.accent}
-                />
+                {userData?.is_verified && (
+                  <MaterialIcons
+                    name="verified"
+                    size={15}
+                    color={colors.accent}
+                  />
+                )}
               </View>
 
               <ThemedText type="defaultSmall">
-                @johndoe12
+                {sellerUsername}
               </ThemedText>
 
-              <ThemedText type="small_price_font">
-                Verified seller
-              </ThemedText>
+              {userData?.is_verified && (
+                <ThemedText type="small_price_font">
+                  Verified seller
+                </ThemedText>
+              )}
             </View>
           </View>
         </TouchableOpacity>
