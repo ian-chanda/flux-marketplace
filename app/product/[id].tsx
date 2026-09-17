@@ -3,14 +3,16 @@ import { CustomHeader } from "@/components/customHeader";
 import { IconButton } from "@/components/iconButton";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
+import { useAuth } from "@/contexts/auth-context";
 import { useTheme } from "@/hooks/useTheme";
 import { getListing } from "@/services/listings";
+import { getSavedListingIds, saveListing, unsaveListing } from "@/services/savedListings";
 import { getUserProfile } from "@/services/users";
 import { Listing } from "@/types/listing";
 import { UserData } from "@/types/user";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { router, useLocalSearchParams } from "expo-router";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { ActivityIndicator, FlatList, Image, ScrollView, StyleSheet, TouchableOpacity, View } from "react-native";
 
 const attributeLabels: Record<string, string> = {
@@ -28,6 +30,8 @@ export default function Product() {
     const [seller, setSeller] = useState<UserData | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<Error | null>(null);
+    const [saved, setSaved] = useState(false);
+    const { user } = useAuth();
 
     useEffect(() => {
         async function load() {
@@ -36,8 +40,21 @@ export default function Product() {
                 const listingData = await getListing(id);
                 setListing(listingData);
 
-                const { data: sellerData } = await getUserProfile(listingData.user_id);
-                if (sellerData) setSeller(sellerData as UserData);
+                try {
+                    const { data: sellerData } = await getUserProfile(listingData.user_id);
+                    if (sellerData) setSeller(sellerData as UserData);
+                } catch {
+                    // seller is optional — don't block the listing
+                }
+
+                if (user) {
+                    try {
+                        const savedIds = await getSavedListingIds(user.id);
+                        setSaved(savedIds.includes(id));
+                    } catch {
+                        setSaved(false);
+                    }
+                }
             } catch (err) {
                 setError(err as Error);
             } finally {
@@ -45,7 +62,24 @@ export default function Product() {
             }
         }
         load();
-    }, [id]);
+    }, [id, user]);
+
+    const toggleSave = useCallback(async () => {
+        if (!user || !id) return;
+
+        const next = !saved;
+        setSaved(next);
+
+        try {
+            if (next) {
+                await saveListing(user.id, id);
+            } else {
+                await unsaveListing(user.id, id);
+            }
+        } catch {
+            setSaved(!next);
+        }
+    }, [user, id, saved]);
 
     if (loading) {
         return (
@@ -79,6 +113,7 @@ export default function Product() {
                 showBack
             >
                 <View style={{ flexDirection: 'row', alignItems: 'center', gap: 15 }}>
+                    <IconButton icon={saved ? "bookmark" : "bookmark-outline"} badgeValue="" onPress={toggleSave} />
                     <IconButton icon={"share"} onPress={() => router.push('/notifications')} badgeValue="" />
                     <IconButton icon={"shopping-cart"} onPress={() => router.push('/cart')} badgeValue='2' />
                 </View>
