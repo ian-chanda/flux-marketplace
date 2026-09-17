@@ -136,14 +136,20 @@ export default function AddListings() {
                 <View style={styles.photoButton}>
                   <View
                     style={{
-                      justifyContent: "flex-start",
+                      justifyContent: "center",
                       padding: 10,
                     }}>
-                    <MaterialIcon name="add" color={colors.accent} size={75} />
+                      <View
+                      style = {{padding: 10, justifyContent: "center", alignItems: "center"}}>
+                      <MaterialIcon name="add" color={colors.accent} size={75} />
+                      </View>
                     <View style={{ paddingRight: 10 }}>
-                      <ThemedText type="defaultFaded">
+                      <View
+                      style={{ flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
+                          <ThemedText type="defaultFaded">
                         {images.length ? "Add more" : "Add photos"}
                       </ThemedText>
+                      </View>
                     </View>
                   </View>
                 </View>
@@ -232,7 +238,7 @@ export default function AddListings() {
                 <View style={[styles.header, { paddingTop: 20, borderTopWidth: 0.5, borderTopColor: "#D3D3D3" }]}>
                   <Ionicons name="options" size={24} color={colors.accent} />
                   <ThemedText type="defaultBold">
-                    Additional details (Optional)
+                    Additional details
                   </ThemedText>
                   <View
                     style={{
@@ -436,11 +442,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   photoButton: {
+    justifyContent: "center",
+    alignItems: "center",
     borderWidth: 1,
     borderColor: "gray",
     borderStyle: "dashed",
-    padding: 30,
-    paddingRight: 10,
+    padding: 0,
     borderRadius: 15,
   },
   thumb: {
