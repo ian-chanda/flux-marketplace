@@ -76,6 +76,31 @@ export async function createListing(input: CreateListingInput): Promise<Listing>
   return data as Listing;
 }
 
+export async function deleteListing(id: string): Promise<void> {
+  const { error } = await supabase
+    .from("listings")
+    .delete()
+    .eq("id", id);
+
+  if (error) throw error;
+}
+
+export async function updateListingAvailability(
+  id: string,
+  isAvailable: boolean
+): Promise<Listing> {
+  const { data, error } = await supabase
+    .from("listings")
+    .update({ is_available: isAvailable })
+    .eq("id", id)
+    .select()
+    .single();
+
+  if (error) throw error;
+
+  return data as Listing;
+}
+
 export async function uploadListingImages(uris: string[], userId: string): Promise<string[]> {
   const urls: string[] = [];
 

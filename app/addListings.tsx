@@ -119,7 +119,7 @@ export default function AddListings() {
         behavior={Platform.OS === "ios" ? "padding" : 'height'}
         keyboardVerticalOffset={0}
       >
-        <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+        <ScrollView contentContainerStyle={{ flexGrow: 0 }}>
           {/*photos*/}
           <View style={[styles.container]}>
             <SectionHeader
@@ -440,6 +440,7 @@ const styles = StyleSheet.create({
     margin: 20,
     flexDirection: "row",
     justifyContent: "center",
+    alignItems: "center",
   },
   photoButton: {
     justifyContent: "center",
