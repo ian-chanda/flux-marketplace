@@ -137,20 +137,19 @@ export default function AddListings() {
                   <View
                     style={{
                       justifyContent: "center",
-                      alignItems: "center",
                       padding: 10,
                     }}>
                       <View
-                      style={{
-                        justifyContent: "center",
-                        alignItems: "center",
-                      }}>
-                      <MaterialIcon name="add" color={colors.accent} size={80} />
+                      style = {{padding: 10, justifyContent: "center", alignItems: "center"}}>
+                      <MaterialIcon name="add" color={colors.accent} size={75} />
                       </View>
                     <View style={{ paddingRight: 10 }}>
-                      <ThemedText type="defaultFaded">
+                      <View
+                      style={{ flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
+                          <ThemedText type="defaultFaded">
                         {images.length ? "Add more" : "Add photos"}
                       </ThemedText>
+                      </View>
                     </View>
                   </View>
                 </View>
@@ -216,46 +215,46 @@ export default function AddListings() {
                   placeholder="Describe your item. its condition, features and anything important"
                 />
               </View>
-<TouchableOpacity
-  onPress={() => router.push("/modals/category")}>
-  <View style={[styles.header, styles.categoryRow, { paddingTop: 20, borderTopWidth: 0.5, borderTopColor: "#D3D3D3" }]}>
-    <View style={{ flexDirection: "row", gap: 7, alignItems: "center", flexShrink: 0 }}>
-      <MaterialIcon name="label" size={24} color={colors.accent} />
-      <ThemedText type="defaultBold" numberOfLines={1}>
-        Category
-        <ThemedText type="defaultBold" style={{ color: colors.accent }}> *</ThemedText>
-      </ThemedText>
-    </View>
-    <View style={{ flexDirection: "row", alignItems: "center", gap: 6, flexShrink: 0 }}>
-      <ThemedText type="default" style={{ color: category ? colors.accent : colors.placeholder }} numberOfLines={1}>
-        {category || "Select"}
-      </ThemedText>
-      <Ionicons name="chevron-forward" size={24} color={"#D4D4D4"} />
-    </View>
-  </View>
-</TouchableOpacity>
-<TouchableOpacity
-  onPress={() => setShowAdditional(true)}>
-  <View style={[styles.header, { paddingTop: 20, borderTopWidth: 0.5, borderTopColor: "#D3D3D3" }]}>
-    <Ionicons name="options" size={24} color={colors.accent} />
-    <ThemedText type="defaultBold" numberOfLines={1} style={{ flexShrink: 1 }}>
-      Additional details
-    </ThemedText>
-    <View
-      style={{
-        flex: 1,
-        flexDirection: "row",
-        justifyContent: "flex-end",
-        alignItems: "center",
-        gap: 6
-      }}>
-      {filledAdditionalCount > 0 && (
-        <ThemedText type="smallFaded">{filledAdditionalCount} filled</ThemedText>
-      )}
-      <Ionicons name="chevron-forward" size={24} color={"#D4D4D4"} />
-    </View>
-  </View>
-</TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => router.push("/modals/category")}>
+                <View style={[styles.header, styles.categoryRow, { paddingTop: 20, borderTopWidth: 0.5, borderTopColor: "#D3D3D3" }]}>
+                  <View style={{ flexDirection: "row", gap: 7, alignItems: "center" }}>
+                    <MaterialIcon name="label" size={24} color={colors.accent} />
+                    <ThemedText type="defaultBold">
+                      Category
+                      <ThemedText type="defaultBold" style={{ color: colors.accent }}> *</ThemedText>
+                    </ThemedText>
+                  </View>
+                  <View style={{ flexDirection: "row", alignItems: "center", gap: 6 }}>
+                    <ThemedText type="default" style={{ color: category ? colors.accent : colors.placeholder }}>
+                      {category || "Select"}
+                    </ThemedText>
+                    <Ionicons name="chevron-forward" size={24} color={"#D4D4D4"} />
+                  </View>
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => setShowAdditional(true)}>
+                <View style={[styles.header, { paddingTop: 20, borderTopWidth: 0.5, borderTopColor: "#D3D3D3" }]}>
+                  <Ionicons name="options" size={24} color={colors.accent} />
+                  <ThemedText type="defaultBold">
+                    Additional details
+                  </ThemedText>
+                  <View
+                    style={{
+                      flex: 1,
+                      flexDirection: "row",
+                      justifyContent: "flex-end",
+                      alignItems: "center",
+                      gap: 6
+                    }}>
+                    {filledAdditionalCount > 0 && (
+                      <ThemedText type="smallFaded">{filledAdditionalCount} filled</ThemedText>
+                    )}
+                    <Ionicons name="chevron-forward" size={24} color={"#D4D4D4"} />
+                  </View>
+                </View>
+              </TouchableOpacity>
             </View>
           </View>
           {/*pricing*/}
@@ -444,10 +443,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   photoButton: {
+    justifyContent: "center",
+    alignItems: "center",
     borderWidth: 1,
     borderColor: "gray",
     borderStyle: "dashed",
-    padding: 20,
+    padding: 0,
     borderRadius: 15,
   },
   thumb: {

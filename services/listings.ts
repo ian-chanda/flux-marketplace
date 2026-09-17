@@ -6,6 +6,7 @@ export async function getListings(): Promise<Listing[]> {
   const { data, error } = await supabase
     .from("listings")
     .select("*")
+    .eq("is_available", true)
     .order("created_at", { ascending: false });
 
   if (error) throw error;
@@ -115,4 +116,26 @@ export async function uploadListingImages(uris: string[], userId: string): Promi
   }
 
   return urls;
+}
+
+export async function updateListing(
+  id: string,
+  updates: Partial<Pick<Listing, "is_available" | "title" | "description" | "price" | "condition">>
+): Promise<Listing> {
+  const { data, error } = await supabase
+    .from("listings")
+    .update({ ...updates, updated_at: new Date().toISOString() })
+    .eq("id", id)
+    .select()
+    .single();
+
+  if (error) throw error;
+
+  return data as Listing;
+}
+
+export async function deleteListing(id: string): Promise<void> {
+  const { error } = await supabase.from("listings").delete().eq("id", id);
+
+  if (error) throw error;
 }
