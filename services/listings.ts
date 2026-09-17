@@ -133,9 +133,3 @@ export async function updateListing(
 
   return data as Listing;
 }
-
-export async function deleteListing(id: string): Promise<void> {
-  const { error } = await supabase.from("listings").delete().eq("id", id);
-
-  if (error) throw error;
-}
