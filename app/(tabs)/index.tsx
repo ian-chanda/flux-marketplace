@@ -6,6 +6,8 @@ import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import { useListings } from "@/hooks/useListings";
 import { useTheme } from "@/hooks/useTheme";
+import { useAuth } from "@/contexts/auth-context";
+import { getSavedListingIds, saveListing, unsaveListing } from "@/services/savedListings";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { router, useFocusEffect } from "expo-router";
 import { useCallback, useRef, useState } from "react";
@@ -39,22 +41,47 @@ const SmallIconButton = ({ icon, title }: buttonTypes) => {
 export default function Index() {
     const { colors } = useTheme()
     const { listings, loading, refreshing, error, load, refresh } = useListings();
+    const { user } = useAuth();
     const [bookmarked, setBookmarked] = useState<Record<string, boolean>>({});
     const isFirstFocus = useRef(true);
 
+    const loadSaved = useCallback(async () => {
+        if (!user) return;
+        try {
+            const ids = await getSavedListingIds(user.id);
+            setBookmarked(ids.reduce((acc, id) => ({ ...acc, [id]: true }), {}));
+        } catch {
+            setBookmarked({});
+        }
+    }, [user]);
+
     useFocusEffect(
         useCallback(() => {
+            loadSaved();
             if (isFirstFocus.current) {
                 isFirstFocus.current = false;
                 return;
             }
             load(true);
-        }, [load])
+        }, [load, loadSaved])
     );
 
-    const toggleBookmark = (id: string) => {
-        setBookmarked(prev => ({ ...prev, [id]: !prev[id] }));
-    };
+    const toggleBookmark = useCallback(async (id: string) => {
+        if (!user) return;
+
+        const next = !bookmarked[id];
+        setBookmarked(prev => ({ ...prev, [id]: next }));
+
+        try {
+            if (next) {
+                await saveListing(user.id, id);
+            } else {
+                await unsaveListing(user.id, id);
+            }
+        } catch {
+            setBookmarked(prev => ({ ...prev, [id]: !next }));
+        }
+    }, [user, bookmarked]);
 
     return (
         <ThemedView isTabVisible={true}>

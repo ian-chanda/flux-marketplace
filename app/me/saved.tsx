@@ -1,120 +1,119 @@
-import { BookmarkBadge } from "@/components/bookmark-badge";
 import { CustomHeader } from "@/components/customHeader";
 import { CustomSearchBar } from "@/components/customSearchBar";
-import { SmallIconButton } from "@/components/small-iconButton";
+import { ProductCardV } from "@/components/productCardV";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
-import { useState } from "react";
-import { FlatList, Image, ScrollView, StyleSheet, View } from "react-native";
-
-const items = [
-  {id: 1, name: "Iphone 23 pro max", Desc: "new", price: "K34000"},
-  {id: 2, name: "Samsung Galaxy S24", Desc: "like new", price: "K28500"},
-  {id: 3, name: "MacBook Pro 14", Desc: "used", price: "K45000"},
-  {id: 4, name: "Sony WH-1000XM5", Desc: "new", price: "K8200"},
-  {id: 5, name: "iPad Air 6", Desc: "fair condition", price: "K18000"},
-  {id: 6, name: "AirPods Pro Max", Desc: "new", price: "K24500"},
-  {id: 7, name: "Dell XPS 15", Desc: "used", price: "K22000"},
-  {id: 8, name: "Nintendo Switch", Desc: "like new", price: "K7500"},
-  {id: 9, name: "Canon EOS R6", Desc: "used", price: "K32000"}
-]
+import { useAuth } from "@/contexts/auth-context";
+import { useTheme } from "@/hooks/useTheme";
+import { getSavedListings, unsaveListing } from "@/services/savedListings";
+import { Listing } from "@/types/listing";
+import { useFocusEffect } from "expo-router";
+import { useCallback, useState } from "react";
+import { ActivityIndicator, FlatList, StyleSheet, View } from "react-native";
 
 export default function Saved() {
+  const { colors } = useTheme();
+  const { user } = useAuth();
+
+  const [listings, setListings] = useState<Listing[]>([]);
+  const [loading, setLoading] = useState(true);
   const [searchValue, setSearchValue] = useState("");
-  const toggleBookmark = (id: number) => {
-        setBookmarked(prev => ({ ...prev, [id]: !prev[id] }));
-  };
 
-  const initialBookmarked = items.reduce((acc, item) => {
-  acc[item.id] = true;
-  return acc;
-  }, {} as Record<number, boolean>);
+  const loadSaved = useCallback(async () => {
+    if (!user) return;
 
-  const [bookmarked, setBookmarked] = useState(initialBookmarked);
+    try {
+      const data = await getSavedListings(user.id);
+      setListings(data);
+    } catch {
+      setListings([]);
+    } finally {
+      setLoading(false);
+    }
+  }, [user]);
 
-  const filterSearchItem = items.filter((items) => 
-    items.name.toLowerCase().includes(searchValue.toLowerCase())
+  useFocusEffect(
+    useCallback(() => {
+      loadSaved();
+    }, [loadSaved])
+  );
+
+  const handleUnsave = useCallback(
+    async (id: string) => {
+      if (!user) return;
+
+      setListings((prev) => prev.filter((item) => item.id !== id));
+
+      try {
+        await unsaveListing(user.id, id);
+      } catch {
+        setLoading(true);
+        loadSaved();
+      }
+    },
+    [user, loadSaved]
+  );
+
+  const filterSearchItem = listings.filter((item) =>
+    item.title.toLowerCase().includes(searchValue.toLowerCase())
   );
 
   return (
-  <ThemedView
-    isTabVisible={false}
-    style={{
-      paddingHorizontal: 10,
-      paddingBottom: 0
-    }}>
-      <CustomHeader 
-      title="Saved"
-      showBack={true}/>
-      <CustomSearchBar 
+    <ThemedView
+      isTabVisible={false}
+      style={{
+        paddingHorizontal: 10,
+        paddingBottom: 0
+      }}>
+      <CustomHeader
+        title="Saved"
+        showBack={true} />
+      <CustomSearchBar
         width={"100%"}
         searchValue={searchValue}
         setSearchValue={setSearchValue}
-        onSearch={()=>alert("no")}
-        />
-      <View
-      style={{
-        paddingVertical: 1
-      }}>
-            <ScrollView
-                showsHorizontalScrollIndicator={false}
-                horizontal
-                style={{
-                    flexGrow: 0,
-                    paddingVertical: 10,
-                }} contentContainerStyle={{
-                    paddingHorizontal: 5,
-                    gap: 10
-                }}
-            >
-          <SmallIconButton icon="phone-portrait" title="Phones" />
-          <SmallIconButton icon="laptop" title="Laptops" />
-          <SmallIconButton icon="game-controller" title="Gaming" />
-          <SmallIconButton icon="headset" title="Audio" />
-          <SmallIconButton icon="watch" title="Wearables" />
-            </ScrollView>
-      </View>
-      <FlatList 
-      data={filterSearchItem}
-      numColumns={2}
-      columnWrapperStyle ={{justifyContent: "space-between"}}
-      contentContainerStyle = {{gap: 20 }}
-      renderItem={({ item }) => (
-        <View style={styles.product_card}>
-          <View>
-            <BookmarkBadge
-              bookmarked={bookmarked[item.id]}
-              onPress={() => toggleBookmark(item.id)}
-              />
-              <Image
-                source={require('../../assets/images/dino.jpg')}
-                style={styles.image}
-                resizeMode="cover"
-                />
-          </View>
-    
-            <ThemedText type="smallFaded">{item.Desc}</ThemedText>
-            <ThemedText type="defaultBold" numberOfLines={1}>{item.name}</ThemedText>
-            <ThemedText type="mediumBold" >{item.price}</ThemedText>
-        </View>
-      )}
-      keyExtractor={(item) => item.id.toString()}
+        onSearch={() => {}}
       />
 
+      {loading ? (
+        <View style={styles.center}>
+          <ActivityIndicator size="large" color={colors.accent} />
+        </View>
+      ) : (
+        <FlatList
+          data={filterSearchItem}
+          numColumns={2}
+          columnWrapperStyle={{ justifyContent: "space-between" }}
+          contentContainerStyle={{ gap: 20, paddingTop: 20 }}
+          renderItem={({ item }) => (
+            <ProductCardV
+              id={item.id}
+              bookmarked
+              img={item.images?.[0]}
+              desc={item.condition ?? item.category}
+              name={item.title}
+              price={`K${Number(item.price).toLocaleString()}`}
+              onBookmark={() => handleUnsave(item.id)}
+            />
+          )}
+          keyExtractor={(item) => item.id}
+          ListEmptyComponent={
+            <View style={styles.center}>
+              <ThemedText type="mediumFaded">No saved items yet.</ThemedText>
+            </View>
+          }
+        />
+      )}
     </ThemedView>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
-  product_card: {
-    width: '45%',
-    borderRadius: 8,
-
+  center: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    paddingTop: 40,
+    gap: 8,
   },
-  image: {
-    width: '100%',
-    height: 150,
-    borderRadius: 8,
-    },
-
-})
+});
