@@ -9,7 +9,7 @@ import { getSavedListings, unsaveListing } from "@/services/savedListings";
 import { Listing } from "@/types/listing";
 import { useFocusEffect } from "expo-router";
 import { useCallback, useState } from "react";
-import { ActivityIndicator, FlatList, StyleSheet, View } from "react-native";
+import { ActivityIndicator, FlatList, RefreshControl, StyleSheet, TouchableOpacity, View } from "react-native";
 
 export default function Saved() {
   const { colors } = useTheme();
@@ -17,6 +17,8 @@ export default function Saved() {
 
   const [listings, setListings] = useState<Listing[]>([]);
   const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
+  const [error, setError] = useState(false);
   const [searchValue, setSearchValue] = useState("");
 
   const loadSaved = useCallback(async () => {
@@ -25,12 +27,20 @@ export default function Saved() {
     try {
       const data = await getSavedListings(user.id);
       setListings(data);
+      setError(false);
     } catch {
       setListings([]);
+      setError(true);
     } finally {
       setLoading(false);
+      setRefreshing(false);
     }
   }, [user]);
+
+  const refresh = useCallback(async () => {
+    setRefreshing(true);
+    await loadSaved();
+  }, [loadSaved]);
 
   useFocusEffect(
     useCallback(() => {
@@ -79,12 +89,27 @@ export default function Saved() {
         <View style={styles.center}>
           <ActivityIndicator size="large" color={colors.accent} />
         </View>
+      ) : error ? (
+        <View style={styles.center}>
+          <ThemedText type="defaultFaded">Could not load listings</ThemedText>
+          <TouchableOpacity onPress={refresh} style={{ marginTop: 10 }}>
+            <ThemedText type="defaultBold" style={{ color: colors.accent }}>Try again</ThemedText>
+          </TouchableOpacity>
+        </View>
+      ) : listings.length === 0 ? (
+        <View style={styles.center}>
+          <ThemedText type="defaultFaded">No saved items yet.</ThemedText>
+        </View>
       ) : (
         <FlatList
+        style={{ flex: 1, paddingTop: 20 }}
           data={filterSearchItem}
           numColumns={2}
-          columnWrapperStyle={{ justifyContent: "space-between" }}
-          contentContainerStyle={{ gap: 20, paddingTop: 20 }}
+          columnWrapperStyle={{ justifyContent: 'space-between', gap: 10 }}
+          contentContainerStyle={{ gap: 16, paddingBottom: 20 }}
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={refresh} tintColor={colors.accent} />
+          }
           renderItem={({ item }) => (
             <ProductCardV
               id={item.id}
@@ -97,11 +122,6 @@ export default function Saved() {
             />
           )}
           keyExtractor={(item) => item.id}
-          ListEmptyComponent={
-            <View style={styles.center}>
-              <ThemedText type="mediumFaded">No saved items yet.</ThemedText>
-            </View>
-          }
         />
       )}
     </ThemedView>

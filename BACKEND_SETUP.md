@@ -373,6 +373,101 @@ CREATE POLICY "Users can upload listing images"
 
 ---
 
+## Step 11: Cart + Orders (Sep 18)
+
+Adds the cart and checkout flow. Two new service files, four edits to screens.
+
+### 11a. Tables (run this in the Supabase SQL Editor)
+
+```sql
+-- cart_items: one row per user+listing; unique so "Add to Cart" again does NOT duplicate
+create table if not exists public.cart_items (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid not null references public.users(id) on delete cascade,
+  listing_id uuid not null references public.listings(id) on delete cascade,
+  quantity int not null default 1,
+  created_at timestamptz not null default now(),
+  unique (user_id, listing_id)
+);
+
+-- orders: one per checkout (status stays 'pending' until a real payment provider)
+create table if not exists public.orders (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid not null references public.users(id) on delete cascade,
+  total numeric not null,
+  status text not null default 'pending',
+  payment_method text,
+  phone_number text,
+  created_at timestamptz not null default now()
+);
+
+-- order_items: a snapshot of each bought listing at purchase time
+create table if not exists public.order_items (
+  id uuid primary key default gen_random_uuid(),
+  order_id uuid not null references public.orders(id) on delete cascade,
+  listing_id uuid not null references public.listings(id) on delete cascade,
+  price numeric not null,
+  title text,
+  image_url text,
+  created_at timestamptz not null default now()
+);
+```
+
+### 11b. RLS (enable + policies)
+
+```sql
+alter table public.cart_items enable row level security;
+create policy "cart_items select own" on public.cart_items for select using (auth.uid() = user_id);
+create policy "cart_items insert own" on public.cart_items for insert with check (auth.uid() = user_id);
+create policy "cart_items update own" on public.cart_items for update using (auth.uid() = user_id) with check (auth.uid() = user_id);
+create policy "cart_items delete own" on public.cart_items for delete using (auth.uid() = user_id);
+
+alter table public.orders enable row level security;
+create policy "orders select own" on public.orders for select using (auth.uid() = user_id);
+create policy "orders insert own" on public.orders for insert with check (auth.uid() = user_id);
+
+alter table public.order_items enable row level security;
+create policy "order_items select own" on public.order_items
+  for select using (exists (select 1 from public.orders o where o.id = order_id and o.user_id = auth.uid()));
+create policy "order_items insert own" on public.order_items
+  for insert with check (exists (select 1 from public.orders o where o.id = order_id and o.user_id = auth.uid()));
+```
+
+### 11c. Hardcoded -> Backend mapping (what changed and why)
+
+| Where you saw hardcoded data | Now loads from | What the service returns |
+|---|---|---|
+| `app/cart.tsx` (4 fake products) | `getCartItems(user.id)` | cart row + the full joined `listing` |
+| `app/payment.tsx` (fake `K569.87`) | `getCartItems()` or `getListing(listingId)` | real `total` from listing prices |
+| `app/payment.tsx` "Pay Now" (alert) | `createOrder({...})` | creates `orders` + `order_items`, then clears cart |
+| `app/product/[id].tsx` badges/buttons | `addToCart()`, `getCartCount()` | cart insert + live count |
+| `app/(tabs)/index.tsx` cart badge `"3"` | `getCartCount(user.id)` | real count per user |
+
+Short snippets so you see the shape vs the old mock:
+
+```ts
+// services/cart.ts — add, join listing (FK) onto cart row
+supabase.from("cart_items")
+  .upsert({ user_id, listing_id }, { onConflict: "user_id,listing_id" });
+supabase.from("cart_items")
+  .select("id, listing_id, quantity, created_at, listings(*)")  // join!
+  .eq("user_id", userId);
+supabase.from("cart_items").delete().eq("user_id", userId);     // clearCart
+
+// services/orders.ts — insert order, then its items, in two calls
+supabase.from("orders").insert({ user_id, total, status: "pending", ... }).select().single();
+supabase.from("order_items").insert(items.map(it => ({ order_id, ...it })));
+```
+
+Key points to relate to work you already did:
+- **Cart join = same pattern as saved listings**: `savedListings.ts` uses `select("listing_id, created_at, listings(*)")`; cart does the identical `listings(*)` join so a cart row carries the full listing (title/price/photo).
+- **`upsert` + `unique(user_id, listing_id)`** is why tapping "Add to Cart" twice never creates a duplicate row.
+- **Buy Now vs Add to Cart**: Buy Now pushes `/payment?listingId=X` (checkout a single item, cart untouched). Add to Cart inserts first, then opens `/cart`. Both land on `/payment`.
+- **Payment**: real total = sum of listing prices (cart flow) or one listing's price (Buy Now). "Pay Now" writes the order snapshot and, for cart flow, empties the cart.
+- Delivery address + the payment providers are still cosmetic (no address table yet, no real mobile-money API). If you open `/payment` directly from home you'll see cart-based totals.
+
+---
+
 ## Pitfalls & Gotchas
 
 ### 1. ExpoSecureStore has a 2KB value limit

@@ -8,6 +8,7 @@ import { useAuth } from "@/contexts/auth-context";
 import { useTheme } from "@/hooks/useTheme";
 import { getCategory } from "@/lib/listingDraft";
 import { createListing, uploadListingImages } from "@/services/listings";
+import { toJpegMany } from "@/utils/image";
 import { Ionicons } from "@expo/vector-icons";
 import MaterialIcon from "@expo/vector-icons/MaterialIcons";
 import * as ImagePicker from "expo-image-picker";
@@ -51,14 +52,14 @@ export default function AddListings() {
     }
 
     const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      mediaTypes: ["images"],
       allowsMultipleSelection: true,
       selectionLimit: 6 - images.length,
       quality: 0.7,
     });
 
     if (!result.canceled && result.assets) {
-      const uris = result.assets.map((asset) => asset.uri);
+      const uris = await toJpegMany(result.assets.map((asset) => asset.uri));
       setImages((prev) => [...prev, ...uris].slice(0, 6));
     }
   };
@@ -226,9 +227,16 @@ export default function AddListings() {
                     </ThemedText>
                   </View>
                   <View style={{ flexDirection: "row", alignItems: "center", gap: 6 }}>
-                    <ThemedText type="default" style={{ color: category ? colors.accent : colors.placeholder }}>
+                    <View
+                    style={{
+                      padding: 1,
+                      justifyContent: "flex-start",
+                      maxWidth: 120,
+                    }}>
+                      <ThemedText type="default" style={{ color: category ? colors.accent : colors.placeholder }}>
                       {category || "Select"}
                     </ThemedText>
+                    </View>
                     <Ionicons name="chevron-forward" size={24} color={"#D4D4D4"} />
                   </View>
                 </View>
@@ -358,12 +366,11 @@ export default function AddListings() {
                   style={{
                     paddingTop: 15,
                     marginLeft: 80,
-                    gap: 5,
                     flexDirection: "row"
                   }}
                 >
-                  <ThemedText type="default" style={{ color: colors.accent }}>change</ThemedText>
-                  <Ionicons name="chevron-forward" size={24} color="#D4D4D4" />
+                  <ThemedText type="default" style={{ color: colors.accent, justifyContent: "flex-start" }}>change</ThemedText>
+                  <Ionicons style={{ marginLeft: 10 }} name="chevron-forward" size={24} color="#D4D4D4" />
                 </TouchableOpacity>
               </View>
             </View>

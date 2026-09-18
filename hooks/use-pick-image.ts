@@ -1,4 +1,5 @@
 import * as ImagePicker from "expo-image-picker";
+import { toJpeg } from "@/utils/image";
 
 export function useImagePicker() {
   const pickImage = async (setter: (uri: string) => void) => {
@@ -9,11 +10,11 @@ export function useImagePicker() {
     }
 
     const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      mediaTypes: ["images"],
       quality: 0.8,
     });
     if (!result.canceled && result.assets?.[0]) {
-      setter(result.assets[0].uri);
+      setter(await toJpeg(result.assets[0].uri));
     }
   };
 
