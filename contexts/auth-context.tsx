@@ -10,7 +10,7 @@ const AuthContext = createContext<{
   hasSeenOnboard: boolean;
   markHasSeenOnboard: ()=>void;
   signIn: ({ email, password }: { email: string, password: string }) => Promise<boolean>;
-  signUp: (email: string, password: string) => Promise<void>;
+  signUp: (email: string, password: string, first_name: string, last_name: string, username: string) => Promise<void>;
   signOut: () => Promise<void>;
   session?: Session | null;
   isLoading: boolean;
@@ -20,7 +20,7 @@ const AuthContext = createContext<{
   markHasSeenOnboard: ()=>{},
   signOut: () => Promise.resolve(),
   signIn: () => Promise.resolve(false),
-  signUp: (email: string, password: string) => Promise.resolve(),
+  signUp: (email: string, password: string, first_name: string, last_name: string, username: string) => Promise.resolve(),
   session: null,
   isLoading: false,
 });
@@ -74,14 +74,17 @@ export function AuthProvider({ children }: PropsWithChildren) {
     return true
   }
 
-  const signUp = async (email: string, password: string) => {
-    const { data, error } = await supabase.auth.signUp({
+  const signUp = async (email: string, password: string, first_name: string, last_name: string, username: string) => {
+    const { error } = await supabase.auth.signUp({
       email: email,
       password: password,
       options: {
         data: {
-          isOnboard: false,
-          isManager: false
+          first_name: first_name,
+          last_name: last_name,
+          username: username,
+          isOnboard: true,
+          isBusinessAccount: false,
         }
       }
     })

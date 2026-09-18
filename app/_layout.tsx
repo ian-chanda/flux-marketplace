@@ -2,12 +2,13 @@ import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { AuthProvider, useAuth } from '@/contexts/auth-context';
 import { ThemeProvider } from '@/contexts/theme-context';
+import { useAuthDeepLinkHandler } from '@/hooks/use-auth-deep-link';
 import { Stack } from 'expo-router';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 export default function RootLayout() {
 
-
+  useAuthDeepLinkHandler();
 
   return (
     <AuthProvider>
@@ -36,7 +37,6 @@ function RootNavigator() {
         <Stack.Protected guard={session == null}>
           <Stack.Screen name="auth/login" options={{ headerShown: false }} />
           <Stack.Screen name="auth/signup" options={{ headerShown: false }} />
-          <Stack.Screen name="auth/signup-steps" options={{ headerShown: false }} />
         </Stack.Protected>
 
         <Stack.Protected guard={session !== null}>
@@ -57,6 +57,8 @@ function RootNavigator() {
           <Stack.Screen name="me/purchases" options={{ headerShown: false }} />
           <Stack.Screen name="me/saved" options={{ headerShown: false }} />
           <Stack.Screen name="editProfile" options={{ headerShown: false }} />
+          <Stack.Screen name="settings/(account)/changePassword" options={{ headerShown: false }} />
+          <Stack.Screen name="settings/(account)/verification" options={{ headerShown: false }} />
         </Stack.Protected>
       </Stack>
 

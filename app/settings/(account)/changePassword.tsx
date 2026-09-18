@@ -3,7 +3,9 @@ import { CustomHeader } from "@/components/customHeader"
 import { CustomInputField } from "@/components/customInput"
 import { ThemedText } from "@/components/themed-text"
 import { ThemedView } from "@/components/themed-view"
+import { useAuth } from "@/contexts/auth-context"
 import { useTheme } from "@/hooks/useTheme"
+import { supabase } from "@/lib/supabase"
 import { MaterialIcons } from "@expo/vector-icons"
 import { router } from "expo-router"
 import { useState } from "react"
@@ -22,6 +24,8 @@ const PasswordField = ({
 }) => {
 	const { colors } = useTheme()
 	const [visible, setVisible] = useState(false)
+	const [isUpdating, setIsUpdating] = useState(false)
+
 
 	return (
 		<View style={{ gap: 6 }}>
@@ -78,6 +82,7 @@ export default function ChangePasswordScreen() {
 	const [confirmPassword, setConfirmPassword] = useState("")
 	const [submitting, setSubmitting] = useState(false)
 	const [errors, setErrors] = useState<{ current?: string; confirm?: string }>({})
+	const {signOut} = useAuth()
 
 	const passwordsMatch = newPassword.length > 0 && newPassword === confirmPassword
 
@@ -94,7 +99,14 @@ export default function ChangePasswordScreen() {
 
 		setSubmitting(true)
 		try {
-			router.back()
+			const { error } = await supabase.auth.updateUser({
+				password: newPassword,
+				current_password: currentPassword
+			})
+			
+			if (error) throw error
+			console.log("password changed")
+			signOut()
 		} catch (err) {
 			setErrors((e) => ({ ...e, current: "Current password is incorrect" }))
 		} finally {
