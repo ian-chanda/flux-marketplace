@@ -1,18 +1,20 @@
 import { useTheme } from "@/hooks/useTheme"
 import { MaterialIcons } from "@expo/vector-icons"
-import { router } from "expo-router"
+import { RelativePathString, router } from "expo-router"
 import { TouchableOpacity, View } from "react-native"
 import { ThemedText } from "./themed-text"
 
 type headerTypes = {
 	title?: string,
 	showBack?: boolean,
+	goto?: RelativePathString,
 	children?: React.ReactNode
 }
 
 export const CustomHeader = ({
 	title,
 	showBack = false,
+	goto,
 	children,
 }: headerTypes) => {
 
@@ -26,7 +28,7 @@ export const CustomHeader = ({
 			paddingHorizontal: 10,
 			height: 60
 		}}>
-			<View style={{flexDirection: 'row', gap: 10, alignItems: 'center'}}>
+			<View style={{ flexDirection: 'row', gap: 10, alignItems: 'center' }}>
 				{showBack && (
 					<TouchableOpacity
 						style={{
@@ -34,7 +36,13 @@ export const CustomHeader = ({
 							justifyContent: 'center',
 							borderRadius: 8
 						}}
-						onPress={() => router.back()}>
+						onPress={() => {
+							if (goto) {
+								router.replace(goto)
+							} else {
+								router.back()
+							}
+						}}>
 						<MaterialIcons name="chevron-left" size={32} color={colors.accent} />
 					</TouchableOpacity>
 				)}

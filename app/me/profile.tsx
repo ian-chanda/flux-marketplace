@@ -1,11 +1,16 @@
 import { CustomHeader } from "@/components/customHeader"
+import { HeaderImage } from "@/components/header-image"
 import { IconButton } from "@/components/iconButton"
+import { PfpItem } from "@/components/pfp-item"
+import { ProfileSkeleton } from "@/components/skeletons/profileSkeleton"
 import { ThemedText } from "@/components/themed-text"
 import { ThemedView } from "@/components/themed-view"
+import { VerifiedBadge } from "@/components/verified-badge"
 import { useAuth } from "@/contexts/auth-context"
 import { useUser } from "@/hooks/use-user"
 import { useTheme } from "@/hooks/useTheme"
 import { supabase } from "@/lib/supabase"
+import { handleGetVerified } from "@/utils/handle-verification-route"
 import { MaterialIcons } from "@expo/vector-icons"
 import { router } from "expo-router"
 import { useEffect, useState } from "react"
@@ -24,113 +29,94 @@ export default function ProfileScreen() {
 
 	const avatar = userData?.avatar_url ?? ""
 	const header = userData?.header_url ?? ""
-	const name = userData?.name ?? "unknown unknown";
+	const firstName = userData?.first_name ?? "unknown";
+	const lastName = userData?.last_name ?? "unknown";
+	const bio = userData?.bio ?? "";
 	const username = userData?.username ?? "unknown123";
-	const contact = userData?.phone_number ?? "090000001";
+	const contact = userData?.phone_number?.trim() ? userData.phone_number : "n/a"
+	const location = `${userData?.location_city ?? "unknown"}, ${userData?.location_country ?? "unknown"}`
 	const date = userData?.created_at ? new Date(userData?.created_at).toLocaleDateString("en-GB", {
 		day: "numeric",
 		month: "short",
 		year: "numeric",
 	}) : "00 jan 0000";
 
+	if (isLoading) {
+		return (
+			<ThemedView isTabVisible={false} style={{ gap: 10 }}>
+				<CustomHeader showBack title="Profile" />
+				<View style={{ paddingTop: 10, marginBottom: 50 }}>
+
+					<ProfileSkeleton />
+				</View>
+			</ThemedView>
+		)
+	}
 
 	return (
-		<ThemedView isTabVisible={false} style={{ paddingHorizontal: 10, gap: 10 }}>
+		<ThemedView isTabVisible={false} style={{ gap: 10 }}>
 			<CustomHeader showBack title="Profile" />
 
-			<View style={{ paddingTop: 10, marginBottom: 50 }}>
-				{/* header image */}
-				<Image
-					source={header
-						? { uri: `${header}?v=${userData?.updated_at}` }
-						: require('@/assets/images/dino.jpg')}
-					style={{
-						width: '100%',
-						height: 150,
-						objectFit: 'cover',
-						borderRadius: 12
-					}}
-				/>
-				{/* profile image */}
-				<View style={{ position: 'absolute', bottom: -30, left: 15 }}>
-					<Image
-						source={avatar
-							? { uri: `${avatar}?v=${userData?.updated_at}` }
-							: require('@/assets/images/dino.jpg')}
-						style={{
-							width: 120,
-							height: 120,
-							borderRadius: 100,
-							borderWidth: 4,
-							borderColor: colors.background
-						}}
-					/>
-				</View>
-			</View>
+			<View style={{ flex: 1, paddingHorizontal: 10 }}>
 
-			<View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-				<View>
-					<View style={{ flexDirection: 'row', alignItems: 'center', gap: 5 }}>
-						<ThemedText type='largeBold'>{name}</ThemedText>
-						<MaterialIcons name='verified' color={colors.text} size={15} />
+				<View style={{ paddingTop: 10, marginBottom: 50 }}>
+					{/* header image */}
+					<HeaderImage source={header ? `${header}?v=${userData?.updated_at}` : ""} />
+					{/* profile image */}
+					<View style={{ position: 'absolute', bottom: -30, left: 15 }}>
+						<PfpItem
+							image={`${avatar}?v=${userData?.updated_at}`}
+							name={`${firstName} ${lastName}`}
+							size="medium"
+						/>
 					</View>
-					<ThemedText type='smallFaded'>@{username}</ThemedText>
 				</View>
 
-				<IconButton icon={'edit'} onPress={() => router.push('/editProfile')} badgeValue="" />
-			</View>
-			<ThemedText type='mediumFaded'>the users bio can go here easy peasy </ThemedText>
+				<View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+					<View>
+						<View style={{ flexDirection: 'row', alignItems: 'center', gap: 5 }}>
+							<ThemedText type='largeBold'>{firstName} {lastName}</ThemedText>
+							{userData?.is_verified ?
+								<VerifiedBadge />
+								:
+								<TouchableOpacity
+									onPress={() => handleGetVerified(userData?.verification?.status ?? "unsubmitted", "/me/profile")}
+									style={{ flexDirection: 'row', alignItems: 'center', gap: 3 }}>
+									<VerifiedBadge />
+									<ThemedText type='link'>Get Verified!</ThemedText>
+								</TouchableOpacity>
+							}
+						</View>
+						<ThemedText type='smallFaded'>@{username}</ThemedText>
+					</View>
 
-			<ScrollView horizontal
-				style={{
-					flexGrow: 0,
-					flexShrink: 0,
-					maxHeight: 40,
-				}}
-				contentContainerStyle={{
+					<IconButton icon={'edit'} onPress={() => router.push('/editProfile')} badgeValue="" />
+				</View>
+				<ThemedText type='mediumFaded'>{bio}</ThemedText>
+
+				<ThemedText type="defaultFaded" style={{ marginTop: 10, marginBottom: 6 }}>
+					About
+				</ThemedText>
+				<View style={{
+					backgroundColor: colors.surface, 
+					borderRadius: 12,
+					padding: 14,
 					gap: 10,
-					alignItems: 'center',
-				}}
-			>
-				{ProfileTabs.map((item, index) => (
-					<TouchableOpacity
-						style={{
-							paddingBottom: 8,
-							borderColor: colors.accent,
-							borderBottomWidth: selectedTab === item ? 2 : 0,
-							alignItems: 'center',
-							justifyContent: 'center'
-						}}
-						key={index}
-						onPress={() => setSelectedTab(item)}
-					>
-						<ThemedText>{item}</ThemedText>
-					</TouchableOpacity>
-				))}
-			</ScrollView>
-			<ScrollView
-				style={{ flex: 1 }}
-				contentContainerStyle={{ gap: 10, paddingBottom: 100 }}
-				showsVerticalScrollIndicator={false}
-			>
-				{selectedTab === 'About' && (
-					<View style={{ gap: 5 }}>
-						<View style={{ flexDirection: 'row', gap: 5 }}>
-							<ThemedText type="defaultFaded">Location:</ThemedText>
-							<ThemedText type="default">Lusaka, Zambia</ThemedText>
-						</View>
-						<View style={{ flexDirection: 'row', gap: 5 }}>
-							<ThemedText type="defaultFaded">Contact: </ThemedText>
-							<ThemedText type="default">{contact}</ThemedText>
-						</View>
-						<View style={{ flexDirection: 'row', gap: 5 }}>
-							<ThemedText type="defaultFaded">Member Since:</ThemedText>
-							<ThemedText type="default">{date}</ThemedText>
-						</View>
+				}}>
+					<View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+						<ThemedText type="defaultFaded">Location</ThemedText>
+						<ThemedText type="default">{location}</ThemedText>
 					</View>
-				)}
-
-			</ScrollView>
+					<View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+						<ThemedText type="defaultFaded">Contact</ThemedText>
+						<ThemedText type="default">{contact}</ThemedText>
+					</View>
+					<View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+						<ThemedText type="defaultFaded">Member Since</ThemedText>
+						<ThemedText type="default">{date}</ThemedText>
+					</View>
+				</View>
+			</View>
 
 		</ThemedView>
 	)

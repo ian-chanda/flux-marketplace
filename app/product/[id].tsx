@@ -36,7 +36,7 @@ export default function Product() {
                 const listingData = await getListing(id);
                 setListing(listingData);
 
-                const { data: sellerData } = await getUserProfile(listingData.user_id);
+                const sellerData = await getUserProfile(listingData.user_id);
                 if (sellerData) setSeller(sellerData as UserData);
             } catch (err) {
                 setError(err as Error);

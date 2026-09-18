@@ -23,6 +23,8 @@ export const uploadImage = async ({
     ? `${id}/${folderName}/${name}.${fileExtension}`
     : `${id}/${name}.${fileExtension}`;
 
+  console.log("the file path: ", filePath)
+
   const response = await fetch(uri);
   const arrayBuffer = await response.arrayBuffer();
 

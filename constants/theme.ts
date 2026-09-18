@@ -19,6 +19,7 @@ export const Colors = {
     shadowColor: 'rgba(224, 44, 31, 0.3)', // blood-red glow
     error: '#b42318',          // blood-red 600 - clear error state
     success: '#5c7a3d',        // muted olive green - complements warm palette
+    link: '#0a7ea4',
   },
   dark: {
     primary: '#aa8e88',        // mauve-bark 400 - main brand color
@@ -33,6 +34,7 @@ export const Colors = {
     shadowColor: 'rgba(231, 86, 75, 0.4)', // blood-red glow
     error: '#ed8078',          // blood-red 300 - visible on dark bg
     success: '#8fae6b',        // lighter olive green - visible on dark bg
+    link: '#0a7ea4',
   }
 };
 

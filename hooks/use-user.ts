@@ -7,7 +7,6 @@ export function useUser() {
   const { user } = useAuth();
   const [userData, setUserData] = useState<UserData | null>();
   const [loading, setIsLoading] = useState(true);
-  const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
     async function loadUser() {
@@ -18,14 +17,11 @@ export function useUser() {
       }
 
       setIsLoading(true);
-      const { data, error } = await getUserProfile(user.id);
+      // if theres an error the error will be thrown from the service function
+      // then itll be caught whereever you have the try and catch
+      const data = await getUserProfile(user.id);
 
-      if (error) {
-        setError(error);
-      } else {
-        setUserData(data);
-      }
-
+      setUserData(data);
       setIsLoading(false);
     }
 
@@ -35,6 +31,5 @@ export function useUser() {
   return {
     userData,
     loading,
-    error,
   };
 }

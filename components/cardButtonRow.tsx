@@ -8,6 +8,7 @@ export const CardButtonRow = ({
 	label,
 	onPress,
 	right,
+	left,
 	desc,
 	destructive,
 }: {
@@ -16,6 +17,7 @@ export const CardButtonRow = ({
 	desc?: string
 	onPress?: () => void
 	right?: React.ReactNode
+	left?: React.ReactNode
 	destructive?: boolean
 }) => {
 	const { colors } = useTheme()
@@ -34,6 +36,7 @@ export const CardButtonRow = ({
 			}}
 		>
 			<View style={{ flexDirection: "row", gap: 10, alignItems: "center" }}>
+				{left}
 				{icon && (
 					<MaterialIcons
 						name={icon}

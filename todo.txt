@@ -136,7 +136,7 @@ PHASE 1 — AUTHENTICATION & USERS
 [x] AuthContext
 [~] Login screen
 [~] Signup screen
-[ ] Forgot password
+[~] Forgot password
 [ ] Auth loading state
 [ ] Auth error handling
 [~] Protected routes
@@ -161,12 +161,12 @@ PHASE 2 — DATA ACCESS ARCHITECTURE
 [FE]
 [x] Create services/
 [x] Create users service
-[ ] Create listings service
+[x] Create listings service
 [ ] Create cart service
 [ ] Create orders service
 [ ] Create reviews service
 [ ] Create messages service
-[ ] Create useUser hook
+[~] Create useUser hook
 [ ] Create useListings hook
 [ ] Create useCart hook
 [ ] Create useOrders hook
