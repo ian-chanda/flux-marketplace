@@ -7,6 +7,7 @@ import { ThemedView } from "@/components/themed-view";
 import { useListings } from "@/hooks/useListings";
 import { useTheme } from "@/hooks/useTheme";
 import { useAuth } from "@/contexts/auth-context";
+import { getCartCount } from "@/services/cart";
 import { getSavedListingIds, saveListing, unsaveListing } from "@/services/savedListings";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { router, useFocusEffect } from "expo-router";
@@ -42,8 +43,9 @@ export default function Index() {
     const { colors } = useTheme()
     const { listings, loading, refreshing, error, load, refresh } = useListings();
     const { user } = useAuth();
-    const [bookmarked, setBookmarked] = useState<Record<string, boolean>>({});
-    const isFirstFocus = useRef(true);
+const [bookmarked, setBookmarked] = useState<Record<string, boolean>>({});
+const [cartCount, setCartCount] = useState(0);
+const isFirstFocus = useRef(true);
 
     const loadSaved = useCallback(async () => {
         if (!user) return;
@@ -55,15 +57,25 @@ export default function Index() {
         }
     }, [user]);
 
+    const loadCartCount = useCallback(async () => {
+        if (!user) return;
+        try {
+            setCartCount(await getCartCount(user.id));
+        } catch {
+            setCartCount(0);
+        }
+    }, [user]);
+
     useFocusEffect(
         useCallback(() => {
             loadSaved();
+            loadCartCount();
             if (isFirstFocus.current) {
                 isFirstFocus.current = false;
                 return;
             }
             load(true);
-        }, [load, loadSaved])
+        }, [load, loadSaved, loadCartCount])
     );
 
     const toggleBookmark = useCallback(async (id: string) => {
@@ -87,7 +99,7 @@ export default function Index() {
         <ThemedView isTabVisible={true}>
             <CustomHeader>
                 <SearchBarButton placeholder="search..." width={'85%'} />
-                <IconButton icon={"shopping-cart"} badgeValue="3" onPress={() => router.push("/cart")} />
+                <IconButton icon={"shopping-cart"} badgeValue={cartCount ? String(cartCount) : ""} onPress={() => router.push("/cart")} />
             </CustomHeader>
             <ScrollView
                 showsHorizontalScrollIndicator={false}
