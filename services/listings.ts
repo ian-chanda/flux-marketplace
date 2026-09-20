@@ -14,6 +14,30 @@ export async function getListings(): Promise<Listing[]> {
   return (data ?? []) as Listing[];
 }
 
+export async function searchListings(options?: {
+  query?: string;
+  category?: string;
+}): Promise<Listing[]> {
+  let query = supabase
+    .from("listings")
+    .select("*")
+    .eq("is_available", true);
+
+  if (options?.category) {
+    query = query.eq("category", options.category);
+  }
+  if (options?.query) {
+    query = query.ilike("title", `%${options.query}%`);
+  }
+
+  query = query.order("created_at", { ascending: false });
+
+  const { data, error } = await query;
+  if (error) throw error;
+
+  return (data ?? []) as Listing[];
+}
+
 export async function getListing(id: string): Promise<Listing> {
   const { data, error } = await supabase
     .from("listings")
