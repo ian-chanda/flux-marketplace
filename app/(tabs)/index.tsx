@@ -9,32 +9,39 @@ import { useTheme } from "@/hooks/useTheme";
 import { useAuth } from "@/contexts/auth-context";
 import { getCartCount } from "@/services/cart";
 import { getSavedListingIds, saveListing, unsaveListing } from "@/services/savedListings";
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import Ionicons from "@expo/vector-icons/Ionicons";
 import { router, useFocusEffect } from "expo-router";
 import { useCallback, useRef, useState } from "react";
 import { ActivityIndicator, FlatList, RefreshControl, ScrollView, StatusBar, StyleSheet, TouchableOpacity, View } from "react-native";
+import { categories } from "@/lib/categories";
 
 type buttonTypes = {
     icon: any;
     title: string;
+    active?: boolean;
+    onPress?: () => void;
 }
 
-const SmallIconButton = ({ icon, title }: buttonTypes) => {
+const SmallIconButton = ({ icon, title, active, onPress }: buttonTypes) => {
     const { colors } = useTheme()
 
     return (
-        <TouchableOpacity style={{
-            flexShrink: 0,
-            flexDirection: 'row',
-            paddingHorizontal: 10,
-            height: 35,
-            gap: 3,
-            alignItems: 'center',
-            backgroundColor: colors.surface,
-            borderRadius: 100,
-        }}>
-            <MaterialIcons name={icon} size={18} color={colors.accent} />
-            <ThemedText type="mediumFaded">{title}</ThemedText>
+        <TouchableOpacity
+            onPress={onPress}
+            style={{
+                flexShrink: 0,
+                flexDirection: 'row',
+                paddingHorizontal: 10,
+                height: 35,
+                gap: 3,
+                alignItems: 'center',
+                backgroundColor: colors.surface,
+                borderRadius: 100,
+                borderWidth: active ? 1.5 : 0,
+                borderColor: active ? colors.accent : "transparent",
+            }}>
+            <Ionicons name={icon} size={18} color={active ? colors.accent : colors.placeholder} />
+            <ThemedText type="mediumFaded" style={active ? { color: colors.accent } : undefined}>{title}</ThemedText>
         </TouchableOpacity>
     )
 }
@@ -45,6 +52,7 @@ export default function Index() {
     const { user } = useAuth();
 const [bookmarked, setBookmarked] = useState<Record<string, boolean>>({});
 const [cartCount, setCartCount] = useState(0);
+const [activeFilter, setActiveFilter] = useState<string | null>(null);
 const isFirstFocus = useRef(true);
 
     const loadSaved = useCallback(async () => {
@@ -95,6 +103,18 @@ const isFirstFocus = useRef(true);
         }
     }, [user, bookmarked]);
 
+    const toggleFilter = useCallback((filter: string | null) => {
+        setActiveFilter(prev => (prev === filter ? null : filter));
+    }, []);
+
+    const filteredListings = activeFilter
+        ? listings.filter((item) => {
+            if (activeFilter === "saved") return !!bookmarked[item.id];
+            if (activeFilter === "selling") return item.user_id === user?.id;
+            return item.category === activeFilter;
+        })
+        : listings;
+
     return (
         <ThemedView isTabVisible={true}>
             <CustomHeader>
@@ -112,10 +132,17 @@ const isFirstFocus = useRef(true);
                     gap: 10
                 }}
             >
-                <SmallIconButton icon="favorite-outline" title="saved" />
-                <SmallIconButton icon="sell" title="selling" />
-                <SmallIconButton icon="sell" title="phones" />
-                <SmallIconButton icon="sell" title="gaming" />
+                <SmallIconButton icon="bookmark-outline" title="saved" active={activeFilter === "saved"} onPress={() => toggleFilter("saved")} />
+                <SmallIconButton icon="pricetag-outline" title="selling" active={activeFilter === "selling"} onPress={() => toggleFilter("selling")} />
+                {categories.map((category) => (
+                    <SmallIconButton
+                        key={category.name}
+                        icon={category.icon as any}
+                        title={category.pill}
+                        active={activeFilter === category.name}
+                        onPress={() => toggleFilter(category.name)}
+                    />
+                ))}
             </ScrollView>
 
             <View style={{ paddingHorizontal: 10, flex: 1 }}>
@@ -134,9 +161,13 @@ const isFirstFocus = useRef(true);
                     <View style={styles.center}>
                         <ThemedText type="defaultFaded">No listings yet. Be the first to post one!</ThemedText>
                     </View>
+                ) : filteredListings.length === 0 ? (
+                    <View style={styles.center}>
+                        <ThemedText type="defaultFaded">No {activeFilter} listings found.</ThemedText>
+                    </View>
                 ) : (
                     <FlatList
-                        data={listings}
+                        data={filteredListings}
                         numColumns={2}
                         columnWrapperStyle={{ justifyContent: 'space-between', gap: 10 }}
                         contentContainerStyle={{ gap: 16, paddingBottom: 20 }}

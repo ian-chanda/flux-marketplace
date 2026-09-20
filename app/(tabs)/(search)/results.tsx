@@ -1,32 +1,44 @@
-import { BookmarkBadge } from '@/components/bookmark-badge';
 import { CustomHeader } from '@/components/customHeader';
 import { ProductCardH } from '@/components/productCardH';
 import { SearchBarButton } from '@/components/searchBarButton';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { useTheme } from '@/hooks/useTheme';
-import { useLocalSearchParams } from 'expo-router';
-import { useState } from 'react';
-import { FlatList, Image, TouchableOpacity, View } from 'react-native';
+import { searchListings } from '@/services/listings';
+import { Listing } from '@/types/listing';
+import { useLocalSearchParams, useFocusEffect } from 'expo-router';
+import { useCallback, useState } from 'react';
+import { ActivityIndicator, FlatList, TouchableOpacity, View } from 'react-native';
 
-const search_results = [
-	{ id: 1, name: "Product THREEE HUNDRED AND NIGETU", Desc: 'new', image: 'url', price: "K2", delivery: "" },
-	{ id: 2, name: "Product 2", Desc: 'pre-owned', image: 'url', price: "K3", delivery: 'free delivery' },
-	{ id: 3, name: "Product 3", Desc: 'used-like new', image: 'url', price: "K4", delivery: "k50 delivery" },
-	{ id: 4, name: "Product 4", Desc: 'new', image: 'url', price: "K5", delivery: "k150 delivery" },
-	{ id: 5, name: "Product 3", Desc: 'used-like new', image: 'url', price: "K4", delivery: 'free delivery' },
-	{ id: 6, name: "Product 3", Desc: 'used-like new', image: 'url', price: "K4", delivery: 'free delivery' },
-	{ id: 7, name: "Product 3", Desc: 'used-like new', image: 'url', price: "K4", delivery: 'free delivery' },
-]
-
-export default function ProfileScreen() {
+export default function ResultsScreen() {
 	const { colors } = useTheme()
-	const [bookmarked, setBookmarked] = useState<Record<number, boolean>>({});
-	const { query } = useLocalSearchParams()
+	const { query, category } = useLocalSearchParams<{ query?: string; category?: string }>()
+	const [listings, setListings] = useState<Listing[]>([])
+	const [loading, setLoading] = useState(true)
+	const [error, setError] = useState(false)
 
-	const toggleBookmark = (id: number) => {
-		setBookmarked(prev => ({ ...prev, [id]: !prev[id] }));
-	};
+	const load = useCallback(async () => {
+		setLoading(true)
+		setError(false)
+		try {
+			const results = await searchListings({
+				query: query ?? undefined,
+				category: category ?? undefined,
+			})
+			setListings(results)
+		} catch {
+			setError(true)
+			setListings([])
+		} finally {
+			setLoading(false)
+		}
+	}, [query, category])
+
+	useFocusEffect(
+		useCallback(() => {
+			load()
+		}, [load])
+	)
 
 	return (
 		<ThemedView isTabVisible>
@@ -35,24 +47,43 @@ export default function ProfileScreen() {
 			<CustomHeader showBack>
 				<SearchBarButton
 					width={'85%'}
-					placeholder={query ? query as string : 'searched item'}
+					placeholder={query || category || 'searched item'}
 				/>
 
 			</CustomHeader>
 			<View style={{ flex: 1, marginTop: 10, paddingHorizontal: 5 }}>
-				<FlatList
-					data={search_results}
-					contentContainerStyle={{ gap: 16 }}
-					renderItem={({ item }) => (
-						<ProductCardH
-							bookmarked={bookmarked[item.id]}
-							desc={item.Desc}
-							name={item.name}
-							price={item.price}
-						/>
-					)}
-					keyExtractor={(item) => item.id.toString()}
-				/>
+				{loading ? (
+					<View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+						<ActivityIndicator size="large" color={colors.accent} />
+					</View>
+				) : error ? (
+					<View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', gap: 10 }}>
+						<ThemedText type="defaultFaded">Could not load results</ThemedText>
+						<TouchableOpacity onPress={load}>
+							<ThemedText type="defaultBold" style={{ color: colors.accent }}>Try again</ThemedText>
+						</TouchableOpacity>
+					</View>
+				) : listings.length === 0 ? (
+					<View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+						<ThemedText type="defaultFaded">No results found.</ThemedText>
+					</View>
+				) : (
+					<FlatList
+						data={listings}
+						contentContainerStyle={{ gap: 16 }}
+						renderItem={({ item }) => (
+							<ProductCardH
+								id={item.id}
+								bookmarked={false}
+								desc={item.condition ?? item.category}
+								name={item.title}
+								price={`K${Number(item.price).toLocaleString()}`}
+								img={item.images?.[0]}
+							/>
+						)}
+						keyExtractor={(item) => item.id}
+					/>
+				)}
 			</View>
 		</ThemedView>
 	);
