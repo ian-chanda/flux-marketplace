@@ -70,31 +70,31 @@ const feedbackMessages = [
 ]
 
 const FeedbackMessage = ({ img, name, when, msg, feedbackType }:
-	{ img?: string, name: string, when: string, msg: string, feedbackType: string }) => {
-	return (
-		<View>
-			<View style={{ gap: 10, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-				<View style={{ flexDirection: 'row', alignItems: 'center', gap: 2 }}>
-					<View style={{ flexDirection: 'row', alignItems: 'center', gap: 2 }}>
-						<Image
-							source={require('@/assets/images/dino.jpg')}
-							style={{
-								width: 20,
-								height: 20,
-								objectFit: 'cover',
-								borderRadius: 100
-							}}
-						/>
-						<ThemedText type="smallFaded">{name}</ThemedText>
-					</View>
-					<ThemedText type="smallFaded">-</ThemedText>
-					<ThemedText type="smallFaded">{when}</ThemedText>
-				</View>
-				<ThemedText type="smallFaded">{feedbackType}</ThemedText>
-			</View>
-			<ThemedText>{msg}</ThemedText>
-		</View>
-	)
+  { img?: string, name: string, when: string, msg: string, feedbackType: string }) => {
+  return (
+    <View>
+      <View style={{ gap: 10, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 2 }}>
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 2 }}>
+            <Image
+              source={require('@/assets/images/dino.jpg')}
+              style={{
+                width: 20,
+                height: 20,
+                objectFit: 'cover',
+                borderRadius: 100
+              }}
+            />
+            <ThemedText type="smallFaded">{name}</ThemedText>
+          </View>
+          <ThemedText type="smallFaded">-</ThemedText>
+          <ThemedText type="smallFaded">{when}</ThemedText>
+        </View>
+        <ThemedText type="smallFaded">{feedbackType}</ThemedText>
+      </View>
+      <ThemedText>{msg}</ThemedText>
+    </View>
+  )
 }
 
 export default function SellingScreen() {
@@ -104,7 +104,8 @@ export default function SellingScreen() {
   const avatar = userData?.avatar_url
     ? { uri: userData.avatar_url }
     : require("../../assets/images/dino.jpg");
-  const sellerName = userData?.name ?? "Seller";
+  const sellerName =
+    `${userData?.first_name ?? ""} ${userData?.last_name ?? ""}`.trim() || "Seller";
   const sellerUsername = userData?.username
     ? `@${userData.username}`
     : "@username";

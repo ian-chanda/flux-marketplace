@@ -14,15 +14,16 @@ type prodCardTypes = {
 	name: string,
 	price: string
 	delivery?: string
+	onBookmark?: () => void,
 }
 
-export const ProductCardH = ({ id, bookmarked, desc, name, price, delivery, showMore=false, img }: prodCardTypes) => {
+export const ProductCardH = ({ id, bookmarked, desc, name, price, delivery, showMore=false, img, onBookmark }: prodCardTypes) => {
 	return (
 		<TouchableOpacity style={{ flexDirection: 'row', gap: 10 }} onPress={id ? () => router.push(`/product/${id}`) : undefined}>
 			<View>
 				<BookmarkBadge
 					bookmarked={bookmarked}
-					onPress={() => { }}
+					onPress={() => onBookmark?.()}
 				/>
 				<Image
 					source={img ? { uri: img } : require('@/assets/images/dino.jpg')}

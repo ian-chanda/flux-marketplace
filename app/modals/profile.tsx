@@ -25,9 +25,8 @@ export default function Profile() {
         async function load() {
             if (!id) return;
             try {
-                const { data, error: profileError } = await getUserProfile(id);
-                if (profileError) throw profileError;
-                setSeller(data as UserData);
+                const sellerProfile = await getUserProfile(id);
+                setSeller(sellerProfile as UserData);
 
                 const items = await getListingsByUser(id);
                 setListings(items);
@@ -81,7 +80,7 @@ export default function Profile() {
                         <View style={styles.profileInfo}>
                             <View style={{ flexDirection: 'row', alignItems: 'center', gap: 5 }}>
                                 <ThemedText type="defaultBold" numberOfLines={1}>
-                                    {seller.name ?? "Seller"}
+                                    {`${seller.first_name ?? ""} ${seller.last_name ?? ""}`.trim() || "Seller"}
                                 </ThemedText>
                                 {seller.is_verified && (
                                     <MaterialIcons name="verified" size={15} color={colors.accent} />
