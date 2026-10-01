@@ -1,6 +1,8 @@
 import { supabase } from "@/lib/supabase";
 import { Listing } from "@/types/listing";
 
+const RECENT_LIMIT = 30;
+
 type RecentViewRow = {
   listing_id: string;
   viewed_at: string;
@@ -23,7 +25,8 @@ export async function getRecentViews(userId: string): Promise<Listing[]> {
     .from("recently_viewed")
     .select("listing_id, viewed_at, listings(*)")
     .eq("user_id", userId)
-    .order("viewed_at", { ascending: false });
+    .order("viewed_at", { ascending: false })
+    .limit(RECENT_LIMIT);
 
   if (error) throw error;
 
