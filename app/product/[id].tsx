@@ -8,6 +8,7 @@ import { useTheme } from "@/hooks/useTheme";
 import { addToCart, getCartListingIds } from "@/services/cart";
 import { getListing } from "@/services/listings";
 import { getSavedListingIds, saveListing, unsaveListing } from "@/services/savedListings";
+import { recordRecentView } from "@/services/recentlyViewed";
 import { getUserProfile } from "@/services/users";
 import { Listing } from "@/types/listing";
 import { UserData } from "@/types/user";
@@ -47,13 +48,18 @@ export default function Product() {
         setListing(listingData);
 
         try {
-          const { data: sellerData } = await getUserProfile(listingData.user_id);
+          const sellerData = await getUserProfile(listingData.user_id);
           if (sellerData) setSeller(sellerData as UserData);
         } catch {
           // seller is optional — don't block the listing
         }
 
         if (user) {
+          try {
+            await recordRecentView(user.id, id);
+          } catch {
+            // recording views is optional — don't block the listing
+          }
           try {
             const savedIds = await getSavedListingIds(user.id);
             setSaved(savedIds.includes(id));
@@ -227,7 +233,7 @@ export default function Product() {
             <View style={{ gap: 2 }}>
               <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
                 <ThemedText type="defaultBold" numberOfLines={1}>
-                  {seller?.name ?? "Seller"}
+                  {`${seller?.first_name ?? ""} ${seller?.last_name ?? ""}`.trim() || "Seller"}
                 </ThemedText>
                 {seller?.is_verified && (
                   <MaterialIcons name="verified" size={15} color={colors.accent} />

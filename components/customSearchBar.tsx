@@ -8,7 +8,7 @@ import {
 type searchTypes = {
 	width: any,
 	searchValue: string;
-	setSearchValue: React.Dispatch<React.SetStateAction<string>>;
+	setSearchValue: (text: string) => void;
 	onSearch: () => void;
 }
 

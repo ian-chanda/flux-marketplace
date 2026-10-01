@@ -17,6 +17,10 @@ export async function getListings(): Promise<Listing[]> {
 export async function searchListings(options?: {
   query?: string;
   category?: string;
+  minPrice?: number;
+  maxPrice?: number;
+  condition?: string[];
+  sort?: "newest" | "price_asc" | "price_desc";
 }): Promise<Listing[]> {
   let query = supabase
     .from("listings")
@@ -29,8 +33,23 @@ export async function searchListings(options?: {
   if (options?.query) {
     query = query.ilike("title", `%${options.query}%`);
   }
+  if (options?.minPrice != null && options.minPrice > 0) {
+    query = query.gte("price", options.minPrice);
+  }
+  if (options?.maxPrice != null && options.maxPrice > 0) {
+    query = query.lte("price", options.maxPrice);
+  }
+  if (options?.condition?.length) {
+    query = query.in("condition", options.condition);
+  }
 
-  query = query.order("created_at", { ascending: false });
+  if (options?.sort === "price_asc") {
+    query = query.order("price", { ascending: true });
+  } else if (options?.sort === "price_desc") {
+    query = query.order("price", { ascending: false });
+  } else {
+    query = query.order("created_at", { ascending: false });
+  }
 
   const { data, error } = await query;
   if (error) throw error;

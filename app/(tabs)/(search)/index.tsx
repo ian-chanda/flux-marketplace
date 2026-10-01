@@ -1,45 +1,122 @@
 // src/app/(tabs)/search.tsx
 import { CustomSearchBar } from '@/components/customSearchBar';
+import { ProductCardH } from '@/components/productCardH';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { useTheme } from '@/hooks/useTheme';
+import { useAuth } from '@/contexts/auth-context';
+import { searchListings } from '@/services/listings';
+import { getRecentViews, removeRecentView } from '@/services/recentlyViewed';
+import { getSavedListingIds, getSavedListings, saveListing, unsaveListing } from '@/services/savedListings';
+import { Listing } from '@/types/listing';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import { router, useLocalSearchParams } from 'expo-router';
-import { useEffect, useState } from 'react';
+import { router, useFocusEffect, useLocalSearchParams } from 'expo-router';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import {
   FlatList, View,
-  TouchableOpacity, StyleSheet
+  TouchableOpacity, ActivityIndicator
 } from 'react-native';
-
-const RecentTabData = [
-  { id: 1, name: "recent title 1", },
-  { id: 2, name: "recent title 2", },
-  { id: 3, name: "recent title 3", },
-  { id: 4, name: "recent title 4", },
-  { id: 5, name: "recent title 5", },
-]
-
-const SavedTabData = [
-  { id: 1, name: "saved title 1", },
-  { id: 2, name: "saved title 2", },
-  { id: 3, name: "saved title 3", },
-  { id: 4, name: "saved title 4", },
-  { id: 5, name: "saved title 5", },
-]
 
 export default function SearchScreen() {
   const { colors } = useTheme()
-  const [searchValue, setSearchValue] = useState('')
+  const { user } = useAuth()
+  const { value } = useLocalSearchParams()
+  const [searchValue, setSearchValue] = useState(() =>
+    typeof value === 'string' && value !== 'search...' ? value : ''
+  )
   const [activeTab, setActiveTab] = useState<'recent' | 'saved'>('recent')
-  const {value} = useLocalSearchParams()
+  const [recents, setRecents] = useState<Listing[]>([])
+  const [saved, setSaved] = useState<Listing[]>([])
+  const [loading, setLoading] = useState(true)
+  const [results, setResults] = useState<Listing[]>([])
+  const [searching, setSearching] = useState(false)
+  const [bookmarked, setBookmarked] = useState<Record<string, boolean>>({})
+  const searchTimeout = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
+
+  const hasQuery = searchValue.trim().length > 0
+
+  const load = useCallback(async () => {
+    if (!user) return
+    setLoading(true)
+    const [r, s, ids] = await Promise.all([
+      getRecentViews(user.id).catch(() => []),
+      getSavedListings(user.id).catch(() => []),
+      getSavedListingIds(user.id).catch(() => []),
+    ])
+    setRecents(r)
+    setSaved(s)
+    setBookmarked(ids.reduce((acc, id) => ({ ...acc, [id]: true }), {}))
+    setLoading(false)
+  }, [user])
+
+  useFocusEffect(
+    useCallback(() => {
+      load()
+    }, [load])
+  )
 
   useEffect(() => {
-    if(value && value !== "search...")
-      setSearchValue(value as string)
+    return () => clearTimeout(searchTimeout.current)
+  }, [])
 
-  }, [value])
+  const runSearch = useCallback(async (term: string) => {
+    if (!term.trim()) {
+      setResults([])
+      setSearching(false)
+      return
+    }
+    setSearching(true)
+    try {
+      const found = await searchListings({ query: term })
+      setResults(found)
+    } catch {
+      setResults([])
+    } finally {
+      setSearching(false)
+    }
+  }, [])
 
-  const tabData = activeTab === 'recent' ? RecentTabData : SavedTabData;
+  const handleChangeText = useCallback((text: string) => {
+    clearTimeout(searchTimeout.current)
+    setSearchValue(text)
+    searchTimeout.current = setTimeout(() => runSearch(text), 300)
+  }, [runSearch])
+
+  const openResults = useCallback(() => {
+    if (!searchValue.trim()) return
+    clearTimeout(searchTimeout.current)
+    runSearch(searchValue)
+    router.push({ pathname: '/results', params: { query: searchValue } })
+  }, [searchValue, runSearch])
+
+  const toggleBookmark = useCallback(async (id: string) => {
+    if (!user) return
+    const next = !bookmarked[id]
+    const optimistic = (prev: Record<string, boolean>) => ({ ...prev, [id]: next })
+    setBookmarked(optimistic)
+    try {
+      if (next) {
+        await saveListing(user.id, id)
+      } else {
+        await unsaveListing(user.id, id)
+      }
+    } catch {
+      setBookmarked(prev => ({ ...prev, [id]: !next }))
+    }
+  }, [user, bookmarked])
+
+  const removeItem = useCallback(async (listingId: string) => {
+    if (!user) return
+    if (activeTab === 'recent') {
+      setRecents(prev => prev.filter((l) => l.id !== listingId))
+      try { await removeRecentView(user.id, listingId) } catch { }
+    } else {
+      setSaved(prev => prev.filter((l) => l.id !== listingId))
+      try { await unsaveListing(user.id, listingId) } catch { }
+    }
+  }, [user, activeTab])
+
+  const listData = activeTab === 'recent' ? recents : saved
 
   return (
     <ThemedView isTabVisible style={{ paddingHorizontal: 10 }}>
@@ -47,90 +124,105 @@ export default function SearchScreen() {
       <CustomSearchBar
         width={'100%'}
         searchValue={searchValue}
-        setSearchValue={setSearchValue}
-        onSearch={() => router.push({
-          pathname: '/results',
-          params: {query: searchValue}
-        })}
+        setSearchValue={handleChangeText}
+        onSearch={openResults}
       />
 
-      {/* TABS */}
-      <View>
-        <View style={{ flexDirection: 'row', gap: 10, marginTop: 20, marginBottom: 20 }}>
-          <TouchableOpacity
-            style={{
-              paddingVertical: 10,
-              paddingHorizontal: 5,
-              borderBottomWidth: activeTab === 'recent' ? 2 : 0,
-              borderColor: colors.accent
-            }}
-            onPress={() => setActiveTab('recent')}
-          >
-            <ThemedText>Recent</ThemedText>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={{
-              paddingVertical: 10,
-              paddingHorizontal: 5,
-              borderBottomWidth: activeTab === 'saved' ? 2 : 0,
-              borderColor: colors.accent
-            }}
-            onPress={() => setActiveTab('saved')}
-          >
-            <ThemedText>Saved</ThemedText>
-          </TouchableOpacity>
-
+      {hasQuery ? (
+        <View style={{ flex: 1, marginTop: 15 }}>
+          {searching ? (
+            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+              <ActivityIndicator size="large" color={colors.accent} />
+            </View>
+          ) : results.length === 0 ? (
+            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+              <ThemedText type="defaultFaded">No results for “{searchValue.trim()}”.</ThemedText>
+            </View>
+          ) : (
+            <FlatList
+              data={results}
+              contentContainerStyle={{ gap: 16, paddingBottom: 20 }}
+              renderItem={({ item }) => (
+                <ProductCardH
+                  id={item.id}
+                  bookmarked={!!bookmarked[item.id]}
+                  onBookmark={() => toggleBookmark(item.id)}
+                  desc={item.condition ?? item.category}
+                  name={item.title}
+                  price={`K${Number(item.price).toLocaleString()}`}
+                  img={item.images?.[0]}
+                />
+              )}
+              keyExtractor={(item) => item.id}
+            />
+          )}
         </View>
-      </View>
-      {/* TABS END */}
+      ) : (
+        <>
+          {/* TABS */}
+          <View>
+            <View style={{ flexDirection: 'row', gap: 10, marginTop: 20, marginBottom: 20 }}>
+              <TouchableOpacity
+                style={{
+                  paddingVertical: 10,
+                  paddingHorizontal: 5,
+                  borderBottomWidth: activeTab === 'recent' ? 2 : 0,
+                  borderColor: colors.accent
+                }}
+                onPress={() => setActiveTab('recent')}
+              >
+                <ThemedText>Recent</ThemedText>
+              </TouchableOpacity>
 
-      <FlatList
-        data={tabData}
-        contentContainerStyle={{ gap: 10 }}
-        renderItem={({ item }) => (
-          <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-            <TouchableOpacity
-              onPress={() => router.push({
-                pathname: '/results',
-                params: { query: item.name}
-              })}
-            >
-              <ThemedText type="defaultFaded" numberOfLines={1}>{item.name}</ThemedText>
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <MaterialIcons name="close" size={20} color={colors.accent} />
-            </TouchableOpacity>
+              <TouchableOpacity
+                style={{
+                  paddingVertical: 10,
+                  paddingHorizontal: 5,
+                  borderBottomWidth: activeTab === 'saved' ? 2 : 0,
+                  borderColor: colors.accent
+                }}
+                onPress={() => setActiveTab('saved')}
+              >
+                <ThemedText>Saved</ThemedText>
+              </TouchableOpacity>
+
+            </View>
           </View>
-        )}
-        keyExtractor={(item) => item.id.toString()}
-      />
+          {/* TABS END */}
 
+          {loading ? (
+            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+              <ActivityIndicator size="large" color={colors.accent} />
+            </View>
+          ) : listData.length === 0 ? (
+            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+              <ThemedText type="defaultFaded">
+                {activeTab === 'recent' ? 'No recently viewed items yet.' : 'No saved items yet.'}
+              </ThemedText>
+            </View>
+          ) : (
+            <FlatList
+              data={listData}
+              contentContainerStyle={{ gap: 10 }}
+              renderItem={({ item }) => (
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <TouchableOpacity
+                    style={{ flex: 1, paddingRight: 10 }}
+                    onPress={() => router.push(`/product/${item.id}`)}
+                  >
+                    <ThemedText type="defaultFaded" numberOfLines={1}>{item.title}</ThemedText>
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={() => removeItem(item.id)}>
+                    <MaterialIcons name="close" size={20} color={colors.accent} />
+                  </TouchableOpacity>
+                </View>
+              )}
+              keyExtractor={(item) => item.id}
+            />
+          )}
+        </>
+      )}
 
     </ThemedView>
   );
 }
-
-const styles = StyleSheet.create({
-  search_container: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: 'center',
-    borderRadius: 30,
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-  },
-  search_icon: {
-    position: "absolute",
-    right: 7,
-  },
-  input: {
-    flex: 1,
-    paddingHorizontal: 15,
-    paddingVertical: 12,
-    alignItems: 'center',
-    width: "100%",
-    borderRadius: 20,
-  },
-
-})

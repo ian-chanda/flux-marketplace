@@ -13,9 +13,10 @@ import { VerifiedBadge } from '@/components/verified-badge';
 import { useAuth } from '@/contexts/auth-context';
 import { useUser } from '@/hooks/use-user';
 import { useTheme } from '@/hooks/useTheme';
+import { getCartCount } from '@/services/cart';
 import { MaterialIcons } from '@expo/vector-icons';
-import { router } from 'expo-router';
-import { useEffect, useState } from 'react';
+import { router, useFocusEffect } from 'expo-router';
+import { useCallback, useEffect, useState } from 'react';
 import { Image, ScrollView, TouchableOpacity, View } from 'react-native';
 
 export default function ProfileScreen() {
@@ -25,16 +26,32 @@ export default function ProfileScreen() {
   const { signOut, user, isLoading } = useAuth()
 
   const [isFetching, setIsFetching] = useState(false)
+  const [cartCount, setCartCount] = useState(0)
   const { userData, loading } = useUser()
 
   const avatar = userData?.avatar_url ?? ""
+
+  const loadCartCount = useCallback(async () => {
+    if (!user) return;
+    try {
+      setCartCount(await getCartCount(user.id));
+    } catch {
+      setCartCount(0);
+    }
+  }, [user]);
+
+  useFocusEffect(
+    useCallback(() => {
+      loadCartCount();
+    }, [loadCartCount])
+  );
 
   return (
     <ThemedView isTabVisible style={{}}>
       <CustomHeader title="My Profile">
         <View style={{ flexDirection: 'row', alignItems: 'center', gap: 15 }}>
           <IconButton icon={"notifications"} onPress={() => router.push('/notifications')} badgeValue='9+' />
-          <IconButton icon={"shopping-cart"} onPress={() => router.push('/cart')} badgeValue='2' />
+          <IconButton icon={"shopping-cart"} onPress={() => router.push('/cart')} badgeValue={cartCount ? String(cartCount) : ""} />
         </View>
       </CustomHeader>
 
