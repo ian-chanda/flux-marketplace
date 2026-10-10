@@ -51,8 +51,6 @@ in development.
 
 ## Preview
 
-> Placeholders — replace with real screenshots.
-
 Home Feed
 <img width="585" height="1266" alt="IMG_0660" src="https://github.com/user-attachments/assets/f4e4a09d-8235-454c-8663-22d9bd8719d4" /> 
 
