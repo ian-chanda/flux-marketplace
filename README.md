@@ -55,7 +55,10 @@ in development.
 
 | Home Feed | Listing Details | Create Listing |
 | --- | --- | --- |
-| _(screenshot)_ | _(screenshot)_ | _(screenshot)_ |
+| <img width="585" height="1266" alt="IMG_0660" src="https://github.com/user-attachments/assets/f4e4a09d-8235-454c-8663-22d9bd8719d4" />
+| <img width="585" height="1266" alt="IMG_0661" src="https://github.com/user-attachments/assets/75ce551e-d511-457a-b018-806bd714d62f" />
+| <img width="585" height="1266" alt="IMG_0662" src="https://github.com/user-attachments/assets/08a7fa63-4927-4cf3-a170-6db943ff9193" />
+|
 
 ## Tech stack
 
