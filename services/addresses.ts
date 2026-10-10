@@ -8,13 +8,10 @@ export async function getDeliveryAddresses(userId: string) {
 
   if (error) throw error;
 
-  console.log("found addies: ", JSON.stringify(data, null, 2));
-
   return data;
 }
 
 export async function getDeliveryAddress(id: string, label: string) {
-  console.log("fetching for: ", label.trim());
   const { data, error } = await supabase
     .from("delivery_addresses")
     .select("*")
@@ -22,8 +19,6 @@ export async function getDeliveryAddress(id: string, label: string) {
     .eq("label", label.trim());
 
   if (error) throw error;
-
-  console.log("found addy: ", JSON.stringify(data, null, 2));
 
   return data;
 }

@@ -78,7 +78,7 @@ export default function DelievryAddressScreen() {
 									label={item?.label ?? "unknown"}
 									onPress={() => router.push({
 										pathname: '/settings/address/[id]',
-										params: { label_: item?.label ?? "" }
+										params: { id: item.id, label_: item?.label ?? "" }
 									})}
 								/>
 								<CheckBox
