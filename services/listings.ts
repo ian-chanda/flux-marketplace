@@ -52,7 +52,9 @@ export type CreateListingInput = {
   pickup: boolean;
 };
 
-export async function createListing(input: CreateListingInput): Promise<Listing> {
+export async function createListing(
+  input: CreateListingInput,
+): Promise<Listing> {
   const { data, error } = await supabase
     .from("listings")
     .insert({
@@ -77,17 +79,14 @@ export async function createListing(input: CreateListingInput): Promise<Listing>
 }
 
 export async function deleteListing(id: string): Promise<void> {
-  const { error } = await supabase
-    .from("listings")
-    .delete()
-    .eq("id", id);
+  const { error } = await supabase.from("listings").delete().eq("id", id);
 
   if (error) throw error;
 }
 
 export async function updateListingAvailability(
   id: string,
-  isAvailable: boolean
+  isAvailable: boolean,
 ): Promise<Listing> {
   const { data, error } = await supabase
     .from("listings")
@@ -101,7 +100,10 @@ export async function updateListingAvailability(
   return data as Listing;
 }
 
-export async function uploadListingImages(uris: string[], userId: string): Promise<string[]> {
+export async function uploadListingImages(
+  uris: string[],
+  userId: string,
+): Promise<string[]> {
   const urls: string[] = [];
 
   for (let i = 0; i < uris.length; i++) {
@@ -120,7 +122,12 @@ export async function uploadListingImages(uris: string[], userId: string): Promi
 
 export async function updateListing(
   id: string,
-  updates: Partial<Pick<Listing, "is_available" | "title" | "description" | "price" | "condition">>
+  updates: Partial<
+    Pick<
+      Listing,
+      "is_available" | "title" | "description" | "price" | "condition"
+    >
+  >,
 ): Promise<Listing> {
   const { data, error } = await supabase
     .from("listings")
@@ -132,4 +139,23 @@ export async function updateListing(
   if (error) throw error;
 
   return data as Listing;
+}
+
+export type SearchListingParams = {
+  query: string;
+};
+
+export async function searchListings(p: SearchListingParams) {
+  let q = supabase.from("listings").select(`*`);
+
+  const term = p.query?.trim().replace(/[,()%]/g, " ");
+  if (term) {
+    q = q.or(
+      `title.ilike.%${term}%,description.ilike.%${term}%,category.ilike.%${term}%,location.ilike.%${term}%`,
+    );
+  }
+  const { data, error } = await q;
+  if (error) throw error;
+
+  return data;
 }

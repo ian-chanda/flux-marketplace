@@ -1,527 +1,215 @@
-//
-//
-// src/app/(tabs)/selling.tsx
-import ActionButton from '@/components/actionButton';
-import { CardButtonRow } from '@/components/cardButtonRow';
-import DashPad from '@/components/DashPad';
-import { ThemedText } from '@/components/themed-text';
-import { useUser } from '@/hooks/use-user';
-import { useTheme } from '@/hooks/useTheme';
-import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import { router } from 'expo-router';
-import { Image, ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { CardButtonRow } from "@/components/cardButtonRow";
+import { CustomHeader } from "@/components/customHeader";
+import { ThemedText } from "@/components/themed-text";
+import { ThemedView } from "@/components/themed-view";
+import { useTheme } from "@/hooks/useTheme";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import { router } from "expo-router";
+import { ComponentProps } from "react";
+import { FlatList, Image, ScrollView, StyleSheet, TouchableOpacity, View } from "react-native";
 
-const feedbackMessages = [
-  {
-    name: "Admin Admin",
-    when: "2y",
-    feedbackType: "purchase",
-    msg: "omg this guy funcking SUCKS! he tried to low ball me so much. he even ran off at some point and we had to chase him down"
-  },
-  {
-    name: "Sarah Chen",
-    when: "3d",
-    feedbackType: "sale",
-    msg: "Super smooth transaction, paid instantly and picked up right on time. Would sell to again!"
-  },
-  {
-    name: "Marcus Webb",
-    when: "1w",
-    feedbackType: "purchase",
-    msg: "Item was exactly as described, great communication throughout. Highly recommend."
-  },
-  {
-    name: "Jenna Ortiz",
-    when: "2w",
-    feedbackType: "sale",
-    msg: "Buyer was a bit slow to respond but everything worked out fine in the end."
-  },
-  {
-    name: "Deshawn Miller",
-    when: "1mo",
-    feedbackType: "purchase",
-    msg: "Packaging could've been better but the product itself was in great shape."
-  },
-  {
-    name: "Olivia Park",
-    when: "3mo",
-    feedbackType: "sale",
-    msg: "Quick payment, no hassle. One of the easier deals I've had on here."
-  },
-  {
-    name: "Tariq Hassan",
-    when: "5mo",
-    feedbackType: "purchase",
-    msg: "Took a while to arrange pickup but seller was patient and friendly about it."
-  },
-  {
-    name: "Emily Novak",
-    when: "8mo",
-    feedbackType: "sale",
-    msg: "Avoid this man at all costs. showed up late and tried to renegotiate price at the last second."
-  },
-  {
-    name: "Ryan Kessler",
-    when: "1y",
-    feedbackType: "purchase",
-    msg: "Great experience, item was even better than the photos showed."
-  }
-]
+type IconName = ComponentProps<typeof MaterialIcons>["name"];
 
-const FeedbackMessage = ({ img, name, when, msg, feedbackType }:
-	{ img?: string, name: string, when: string, msg: string, feedbackType: string }) => {
-	return (
-		<View>
-			<View style={{ gap: 10, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-				<View style={{ flexDirection: 'row', alignItems: 'center', gap: 2 }}>
-					<View style={{ flexDirection: 'row', alignItems: 'center', gap: 2 }}>
-						<Image
-							source={require('@/assets/images/dino.jpg')}
-							style={{
-								width: 20,
-								height: 20,
-								objectFit: 'cover',
-								borderRadius: 100
-							}}
-						/>
-						<ThemedText type="smallFaded">{name}</ThemedText>
-					</View>
-					<ThemedText type="smallFaded">-</ThemedText>
-					<ThemedText type="smallFaded">{when}</ThemedText>
-				</View>
-				<ThemedText type="smallFaded">{feedbackType}</ThemedText>
-			</View>
-			<ThemedText>{msg}</ThemedText>
-		</View>
-	)
-}
+type Stat = { id: string; label: string; value: string; icon?: IconName };
+
+type Feedback = {
+  id: string;
+  name: string;
+  when: string;
+  type: "purchase" | "sale";
+  msg: string;
+};
+
+// ---------- mock data (replace with real queries) ----------
+
+const overviewStats: Stat[] = [
+  { id: "inquiries", label: "Listing inquiries", value: "5", icon: "message" },
+  { id: "listings", label: "Active listings", value: "12", icon: "list" },
+];
+
+const performanceStats: Stat[] = [
+  { id: "rating", label: "Rating", value: "4.8", icon: "star" },
+  { id: "views", label: "Views", value: "1,430", icon: "visibility" },
+  { id: "earnings", label: "Earnings", value: "K3,589.45", icon: "attach-money" },
+  // { id: "sales", label: "Sales", value: "130", icon: "check-circle" },
+  // { id: "response", label: "Response time", value: "~2h", icon: "schedule" },
+];
+
+const feedback: Feedback[] = [
+  { id: "1", name: "Sarah Chen", when: "3d", type: "sale", msg: "Super smooth transaction, paid instantly and picked up right on time. Would sell to again!" },
+  { id: "2", name: "Marcus Webb", when: "1w", type: "purchase", msg: "Item was exactly as described, great communication throughout. Highly recommend." },
+  { id: "3", name: "Jenna Ortiz", when: "2w", type: "sale", msg: "Buyer was a bit slow to respond but everything worked out fine in the end." },
+  { id: "4", name: "Deshawn Miller", when: "1mo", type: "purchase", msg: "Packaging could've been better but the product itself was in great shape." },
+  { id: "5", name: "Emily Novak", when: "8mo", type: "sale", msg: "Showed up late and tried to renegotiate price at the last second." },
+];
+
+// ---------- components ----------
+
+const StatItem = ({ label, value, icon }: Omit<Stat, "id">) => {
+  const { colors } = useTheme();
+  return (
+    <View style={[styles.stat, { backgroundColor: colors.surface }]}>
+      <View>
+        <View style={styles.statLabelRow}>
+          <ThemedText type="defaultFaded" numberOfLines={1} style={{ flexShrink: 1 }}>
+            {label}
+          </ThemedText>
+        </View>
+        <ThemedText type="defaultBold">{value}</ThemedText>
+      </View>
+      {icon && <MaterialIcons name={icon} size={30} color={colors.accent + '40'} />}
+    </View>
+  );
+};
+
+const FeedbackCard = ({ name, when, type, msg }: Omit<Feedback, "id">) => {
+  const { colors } = useTheme();
+  return (
+    <View style={[styles.feedbackCard, { backgroundColor: colors.surface }]}>
+      <View style={styles.feedbackHeader}>
+        <View style={styles.feedbackWho}>
+          <Image
+            source={require("@/assets/images/dino.jpg")}
+            style={styles.feedbackAvatar}
+          />
+          <ThemedText type="smallFaded" numberOfLines={1} style={{ flexShrink: 1 }}>
+            {name} · {when}
+          </ThemedText>
+        </View>
+        <ThemedText type="smallFaded">{type}</ThemedText>
+      </View>
+      <ThemedText numberOfLines={4}>{msg}</ThemedText>
+    </View>
+  );
+};
+
+const Section = ({
+  title,
+  action,
+  children,
+}: {
+  title: string;
+  action?: { label: string; onPress: () => void };
+  children: React.ReactNode;
+}) => (
+  <View style={{ gap: 8 }}>
+    <View style={styles.sectionHeader}>
+      <ThemedText type="defaultBold">{title}</ThemedText>
+      {action && (
+        <TouchableOpacity onPress={action.onPress}>
+          <ThemedText type="smallFaded">{action.label}</ThemedText>
+        </TouchableOpacity>
+      )}
+    </View>
+    {children}
+  </View>
+);
+
+// ---------- screen ----------
 
 export default function SellingScreen() {
-  const { colors } = useTheme();
-  const { userData } = useUser();
-
-  const avatar = userData?.avatar_url
-    ? { uri: userData.avatar_url }
-    : require("../../assets/images/dino.jpg");
-  const sellerName = userData?.name ?? "Seller";
-  const sellerUsername = userData?.username
-    ? `@${userData.username}`
-    : "@username";
-
   return (
-    <SafeAreaView
-      style={{
-        backgroundColor: colors.background,
-        flex: 1,
-      }}
-    >
+    <ThemedView isTabVisible>
+      <CustomHeader title="Selling" />
+
       <ScrollView
-        contentContainerStyle={{
-          paddingBottom: 100,
-          gap: 10,
-        }}
+        contentContainerStyle={styles.page}
         showsVerticalScrollIndicator={false}
       >
-
-        {/* Seller Header */}
-        <TouchableOpacity
-          onPress={() => router.push("/me/profile")}
-        >
-          <View
-            style={[
-              styles.container,
-              styles.shadow,
-              {
-                backgroundColor: colors.background,
-                flexDirection: "row",
-                alignItems: "center",
-              },
-            ]}
-          >
-            <Image
-              source={avatar}
-              style={styles.profileImage}
-            />
-
-            <View style={styles.profileInfo}>
-              <View
-                style={{
-                  flexDirection: "row",
-                  alignItems: "center",
-                  gap: 5,
-                }}
-              >
-                <ThemedText type="defaultBold">
-                  {sellerName}
-                </ThemedText>
-
-                {userData?.is_verified && (
-                  <MaterialIcons
-                    name="verified"
-                    size={15}
-                    color={colors.accent}
-                  />
-                )}
-              </View>
-
-              <ThemedText type="defaultSmall">
-                {sellerUsername}
-              </ThemedText>
-
-              {userData?.is_verified && (
-                <ThemedText type="small_price_font">
-                  Verified seller
-                </ThemedText>
-              )}
-            </View>
-          </View>
-        </TouchableOpacity>
-
-
-        {/* Actions */}
-        <View
-          style={[
-            styles.infoContainer,
-            { flexDirection: 'column', paddingHorizontal: 10, gap: 4 },
-          ]}
-        >
-
-          <CardButtonRow icon={"add"} label='Add Listing' onPress={() => router.push("/addListings")} />
-          <CardButtonRow icon={"dashboard"} label='View listings' onPress={() => router.push("/viewListings")} />
-
-          {/* <ActionButton */}
-          {/*   title="Add Listing" */}
-          {/*   Icon="add" */}
-          {/*   onPress={() => router.push("/addListings")} */}
-          {/* /> */}
-          {/**/}
-          {/* <ActionButton */}
-          {/*   title="View Listings" */}
-          {/*   Icon="dashboard" */}
-          {/*   onPress={() => router.push("/viewListings")} */}
-          {/* /> */}
+        <View style={{ gap: 4 }}>
+          <CardButtonRow icon="add" label="Add listing" onPress={() => router.push("/addListings")} />
+          <CardButtonRow icon="dashboard" label="View listings" onPress={() => router.push("/viewListings")} />
         </View>
 
-
-        {/* Seller Performance */}
-        <View
-          style={[
-            styles.container,
-            styles.shadow,
-            { backgroundColor: colors.background },
-          ]}
-        >
-          <ThemedText type="subtitle">
-            Seller Performance
-          </ThemedText>
-
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-around",
-              marginTop: 15,
-            }}
-          >
-            <View>
-              <ThemedText type="medium">
-                Rating
-              </ThemedText>
-
-              <View
-                style={{
-                  flexDirection: "row",
-                  alignItems: "center",
-                  gap: 4,
-                }}
-              >
-                <MaterialIcons
-                  name="star"
-                  size={16}
-                  color="gold"
-                />
-
-                <ThemedText type="defaultBold">
-                  4.8
-                </ThemedText>
-              </View>
-            </View>
-
-            <View>
-              <ThemedText type="medium">
-                Successful Sales
-              </ThemedText>
-
-              <ThemedText type="defaultBold">
-                130
-              </ThemedText>
-            </View>
-
-            <View>
-              <ThemedText type="medium">
-                Response Time
-              </ThemedText>
-
-              <ThemedText type="defaultBold">
-                ~2h
-              </ThemedText>
-            </View>
+        <Section title="Overview" >
+          <View style={styles.grid}>
+            {overviewStats.map(({ id, ...stat }) => (
+              <StatItem key={id} {...stat} />
+            ))}
           </View>
-        </View>
+        </Section>
 
-
-        {/* Listings Overview */}
-        <View
-          style={[
-            styles.container,
-            styles.shadow,
-            { backgroundColor: colors.background },
-          ]}
-        >
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              alignItems: "center",
-            }}
-          >
-            <ThemedText type="subtitle">
-              Your Listings
-            </ThemedText>
-
-            <TouchableOpacity
-              onPress={() => router.push("/viewListings")}
-            >
-              <ThemedText type="smallFaded">
-                View all
-              </ThemedText>
-            </TouchableOpacity>
+        <Section title="Performance" action={{ label: "View all", onPress: () => router.push("/viewListings") }} >
+          <View style={styles.grid}>
+            {performanceStats.map(({ id, ...stat }) => (
+              <StatItem key={id} {...stat} />
+            ))}
           </View>
+        </Section>
 
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-around",
-              marginTop: 15,
-            }}
-          >
-            <DashPad
-              title="Active Listings"
-              value="12"
-              subIconColor="green"
-              mainIcon="list"
-              subTitle="this month"
-              subIcon="trending-up"
-            />
-
-            <DashPad
-              title="Total Views"
-              value="1,430"
-              subIconColor="green"
-              mainIcon="visibility"
-              subTitle="this month"
-              subIcon="trending-up"
-            />
-          </View>
-        </View>
-
-
-        {/* This Month */}
-        <View
-          style={[
-            styles.container,
-            styles.shadow,
-            { backgroundColor: colors.background },
-          ]}
-        >
-          <ThemedText type="subtitle">
-            This Month
-          </ThemedText>
-
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-around",
-              marginTop: 15,
-            }}
-          >
-            <DashPad
-              title="Messages"
-              value="44"
-              subIconColor="red"
-              mainIcon="mail"
-              subTitle="this month"
-              subIcon="trending-down"
-              showBorder={false}
-            />
-
-            <DashPad
-              title="Total Earnings"
-              value="K3,589.45"
-              subIconColor="green"
-              mainIcon="attach-money"
-              subTitle="this month"
-              subIcon="trending-up"
-              showBorder={false}
-            />
-          </View>
-        </View>
-
-        <View style={{ gap: 5 }}>
-          <ThemedText type="subtitle">Ratings</ThemedText>
-          <View style={{ marginBottom: 10, flexDirection: 'row', justifyContent: 'space-between' }}>
-            <View style={{ flexDirection: 'column', }}>
-              <ThemedText>Positive</ThemedText>
-              <ThemedText type="defaultBold">0</ThemedText>
-            </View>
-            <View style={{ flexDirection: 'column', }}>
-              <ThemedText>Neutral</ThemedText>
-              <ThemedText type="defaultBold">0</ThemedText>
-            </View>
-            <View style={{ flexDirection: 'column', }}>
-              <ThemedText>Negative</ThemedText>
-              <ThemedText type="defaultBold">20</ThemedText>
-            </View>
-          </View>
-          <ThemedText type="subtitle">All Feedback</ThemedText>
-
-          {feedbackMessages.map((item, index) => (
-            <View key={index}
-              style={{
-                paddingVertical: 10,
-                borderBottomColor: colors.disabled,
-                borderBottomWidth: 1
-              }}>
-
-              <FeedbackMessage
-                name={item.name}
-                when={item.when}
-                feedbackType={item.feedbackType}
-                msg={item.msg}
-              />
-
-            </View>
-
-          ))}
-        </View>
-
+        <Section title="Feedback">
+          <FlatList
+            data={feedback}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            snapToInterval={FEEDBACK_CARD_WIDTH + FEEDBACK_GAP}
+            decelerationRate="fast"
+            contentContainerStyle={{ gap: FEEDBACK_GAP }}
+            keyExtractor={(item) => item.id}
+            renderItem={({ item: { id, ...card } }) => <FeedbackCard {...card} />}
+          />
+        </Section>
       </ScrollView>
-    </SafeAreaView>
+    </ThemedView>
   );
 }
 
-export const styles = StyleSheet.create({
-  container: {
-    width: "100%",
-    borderRadius: 12,
-    padding: 12,
+const FEEDBACK_CARD_WIDTH = 270;
+const FEEDBACK_GAP = 10;
+
+const styles = StyleSheet.create({
+  page: {
+    gap: 20,
+    paddingBottom: 100,
+    paddingHorizontal: 10,
   },
-
-  shadow: {
-    // Keep this subtle; your theme can control the actual
-    // background/shadow colors where needed.
-    elevation: 2,
-
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-
-    shadowOpacity: 0.08,
-    shadowRadius: 3,
-  },
-
-  profileImage: {
-    width: 75,
-    height: 75,
-    borderRadius: 100,
-    objectFit: "cover",
-  },
-
-  profileInfo: {
-    flex: 1,
-    marginLeft: 12,
-    gap: 3,
-  },
-
-  verifyContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    alignSelf: "flex-start",
-    gap: 4,
-    marginTop: 2,
-  },
-
-  verifyIcon: {
-    marginRight: 1,
-  },
-
-  buttonGrid: {
-    width: "100%",
-  },
-
-  infoContainer: {
-    flexDirection: "row",
-    justifyContent: 'space-evenly',
-  },
-
-  statsContainer: {
-    width: "100%",
-    borderRadius: 12,
-    padding: 12,
-  },
-
-  statsRow: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    alignItems: "flex-start",
-  },
-
-  statsItem: {
-    flex: 1,
-    alignItems: "center",
-  },
-
-  statsValueRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 4,
-  },
-
   sectionHeader: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
   },
-
-  sectionTitle: {
-    marginBottom: 4,
+  // two per row; an odd last item (e.g. 3 stats) stays half width
+  grid: {
+    flexDirection: "column",
+    gap: 8,
   },
-
-  sectionContent: {
-    marginTop: 12,
+  stat: {
+    flexBasis: "48%",
+    flexGrow: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+    borderRadius: 12,
+    gap: 2,
   },
-
-  performanceRow: {
+  statLabelRow: {
     flexDirection: "row",
-    justifyContent: "space-around",
-    alignItems: "flex-start",
-  },
-
-  performanceItem: {
-    flex: 1,
     alignItems: "center",
+    gap: 4,
   },
-
-  listingStatsRow: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    alignItems: "flex-start",
+  feedbackCard: {
+    width: FEEDBACK_CARD_WIDTH,
+    padding: 12,
+    borderRadius: 12,
+    gap: 8,
   },
-
-  monthlyStatsRow: {
+  feedbackHeader: {
     flexDirection: "row",
-    justifyContent: "space-around",
-    alignItems: "flex-start",
+    alignItems: "center",
+    justifyContent: "space-between",
+    gap: 8,
+  },
+  feedbackWho: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 6,
+    flexShrink: 1,
+  },
+  feedbackAvatar: {
+    width: 20,
+    height: 20,
+    borderRadius: 10,
   },
 });

@@ -1,9 +1,11 @@
 import Button from "@/components/Button";
 import { CustomHeader } from "@/components/customHeader";
 import { IconButton } from "@/components/iconButton";
+import { PfpRowItem } from "@/components/pfpRowItem";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import { useAuth } from "@/contexts/auth-context";
+import { useCreateChannel } from "@/hooks/use-create-channel";
 import { useTheme } from "@/hooks/useTheme";
 import { addToCart, getCartListingIds } from "@/services/cart";
 import { getListing } from "@/services/listings";
@@ -15,6 +17,7 @@ import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { router, useLocalSearchParams } from "expo-router";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { ActivityIndicator, FlatList, Image, Pressable, ScrollView, StyleSheet, TouchableOpacity, View, ViewToken, useWindowDimensions } from "react-native";
+import { LoadingScreen } from "../(tabs)/(search)/results";
 
 const attributeLabels: Record<string, string> = {
   brand: "Brand",
@@ -38,6 +41,7 @@ export default function Product() {
   const [activeImage, setActiveImage] = useState(0);
   const mainListRef = useRef<FlatList | null>(null);
   const { user } = useAuth();
+  const { createChannel, isPending } = useCreateChannel()
 
   useEffect(() => {
     async function load() {
@@ -47,7 +51,7 @@ export default function Product() {
         setListing(listingData);
 
         try {
-          const { data: sellerData } = await getUserProfile(listingData.user_id);
+          const sellerData = await getUserProfile(listingData.user_id);
           if (sellerData) setSeller(sellerData as UserData);
         } catch {
           // seller is optional — don't block the listing
@@ -97,8 +101,13 @@ export default function Product() {
 
   if (loading) {
     return (
-      <ThemedView style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <ActivityIndicator size="large" color={colors.accent} />
+      <ThemedView isTabVisible={false}>
+        <CustomHeader showBack >
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 15 }}>
+            <IconButton icon={"shopping-cart"} onPress={() => router.push('/cart')} badgeValue={cartCount ? String(cartCount) : ''} />
+          </View>
+        </CustomHeader>
+        <LoadingScreen />
       </ThemedView>
     );
   }
@@ -118,11 +127,8 @@ export default function Product() {
   const attributes = Object.entries(listing.attributes ?? {});
 
   return (
-    <ThemedView
-      style={{
-        paddingHorizontal: 10,
-        paddingBottom: 60
-      }}>
+    <ThemedView isTabVisible={false}>
+
       <CustomHeader
         showBack
       >
@@ -132,7 +138,11 @@ export default function Product() {
           <IconButton icon={"shopping-cart"} onPress={() => router.push('/cart')} badgeValue={cartCount ? String(cartCount) : ''} />
         </View>
       </CustomHeader>
-      <ScrollView showsVerticalScrollIndicator={false}>
+
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{paddingHorizontal: 10,  gap: 10 }}
+      >
         {images.length > 0 && (
           <>
             <FlatList
@@ -167,13 +177,14 @@ export default function Product() {
             />
           </>
         )}
+
         <View>
           <ThemedText type="subtitle">{listing.title}</ThemedText>
           {listing.condition && (
             <ThemedText>Condition: {listing.condition}</ThemedText>
           )}
           <ThemedText type="defaultFaded">{listing.location}</ThemedText>
-          <ThemedText style={{ paddingVertical: 10 }} type="subtitle">
+          <ThemedText type="subtitle">
             K{listing.price}
           </ThemedText>
         </View>
@@ -196,57 +207,6 @@ export default function Product() {
             ))}
           </View>
         )}
-
-        <TouchableOpacity
-          onPress={() => router.push({ pathname: "/modals/profile", params: { id: listing.user_id } })}
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            padding: 12,
-            borderRadius: 15,
-            backgroundColor: colors.surface,
-            justifyContent: 'space-between',
-            marginVertical: 15
-          }}
-        >
-          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
-            <Image
-              source={seller?.avatar_url ? { uri: seller.avatar_url } : require('@/assets/images/dino.jpg')}
-              style={styles.avatar}
-            />
-            <View style={{ gap: 2 }}>
-              <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
-                <ThemedText type="defaultBold" numberOfLines={1}>
-                  {seller?.name ?? "Seller"}
-                </ThemedText>
-                {seller?.is_verified && (
-                  <MaterialIcons name="verified" size={15} color={colors.accent} />
-                )}
-              </View>
-              <ThemedText type="smallFaded">
-                {seller?.username ? `@${seller.username}` : "Flux seller"}
-              </ThemedText>
-            </View>
-          </View>
-          <Ionicons name="chevron-forward" size={24} color="#D4D4D4" />
-        </TouchableOpacity>
-
-        <ThemedText type="default" style={{ paddingBottom: 15 }}>
-          {listing.description}
-        </ThemedText>
-
-        {attributes.length > 0 && (
-          <TouchableOpacity
-            onPress={() => router.push({ pathname: "/modals/itemInformation", params: { id: listing.id } })}>
-            <View style={{ paddingTop: 15, paddingBottom: 20, justifyContent: "center", flexDirection: "column" }}>
-              <View style={{ flexDirection: "row", justifyContent: "space-between", gap: 40, paddingHorizontal: 5 }}>
-                <ThemedText type="subtitle">Item Information</ThemedText>
-                <Ionicons name="chevron-forward" size={24} />
-              </View>
-            </View>
-          </TouchableOpacity>
-        )}
-
         <Button
           title="Buy Now"
           onPress={() => router.push({ pathname: "/payment", params: { listingId: id } })}
@@ -267,8 +227,61 @@ export default function Product() {
             }
           }}
         />
+
+        <View>
+          <PfpRowItem
+            imageUrl={`${seller?.avatar_url}?v=${seller?.updated_at}`}
+            fName={seller?.first_name ?? "unknown"}
+            lName={seller?.last_name ?? "unknown"}
+            username={seller?.username ?? "unknown123"}
+            isVerified={seller?.is_verified ?? false}
+            onPress={() => router.push({ pathname: "/modals/profile", params: { id: listing.user_id } })}
+          />
+          <TouchableOpacity
+            onPress={() =>
+              createChannel.mutate({
+                recipient: listing.user_id,
+                listing_id: listing.id,
+                subject: listing.title,
+                // recipient_name: `${seller?.first_name} ${seller?.last_name}`,
+                // recipient_avatar: seller?.avatar_url
+              })
+            }
+            style={{
+              width: '100%',
+              padding: 10,
+              justifyContent: 'center',
+              alignItems: 'center',
+              borderRadius: 12,
+              borderColor: colors.accent, borderWidth: 1
+            }}
+          >
+            {isPending ?
+              <ActivityIndicator size={24} color={colors.accent} />
+              :
+              <ThemedText>contact seller</ThemedText>
+            }
+          </TouchableOpacity>
+        </View>
+
+        <ThemedText type="default">
+          {listing.description}
+        </ThemedText>
+
+        {attributes.length > 0 && (
+          <TouchableOpacity
+            onPress={() => router.push({ pathname: "/modals/itemInformation", params: { id: listing.id } })}>
+            <View style={{ paddingTop: 15, paddingBottom: 20, justifyContent: "center", flexDirection: "column" }}>
+              <View style={{ flexDirection: "row", justifyContent: "space-between", gap: 40, paddingHorizontal: 5 }}>
+                <ThemedText type="subtitle">Item Information</ThemedText>
+                <Ionicons name="chevron-forward" size={24} />
+              </View>
+            </View>
+          </TouchableOpacity>
+        )}
+
       </ScrollView>
-    </ThemedView>
+    </ThemedView >
   )
 }
 

@@ -41,11 +41,11 @@ const SmallIconButton = ({ icon, title }: buttonTypes) => {
 
 export default function Index() {
     const { colors } = useTheme()
-    const { listings, loading, refreshing, error, load, refresh } = useListings();
+    const { listings, loading, refreshing, error, refresh } = useListings();
     const { user } = useAuth();
-const [bookmarked, setBookmarked] = useState<Record<string, boolean>>({});
-const [cartCount, setCartCount] = useState(0);
-const isFirstFocus = useRef(true);
+    const [bookmarked, setBookmarked] = useState<Record<string, boolean>>({});
+    const [cartCount, setCartCount] = useState(0);
+    const isFirstFocus = useRef(true);
 
     const loadSaved = useCallback(async () => {
         if (!user) return;
@@ -74,8 +74,8 @@ const isFirstFocus = useRef(true);
                 isFirstFocus.current = false;
                 return;
             }
-            load(true);
-        }, [load, loadSaved, loadCartCount])
+            refresh()
+        }, [refresh, loadSaved, loadCartCount])
     );
 
     const toggleBookmark = useCallback(async (id: string) => {
@@ -126,11 +126,11 @@ const isFirstFocus = useRef(true);
                 ) : error ? (
                     <View style={styles.center}>
                         <ThemedText type="defaultFaded">Could not load listings</ThemedText>
-                        <TouchableOpacity onPress={refresh} style={{ marginTop: 10 }}>
+                        <TouchableOpacity onPress={() => refresh()} style={{ marginTop: 10 }}>
                             <ThemedText type="defaultBold" style={{ color: colors.accent }}>Try again</ThemedText>
                         </TouchableOpacity>
                     </View>
-                ) : listings.length === 0 ? (
+                ) : listings?.length === 0 ? (
                     <View style={styles.center}>
                         <ThemedText type="defaultFaded">No listings yet. Be the first to post one!</ThemedText>
                     </View>

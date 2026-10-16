@@ -1,35 +1,24 @@
 import { useAuth } from "@/contexts/auth-context";
 import { getUserProfile } from "@/services/users";
 import { UserData } from "@/types/user";
-import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 
 export function useUser() {
   const { user } = useAuth();
-  const [userData, setUserData] = useState<UserData | null>();
-  const [loading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    async function loadUser() {
-      if (!user) {
-        setUserData(null);
-        setIsLoading(false);
-        return;
-      }
-
-      setIsLoading(true);
-      // if theres an error the error will be thrown from the service function
-      // then itll be caught whereever you have the try and catch
-      const data = await getUserProfile(user.id);
-
-      setUserData(data);
-      setIsLoading(false);
-    }
-
-    loadUser();
-  }, [user]);
+  const {data, isLoading: loading, error, refetch} = useQuery({
+    queryKey: ['users', user?.id],
+    queryFn: async () => {
+      const data = await getUserProfile(user?.id as string);
+      return data
+    },
+    enabled: !!user?.id
+  })
 
   return {
-    userData,
+    data,
     loading,
+    error,
+    refetch
   };
 }

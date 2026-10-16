@@ -25,9 +25,9 @@ export default function ProfileScreen() {
   const { signOut, user, isLoading } = useAuth()
 
   const [isFetching, setIsFetching] = useState(false)
-  const { userData, loading } = useUser()
+  const { data, loading } = useUser()
 
-  const avatar = userData?.avatar_url ?? ""
+  const avatar = data?.avatar_url ?? ""
 
   return (
     <ThemedView isTabVisible style={{}}>
@@ -38,17 +38,17 @@ export default function ProfileScreen() {
         </View>
       </CustomHeader>
 
-      <ScrollView contentContainerStyle={{ paddingHorizontal: 20, gap: 16 }}>
+      <ScrollView contentContainerStyle={{ paddingHorizontal: 10, gap: 16 }}>
 
         {loading ?
           <RowProfile />
           :
           <PfpRowItem 
-            imageUrl={`${avatar}?v=${userData?.updated_at}`}
-            fName={userData?.first_name ?? "unknown"}
-            lName={userData?.last_name ?? "unknown"}
-            username={userData?.username ?? "unknown123"}
-            isVerified={userData?.is_verified ?? false}
+            imageUrl={`${avatar}?v=${data?.updated_at}`}
+            fName={data?.first_name ?? "unknown"}
+            lName={data?.last_name ?? "unknown"}
+            username={data?.username ?? "unknown123"}
+            isVerified={data?.is_verified ?? false}
             onPress={() => router.push('/me/profile')}
           />
         }

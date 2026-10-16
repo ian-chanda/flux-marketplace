@@ -25,8 +25,7 @@ export default function Profile() {
         async function load() {
             if (!id) return;
             try {
-                const { data, error: profileError } = await getUserProfile(id);
-                if (profileError) throw profileError;
+                const data = await getUserProfile(id);
                 setSeller(data as UserData);
 
                 const items = await getListingsByUser(id);
@@ -42,17 +41,22 @@ export default function Profile() {
 
     if (loading) {
         return (
-            <ThemedView style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-                <ActivityIndicator size="large" color={colors.accent} />
+            <ThemedView isTabVisible={false}>
+                <CustomHeader title="Seller Profile" showBack />
+                <View style={{ flex: 1, alignItems: "center", justifyContent: "center", gap: 10 }}>
+                    <ActivityIndicator size="large" color={colors.accent} />
+                </View>
             </ThemedView>
         );
     }
 
     if (error || !seller) {
         return (
-            <ThemedView style={{ flex: 1, alignItems: "center", justifyContent: "center", gap: 10 }}>
+            <ThemedView isTabVisible={false}>
                 <CustomHeader title="Seller Profile" showBack />
-                <ThemedText type="defaultFaded">Could not load seller profile.</ThemedText>
+                <View style={{ flex: 1, alignItems: "center", justifyContent: "center", gap: 10 }}>
+                    <ThemedText type="defaultFaded">Could not load seller profile.</ThemedText>
+                </View>
             </ThemedView>
         );
     }
@@ -63,14 +67,12 @@ export default function Profile() {
     });
 
     return (
-        <ThemedView
-            style={{
-                paddingHorizontal: 10
-            }}>
+        <ThemedView>
             <CustomHeader
                 title="Seller profile"
                 showBack />
             <ScrollView
+                contentContainerStyle={{ paddingHorizontal: 10 }}
                 showsVerticalScrollIndicator={false}>
                 <View>
                     <View style={[styles.container, styles.shadow, { backgroundColor: colors.background }]}>
@@ -106,19 +108,19 @@ export default function Profile() {
                         </View>
                     </View>
 
-                    <ThemedText type="subtitle" style={{ paddingHorizontal: 15, paddingVertical: 15 }}>
+                    <ThemedText type="subtitle" style={{ paddingVertical: 15 }}>
                         Reviews
                     </ThemedText>
-                    <View style={{ paddingHorizontal: 15 }}>
+                    <View style={{}}>
                         <ThemedText type="defaultFaded">No reviews yet.</ThemedText>
                     </View>
 
-                    <ThemedText type="subtitle" style={{ paddingHorizontal: 15, paddingVertical: 15 }}>
+                    <ThemedText type="subtitle" style={{ paddingVertical: 15 }}>
                         Other Products by seller
                     </ThemedText>
-                    <View style={{ paddingHorizontal: 10 }}>
+                    <View style={{}}>
                         {listings.length === 0 ? (
-                            <ThemedText type="defaultFaded" style={{ paddingHorizontal: 5 }}>
+                            <ThemedText type="defaultFaded" style={{}}>
                                 No listings yet.
                             </ThemedText>
                         ) : (

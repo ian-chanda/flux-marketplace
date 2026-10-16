@@ -66,7 +66,7 @@ export default function EditProfileScreen() {
 	const [currentLocation, setCurrentLocation] = useState("permission required")
 	const { user } = useAuth()
 	const { pickImage } = useImagePicker()
-	const { userData, loading } = useUser()
+	const { data: userData, loading } = useUser()
 
 	const [errors, setErrors] = useState<ErrorType>({})
 

@@ -18,7 +18,7 @@ export const CustomSearchBar = ({ width, searchValue, setSearchValue, onSearch }
 	return (
 		<View
 			style={[styles.search_container, {
-				width: '100%',
+				width: width,
 				backgroundColor: colors.surface }]}>
 			<TextInput
 				style={[styles.input, { color: colors.text, backgroundColor: colors.surface }]}

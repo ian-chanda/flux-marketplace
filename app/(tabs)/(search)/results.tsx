@@ -4,10 +4,12 @@ import { ProductCardH } from '@/components/productCardH';
 import { SearchBarButton } from '@/components/searchBarButton';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
+import { useSearchListings } from '@/hooks/use-search-listings';
 import { useTheme } from '@/hooks/useTheme';
+import { attributesToString } from '@/utils/misc';
 import { useLocalSearchParams } from 'expo-router';
 import { useState } from 'react';
-import { FlatList, Image, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, FlatList, Image, TouchableOpacity, View } from 'react-native';
 
 const search_results = [
 	{ id: 1, name: "Product THREEE HUNDRED AND NIGETU", Desc: 'new', image: 'url', price: "K2", delivery: "" },
@@ -19,19 +21,23 @@ const search_results = [
 	{ id: 7, name: "Product 3", Desc: 'used-like new', image: 'url', price: "K4", delivery: 'free delivery' },
 ]
 
+export const LoadingScreen = () => {
+	const { colors } = useTheme()
+	return (
+		<View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+			<ActivityIndicator size={"large"} color={colors.accent} />
+		</View>
+	)
+}
+
 export default function ProfileScreen() {
 	const { colors } = useTheme()
-	const [bookmarked, setBookmarked] = useState<Record<number, boolean>>({});
+	const [bookmarked, setBookmarked] = useState<Record<string, boolean>>({});
 	const { query } = useLocalSearchParams()
-
-	const toggleBookmark = (id: number) => {
-		setBookmarked(prev => ({ ...prev, [id]: !prev[id] }));
-	};
+	const { data, loading, refetch } = useSearchListings({ query: query as string })
 
 	return (
 		<ThemedView isTabVisible>
-
-			{/* header */}
 			<CustomHeader showBack>
 				<SearchBarButton
 					width={'85%'}
@@ -39,21 +45,33 @@ export default function ProfileScreen() {
 				/>
 
 			</CustomHeader>
-			<View style={{ flex: 1, marginTop: 10, paddingHorizontal: 5 }}>
-				<FlatList
-					data={search_results}
-					contentContainerStyle={{ gap: 16 }}
-					renderItem={({ item }) => (
-						<ProductCardH
-							bookmarked={bookmarked[item.id]}
-							desc={item.Desc}
-							name={item.name}
-							price={item.price}
-						/>
-					)}
-					keyExtractor={(item) => item.id.toString()}
-				/>
-			</View>
-		</ThemedView>
+			{loading ?
+				<LoadingScreen />
+				:
+				< View style={{ flex: 1, marginTop: 10, paddingHorizontal: 5 }}>
+					<FlatList
+						data={data}
+						contentContainerStyle={{ gap: 16 }}
+						renderItem={({ item }) => {
+							const a = item.attributes as Record<string, string>;
+							const attr = [a.brand, a.model, a.storage + "GB", a.ram + "GB"].filter(Boolean).join(" ");
+							// "Samsung · Samsung s24 · 128 GB · 8 GB"
+							return (
+								<ProductCardH
+									id={item.id}
+									img={item.images[0]}
+									bookmarked={bookmarked[item?.id]}
+									desc={attr}
+									condition={item.condition as string}
+									name={item.title}
+									price={item.price.toString()}
+								/>
+							)
+						}}
+						keyExtractor={(item) => item.id.toString()}
+					/>
+				</View>
+			}
+		</ThemedView >
 	);
 }
