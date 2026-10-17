@@ -66,7 +66,7 @@ export default function Messages() {
                     />
                     {loading
                         ?
-                        <ActivityIndicator size={"large"} />
+                        <LoadingScreen />
                         :
                         channels && channels?.length <= 0 ?
                             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
