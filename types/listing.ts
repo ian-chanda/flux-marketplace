@@ -1,3 +1,5 @@
+import { TablesInsert } from "./database.types";
+
 export type Listing = {
   id: string;
   user_id: string;
@@ -15,3 +17,16 @@ export type Listing = {
   created_at: string;
   updated_at: string;
 };
+
+export type ListingForm = Pick<TablesInsert<"listings">,
+|"user_id"
+|"title"
+|"description"
+|"price"
+|"category"
+|"condition"
+|"images"
+|"attributes"
+|"location"
+|"delivery_available"
+|"pickup_available">

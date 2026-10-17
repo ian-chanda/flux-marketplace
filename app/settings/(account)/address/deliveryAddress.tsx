@@ -5,50 +5,39 @@ import { IconButton } from "@/components/iconButton";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import { useAuth } from "@/contexts/auth-context";
+import { useFetchAddresses } from "@/hooks/use-fetch-addresses";
+import { useMakePrimary } from "@/hooks/use-make-primary";
 import { useTheme } from "@/hooks/useTheme";
-import { getDeliveryAddresses, setAddressPrimary, submitAddress } from "@/services/addresses";
-import { MaterialIcons } from "@expo/vector-icons";
+import { Tables } from "@/types/database.types";
+import { useMutationState } from "@tanstack/react-query";
 import { router } from "expo-router";
-import { useEffect, useState } from "react";
-import { ActivityIndicator, FlatList, TouchableOpacity, View } from "react-native";
+import { useMemo, useState } from "react";
+import { ActivityIndicator, FlatList, View } from "react-native";
 
 export default function DelievryAddressScreen() {
 	const { colors } = useTheme()
 	const { user } = useAuth()
-	const [isFetching, setFetching] = useState(false)
-	const [isPrimary, setIsPrimary] = useState(false)
-	const [addresses, setAddresses] = useState<any[]>([])
+	const { data: addresses, loading: isFetching } = useFetchAddresses()
+	const { makePrimaryAddress, isPending } = useMakePrimary()
 
 	const userId = user?.id as string
 
-	const setPrimary = async (label: string) => {
+	const pendingId = useMutationState({
+		filters: { mutationKey: ['addresses', user?.id, "primary"], status: "pending" },
+		select: (m) => (m.state.variables as { id: string }).id
+	}).at(-1)
 
-		const prevAddies = addresses;
-		setAddresses((prev) => prev.map(addr => ({ ...addr, is_primary: addr.label === label })))
+	console.log("pendingID: ", pendingId)
 
-		try {
-			await setAddressPrimary(userId, label)
-		} catch (error: any) {
-			console.log("error fetching addies: ", error.message)
-			setAddresses(prevAddies)
-		}
+	const addressData = useMemo(() =>
+		(addresses ?? []).map((a) => pendingId ? { ...a, is_primary: a.id === pendingId } : a)
+
+		, [addresses, pendingId])
+
+	// the optimistic setting, just like the way i handle the messages
+	const setPrimary = async (id: string) => {
+		makePrimaryAddress.mutate({ id: id })
 	}
-
-	const fetchAddies = async () => {
-		setFetching(true)
-		try {
-			const data = await getDeliveryAddresses(user?.id as string);
-			setAddresses(data)
-		} catch (error: any) {
-			console.log("error fetching addies: ", error.message)
-		} finally {
-			setFetching(false)
-		}
-	}
-
-	useEffect(() => {
-		fetchAddies()
-	}, [])
 
 	if (isFetching) {
 		return (
@@ -64,11 +53,18 @@ export default function DelievryAddressScreen() {
 	return (
 		<ThemedView>
 			<CustomHeader showBack title="Addresses">
-				<IconButton icon={"add"} badgeValue="" onPress={() => router.push('/settings/address/[id]')} />
+				<IconButton
+					icon={"add"}
+					badgeValue=""
+					onPress={() => router.push({
+						pathname: '/settings/address/[id]',
+						params: { id: "new" }
+					})}
+				/>
 			</CustomHeader>
-			{addresses.length > 0 ?
+			{addressData?.length > 0 ?
 				<FlatList
-					data={addresses}
+					data={addressData}
 					style={{ paddingHorizontal: 10 }}
 					contentContainerStyle={{ gap: 30 }}
 					renderItem={({ item }) => {
@@ -78,13 +74,13 @@ export default function DelievryAddressScreen() {
 									label={item?.label ?? "unknown"}
 									onPress={() => router.push({
 										pathname: '/settings/address/[id]',
-										params: { label_: item?.label ?? "" }
+										params: { id: item?.id ?? "" }
 									})}
 								/>
 								<CheckBox
 									label="primary address"
 									checked={item?.is_primary ?? false}
-									onPress={() => setPrimary(item?.label ?? "unknown")}
+									onPress={() => setPrimary(item?.id ?? "")}
 								/>
 							</View>
 						)
@@ -93,7 +89,7 @@ export default function DelievryAddressScreen() {
 					keyExtractor={(item) => item.id.toString()}
 				/>
 				:
-				<View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+				<View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
 					<ThemedText type="defaultFaded">
 						you dont have any addresses
 					</ThemedText>

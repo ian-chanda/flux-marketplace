@@ -9,13 +9,15 @@ type prodCardTypes = {
 	img?: string,
 	desc: string,
 	name: string,
-	price: string,
+	price: number,
 	onBookmark?: () => void,
 }
 
 export const ProductCardV = ({ id, bookmarked, img, desc, name, price, onBookmark }: prodCardTypes) => {
 	return (
-		<TouchableOpacity style={styles.product_card} onPress={() => router.push(`/product/${id}`)}>
+		<TouchableOpacity style={styles.product_card} 
+			onPress={() => router.push(`/product/${id}`)}
+		>
 			<View>
 				<BookmarkBadge
 					bookmarked={bookmarked}
@@ -30,7 +32,7 @@ export const ProductCardV = ({ id, bookmarked, img, desc, name, price, onBookmar
 
 			<ThemedText type="smallFaded">{desc}</ThemedText>
 			<ThemedText type="defaultBold" numberOfLines={1}>{name}</ThemedText>
-			<ThemedText type="mediumBold">{price}</ThemedText>
+			<ThemedText type="mediumBold">K{price.toLocaleString()}</ThemedText>
 		</TouchableOpacity>
 	)
 }

@@ -9,3 +9,6 @@ export const attributesToString = (attributes: Json, separator = " ") => {
     .filter(Boolean)
     .join(separator);
 };
+
+export const formatPrice = (n: number) =>
+  `K${n.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 2 })}`;

@@ -150,7 +150,7 @@ export default function Index() {
                                 img={item.images?.[0]}
                                 desc={item.condition ?? item.category}
                                 name={item.title}
-                                price={`K${item.price}`}
+                                price={item.price}
                                 onBookmark={() => toggleBookmark(item.id)}
                             />
                         )}

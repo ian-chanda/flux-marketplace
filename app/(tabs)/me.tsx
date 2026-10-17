@@ -57,7 +57,6 @@ export default function ProfileScreen() {
           icon={isDark ? "dark-mode" : "light-mode"}
           label={isDark ? "Dark mode" : "Light mode"}
           right={<DarkModeToggle />}
-
         />
 
         <SettingsSection title='Shopping'>

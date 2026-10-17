@@ -189,7 +189,6 @@ export default function ChatScreen() {
             pending: o.status === "pending"
         }))
 
-
     const listData: ListMessage[] = [...outgoingMsgs, ...(messages ?? [])]
     // .sort((a, b) => b.created_at - a.created_at)
 

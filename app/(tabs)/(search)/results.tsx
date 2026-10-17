@@ -53,19 +53,22 @@ export default function ProfileScreen() {
 						data={data}
 						contentContainerStyle={{ gap: 16 }}
 						renderItem={({ item }) => {
-							const a = item.attributes as Record<string, string>;
-							const attr = [a.brand, a.model, a.storage + "GB", a.ram + "GB"].filter(Boolean).join(" ");
-							// "Samsung · Samsung s24 · 128 GB · 8 GB"
 							return (
 								<ProductCardH
 									id={item.id}
-									img={item.images[0]}
+									img={item.images?.[0]}
+									desc={item.title}
+									condition={item.condition ?? undefined}
+									price={item.price}
 									bookmarked={bookmarked[item?.id]}
-									desc={attr}
-									condition={item.condition as string}
-									name={item.title}
-									price={item.price.toString()}
+									location={item.location}
+									postedAt={item.created_at}
+									specs={attributesToString(item.attributes)}
+									deliveryAvailable={item.delivery_available}
+									pickupAvailable={item.pickup_available}
+									available={item.is_available}
 								/>
+
 							)
 						}}
 						keyExtractor={(item) => item.id.toString()}

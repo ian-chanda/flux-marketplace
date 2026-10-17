@@ -1,6 +1,7 @@
 import { supabase } from "@/lib/supabase";
-import { Listing } from "@/types/listing";
+import { Listing, ListingForm } from "@/types/listing";
 import { uploadImage } from "./storage";
+import { Tables } from "@/types/database.types";
 
 export async function getListings(): Promise<Listing[]> {
   const { data, error } = await supabase
@@ -53,12 +54,12 @@ export type CreateListingInput = {
 };
 
 export async function createListing(
-  input: CreateListingInput,
-): Promise<Listing> {
+  input: ListingForm,
+): Promise<Tables<"listings">> {
   const { data, error } = await supabase
     .from("listings")
     .insert({
-      user_id: input.userId,
+      user_id: input.user_id,
       title: input.title,
       description: input.description,
       price: input.price,
@@ -67,8 +68,8 @@ export async function createListing(
       images: input.images,
       attributes: input.attributes,
       location: input.location,
-      delivery_available: input.delivery,
-      pickup_available: input.pickup,
+      delivery_available: input.delivery_available,
+      pickup_available: input.pickup_available,
     })
     .select()
     .single();
