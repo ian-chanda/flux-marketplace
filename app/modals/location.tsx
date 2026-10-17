@@ -57,7 +57,7 @@ export default function SelectAddressModal() {
                         <Button
                             title="Add new address"
                             onPress={() =>
-                                router.dismissTo({ pathname: "/address/[id]", params: { id: "new" } })
+                                router.dismissTo({ pathname: "/settings/address/[id]", params: { id: "new" } })
                             }
                         />
                     }
