@@ -1,16 +1,17 @@
 import { CardButtonRow } from "@/components/cardButtonRow";
 import { CustomHeader } from "@/components/customHeader";
+import { EarningsCard } from "@/components/earningsCard";
+import { StatsRow } from "@/components/statsRow";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
+import { useFetchSellerData } from "@/hooks/use-fetch-selling-data";
 import { useTheme } from "@/hooks/useTheme";
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import { buildStatRow } from "@/utils/seller-utils";
 import { router } from "expo-router";
-import { ComponentProps } from "react";
+import { Fragment, ReactNode } from "react";
 import { FlatList, Image, ScrollView, StyleSheet, TouchableOpacity, View } from "react-native";
 
-type IconName = ComponentProps<typeof MaterialIcons>["name"];
-
-type Stat = { id: string; label: string; value: string; icon?: IconName };
+type Stat = { id: string; label: string; value: string };
 
 type Feedback = {
   id: string;
@@ -22,17 +23,11 @@ type Feedback = {
 
 // ---------- mock data (replace with real queries) ----------
 
-const overviewStats: Stat[] = [
-  { id: "inquiries", label: "Listing inquiries", value: "5", icon: "message" },
-  { id: "listings", label: "Active listings", value: "12", icon: "list" },
-];
 
 const performanceStats: Stat[] = [
-  { id: "rating", label: "Rating", value: "4.8", icon: "star" },
-  { id: "views", label: "Views", value: "1,430", icon: "visibility" },
-  { id: "earnings", label: "Earnings", value: "K3,589.45", icon: "attach-money" },
-  // { id: "sales", label: "Sales", value: "130", icon: "check-circle" },
-  // { id: "response", label: "Response time", value: "~2h", icon: "schedule" },
+  { id: "rating", label: "Rating", value: "4.8" },
+  { id: "sales", label: "Sales", value: "130" },
+  { id: "response", label: "Response time", value: "~2h" },
 ];
 
 const feedback: Feedback[] = [
@@ -45,25 +40,34 @@ const feedback: Feedback[] = [
 
 // ---------- components ----------
 
-const StatItem = ({ label, value, icon }: Omit<Stat, "id">) => {
+// several numbers in one card, number first, label underneath
+const StatStrip = ({ items }: { items: Stat[] }) => {
   const { colors } = useTheme();
   return (
-    <View style={[styles.stat, { backgroundColor: colors.surface }]}>
-      <View>
-        <View style={styles.statLabelRow}>
-          <ThemedText type="defaultFaded" numberOfLines={1} style={{ flexShrink: 1 }}>
-            {label}
-          </ThemedText>
-        </View>
-        <ThemedText type="defaultBold">{value}</ThemedText>
-      </View>
-      {icon && <MaterialIcons name={icon} size={30} color={colors.accent + '40'} />}
+    <View style={[styles.strip, { backgroundColor: colors.surface }]}>
+      {items.map((item, index) => (
+        <Fragment key={item.id}>
+          {index > 0 && <View style={[styles.divider, { backgroundColor: colors.background }]} />}
+          <View style={styles.cell}>
+            <ThemedText type="defaultBold" style={styles.cellValue}>
+              {item.value}
+            </ThemedText>
+            <ThemedText type="smallFaded" numberOfLines={1}>
+              {item.label}
+            </ThemedText>
+          </View>
+        </Fragment>
+      ))}
     </View>
   );
 };
 
 const FeedbackCard = ({ name, when, type, msg }: Omit<Feedback, "id">) => {
   const { colors } = useTheme();
+
+
+
+
   return (
     <View style={[styles.feedbackCard, { backgroundColor: colors.surface }]}>
       <View style={styles.feedbackHeader}>
@@ -90,7 +94,7 @@ const Section = ({
 }: {
   title: string;
   action?: { label: string; onPress: () => void };
-  children: React.ReactNode;
+  children: ReactNode;
 }) => (
   <View style={{ gap: 8 }}>
     <View style={styles.sectionHeader}>
@@ -108,6 +112,10 @@ const Section = ({
 // ---------- screen ----------
 
 export default function SellingScreen() {
+
+
+  const {sellerData, loading} = useFetchSellerData()
+
   return (
     <ThemedView isTabVisible>
       <CustomHeader title="Selling" />
@@ -121,20 +129,16 @@ export default function SellingScreen() {
           <CardButtonRow icon="dashboard" label="View listings" onPress={() => router.push("/viewListings")} />
         </View>
 
-        <Section title="Overview" >
-          <View style={styles.grid}>
-            {overviewStats.map(({ id, ...stat }) => (
-              <StatItem key={id} {...stat} />
-            ))}
-          </View>
+        <Section
+          title="Overview"
+          action={{ label: "expand", onPress: () => router.push("/overview") }}
+        >
+          <EarningsCard listings={sellerData ?? []} topText="Total Earnings"/>
+          <StatsRow stats={buildStatRow(sellerData ?? [])} />
         </Section>
 
-        <Section title="Performance" action={{ label: "View all", onPress: () => router.push("/viewListings") }} >
-          <View style={styles.grid}>
-            {performanceStats.map(({ id, ...stat }) => (
-              <StatItem key={id} {...stat} />
-            ))}
-          </View>
+        <Section title="Performance">
+          <StatStrip items={performanceStats} />
         </Section>
 
         <Section title="Feedback">
@@ -168,26 +172,29 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
   },
-  // two per row; an odd last item (e.g. 3 stats) stays half width
-  grid: {
-    flexDirection: "column",
-    gap: 8,
-  },
-  stat: {
-    flexBasis: "48%",
-    flexGrow: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: 12,
-    paddingVertical: 10,
+  hero: {
+    padding: 16,
     borderRadius: 12,
     gap: 2,
   },
-  statLabelRow: {
+  strip: {
     flexDirection: "row",
+    borderRadius: 12,
+    overflow: "hidden",
+  },
+  cell: {
+    flex: 1,
     alignItems: "center",
-    gap: 4,
+    paddingVertical: 14,
+    paddingHorizontal: 6,
+    gap: 2,
+  },
+  cellValue: {
+    fontSize: 20,
+    lineHeight: 26,
+  },
+  divider: {
+    width: 2,
   },
   feedbackCard: {
     width: FEEDBACK_CARD_WIDTH,

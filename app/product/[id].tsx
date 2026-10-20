@@ -7,17 +7,15 @@ import { ThemedView } from "@/components/themed-view";
 import { useAuth } from "@/contexts/auth-context";
 import { useCreateChannel } from "@/hooks/use-create-channel";
 import { useTheme } from "@/hooks/useTheme";
-import { addToCart, getCartListingIds } from "@/services/cart";
-import { getListing } from "@/services/listings";
-import { getSavedListingIds, saveListing, unsaveListing } from "@/services/savedListings";
-import { getUserProfile } from "@/services/users";
-import { Listing } from "@/types/listing";
-import { UserData } from "@/types/user";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
-import { router, useLocalSearchParams } from "expo-router";
+import { router, useFocusEffect, useLocalSearchParams } from "expo-router";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { ActivityIndicator, FlatList, Image, Pressable, ScrollView, StyleSheet, TouchableOpacity, View, ViewToken, useWindowDimensions } from "react-native";
 import { LoadingScreen } from "../(tabs)/(search)/results";
+import { useFetchListingDetails } from "@/hooks/use-fetch-listing-details";
+import { useSaveListing } from "@/hooks/use-save-listing";
+import { useAddToCart } from "@/hooks/use-add-to-cart";
+import { useRecordView } from "@/hooks/use-record-view";
 
 const attributeLabels: Record<string, string> = {
   brand: "Brand",
@@ -31,89 +29,32 @@ export default function Product() {
   const { colors } = useTheme();
   const { width } = useWindowDimensions();
   const { id } = useLocalSearchParams<{ id: string }>();
-  const [listing, setListing] = useState<Listing | null>(null);
-  const [seller, setSeller] = useState<UserData | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<Error | null>(null);
-  const [saved, setSaved] = useState(false);
-  const [cartCount, setCartCount] = useState(0);
-  const [inCart, setInCart] = useState(false);
-  const [addingToCart, setAddingToCart] = useState(false);
   const [activeImage, setActiveImage] = useState(0);
   const mainListRef = useRef<FlatList | null>(null);
   const { user } = useAuth();
   const { createChannel, isPending } = useCreateChannel();
+  const {
+    listingData: listing, seller, isSaved: saved,
+    cartCount, inCart, loading, error, isError
+  } = useFetchListingDetails(id)
+  const { doSaveListings, } = useSaveListing()
+  const { doRecordView } = useRecordView()
+  const { doAddToCart, isPending: addingToCart } = useAddToCart()
 
+  const recorded = useRef(false)
   useEffect(() => {
-    async function load() {
-      if (!id) return;
-      try {
-        const listingData = await getListing(id);
-        setListing(listingData);
-
-        try {
-          const sellerData = await getUserProfile(listingData.user_id);
-          if (sellerData) setSeller(sellerData as UserData);
-        } catch {
-          // seller is optional — don't block the listing
-        }
-
-        if (user) {
-          try {
-            const savedIds = await getSavedListingIds(user.id);
-            setSaved(savedIds.includes(id));
-          } catch {
-            setSaved(false);
-          }
-          try {
-            const cartIds = await getCartListingIds(user.id);
-            setCartCount(cartIds.length);
-            setInCart(cartIds.includes(id));
-          } catch {
-            setCartCount(0);
-            setInCart(false);
-          }
-        }
-      } catch (err) {
-        setError(err as Error);
-      } finally {
-        setLoading(false);
-      }
-    }
-    load();
-  }, [id, user]);
-
-  const toggleSave = useCallback(async () => {
-    if (!user || !id) return;
-
-    const next = !saved;
-    setSaved(next);
-
-    try {
-      if (next) {
-        await saveListing(user.id, id);
-      } else {
-        await unsaveListing(user.id, id);
-      }
-    } catch {
-      setSaved(!next);
-    }
-  }, [user, id, saved]);
+    if (!listing?.id || recorded.current) return
+    recorded.current = true
+    doRecordView.mutate({ id: listing?.id })
+  }, [listing?.id])
 
   const handleCart = async () => {
     if (inCart) return router.push("/cart");
     if (!user) return alert("Please sign in first");
 
-    setAddingToCart(true);
-    try {
-      await addToCart(user.id, id);
-      setInCart(true);
-      setCartCount((c) => c + 1);
-    } catch {
-      alert("Could not add to cart");
-    } finally {
-      setAddingToCart(false);
-    }
+    if (!listing?.id) return
+    doAddToCart.mutate(listing?.id)
+
   };
 
   if (loading) {
@@ -148,7 +89,13 @@ export default function Product() {
     <ThemedView isTabVisible={false}>
       <CustomHeader showBack>
         <View style={{ flexDirection: "row", alignItems: "center", gap: 15 }}>
-          <IconButton icon={saved ? "bookmark" : "bookmark-outline"} badgeValue="" onPress={toggleSave} />
+          <IconButton
+            icon={saved ? "bookmark" : "bookmark-outline"}
+            badgeValue=""
+            onPress={() => {
+              doSaveListings.mutate({ id: listing.id, saved: !saved })
+            }}
+          />
           <IconButton icon={"share"} onPress={() => router.push("/notifications")} badgeValue="" />
           <IconButton icon={"shopping-cart"} onPress={() => router.push("/cart")} badgeValue={cartCount ? String(cartCount) : ""} />
         </View>

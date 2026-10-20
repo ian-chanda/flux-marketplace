@@ -11,8 +11,24 @@ import { getCartCount } from "@/services/cart";
 import { getSavedListingIds, saveListing, unsaveListing } from "@/services/savedListings";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { router, useFocusEffect } from "expo-router";
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 import { ActivityIndicator, FlatList, RefreshControl, ScrollView, StatusBar, StyleSheet, TouchableOpacity, View } from "react-native";
+import { useCartIds, useSavedIds } from "@/hooks/use-fetch-listing-details";
+import { useSaveListing } from "@/hooks/use-save-listing";
+
+// export function useBookmark(id: string) {
+//   const { data: savedIds } = useSavedIds();
+//   const { doSaveListings } = useSaveListing();
+//   const isSaved = savedIds?.includes(id) ?? false;
+//
+//   return { isSaved, toggle: () => doSaveListings.mutate({ id, saved: !isSaved }) };
+// }
+//
+//  export const ListingCard = ({ listing }: { listing: ListingWithSeller }) => {
+//   const { isSaved, toggle } = useBookmark(listing.id);
+//
+//   return <ProductCardH id={listing.id} bookmarked={isSaved} onBookmark={toggle} /* ...other props */ />;
+// };   
 
 type buttonTypes = {
     icon: any;
@@ -43,57 +59,15 @@ export default function Index() {
     const { colors } = useTheme()
     const { listings, loading, refreshing, error, refresh } = useListings();
     const { user } = useAuth();
-    const [bookmarked, setBookmarked] = useState<Record<string, boolean>>({});
-    const [cartCount, setCartCount] = useState(0);
-    const isFirstFocus = useRef(true);
+    const { doSaveListings } = useSaveListing()
 
-    const loadSaved = useCallback(async () => {
-        if (!user) return;
-        try {
-            const ids = await getSavedListingIds(user.id);
-            setBookmarked(ids.reduce((acc, id) => ({ ...acc, [id]: true }), {}));
-        } catch {
-            setBookmarked({});
-        }
-    }, [user]);
+    const { data: cartData } = useCartIds()
+    const { data: savedData } = useSavedIds()
+    const savedIds = savedData as string[]
 
-    const loadCartCount = useCallback(async () => {
-        if (!user) return;
-        try {
-            setCartCount(await getCartCount(user.id));
-        } catch {
-            setCartCount(0);
-        }
-    }, [user]);
+    const savedSet = useMemo(() => new Set(savedIds ?? []), [savedIds]);
+    const cartCount = cartData?.length ?? 0;
 
-    useFocusEffect(
-        useCallback(() => {
-            loadSaved();
-            loadCartCount();
-            if (isFirstFocus.current) {
-                isFirstFocus.current = false;
-                return;
-            }
-            refresh()
-        }, [refresh, loadSaved, loadCartCount])
-    );
-
-    const toggleBookmark = useCallback(async (id: string) => {
-        if (!user) return;
-
-        const next = !bookmarked[id];
-        setBookmarked(prev => ({ ...prev, [id]: next }));
-
-        try {
-            if (next) {
-                await saveListing(user.id, id);
-            } else {
-                await unsaveListing(user.id, id);
-            }
-        } catch {
-            setBookmarked(prev => ({ ...prev, [id]: !next }));
-        }
-    }, [user, bookmarked]);
 
     return (
         <ThemedView isTabVisible={true}>
@@ -146,12 +120,12 @@ export default function Index() {
                         renderItem={({ item }) => (
                             <ProductCardV
                                 id={item.id}
-                                bookmarked={bookmarked[item.id]}
+                                bookmarked={savedSet.has(item.id)}
                                 img={item.images?.[0]}
                                 desc={item.condition ?? item.category}
                                 name={item.title}
                                 price={item.price}
-                                onBookmark={() => toggleBookmark(item.id)}
+                                onBookmark={() => doSaveListings.mutate({ id: item.id, saved: !savedSet.has(item.id) })}
                             />
                         )}
                         keyExtractor={(item) => item.id}

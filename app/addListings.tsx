@@ -10,14 +10,15 @@ import { SectionHeader } from "@/components/titleBar";
 import { useAuth } from "@/contexts/auth-context";
 import { useCreateListing } from "@/hooks/use-create-listing";
 import { useFetchAddresses } from "@/hooks/use-fetch-addresses";
+import { useFetchListingDetails } from "@/hooks/use-fetch-listing-details";
 import { useTheme } from "@/hooks/useTheme";
-import { getCategory } from "@/lib/listingDraft";
-import { createListing, uploadListingImages } from "@/services/listings";
+import { getAddressId, getCategory, setCategory } from "@/lib/listingDraft";
+import { Tables } from "@/types/database.types";
+import { emptyListingForm, ListingForm } from "@/types/listing";
 import { toJpegMany } from "@/utils/image";
-import MaterialIcon from "@expo/vector-icons/MaterialIcons";
 import * as ImagePicker from "expo-image-picker";
 import { router, useFocusEffect, useLocalSearchParams } from "expo-router";
-import { ReactNode, useCallback, useMemo, useState } from "react";
+import { ReactNode, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   Alert,
   Image,
@@ -30,29 +31,35 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { LoadingScreen } from "./(tabs)/(search)/results";
+
+export const listingToForm = (l: Tables<"listings">): ListingForm => {
+  return {
+    user_id: "",
+    title: l.title,
+    description: l.description,
+    price: l.price,
+    category: l.category,
+    condition: l.condition,
+    images: l.images ?? [],
+    attributes: (l.attributes ?? {}) as AdditionalDetails,
+    delivery_available: l.delivery_available,
+    pickup_available: l.pickup_available,
+  };
+};
 
 const PHOTO_LIMIT = 6;
 const CONDITIONS = ["New", "Like New", "Used", "Fair"];
 
 // ---------- small building blocks ----------
 
-const Section = ({
-  icon,
-  title,
-  children,
-}: {
-  icon: string;
-  title: string;
-  children: ReactNode;
-}) => {
-  const { colors } = useTheme();
-  return (
-    <View style={{ gap: 12 }}>
-      <SectionHeader icon={icon} title={title} iconColor={colors.accent} />
-      {children}
-    </View>
-  );
-};
+// same SectionHeader as everywhere else, just without an icon
+const Section = ({ title, children }: { title: string; children: ReactNode }) => (
+  <View style={{ gap: 12 }}>
+    <SectionHeader title={title} />
+    {children}
+  </View>
+);
 
 const Field = ({
   label,
@@ -68,7 +75,7 @@ const Field = ({
   const { colors } = useTheme();
   return (
     <View style={{ gap: 6 }}>
-      <ThemedText type="defaultBold">
+      <ThemedText type="defaultFaded">
         {label}
         {required && (
           <ThemedText type="defaultBold" style={{ color: colors.accent }}>
@@ -88,20 +95,22 @@ const Field = ({
 export default function AddListings() {
   const { colors } = useTheme();
   const { user } = useAuth();
-  const { addressId } = useLocalSearchParams<{ addressId?: string }>();
+  const { addressId, listingId } = useLocalSearchParams<{ addressId?: string; listingId?: string }>();
   const { data: addresses } = useFetchAddresses();
 
-  const [itemName, setItemName] = useState("");
-  const [itemDetails, setItemDetails] = useState("");
-  const [itemPrice, setItemPrice] = useState("");
-  const [selectedCondition, setSelectedCondition] = useState<string | null>(null);
-  const [images, setImages] = useState<string[]>([]);
-  const [category, setCategory] = useState<string>(getCategory() ?? "");
-  const [additional, setAdditional] = useState<AdditionalDetails>({});
   const [showAdditional, setShowAdditional] = useState(false);
-  const [delivery, setDelivery] = useState(true);
-  const [pickup, setPickup] = useState(false);
-  const { doCreateListing, isPending: submitting, isError, error } = useCreateListing()
+  const { doCreateListing, isPending: submitting, isError, error } = useCreateListing();
+  const { listingData: listing, loading } = useFetchListingDetails(listingId?.trim() ?? "");
+
+  const [priceText, setPrice] = useState<string>("");
+  const [localId, setLocalId] = useState<string>("");
+  const [pickedAddressId, setPickedAddressId] = useState<string>("");
+  const [originalImages, setOriginalImages] = useState<string[]>([]);
+  const [form, setForm] = useState<ListingForm>(emptyListingForm);
+  const set = <K extends keyof ListingForm>(key: K, value: ListingForm[K]) =>
+    setForm((f) => ({ ...f, [key]: value }));
+
+  // when editing you fetch the listing
 
   if (isError) {
     const message =
@@ -111,24 +120,39 @@ export default function AddListings() {
 
   useFocusEffect(
     useCallback(() => {
-      setCategory(getCategory() ?? "");
-    }, [])
+      setForm((f) => ({ ...f, category: getCategory() ?? f.category }));
+      setCategory(form.category);
+      setPickedAddressId(getAddressId() as string);
+    }, [form.category])
   );
+
+  const initialized = useRef(false);
+  useEffect(() => {
+    if (!listing || !listingId?.trim() || initialized.current) return;
+
+    initialized.current = true;
+    setForm(listingToForm(listing));
+    setPrice(String(listing.price));
+    setLocalId(listingId as string);
+    setOriginalImages(listing.images as string[]);
+  }, [listing, listingId]);
 
   // the address chosen in the picker, otherwise the user's primary one
   const address = useMemo(
     () =>
-      addresses?.find((a) => a.id === addressId) ??
+      addresses?.find((a) => a.id === pickedAddressId) ??
       addresses?.find((a) => a.is_primary),
-    [addresses, addressId]
+    [addresses, pickedAddressId]
   );
 
   // listings are public, so only expose the area, never the street
-  const locationLabel = address
-    ? [...new Set([address.city, address.province].filter(Boolean))].join(", ")
-    : "";
+  const areaOf = (a?: { city?: string | null; province?: string | null } | null) =>
+    a ? [...new Set([a.city, a.province].filter(Boolean))].join(", ") : "";
 
-  const filledAdditionalCount = Object.values(additional).filter(
+  const locationLabel =
+    pickedAddressId || !listing ? areaOf(address) : listing.location ?? areaOf(address);
+
+  const filledAdditionalCount = Object.values(form.attributes ?? {}).filter(
     (v) => v && v.trim()
   ).length;
 
@@ -145,40 +169,39 @@ export default function AddListings() {
     const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ["images"],
       allowsMultipleSelection: true,
-      selectionLimit: PHOTO_LIMIT - images.length,
+      selectionLimit: PHOTO_LIMIT - (form.images as string[]).length,
       quality: 0.7,
     });
 
     if (!result.canceled && result.assets) {
       const uris = await toJpegMany(result.assets.map((asset) => asset.uri));
-      setImages((prev) => [...prev, ...uris].slice(0, PHOTO_LIMIT));
+      setForm((f) => ({ ...f, images: [...(f.images ?? []), ...uris] }));
     }
   };
 
-
   const publish = async () => {
-    if (!itemName.trim() || !itemDetails.trim() || !itemPrice.trim()) {
+    if (form.title.trim().length <= 0 || form.description.trim().length <= 0 || !priceText.trim()) {
       Alert.alert("Missing details", "Please add a title, description and price.");
       return;
     }
 
-    if (!category) {
+    if (form.category.length <= 0) {
       Alert.alert("Missing category", "Pick a category for your item.");
       return;
     }
 
-    const price = parseFloat(itemPrice);
+    const price = parseFloat(priceText);
     if (isNaN(price) || price <= 0) {
       Alert.alert("Invalid price", "Enter a price greater than 0.");
       return;
     }
 
-    if (!locationLabel) {
+    if (locationLabel.length <= 0) {
       Alert.alert("Missing location", "Choose where the item is located.");
       return;
     }
 
-    if (!delivery && !pickup) {
+    if (!form.delivery_available && !form.pickup_available) {
       Alert.alert("Delivery or pickup", "Turn on at least one way for buyers to get the item.");
       return;
     }
@@ -186,23 +209,34 @@ export default function AddListings() {
     if (!user) return;
 
     doCreateListing.mutate({
-      images: images,
+      id: localId,
+      originalImages: originalImages,
+      images: form.images as string[],
       payload: {
         user_id: user.id,
-        title: itemName.trim(),
-        description: itemDetails.trim(),
+        title: form.title.trim(),
+        description: form.description.trim(),
         price: price,
-        category: category,
-        condition: selectedCondition,
-        attributes: additional,
+        category: form.category,
+        condition: form.condition,
+        attributes: form.attributes,
         location: locationLabel,
-        delivery_available: delivery,
-        pickup_available: pickup,
-      }
-    })
+        delivery_available: form.delivery_available,
+        pickup_available: form.pickup_available,
+      },
+    });
   };
 
   const inputStyle = [styles.input, { backgroundColor: colors.surface, color: colors.text }];
+
+  if (loading) {
+    return (
+      <ThemedView isTabVisible={false} style={{ flex: 1 }}>
+        <CustomHeader title="Add listing" showBack />
+        <LoadingScreen />
+      </ThemedView>
+    );
+  }
 
   return (
     <ThemedView isTabVisible={false} style={{ flex: 1 }}>
@@ -219,8 +253,8 @@ export default function AddListings() {
           keyboardShouldPersistTaps="handled"
           showsVerticalScrollIndicator={false}
         >
-          {/* photos */}
-          <Section icon="image" title="Photos">
+          {/* photos: equal tiles, wrapping down the page */}
+          <Section title="Photos">
             <ThemedText type="smallFaded">
               Add up to {PHOTO_LIMIT} photos. The first one is your cover image.
             </ThemedText>
@@ -229,47 +263,53 @@ export default function AddListings() {
               showsHorizontalScrollIndicator={false}
               contentContainerStyle={{ gap: 10 }}
             >
-              {images.length < PHOTO_LIMIT && (
+
+              {(form.images as string[]).length < PHOTO_LIMIT && (
                 <Pressable
                   onPress={pickImages}
                   style={[styles.addTile, { borderColor: colors.placeholder }]}
                 >
-                  <MaterialIcon name="add-a-photo" size={28} color={colors.accent} />
+                  <ThemedText type="defaultBold" style={{ color: colors.accent }}>
+                    + Add
+                  </ThemedText>
                   <ThemedText type="smallFaded">
-                    {images.length}/{PHOTO_LIMIT}
+                    {(form.images as string[]).length}/{PHOTO_LIMIT}
                   </ThemedText>
                 </Pressable>
               )}
 
-              {images.map((uri, index) => (
-                <View key={`${uri}-${index}`}>
-                  <Image source={{ uri }} style={styles.thumb} />
-                  {index === 0 && (
-                    <View style={styles.coverTag}>
-                      <ThemedText type="smallBold" style={{ color: "white" }}>
-                        Cover
-                      </ThemedText>
-                    </View>
-                  )}
-                  <Pressable
-                    hitSlop={8}
-                    onPress={() => setImages((prev) => prev.filter((_, i) => i !== index))}
-                    style={styles.removeButton}
-                  >
-                    <MaterialIcon name="close" size={14} color="white" />
-                  </Pressable>
-                </View>
-              ))}
+              {form.images &&
+                form.images.map((uri, index) => (
+                  <View key={`${uri}-${index}`}>
+                    <Image source={{ uri }} style={styles.photo} />
+                    {index === 0 && (
+                      <View style={styles.coverTag}>
+                        <ThemedText type="smallBold" style={{ color: "white" }}>
+                          Cover
+                        </ThemedText>
+                      </View>
+                    )}
+                    <Pressable
+                      hitSlop={8}
+                      onPress={() =>
+                        set("images", (form.images as string[]).filter((_, i) => i !== index))
+                      }
+                      style={styles.removeButton}
+                    >
+                      <ThemedText style={styles.removeText}>×</ThemedText>
+                    </Pressable>
+                  </View>
+                ))}
             </ScrollView>
           </Section>
 
           {/* details */}
-          <Section icon="information-circle" title="Details">
+          <Section title="Details">
             <Field label="Title" required>
               <TextInput
                 style={inputStyle}
-                value={itemName}
-                onChangeText={setItemName}
+                value={form.title}
+                onChangeText={(x) => set("title", x)}
                 maxLength={80}
                 placeholder="e.g. iPhone 13 Pro Max 256GB"
                 placeholderTextColor={colors.placeholder}
@@ -279,8 +319,8 @@ export default function AddListings() {
             <Field label="Description" required>
               <TextInput
                 style={[inputStyle, styles.multiline]}
-                value={itemDetails}
-                onChangeText={setItemDetails}
+                value={form.description}
+                onChangeText={(x) => set("description", x)}
                 multiline
                 textAlignVertical="top"
                 placeholder="Describe the condition, features and anything important"
@@ -289,15 +329,13 @@ export default function AddListings() {
             </Field>
 
             <NavRow
-              icon="label"
               label="Category"
               required
-              value={category}
+              value={form.category}
               onPress={() => router.push("/modals/category")}
             />
 
             <NavRow
-              icon="tune"
               label="Additional details"
               value={filledAdditionalCount > 0 ? `${filledAdditionalCount} filled` : undefined}
               placeholder="Optional"
@@ -306,16 +344,16 @@ export default function AddListings() {
           </Section>
 
           {/* price */}
-          <Section icon="wallet-outline" title="Price">
+          <Section title="Price">
             <Field label="Price" required hint="Be realistic with your price to sell faster">
               <View style={[styles.priceField, { backgroundColor: colors.surface }]}>
-                <ThemedText type="defaultBold" style={{ color: colors.accent }}>
+                <ThemedText type="defaultBold" style={{ color: colors.accent, fontSize: 22 }}>
                   K
                 </ThemedText>
                 <TextInput
                   style={[styles.priceInput, { color: colors.text }]}
-                  value={itemPrice}
-                  onChangeText={(t) => setItemPrice(t.replace(/[^0-9.]/g, ""))}
+                  value={priceText}
+                  onChangeText={(x) => setPrice(x.replace(/[^0-9.]/g, ""))}
                   keyboardType="decimal-pad"
                   placeholder="0.00"
                   placeholderTextColor={colors.placeholder}
@@ -325,23 +363,19 @@ export default function AddListings() {
           </Section>
 
           {/* condition */}
-          <Section icon="shield-outline" title="Item condition">
-            <View style={styles.chips}>
+          <Section title="Item condition">
+            <View style={[styles.segment, { backgroundColor: colors.surface }]}>
               {CONDITIONS.map((condition) => {
-                const selected = selectedCondition === condition;
+                const selected = form.condition === condition;
                 return (
                   <TouchableOpacity
                     key={condition}
-                    onPress={() => setSelectedCondition(selected ? null : condition)}
-                    style={[
-                      styles.chip,
-                      {
-                        backgroundColor: selected ? colors.accent : colors.surface,
-                      },
-                    ]}
+                    onPress={() => set("condition", selected ? null : condition)}
+                    style={[styles.segmentItem, selected && { backgroundColor: colors.accent }]}
                   >
                     <ThemedText
                       type="smallBold"
+                      numberOfLines={1}
                       style={{ color: selected ? colors.background : colors.text }}
                     >
                       {condition}
@@ -353,11 +387,11 @@ export default function AddListings() {
           </Section>
 
           {/* location */}
-          <Section icon="location-outline" title="Location">
+          <Section title="Location">
             <NavRow
               label={address?.label ?? "Item location"}
               required
-              value={locationLabel}
+              value={locationLabel ?? ""}
               onPress={() =>
                 router.navigate({
                   pathname: "/modals/location",
@@ -371,18 +405,28 @@ export default function AddListings() {
           </Section>
 
           {/* delivery */}
-          <Section icon="car-outline" title="Delivery & pickup">
+          <Section title="Delivery & pickup">
             <CardButtonRow
-              icon={"directions-car"}
               label={"Delivery available"}
               desc="You’ll deliver the item to the buyer"
-              right={<CustomToggle value={delivery} onValueChange={setDelivery} disabled={false} />}
+              right={
+                <CustomToggle
+                  value={form.delivery_available ?? false}
+                  onValueChange={(x) => set("delivery_available", x)}
+                  disabled={false}
+                />
+              }
             />
             <CardButtonRow
-              icon="directions-walk"
               label="Buyer pickup"
               desc="The buyer collects the item from you"
-              right={<CustomToggle value={pickup} onValueChange={setPickup} disabled={false} />}
+              right={
+                <CustomToggle
+                  value={form.pickup_available ?? false}
+                  onValueChange={(x) => set("pickup_available", x)}
+                  disabled={false}
+                />
+              }
             />
           </Section>
         </ScrollView>
@@ -390,7 +434,11 @@ export default function AddListings() {
         {/* always reachable, even with the keyboard open */}
         <View style={[styles.footer, { backgroundColor: colors.background, borderTopColor: colors.surface }]}>
           <Button
-            title={submitting ? "Publishing..." : "Publish"}
+            title={
+              submitting
+                ? listingId ? "Updating..." : "publishing..."
+                : listingId ? "update" : "publish"
+            }
             loading={submitting}
             disabled={submitting}
             onPress={publish}
@@ -400,9 +448,9 @@ export default function AddListings() {
 
       <AdditionalDetailsModal
         visible={showAdditional}
-        values={additional}
+        values={(form.attributes ?? {}) as AdditionalDetails}
         onClose={() => setShowAdditional(false)}
-        onSave={(values) => setAdditional(values)}
+        onSave={(values) => set("attributes", values)}
       />
     </ThemedView>
   );
@@ -423,57 +471,31 @@ const styles = StyleSheet.create({
   multiline: {
     minHeight: 110,
   },
-  priceField: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 6,
-    paddingHorizontal: 14,
-    borderRadius: 12,
-    alignSelf: "flex-start",
-    minWidth: 160,
-  },
-  priceInput: {
-    flex: 1,
-    paddingVertical: 12,
-    fontSize: 16,
-  },
-  navRow: {
-    width: '100%',
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 12,
-    padding: 14,
-    borderRadius: 12,
-  },
-  chips: {
+  photoGrid: {
     flexDirection: "row",
     flexWrap: "wrap",
     gap: 10,
   },
-  chip: {
-    paddingVertical: 10,
-    paddingHorizontal: 16,
-    borderRadius: 20,
-  },
-  addTile: {
+  // three per row, always square
+  photo: {
     width: 88,
     height: 88,
     borderRadius: 12,
+  },
+  addTile: {
     borderWidth: 1,
+    width: 88,
+    height: 88,
     borderStyle: "dashed",
     alignItems: "center",
     justifyContent: "center",
-    gap: 2,
-  },
-  thumb: {
-    width: 88,
-    height: 88,
     borderRadius: 12,
+    gap: 2,
   },
   coverTag: {
     position: "absolute",
-    left: 4,
-    bottom: 4,
+    left: 6,
+    bottom: 6,
     paddingHorizontal: 6,
     paddingVertical: 2,
     borderRadius: 6,
@@ -481,14 +503,46 @@ const styles = StyleSheet.create({
   },
   removeButton: {
     position: "absolute",
-    top: 4,
-    right: 4,
+    top: 6,
+    right: 6,
     width: 22,
     height: 22,
     borderRadius: 11,
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "rgba(0,0,0,0.6)",
+  },
+  removeText: {
+    color: "white",
+    fontSize: 16,
+    lineHeight: 19,
+    textAlign: "center",
+  },
+  priceField: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
+    paddingHorizontal: 16,
+    borderRadius: 12,
+  },
+  priceInput: {
+    flex: 1,
+    paddingVertical: 14,
+    fontSize: 28,
+    fontWeight: "700",
+  },
+  segment: {
+    flexDirection: "row",
+    padding: 4,
+    borderRadius: 12,
+    gap: 4,
+  },
+  segmentItem: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    paddingVertical: 10,
+    borderRadius: 9,
   },
   footer: {
     paddingHorizontal: 15,

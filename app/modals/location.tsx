@@ -5,6 +5,7 @@ import { ThemedText } from "@/components/themed-text"
 import { ThemedView } from "@/components/themed-view"
 import { useFetchAddresses } from "@/hooks/use-fetch-addresses"
 import { useTheme } from "@/hooks/useTheme"
+import { setAddressId } from "@/lib/listingDraft"
 import MaterialIcons from "@expo/vector-icons/MaterialIcons"
 import { router, useLocalSearchParams } from "expo-router"
 import { useEffect, useState } from "react"
@@ -19,7 +20,8 @@ export default function SelectAddressModal() {
     // hand the choice back to the add listing screen, which reads it from its params
     const choose = (addressId: string) => {
         setSelectedAddress(addressId)
-        router.dismissTo({ pathname: "/addListings", params: { addressId } })
+        setAddressId(addressId)
+        router.back()
     }
 
     useEffect(() => {

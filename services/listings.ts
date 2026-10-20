@@ -3,6 +3,36 @@ import { Listing, ListingForm } from "@/types/listing";
 import { uploadImage } from "./storage";
 import { Tables } from "@/types/database.types";
 
+export async function fetchSellerData(user_id: string) {
+  const { data, error } = await supabase
+    .from("listings")
+    .select(
+      "id, user_id, price, title, is_sold, is_available, sold_at, channels!left(id, created_at, listing_id, last_msg_id), listing_views!left(created_at)",
+    )
+    .eq("user_id", user_id);
+
+  if (error) throw error;
+
+  return data.map((listing) => ({
+    ...listing,
+    sold_at: new Date().toISOString(),
+    listing_views: listing.listing_views,
+    views: listing.listing_views.length,
+    inquiries: listing.channels.filter((l) => l.last_msg_id !== null).length
+  }));
+}
+
+export async function fetchEarnings() {
+  const { data, error } = await supabase
+    .from("listings")
+    .select("*")
+    .eq("is_sold", true);
+
+  if (error) throw error;
+
+  return data;
+}
+
 export async function getListings(): Promise<Listing[]> {
   const { data, error } = await supabase
     .from("listings")
@@ -25,6 +55,20 @@ export async function getListing(id: string): Promise<Listing> {
   if (error) throw error;
 
   return data as Listing;
+}
+
+export async function getListingDetail(id: string) {
+  const { data, error } = await supabase
+    .from("listings")
+    .select(
+      "*, seller:users!listings_user_id_fkey(id, username, first_name, last_name, avatar_url, is_verified, updated_at)",
+    )
+    .eq("id", id)
+    .single();
+
+  if (error) throw error;
+
+  return data;
 }
 
 export async function getListingsByUser(userId: string): Promise<Listing[]> {
@@ -125,11 +169,16 @@ export async function updateListing(
   id: string,
   updates: Partial<
     Pick<
-      Listing,
-      "is_available" | "title" | "description" | "price" | "condition"
+      Tables<"listings">,
+      | "is_available"
+      | "title"
+      | "description"
+      | "price"
+      | "condition"
+      | "images"
     >
   >,
-): Promise<Listing> {
+): Promise<Tables<"listings">> {
   const { data, error } = await supabase
     .from("listings")
     .update({ ...updates, updated_at: new Date().toISOString() })
@@ -139,7 +188,7 @@ export async function updateListing(
 
   if (error) throw error;
 
-  return data as Listing;
+  return data;
 }
 
 export type SearchListingParams = {

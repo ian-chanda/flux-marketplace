@@ -12,13 +12,7 @@ import {
 } from "react-native";
 import { ThemedText } from "./themed-text";
 
-export type AdditionalDetails = {
-  brand?: string;
-  model?: string;
-  ram?: string;
-  storage?: string;
-  color?: string;
-};
+export type AdditionalDetails = Record<string, string>;
 
 type AdditionalDetailsModalProps = {
   visible: boolean;

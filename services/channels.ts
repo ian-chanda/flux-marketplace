@@ -1,22 +1,34 @@
 import { supabase } from "@/lib/supabase";
 
-// export const getChannels = async (userId: string) => {
-//   const { data, error } = await supabase
-//     .from("channel_users")
-//     .select(
-//       `*, channels(*, listings(id, user_id, images), users(id, username, avatar_url, last_msg:messages!channels_last_msg_id_fkey (*))`,
-//     )
-//     .eq("user_id", userId);
-//
-//   console.log(JSON.stringify(data, null, 2));
-//
-//   if (error) throw error;
-//   return data;
-// };
+// one user can not have more than one channel open for the same listing_id
+export const fetchListingInquiries = async (userId: string) => {
+  // fetch all rows that belong to a seller
+  // where they are in a channel
+  // and the listing_id is not null
+  // and the last_msg id is also not null
+  const { count, error } = await supabase
+    .from("channel_users")
+    .select(
+      `
+      channel_id,
+      channels!inner ( id, last_msg_id, listing_id)
+      `,
+      { count: "exact", head: true },
+    )
+    .not("channels.last_msg_id", "is", null)
+    .not("channels.listing_id", "is", null)
+    .eq("user_id", userId);
+
+  if (error) throw error;
+
+  return count;
+};
+
 export const getChannels = async (userId: string) => {
   const { data, error } = await supabase
     .from("channel_users")
-    .select(`
+    .select(
+      `
       channel_id,
       channels (
         id,
@@ -26,7 +38,8 @@ export const getChannels = async (userId: string) => {
         users (id, username, avatar_url),
         last_msg:messages!channels_last_msg_id_fkey (id, content, created_at, user_id)
       )
-    `)
+    `,
+    )
     .eq("user_id", userId);
 
   if (error) throw error;

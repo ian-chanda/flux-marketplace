@@ -1,6 +1,7 @@
 import { supabase } from "@/lib/supabase";
 import { uploadImage } from "./storage";
 import { getVerificationStatus } from "./verifications";
+import { UserUpdateForm } from "@/types/user";
 
 export async function getUserProfile(userId: string) {
   const { data: profile, error: profileError } = await supabase
@@ -28,38 +29,15 @@ export async function getUserProfile(userId: string) {
 }
 
 export async function updateProfile({
+  payload,
   userId,
-  firstName,
-  lastName,
-  locationCity,
-  locationProvince,
-  locationCountry,
-  bio,
-  username,
-  phoneNumber,
 }: {
+  payload: UserUpdateForm;
   userId: string;
-  firstName: string;
-  lastName: string;
-  locationCity: string;
-  locationProvince: string;
-  locationCountry: string;
-  bio: string;
-  username: string;
-  phoneNumber: string;
 }) {
   const { data, error } = await supabase
     .from("users")
-    .update({
-      first_name: firstName,
-      last_name: lastName,
-      location_city: locationCity,
-      location_province: locationProvince,
-      location_country: locationCountry,
-      bio: bio,
-      username: username,
-      phone_number: phoneNumber,
-    })
+    .update(payload)
     .eq("id", userId)
     .select()
     .single();
@@ -75,31 +53,42 @@ export async function updateProfileImages({
   headerUri,
 }: {
   userId: string;
-  avatarUri: string;
-  headerUri: string;
+  avatarUri: string | null;
+  headerUri: string | null;
 }) {
-  const avatarUrl = await uploadImage({
-    bucket_name: "profile",
-    id: userId,
-    uri: avatarUri,
-    folderName: "profile",
-    imageName: "avatar",
-  });
 
-  const headerUrl = await uploadImage({
-    bucket_name: "profile",
-    id: userId,
-    uri: headerUri,
-    folderName: "profile",
-    imageName: "header",
-  });
+  let avatarUrl;
+  let headerUrl;
+  if (avatarUri) {
+    avatarUrl = await uploadImage({
+      bucket_name: "profile",
+      id: userId,
+      uri: avatarUri,
+      folderName: "profile",
+      imageName: "avatar",
+    });
+  }
+
+  if (headerUri) {
+    headerUrl = await uploadImage({
+      bucket_name: "profile",
+      id: userId,
+      uri: headerUri,
+      folderName: "profile",
+      imageName: "header",
+    });
+  } 
+
+  const updates: { avatar_url?: string; header_url?: string; updated_at?: string } = {};
+  if (avatarUrl) updates.avatar_url = avatarUrl;
+  if (headerUrl) updates.header_url = headerUrl;
+ 
+  // nothing changed, so there is nothing to write
+  if (Object.keys(updates).length === 0) return null;
 
   const { data, error } = await supabase
     .from("users")
-    .update({
-      avatar_url: avatarUrl,
-      header_url: headerUrl,
-    })
+    .update(updates)
     .eq("id", userId)
     .select()
     .single();

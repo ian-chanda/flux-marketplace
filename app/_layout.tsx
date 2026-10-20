@@ -56,6 +56,7 @@ function RootNavigator() {
           <Stack.Screen name="modals/userDescription" options={{ presentation: "modal" }} />
           <Stack.Screen name="modals/profile" options={{ presentation: "modal" }} />
           <Stack.Screen name="addListings" options={{ headerShown: false }} />
+          <Stack.Screen name="overview" options={{ headerShown: false }} />
           <Stack.Screen name="product/[id]" options={{ headerShown: false }} />
           <Stack.Screen name="me/settings" options={{ headerShown: false }} />
           <Stack.Screen name="me/profile" options={{ headerShown: false }} />

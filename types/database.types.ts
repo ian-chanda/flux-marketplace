@@ -212,6 +212,45 @@ export type Database = {
           },
         ]
       }
+      listing_views: {
+        Row: {
+          created_at: string
+          id: string
+          listing_id: string
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          listing_id: string
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          listing_id?: string
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "listing_views_listing_id_fkey"
+            columns: ["listing_id"]
+            isOneToOne: false
+            referencedRelation: "listings"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "listing_views_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       listings: {
         Row: {
           attributes: Json
@@ -223,9 +262,11 @@ export type Database = {
           id: string
           images: string[]
           is_available: boolean
+          is_sold: boolean | null
           location: string | null
           pickup_available: boolean
           price: number
+          sold_at: string | null
           title: string
           updated_at: string
           user_id: string
@@ -240,9 +281,11 @@ export type Database = {
           id?: string
           images?: string[]
           is_available?: boolean
+          is_sold?: boolean | null
           location?: string | null
           pickup_available?: boolean
           price: number
+          sold_at?: string | null
           title: string
           updated_at?: string
           user_id: string
@@ -257,9 +300,11 @@ export type Database = {
           id?: string
           images?: string[]
           is_available?: boolean
+          is_sold?: boolean | null
           location?: string | null
           pickup_available?: boolean
           price?: number
+          sold_at?: string | null
           title?: string
           updated_at?: string
           user_id?: string
@@ -587,7 +632,11 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      get_or_create_channel: {
+        Args: { p_listing_id: string; p_subject: string }
+        Returns: string
+      }
+      is_channel_member: { Args: { p_channel_id: string }; Returns: boolean }
     }
     Enums: {
       [_ in never]: never

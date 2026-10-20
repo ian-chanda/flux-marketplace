@@ -7,8 +7,6 @@ export async function getDeliveryAddresses(userId: string) {
     .select("*")
     .eq("user_id", userId);
 
-  console.log("addys", JSON.stringify(data, null, 2))
-
   if (error) throw error;
 
   return data;

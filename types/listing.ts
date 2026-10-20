@@ -18,15 +18,33 @@ export type Listing = {
   updated_at: string;
 };
 
-export type ListingForm = Pick<TablesInsert<"listings">,
-|"user_id"
-|"title"
-|"description"
-|"price"
-|"category"
-|"condition"
-|"images"
-|"attributes"
-|"location"
-|"delivery_available"
-|"pickup_available">
+export type ListingForm = Pick<
+  TablesInsert<"listings">,
+  | "user_id"
+  | "title"
+  | "description"
+  | "price"
+  | "category"
+  | "condition"
+  | "images"
+  | "attributes"
+  | "location"
+  | "delivery_available"
+  | "pickup_available"
+>;
+
+export type LocalListing = ListingForm & { id?: string };
+
+export const emptyListingForm: ListingForm = {
+  user_id: "",
+  title: "",
+  description: "",
+  price: 0,
+  category: "",
+  condition: null,
+  images: [],
+  attributes: {},
+  delivery_available: true,
+  pickup_available: false,
+};
+
