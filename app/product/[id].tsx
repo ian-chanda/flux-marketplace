@@ -10,7 +10,7 @@ import { useTheme } from "@/hooks/useTheme";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { router, useFocusEffect, useLocalSearchParams } from "expo-router";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { ActivityIndicator, FlatList, Image, Pressable, ScrollView, StyleSheet, TouchableOpacity, View, ViewToken, useWindowDimensions } from "react-native";
+import { ActivityIndicator, FlatList, Image, Pressable, ScrollView, Share, StyleSheet, TouchableOpacity, View, ViewToken, useWindowDimensions } from "react-native";
 import { LoadingScreen } from "../(tabs)/(search)/results";
 import { useFetchListingDetails } from "@/hooks/use-fetch-listing-details";
 import { useSaveListing } from "@/hooks/use-save-listing";
@@ -84,6 +84,16 @@ export default function Product() {
   const images = listing.images?.length ? listing.images : [];
   const attributes = Object.entries(listing.attributes ?? {});
   const isOwner = user?.id === listing.user_id;
+
+  const handleShare = async () => {
+    try {
+      await Share.share({
+        message: `Check out "${listing.title}" on Flux for K${Number(listing.price).toLocaleString()}${listing.location ? ` in ${listing.location}` : ""}`,
+      });
+    } catch {
+      // dismissed by user or share failed — nothing to do
+    }
+  };
 
   return (
     <ThemedView isTabVisible={false}>
@@ -185,7 +195,6 @@ export default function Product() {
           <ThemedText type="defaultBold">Description</ThemedText>
           <ThemedText type="default">{listing.description}</ThemedText>
         </View>
-
         {/* seller */}
         <View style={[styles.sellerCard, { backgroundColor: colors.surface }]}>
           <PfpRowItem

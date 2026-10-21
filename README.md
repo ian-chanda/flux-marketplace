@@ -1,50 +1,109 @@
-# Welcome to your Expo app 👋
+# Flux
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Flux is a collaborative, mobile-first marketplace application designed for buying and selling goods
+in Zambia. Built with React Native, Expo, and Supabase, it supports product listings, search, user
+profiles, and an order management flow. Messaging, notifications, and payment integrations remain
+in development.
 
-## Get started
+**Contributors:** Ian Chanda and Elijah Muma
 
-1. Install dependencies
+## Status at a glance
 
-   ```bash
-   npm install
-   ```
+| Area | State |
+| --- | --- |
+| Authentication & sessions | Working |
+| Listings, search & discovery | Working |
+| Cart, checkout & order history | Working (no real payment gateway) |
+| Saved items & recently viewed | Working |
+| Profiles, avatars & addresses | Working |
+| Messaging | UI only, no backend |
+| Notifications | Placeholder only |
+| Payments | Not integrated |
+| Selling dashboard | Mostly static |
 
-2. Start the app
+## Implemented functionality
 
-   ```bash
-   npx expo start
-   ```
+- **Authentication** — email sign-up/sign-in/out with session persistence; authenticated routes
+  are guarded from public ones.
+- **Discovery** — home feed of live listings, category/status pills, and search with debounced
+  live results plus a results screen supporting price range, condition, and sort.
+- **Listings** — create and manage listings with multi-image upload, availability toggling, and
+  delete; product detail pages with an image gallery, seller profile, bookmarking, and cart actions.
+- **Commerce** — cart management and checkout that records orders and order items, with a purchase
+  history screen. No money is actually moved yet.
+- **Personal features** — saved items, recently viewed, and profile editing with avatar/header
+  uploads and delivery addresses.
 
-In the output, you'll find options to open the app in a
+## Notable technical decisions
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+1. **Optimistic bookmark updates with rollback.** Saving or unsaving a listing updates the
+   interface immediately and persists the change in the background. If the Supabase write fails,
+   the UI state is rolled back, so a listing never appears bookmarked when it wasn't actually
+   stored. This keeps interactions instant on slow connections without sacrificing consistency.
+2. **A client-side image normalization pipeline.** iPhone photos arrive as HEIC, which React
+   Native's `<Image>` cannot render reliably (especially on Android). Picked images are re-encoded
+   to JPEG with `expo-image-manipulator` before upload, and uploads use cache-busting so refreshed
+   avatars and listing photos aren't served stale.
+3. **Clear separation between UI, data, and external calls.** Screens live in `app/` (typed,
+   file-based expo-router), reusable behavior in `hooks/`, all Supabase access in `services/`, and
+   pure helpers in `utils/`. This keeps network and database logic out of components and makes the
+   app easier to reason about as it grows.
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## Preview
 
-## Get a fresh project
+Home Feed
+<img width="585" height="1266" alt="IMG_0660" src="https://github.com/user-attachments/assets/f4e4a09d-8235-454c-8663-22d9bd8719d4" /> 
 
-When you're ready, run:
+Listing Details
+<img width="585" height="1266" alt="IMG_0661" src="https://github.com/user-attachments/assets/75ce551e-d511-457a-b018-806bd714d62f" /> 
+
+Create Listing 
+<img width="585" height="1266" alt="IMG_0662" src="https://github.com/user-attachments/assets/08a7fa63-4927-4cf3-a170-6db943ff9193" /> 
+
+## Tech stack
+
+- **Framework:** Expo SDK 57, React Native 0.86, React 19, TypeScript
+- **Navigation:** expo-router (typed, file-based routing)
+- **Backend:** Supabase (`@supabase/supabase-js`) — auth, Postgres, storage
+- **Device APIs:** expo-image-picker, expo-image-manipulator, expo-location, expo-file-system
+- **State & storage:** React hooks, AsyncStorage, contexts
+- **UI:** react-native-reanimated, react-native-gesture-handler, react-native-svg, Expo Vector Icons
+- **Tooling:** ESLint (`expo lint`)
+
+## Getting started
 
 ```bash
-npm run reset-project
+npm install        # install dependencies
+npm start          # start the Expo dev server
+
+npm run ios        # run on iOS
+npm run android     # run on Android
+npm run lint       # lint
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+Create a `.env` file (see `.env.example`) with your own Supabase project values:
 
-## Learn more
+```bash
+EXPO_PUBLIC_SUPABASE_URL=your-project-url
+EXPO_PUBLIC_SUPABASE_PUBLISHABLE_KEY=your-publishable-key
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+### Supabase setup
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+The app expects a Supabase project that has already been configured with the required tables
+(listings, users, cart, orders, saved items, and so on), Row Level Security policies, and storage
+buckets. This schema configuration is **not included automatically** and must be set up per
+project. Prepared, unapplied SQL and read-only inspection queries are kept in `supabase/`.
 
-## Join the community
+## Project structure
 
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+```
+app/         expo-router screens
+components/  UI components
+hooks/       reusable React state & behavior
+services/    Supabase / external API calls
+contexts/    auth and theme providers
+types/       shared TypeScript types
+utils/       pure helper functions
+supabase/    prepared (unapplied) migrations & inspection queries
+```

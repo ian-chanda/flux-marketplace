@@ -4,6 +4,7 @@ import { ThemedView } from "@/components/themed-view";
 import { useTheme } from "@/hooks/useTheme";
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
+import { useState } from "react";
 import { View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 

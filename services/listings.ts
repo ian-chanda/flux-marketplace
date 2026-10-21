@@ -45,6 +45,49 @@ export async function getListings(): Promise<Listing[]> {
   return (data ?? []) as Listing[];
 }
 
+export async function searchListings(options?: {
+  query?: string;
+  category?: string;
+  minPrice?: number;
+  maxPrice?: number;
+  condition?: string[];
+  sort?: "newest" | "price_asc" | "price_desc";
+}): Promise<Listing[]> {
+  let query = supabase
+    .from("listings")
+    .select("*")
+    .eq("is_available", true);
+
+  if (options?.category) {
+    query = query.eq("category", options.category);
+  }
+  if (options?.query) {
+    query = query.ilike("title", `%${options.query}%`);
+  }
+  if (options?.minPrice != null && options.minPrice > 0) {
+    query = query.gte("price", options.minPrice);
+  }
+  if (options?.maxPrice != null && options.maxPrice > 0) {
+    query = query.lte("price", options.maxPrice);
+  }
+  if (options?.condition?.length) {
+    query = query.in("condition", options.condition);
+  }
+
+  if (options?.sort === "price_asc") {
+    query = query.order("price", { ascending: true });
+  } else if (options?.sort === "price_desc") {
+    query = query.order("price", { ascending: false });
+  } else {
+    query = query.order("created_at", { ascending: false });
+  }
+
+  const { data, error } = await query;
+  if (error) throw error;
+
+  return (data ?? []) as Listing[];
+}
+
 export async function getListing(id: string): Promise<Listing> {
   const { data, error } = await supabase
     .from("listings")

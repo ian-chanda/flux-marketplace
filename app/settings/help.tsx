@@ -125,7 +125,7 @@ export default function HelpCenterScreen() {
 					<CardButtonRow
 						icon="report-problem"
 						label="Report a Problem"
-						onPress={() => router.push("/settings/report-problem")}
+						onPress={() => router.push("/settings/report")}
 					/>
 					<CardButtonRow
 						icon="mail-outline"

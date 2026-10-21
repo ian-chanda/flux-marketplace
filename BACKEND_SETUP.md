@@ -468,6 +468,54 @@ Key points to relate to work you already did:
 
 ---
 
+## Step 12: Recently Viewed (Sep 20)
+
+Adds a recently-viewed recorder. One new service file, a view-recording hook in the product
+screen, and the search screen's "Recent" tab reads real data.
+
+### 12a. Table + RLS (run this in the Supabase SQL Editor)
+
+```sql
+-- recently_viewed: one row per user+listing, upserted (viewed_at bumped) each open
+create table if not exists public.recently_viewed (
+  user_id uuid not null references public.users(id) on delete cascade,
+  listing_id uuid not null references public.listings(id) on delete cascade,
+  viewed_at timestamptz not null default now(),
+  primary key (user_id, listing_id)
+);
+
+alter table public.recently_viewed enable row level security;
+
+-- drop first so the block is re-runnable; a bare re-run fails with 42710
+-- (policy ... already exists) partway through
+drop policy if exists "recently_viewed select own" on public.recently_viewed;
+drop policy if exists "recently_viewed insert own" on public.recently_viewed;
+drop policy if exists "recently_viewed update own" on public.recently_viewed;
+drop policy if exists "recently_viewed delete own" on public.recently_viewed;
+
+create policy "recently_viewed select own" on public.recently_viewed for select using (auth.uid() = user_id);
+create policy "recently_viewed insert own" on public.recently_viewed for insert with check (auth.uid() = user_id);
+create policy "recently_viewed update own" on public.recently_viewed for update using (auth.uid() = user_id) with check (auth.uid() = user_id);
+create policy "recently_viewed delete own" on public.recently_viewed for delete using (auth.uid() = user_id);
+```
+
+### 12b. Hardcoded -> Backend mapping
+
+| Where you saw hardcoded data | Now loads from | What the service returns |
+|---|---|---|
+| `(tabs)/(search)/index.tsx` "Recent" tab (5 fake titles) | `getRecentViews(user.id)` | full joined `listing` rows, newest first, capped at 30 |
+| `(tabs)/(search)/index.tsx` "Saved" tab (5 fake titles) | `getSavedListings(user.id)` (already existed) | full joined `listing` rows |
+| product page views | `recordRecentView(user.id, listingId)` on load | upserts `recently_viewed` (non-fatal) |
+| `app/me/recents.tsx` (9 fake items) | `getRecentViews(user.id)` | same data; swipe-to-delete calls `removeRecentView` |
+
+Note: `upsert` on `recently_viewed` needs BOTH the insert and the update policies above (a
+conflict triggers an update), otherwise it silently fails. Same caveat as `cart_items`.
+
+`getRecentViews` caps at `RECENT_LIMIT` (30) in `services/recentlyViewed.ts`, so history cannot
+grow unbounded. The cap is read-side only — old rows stay in the table, they just never load.
+
+---
+
 ## Pitfalls & Gotchas
 
 ### 1. ExpoSecureStore has a 2KB value limit

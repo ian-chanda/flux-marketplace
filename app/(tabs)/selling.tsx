@@ -20,7 +20,6 @@ type Feedback = {
   type: "purchase" | "sale";
   msg: string;
 };
-
 // ---------- mock data (replace with real queries) ----------
 
 
@@ -64,7 +63,6 @@ const StatStrip = ({ items }: { items: Stat[] }) => {
 
 const FeedbackCard = ({ name, when, type, msg }: Omit<Feedback, "id">) => {
   const { colors } = useTheme();
-
 
 
 

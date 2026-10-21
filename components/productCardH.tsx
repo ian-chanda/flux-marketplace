@@ -11,7 +11,7 @@ type prodCardTypes = {
 	id: string,
 	bookmarked: boolean,
 	showMore?: boolean,
-	img?: any,
+	img?: string | null,
 	desc: string,
 	name?: string,
 	condition?: string,

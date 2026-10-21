@@ -7,14 +7,13 @@ import { ThemedView } from "@/components/themed-view";
 import { useListings } from "@/hooks/useListings";
 import { useTheme } from "@/hooks/useTheme";
 import { useAuth } from "@/contexts/auth-context";
-import { getCartCount } from "@/services/cart";
-import { getSavedListingIds, saveListing, unsaveListing } from "@/services/savedListings";
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import { router, useFocusEffect } from "expo-router";
-import { useCallback, useMemo, useRef, useState } from "react";
+import Ionicons from "@expo/vector-icons/Ionicons";
+import { router, } from "expo-router";
+import { useCallback, useMemo, useState } from "react";
 import { ActivityIndicator, FlatList, RefreshControl, ScrollView, StatusBar, StyleSheet, TouchableOpacity, View } from "react-native";
 import { useCartIds, useSavedIds } from "@/hooks/use-fetch-listing-details";
 import { useSaveListing } from "@/hooks/use-save-listing";
+import { categories } from "@/lib/categories";
 
 // export function useBookmark(id: string) {
 //   const { data: savedIds } = useSavedIds();
@@ -33,24 +32,30 @@ import { useSaveListing } from "@/hooks/use-save-listing";
 type buttonTypes = {
     icon: any;
     title: string;
+    active?: boolean;
+    onPress?: () => void;
 }
 
-const SmallIconButton = ({ icon, title }: buttonTypes) => {
+const SmallIconButton = ({ icon, title, active, onPress }: buttonTypes) => {
     const { colors } = useTheme()
 
     return (
-        <TouchableOpacity style={{
-            flexShrink: 0,
-            flexDirection: 'row',
-            paddingHorizontal: 10,
-            height: 35,
-            gap: 3,
-            alignItems: 'center',
-            backgroundColor: colors.surface,
-            borderRadius: 100,
-        }}>
-            <MaterialIcons name={icon} size={18} color={colors.accent} />
-            <ThemedText type="mediumFaded">{title}</ThemedText>
+        <TouchableOpacity
+            onPress={onPress}
+            style={{
+                flexShrink: 0,
+                flexDirection: 'row',
+                paddingHorizontal: 10,
+                height: 35,
+                gap: 3,
+                alignItems: 'center',
+                backgroundColor: colors.surface,
+                borderRadius: 100,
+                borderWidth: active ? 1.5 : 0,
+                borderColor: active ? colors.accent : "transparent",
+            }}>
+            <Ionicons name={icon} size={18} color={active ? colors.accent : colors.placeholder} />
+            <ThemedText type="mediumFaded" style={active ? { color: colors.accent } : undefined}>{title}</ThemedText>
         </TouchableOpacity>
     )
 }
@@ -60,6 +65,8 @@ export default function Index() {
     const { listings, loading, refreshing, error, refresh } = useListings();
     const { user } = useAuth();
     const { doSaveListings } = useSaveListing()
+    const [bookmarked, setBookmarked] = useState<Record<string, boolean>>({});
+    const [activeFilter, setActiveFilter] = useState<string | null>(null);
 
     const { data: cartData } = useCartIds()
     const { data: savedData } = useSavedIds()
@@ -68,6 +75,18 @@ export default function Index() {
     const savedSet = useMemo(() => new Set(savedIds ?? []), [savedIds]);
     const cartCount = cartData?.length ?? 0;
 
+
+    const toggleFilter = useCallback((filter: string | null) => {
+        setActiveFilter(prev => (prev === filter ? null : filter));
+    }, []);
+
+    const filteredListings = activeFilter
+        ? listings?.filter((item) => {
+            if (activeFilter === "saved") return !!bookmarked[item.id];
+            if (activeFilter === "selling") return item.user_id === user?.id;
+            return item.category === activeFilter;
+        })
+        : listings;
 
     return (
         <ThemedView isTabVisible={true}>
@@ -86,10 +105,17 @@ export default function Index() {
                     gap: 10
                 }}
             >
-                <SmallIconButton icon="favorite-outline" title="saved" />
-                <SmallIconButton icon="sell" title="selling" />
-                <SmallIconButton icon="sell" title="phones" />
-                <SmallIconButton icon="sell" title="gaming" />
+                <SmallIconButton icon="bookmark-outline" title="saved" active={activeFilter === "saved"} onPress={() => toggleFilter("saved")} />
+                <SmallIconButton icon="pricetag-outline" title="selling" active={activeFilter === "selling"} onPress={() => toggleFilter("selling")} />
+                {categories.map((category) => (
+                    <SmallIconButton
+                        key={category.name}
+                        icon={category.icon as any}
+                        title={category.pill}
+                        active={activeFilter === category.name}
+                        onPress={() => toggleFilter(category.name)}
+                    />
+                ))}
             </ScrollView>
 
             <View style={{ paddingHorizontal: 10, flex: 1 }}>
@@ -108,9 +134,13 @@ export default function Index() {
                     <View style={styles.center}>
                         <ThemedText type="defaultFaded">No listings yet. Be the first to post one!</ThemedText>
                     </View>
+                ) : filteredListings?.length === 0 ? (
+                    <View style={styles.center}>
+                        <ThemedText type="defaultFaded">No {activeFilter} listings found.</ThemedText>
+                    </View>
                 ) : (
                     <FlatList
-                        data={listings}
+                        data={filteredListings}
                         numColumns={2}
                         columnWrapperStyle={{ justifyContent: 'space-between', gap: 10 }}
                         contentContainerStyle={{ gap: 16, paddingBottom: 20 }}

@@ -83,7 +83,7 @@ export default function Profile() {
                         <View style={styles.profileInfo}>
                             <View style={{ flexDirection: 'row', alignItems: 'center', gap: 5 }}>
                                 <ThemedText type="defaultBold" numberOfLines={1}>
-                                    {seller.name ?? "Seller"}
+                                    {`${seller.first_name ?? ""} ${seller.last_name ?? ""}`.trim() || "Seller"}
                                 </ThemedText>
                                 {seller.is_verified && (
                                     <MaterialIcons name="verified" size={15} color={colors.accent} />
@@ -137,7 +137,7 @@ export default function Profile() {
                                         img={item.images?.[0]}
                                         desc={item.condition ?? item.category}
                                         name={item.title}
-                                        price={`K${item.price}`}
+                                        price={item.price}
                                     />
                                 )}
                                 keyExtractor={(item) => item.id}

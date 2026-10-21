@@ -9,7 +9,7 @@ type searchTypes = {
 	width: any,
 	showSearch?: boolean,
 	searchValue: string;
-	setSearchValue: React.Dispatch<React.SetStateAction<string>>;
+	setSearchValue: (text: string) => void;
 	onSearch: () => void;
 }
 

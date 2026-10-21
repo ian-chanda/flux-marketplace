@@ -2,40 +2,25 @@ import { CustomSearchBar } from "@/components/customSearchBar";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import { useTheme } from "@/hooks/useTheme";
+import { categories } from "@/lib/categories";
 import { getCategory, setCategory } from "@/lib/listingDraft";
 import { Ionicons } from "@expo/vector-icons";
 import { router } from 'expo-router';
 import { useState } from "react";
 import { FlatList, StyleSheet, TouchableOpacity, View } from "react-native";
 
-const categories = [
-    {id: 1, name: "Phones & Tablets", icon: "phone-portrait"},
-    {id: 2, name: "Laptops & Computers", icon: "laptop"},
-    {id: 3, name: "Gaming", icon: "game-controller"},
-    {id: 4, name: "Audio", icon: "headset"},
-    {id: 5, name: "Wearables", icon: "watch"},
-    {id: 6, name: "Cameras & Photography", icon: "camera"},
-    {id: 7, name: "TVs & Home Entertainment", icon: "tv"},
-    {id: 8, name: "Accessories", icon: "bag"},
-    {id: 9, name: "Smart Home", icon: "home"},
-    {id: 10, name: "Other", icon: "ellipsis-horizontal"}
-]
-
 export default function Category() {
     const [searchValue, setSearchValue] = useState("");
     const { colors } = useTheme();
 
-    const savedCategory = getCategory();
-    const [selectedId, setSelectedId] = useState<number | null>(
-        categories.find((c) => c.name === savedCategory)?.id ?? null
-    );
+    const [selectedName, setSelectedName] = useState<string | null>(getCategory() ?? null);
 
     const filteredCategories = categories.filter((category) =>
         category.name.toLowerCase().includes(searchValue.toLowerCase())
     );
 
-    const handleSelectCategory = (categoryId: number, categoryName: string) => {
-        setSelectedId(categoryId);
+    const handleSelectCategory = (categoryName: string) => {
+        setSelectedName(categoryName);
         setCategory(categoryName);
         router.back();
     };
@@ -55,10 +40,10 @@ export default function Category() {
             data={filteredCategories} 
             renderItem={({ item }) => (
                 <TouchableOpacity
-                onPress={() => handleSelectCategory(item.id, item.name)}
+                onPress={() => handleSelectCategory(item.name)}
                 style={[
                     styles.field,
-                    selectedId === item.id && { 
+                    selectedName === item.name && { 
                         borderWidth: 1,
                         borderColor: colors.surface,
                         borderRadius: 23
@@ -83,7 +68,7 @@ export default function Category() {
 	            </View>
                 </TouchableOpacity>
             )}
-            keyExtractor={(item) => item.id.toString()}
+            keyExtractor={(item) => item.name}
             />
         </ThemedView>
     )

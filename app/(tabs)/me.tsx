@@ -2,21 +2,18 @@ import Button from '@/components/Button';
 import { CardButtonRow } from '@/components/cardButtonRow';
 import { CustomHeader } from '@/components/customHeader';
 import { IconButton } from '@/components/iconButton';
-import { PfpItem } from '@/components/pfp-item';
 import { PfpRowItem } from '@/components/pfpRowItem';
 import { SettingsSection } from '@/components/settingsSection';
 import { RowProfile } from '@/components/skeletons/rowProfileSkeleton';
-import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { DarkModeToggle } from '@/components/toggleButton';
-import { VerifiedBadge } from '@/components/verified-badge';
 import { useAuth } from '@/contexts/auth-context';
+import { useCartIds } from '@/hooks/use-fetch-listing-details';
 import { useUser } from '@/hooks/use-user';
 import { useTheme } from '@/hooks/useTheme';
-import { MaterialIcons } from '@expo/vector-icons';
-import { router } from 'expo-router';
-import { useEffect, useState } from 'react';
-import { Image, ScrollView, TouchableOpacity, View } from 'react-native';
+import { router, useFocusEffect } from 'expo-router';
+import { useCallback, useState } from 'react';
+import { ScrollView, View } from 'react-native';
 
 export default function ProfileScreen() {
 
@@ -29,12 +26,15 @@ export default function ProfileScreen() {
 
   const avatar = data?.avatar_url ?? ""
 
+  const { data: cartData } = useCartIds()
+  const cartCount = cartData?.length ?? 0;
+
   return (
     <ThemedView isTabVisible style={{}}>
       <CustomHeader title="My Profile">
         <View style={{ flexDirection: 'row', alignItems: 'center', gap: 15 }}>
           <IconButton icon={"notifications"} onPress={() => router.push('/notifications')} badgeValue='9+' />
-          <IconButton icon={"shopping-cart"} onPress={() => router.push('/cart')} badgeValue='2' />
+          <IconButton icon={"shopping-cart"} onPress={() => router.push('/cart')} badgeValue={cartCount ? String(cartCount) : ""} />
         </View>
       </CustomHeader>
 
@@ -43,7 +43,7 @@ export default function ProfileScreen() {
         {loading ?
           <RowProfile />
           :
-          <PfpRowItem 
+          <PfpRowItem
             imageUrl={`${avatar}?v=${data?.updated_at}`}
             fName={data?.first_name ?? "unknown"}
             lName={data?.last_name ?? "unknown"}

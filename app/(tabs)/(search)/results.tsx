@@ -1,4 +1,3 @@
-import { BookmarkBadge } from '@/components/bookmark-badge';
 import { CustomHeader } from '@/components/customHeader';
 import { ProductCardH } from '@/components/productCardH';
 import { SearchBarButton } from '@/components/searchBarButton';
@@ -11,15 +10,7 @@ import { useLocalSearchParams } from 'expo-router';
 import { useState } from 'react';
 import { ActivityIndicator, FlatList, Image, TouchableOpacity, View } from 'react-native';
 
-const search_results = [
-	{ id: 1, name: "Product THREEE HUNDRED AND NIGETU", Desc: 'new', image: 'url', price: "K2", delivery: "" },
-	{ id: 2, name: "Product 2", Desc: 'pre-owned', image: 'url', price: "K3", delivery: 'free delivery' },
-	{ id: 3, name: "Product 3", Desc: 'used-like new', image: 'url', price: "K4", delivery: "k50 delivery" },
-	{ id: 4, name: "Product 4", Desc: 'new', image: 'url', price: "K5", delivery: "k150 delivery" },
-	{ id: 5, name: "Product 3", Desc: 'used-like new', image: 'url', price: "K4", delivery: 'free delivery' },
-	{ id: 6, name: "Product 3", Desc: 'used-like new', image: 'url', price: "K4", delivery: 'free delivery' },
-	{ id: 7, name: "Product 3", Desc: 'used-like new', image: 'url', price: "K4", delivery: 'free delivery' },
-]
+type SortOption = "newest" | "price_asc" | "price_desc";
 
 export const LoadingScreen = () => {
 	const { colors } = useTheme()
@@ -41,7 +32,7 @@ export default function ProfileScreen() {
 			<CustomHeader showBack>
 				<SearchBarButton
 					width={'85%'}
-					placeholder={query ? query as string : 'searched item'}
+					placeholder={query as string ?? "searched item"}
 				/>
 
 			</CustomHeader>
