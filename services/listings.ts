@@ -15,7 +15,6 @@ export async function fetchSellerData(user_id: string) {
 
   return data.map((listing) => ({
     ...listing,
-    sold_at: new Date().toISOString(),
     listing_views: listing.listing_views,
     views: listing.listing_views.length,
     inquiries: listing.channels.filter((l) => l.last_msg_id !== null).length
@@ -40,49 +39,6 @@ export async function getListings(): Promise<Listing[]> {
     .eq("is_available", true)
     .order("created_at", { ascending: false });
 
-  if (error) throw error;
-
-  return (data ?? []) as Listing[];
-}
-
-export async function searchListings(options?: {
-  query?: string;
-  category?: string;
-  minPrice?: number;
-  maxPrice?: number;
-  condition?: string[];
-  sort?: "newest" | "price_asc" | "price_desc";
-}): Promise<Listing[]> {
-  let query = supabase
-    .from("listings")
-    .select("*")
-    .eq("is_available", true);
-
-  if (options?.category) {
-    query = query.eq("category", options.category);
-  }
-  if (options?.query) {
-    query = query.ilike("title", `%${options.query}%`);
-  }
-  if (options?.minPrice != null && options.minPrice > 0) {
-    query = query.gte("price", options.minPrice);
-  }
-  if (options?.maxPrice != null && options.maxPrice > 0) {
-    query = query.lte("price", options.maxPrice);
-  }
-  if (options?.condition?.length) {
-    query = query.in("condition", options.condition);
-  }
-
-  if (options?.sort === "price_asc") {
-    query = query.order("price", { ascending: true });
-  } else if (options?.sort === "price_desc") {
-    query = query.order("price", { ascending: false });
-  } else {
-    query = query.order("created_at", { ascending: false });
-  }
-
-  const { data, error } = await query;
   if (error) throw error;
 
   return (data ?? []) as Listing[];
@@ -163,7 +119,7 @@ export async function createListing(
 
   if (error) throw error;
 
-  return data as Listing;
+  return data;
 }
 
 export async function deleteListing(id: string): Promise<void> {
