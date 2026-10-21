@@ -5,7 +5,7 @@ import { StyleSheet, View } from "react-native";
 import { ThemedText } from "./themed-text";
 
 interface SectionHeaderProps {
-  icon: ComponentProps<typeof Ionicons>["name"];
+  icon?: ComponentProps<typeof Ionicons>["name"];
   title: string;
   description?: string;  // ← Make optional
   iconColor?: string;
@@ -39,6 +39,6 @@ const sytles = StyleSheet.create({
     header: {
     flexDirection: "row", 
     gap: 7, 
-    margin: 10
+    margin: 2 
   }
 })

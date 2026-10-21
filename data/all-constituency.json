@@ -1,0 +1,8738 @@
+[
+  {
+    "id": "ZM101001001",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Katuba",
+      "en": "Katuba",
+      "slug": "katuba-zm101001001"
+    },
+    "code": {
+      "id": "ZM101001001",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM101001",
+      "level": 2,
+      "name": {
+        "local": "Chibombo",
+        "en": "Chibombo",
+        "slug": "chibombo-zm101001"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM101",
+        "level": 1,
+        "name": {
+          "local": "Central",
+          "en": "Central",
+          "slug": "central-zm101"
+        }
+      },
+      {
+        "id": "ZM101001",
+        "level": 2,
+        "name": {
+          "local": "Chibombo",
+          "en": "Chibombo",
+          "slug": "chibombo-zm101001"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 8
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-15.169",
+      "lon": "27.995"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM101001002",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Keembe",
+      "en": "Keembe",
+      "slug": "keembe-zm101001002"
+    },
+    "code": {
+      "id": "ZM101001002",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM101001",
+      "level": 2,
+      "name": {
+        "local": "Chibombo",
+        "en": "Chibombo",
+        "slug": "chibombo-zm101001"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM101",
+        "level": 1,
+        "name": {
+          "local": "Central",
+          "en": "Central",
+          "slug": "central-zm101"
+        }
+      },
+      {
+        "id": "ZM101001",
+        "level": 2,
+        "name": {
+          "local": "Chibombo",
+          "en": "Chibombo",
+          "slug": "chibombo-zm101001"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 13
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-14.758",
+      "lon": "27.633"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM101002003",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Chisamba",
+      "en": "Chisamba",
+      "slug": "chisamba-zm101002003"
+    },
+    "code": {
+      "id": "ZM101002003",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM101002",
+      "level": 2,
+      "name": {
+        "local": "Chisamba",
+        "en": "Chisamba",
+        "slug": "chisamba-zm101002"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM101",
+        "level": 1,
+        "name": {
+          "local": "Central",
+          "en": "Central",
+          "slug": "central-zm101"
+        }
+      },
+      {
+        "id": "ZM101002",
+        "level": 2,
+        "name": {
+          "local": "Chisamba",
+          "en": "Chisamba",
+          "slug": "chisamba-zm101002"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 12
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-14.772",
+      "lon": "28.459"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM101003004",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Chitambo",
+      "en": "Chitambo",
+      "slug": "chitambo-zm101003004"
+    },
+    "code": {
+      "id": "ZM101003004",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM101003",
+      "level": 2,
+      "name": {
+        "local": "Chitambo",
+        "en": "Chitambo",
+        "slug": "chitambo-zm101003"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM101",
+        "level": 1,
+        "name": {
+          "local": "Central",
+          "en": "Central",
+          "slug": "central-zm101"
+        }
+      },
+      {
+        "id": "ZM101003",
+        "level": 2,
+        "name": {
+          "local": "Chitambo",
+          "en": "Chitambo",
+          "slug": "chitambo-zm101003"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 10
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-12.543",
+      "lon": "30.4"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM101005006",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Bwacha",
+      "en": "Bwacha",
+      "slug": "bwacha-zm101005006"
+    },
+    "code": {
+      "id": "ZM101005006",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM101005",
+      "level": 2,
+      "name": {
+        "local": "Kabwe",
+        "en": "Kabwe",
+        "slug": "kabwe-zm101005"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM101",
+        "level": 1,
+        "name": {
+          "local": "Central",
+          "en": "Central",
+          "slug": "central-zm101"
+        }
+      },
+      {
+        "id": "ZM101005",
+        "level": 2,
+        "name": {
+          "local": "Kabwe",
+          "en": "Kabwe",
+          "slug": "kabwe-zm101005"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 15
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-14.458",
+      "lon": "28.32"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM101005007",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Kabwe Central",
+      "en": "Kabwe Central",
+      "slug": "kabwe-central-zm101005007"
+    },
+    "code": {
+      "id": "ZM101005007",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM101005",
+      "level": 2,
+      "name": {
+        "local": "Kabwe",
+        "en": "Kabwe",
+        "slug": "kabwe-zm101005"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM101",
+        "level": 1,
+        "name": {
+          "local": "Central",
+          "en": "Central",
+          "slug": "central-zm101"
+        }
+      },
+      {
+        "id": "ZM101005",
+        "level": 2,
+        "name": {
+          "local": "Kabwe",
+          "en": "Kabwe",
+          "slug": "kabwe-zm101005"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 14
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-14.413",
+      "lon": "28.49"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM101006008",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Kapiri Mposhi",
+      "en": "Kapiri Mposhi",
+      "slug": "kapiri-mposhi-zm101006008"
+    },
+    "code": {
+      "id": "ZM101006008",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM101006",
+      "level": 2,
+      "name": {
+        "local": "Kapiri Mposhi",
+        "en": "Kapiri Mposhi",
+        "slug": "kapiri-mposhi-zm101006"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM101",
+        "level": 1,
+        "name": {
+          "local": "Central",
+          "en": "Central",
+          "slug": "central-zm101"
+        }
+      },
+      {
+        "id": "ZM101006",
+        "level": 2,
+        "name": {
+          "local": "Kapiri Mposhi",
+          "en": "Kapiri Mposhi",
+          "slug": "kapiri-mposhi-zm101006"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 18
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-14.196",
+      "lon": "28.487"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM101007009",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Mkushi South",
+      "en": "Mkushi South",
+      "slug": "mkushi-south-zm101007009"
+    },
+    "code": {
+      "id": "ZM101007009",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM101007",
+      "level": 2,
+      "name": {
+        "local": "Luano",
+        "en": "Luano",
+        "slug": "luano-zm101007"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM101",
+        "level": 1,
+        "name": {
+          "local": "Central",
+          "en": "Central",
+          "slug": "central-zm101"
+        }
+      },
+      {
+        "id": "ZM101007",
+        "level": 2,
+        "name": {
+          "local": "Luano",
+          "en": "Luano",
+          "slug": "luano-zm101007"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 12
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-14.461",
+      "lon": "29.568"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM101008010",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Mkushi North",
+      "en": "Mkushi North",
+      "slug": "mkushi-north-zm101008010"
+    },
+    "code": {
+      "id": "ZM101008010",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM101008",
+      "level": 2,
+      "name": {
+        "local": "Mkushi",
+        "en": "Mkushi",
+        "slug": "mkushi-zm101008"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM101",
+        "level": 1,
+        "name": {
+          "local": "Central",
+          "en": "Central",
+          "slug": "central-zm101"
+        }
+      },
+      {
+        "id": "ZM101008",
+        "level": 2,
+        "name": {
+          "local": "Mkushi",
+          "en": "Mkushi",
+          "slug": "mkushi-zm101008"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 16
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-13.765",
+      "lon": "29.483"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM101009011",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Mumbwa",
+      "en": "Mumbwa",
+      "slug": "mumbwa-zm101009011"
+    },
+    "code": {
+      "id": "ZM101009011",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM101009",
+      "level": 2,
+      "name": {
+        "local": "Mumbwa",
+        "en": "Mumbwa",
+        "slug": "mumbwa-zm101009"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM101",
+        "level": 1,
+        "name": {
+          "local": "Central",
+          "en": "Central",
+          "slug": "central-zm101"
+        }
+      },
+      {
+        "id": "ZM101009",
+        "level": 2,
+        "name": {
+          "local": "Mumbwa",
+          "en": "Mumbwa",
+          "slug": "mumbwa-zm101009"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 12
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-14.754",
+      "lon": "26.345"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM101009012",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Nangoma",
+      "en": "Nangoma",
+      "slug": "nangoma-zm101009012"
+    },
+    "code": {
+      "id": "ZM101009012",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM101009",
+      "level": 2,
+      "name": {
+        "local": "Mumbwa",
+        "en": "Mumbwa",
+        "slug": "mumbwa-zm101009"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM101",
+        "level": 1,
+        "name": {
+          "local": "Central",
+          "en": "Central",
+          "slug": "central-zm101"
+        }
+      },
+      {
+        "id": "ZM101009",
+        "level": 2,
+        "name": {
+          "local": "Mumbwa",
+          "en": "Mumbwa",
+          "slug": "mumbwa-zm101009"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 9
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-15.315",
+      "lon": "27.304"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM101010013",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Lufubu",
+      "en": "Lufubu",
+      "slug": "lufubu-zm101010013"
+    },
+    "code": {
+      "id": "ZM101010013",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM101010",
+      "level": 2,
+      "name": {
+        "local": "Ngabwe",
+        "en": "Ngabwe",
+        "slug": "ngabwe-zm101010"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM101",
+        "level": 1,
+        "name": {
+          "local": "Central",
+          "en": "Central",
+          "slug": "central-zm101"
+        }
+      },
+      {
+        "id": "ZM101010",
+        "level": 2,
+        "name": {
+          "local": "Ngabwe",
+          "en": "Ngabwe",
+          "slug": "ngabwe-zm101010"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 8
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-14.095",
+      "lon": "27.378"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM101011014",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Muchinga",
+      "en": "Muchinga",
+      "slug": "muchinga-zm101011014"
+    },
+    "code": {
+      "id": "ZM101011014",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM101011",
+      "level": 2,
+      "name": {
+        "local": "Serenje",
+        "en": "Serenje",
+        "slug": "serenje-zm101011"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM101",
+        "level": 1,
+        "name": {
+          "local": "Central",
+          "en": "Central",
+          "slug": "central-zm101"
+        }
+      },
+      {
+        "id": "ZM101011",
+        "level": 2,
+        "name": {
+          "local": "Serenje",
+          "en": "Serenje",
+          "slug": "serenje-zm101011"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 12
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-13.416",
+      "lon": "30.842"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM101011015",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Serenje",
+      "en": "Serenje",
+      "slug": "serenje-zm101011015"
+    },
+    "code": {
+      "id": "ZM101011015",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM101011",
+      "level": 2,
+      "name": {
+        "local": "Serenje",
+        "en": "Serenje",
+        "slug": "serenje-zm101011"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM101",
+        "level": 1,
+        "name": {
+          "local": "Central",
+          "en": "Central",
+          "slug": "central-zm101"
+        }
+      },
+      {
+        "id": "ZM101011",
+        "level": 2,
+        "name": {
+          "local": "Serenje",
+          "en": "Serenje",
+          "slug": "serenje-zm101011"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 9
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-12.975",
+      "lon": "30.088"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM101012001",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Mwembezhi",
+      "en": "Mwembezhi",
+      "slug": "mwembezhi-zm101012001"
+    },
+    "code": {
+      "id": "ZM101012001",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM101012",
+      "level": 2,
+      "name": {
+        "local": "Shibuyunji",
+        "en": "Shibuyunji",
+        "slug": "shibuyunji-zm101012"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM101",
+        "level": 1,
+        "name": {
+          "local": "Central",
+          "en": "Central",
+          "slug": "central-zm101"
+        }
+      },
+      {
+        "id": "ZM101012",
+        "level": 2,
+        "name": {
+          "local": "Shibuyunji",
+          "en": "Shibuyunji",
+          "slug": "shibuyunji-zm101012"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 12
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-15.332",
+      "lon": "27.683"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM102001016",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Chililabombwe",
+      "en": "Chililabombwe",
+      "slug": "chililabombwe-zm102001016"
+    },
+    "code": {
+      "id": "ZM102001016",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM102001",
+      "level": 2,
+      "name": {
+        "local": "Chililabombwe",
+        "en": "Chililabombwe",
+        "slug": "chililabombwe-zm102001"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM102",
+        "level": 1,
+        "name": {
+          "local": "Copperbelt",
+          "en": "Copperbelt",
+          "slug": "copperbelt-zm102"
+        }
+      },
+      {
+        "id": "ZM102001",
+        "level": 2,
+        "name": {
+          "local": "Chililabombwe",
+          "en": "Chililabombwe",
+          "slug": "chililabombwe-zm102001"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 24
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-12.358",
+      "lon": "27.761"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM102002017",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Chingola",
+      "en": "Chingola",
+      "slug": "chingola-zm102002017"
+    },
+    "code": {
+      "id": "ZM102002017",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM102002",
+      "level": 2,
+      "name": {
+        "local": "Chingola",
+        "en": "Chingola",
+        "slug": "chingola-zm102002"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM102",
+        "level": 1,
+        "name": {
+          "local": "Copperbelt",
+          "en": "Copperbelt",
+          "slug": "copperbelt-zm102"
+        }
+      },
+      {
+        "id": "ZM102002",
+        "level": 2,
+        "name": {
+          "local": "Chingola",
+          "en": "Chingola",
+          "slug": "chingola-zm102002"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 18
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-12.505",
+      "lon": "27.693"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM102002018",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Nchanga",
+      "en": "Nchanga",
+      "slug": "nchanga-zm102002018"
+    },
+    "code": {
+      "id": "ZM102002018",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM102002",
+      "level": 2,
+      "name": {
+        "local": "Chingola",
+        "en": "Chingola",
+        "slug": "chingola-zm102002"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM102",
+        "level": 1,
+        "name": {
+          "local": "Copperbelt",
+          "en": "Copperbelt",
+          "slug": "copperbelt-zm102"
+        }
+      },
+      {
+        "id": "ZM102002",
+        "level": 2,
+        "name": {
+          "local": "Chingola",
+          "en": "Chingola",
+          "slug": "chingola-zm102002"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 11
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-12.534",
+      "lon": "27.966"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM102003019",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Kalulushi",
+      "en": "Kalulushi",
+      "slug": "kalulushi-zm102003019"
+    },
+    "code": {
+      "id": "ZM102003019",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM102003",
+      "level": 2,
+      "name": {
+        "local": "Kalulushi",
+        "en": "Kalulushi",
+        "slug": "kalulushi-zm102003"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM102",
+        "level": 1,
+        "name": {
+          "local": "Copperbelt",
+          "en": "Copperbelt",
+          "slug": "copperbelt-zm102"
+        }
+      },
+      {
+        "id": "ZM102003",
+        "level": 2,
+        "name": {
+          "local": "Kalulushi",
+          "en": "Kalulushi",
+          "slug": "kalulushi-zm102003"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 24
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-12.761",
+      "lon": "27.855"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM102004020",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Chimwemwe",
+      "en": "Chimwemwe",
+      "slug": "chimwemwe-zm102004020"
+    },
+    "code": {
+      "id": "ZM102004020",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM102004",
+      "level": 2,
+      "name": {
+        "local": "Kitwe",
+        "en": "Kitwe",
+        "slug": "kitwe-zm102004"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM102",
+        "level": 1,
+        "name": {
+          "local": "Copperbelt",
+          "en": "Copperbelt",
+          "slug": "copperbelt-zm102"
+        }
+      },
+      {
+        "id": "ZM102004",
+        "level": 2,
+        "name": {
+          "local": "Kitwe",
+          "en": "Kitwe",
+          "slug": "kitwe-zm102004"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 7
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-12.715",
+      "lon": "28.178"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM102004021",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Kamfinsa",
+      "en": "Kamfinsa",
+      "slug": "kamfinsa-zm102004021"
+    },
+    "code": {
+      "id": "ZM102004021",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM102004",
+      "level": 2,
+      "name": {
+        "local": "Kitwe",
+        "en": "Kitwe",
+        "slug": "kitwe-zm102004"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM102",
+        "level": 1,
+        "name": {
+          "local": "Copperbelt",
+          "en": "Copperbelt",
+          "slug": "copperbelt-zm102"
+        }
+      },
+      {
+        "id": "ZM102004",
+        "level": 2,
+        "name": {
+          "local": "Kitwe",
+          "en": "Kitwe",
+          "slug": "kitwe-zm102004"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 4
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-12.833",
+      "lon": "28.328"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM102004022",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Kwacha",
+      "en": "Kwacha",
+      "slug": "kwacha-zm102004022"
+    },
+    "code": {
+      "id": "ZM102004022",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM102004",
+      "level": 2,
+      "name": {
+        "local": "Kitwe",
+        "en": "Kitwe",
+        "slug": "kitwe-zm102004"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM102",
+        "level": 1,
+        "name": {
+          "local": "Copperbelt",
+          "en": "Copperbelt",
+          "slug": "copperbelt-zm102"
+        }
+      },
+      {
+        "id": "ZM102004",
+        "level": 2,
+        "name": {
+          "local": "Kitwe",
+          "en": "Kitwe",
+          "slug": "kitwe-zm102004"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 7
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-12.775",
+      "lon": "28.326"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM102004023",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Nkana",
+      "en": "Nkana",
+      "slug": "nkana-zm102004023"
+    },
+    "code": {
+      "id": "ZM102004023",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM102004",
+      "level": 2,
+      "name": {
+        "local": "Kitwe",
+        "en": "Kitwe",
+        "slug": "kitwe-zm102004"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM102",
+        "level": 1,
+        "name": {
+          "local": "Copperbelt",
+          "en": "Copperbelt",
+          "slug": "copperbelt-zm102"
+        }
+      },
+      {
+        "id": "ZM102004",
+        "level": 2,
+        "name": {
+          "local": "Kitwe",
+          "en": "Kitwe",
+          "slug": "kitwe-zm102004"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 8
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-12.816",
+      "lon": "28.175"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM102004024",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Wusakile",
+      "en": "Wusakile",
+      "slug": "wusakile-zm102004024"
+    },
+    "code": {
+      "id": "ZM102004024",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM102004",
+      "level": 2,
+      "name": {
+        "local": "Kitwe",
+        "en": "Kitwe",
+        "slug": "kitwe-zm102004"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM102",
+        "level": 1,
+        "name": {
+          "local": "Copperbelt",
+          "en": "Copperbelt",
+          "slug": "copperbelt-zm102"
+        }
+      },
+      {
+        "id": "ZM102004",
+        "level": 2,
+        "name": {
+          "local": "Kitwe",
+          "en": "Kitwe",
+          "slug": "kitwe-zm102004"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 6
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-12.924",
+      "lon": "28.225"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM102005025",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Luanshya",
+      "en": "Luanshya",
+      "slug": "luanshya-zm102005025"
+    },
+    "code": {
+      "id": "ZM102005025",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM102005",
+      "level": 2,
+      "name": {
+        "local": "Luanshya",
+        "en": "Luanshya",
+        "slug": "luanshya-zm102005"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM102",
+        "level": 1,
+        "name": {
+          "local": "Copperbelt",
+          "en": "Copperbelt",
+          "slug": "copperbelt-zm102"
+        }
+      },
+      {
+        "id": "ZM102005",
+        "level": 2,
+        "name": {
+          "local": "Luanshya",
+          "en": "Luanshya",
+          "slug": "luanshya-zm102005"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 16
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-13.098",
+      "lon": "28.434"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM102005026",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Roan",
+      "en": "Roan",
+      "slug": "roan-zm102005026"
+    },
+    "code": {
+      "id": "ZM102005026",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM102005",
+      "level": 2,
+      "name": {
+        "local": "Luanshya",
+        "en": "Luanshya",
+        "slug": "luanshya-zm102005"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM102",
+        "level": 1,
+        "name": {
+          "local": "Copperbelt",
+          "en": "Copperbelt",
+          "slug": "copperbelt-zm102"
+        }
+      },
+      {
+        "id": "ZM102005",
+        "level": 2,
+        "name": {
+          "local": "Luanshya",
+          "en": "Luanshya",
+          "slug": "luanshya-zm102005"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 14
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-13.074",
+      "lon": "28.28"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM102006027",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Lufwanyama",
+      "en": "Lufwanyama",
+      "slug": "lufwanyama-zm102006027"
+    },
+    "code": {
+      "id": "ZM102006027",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM102006",
+      "level": 2,
+      "name": {
+        "local": "Lufwanyama",
+        "en": "Lufwanyama",
+        "slug": "lufwanyama-zm102006"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM102",
+        "level": 1,
+        "name": {
+          "local": "Copperbelt",
+          "en": "Copperbelt",
+          "slug": "copperbelt-zm102"
+        }
+      },
+      {
+        "id": "ZM102006",
+        "level": 2,
+        "name": {
+          "local": "Lufwanyama",
+          "en": "Lufwanyama",
+          "slug": "lufwanyama-zm102006"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 20
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-12.951",
+      "lon": "27.572"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM102007028",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Kafulafuta",
+      "en": "Kafulafuta",
+      "slug": "kafulafuta-zm102007028"
+    },
+    "code": {
+      "id": "ZM102007028",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM102007",
+      "level": 2,
+      "name": {
+        "local": "Masaiti",
+        "en": "Masaiti",
+        "slug": "masaiti-zm102007"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM102",
+        "level": 1,
+        "name": {
+          "local": "Copperbelt",
+          "en": "Copperbelt",
+          "slug": "copperbelt-zm102"
+        }
+      },
+      {
+        "id": "ZM102007",
+        "level": 2,
+        "name": {
+          "local": "Masaiti",
+          "en": "Masaiti",
+          "slug": "masaiti-zm102007"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 8
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-13.224",
+      "lon": "28.831"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM102007029",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Masaiti",
+      "en": "Masaiti",
+      "slug": "masaiti-zm102007029"
+    },
+    "code": {
+      "id": "ZM102007029",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM102007",
+      "level": 2,
+      "name": {
+        "local": "Masaiti",
+        "en": "Masaiti",
+        "slug": "masaiti-zm102007"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM102",
+        "level": 1,
+        "name": {
+          "local": "Copperbelt",
+          "en": "Copperbelt",
+          "slug": "copperbelt-zm102"
+        }
+      },
+      {
+        "id": "ZM102007",
+        "level": 2,
+        "name": {
+          "local": "Masaiti",
+          "en": "Masaiti",
+          "slug": "masaiti-zm102007"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 11
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-13.474",
+      "lon": "28.582"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM102008030",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Mpongwe",
+      "en": "Mpongwe",
+      "slug": "mpongwe-zm102008030"
+    },
+    "code": {
+      "id": "ZM102008030",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM102008",
+      "level": 2,
+      "name": {
+        "local": "Mpongwe",
+        "en": "Mpongwe",
+        "slug": "mpongwe-zm102008"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM102",
+        "level": 1,
+        "name": {
+          "local": "Copperbelt",
+          "en": "Copperbelt",
+          "slug": "copperbelt-zm102"
+        }
+      },
+      {
+        "id": "ZM102008",
+        "level": 2,
+        "name": {
+          "local": "Mpongwe",
+          "en": "Mpongwe",
+          "slug": "mpongwe-zm102008"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 15
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-13.574",
+      "lon": "27.635"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM102009031",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Kankoyo",
+      "en": "Kankoyo",
+      "slug": "kankoyo-zm102009031"
+    },
+    "code": {
+      "id": "ZM102009031",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM102009",
+      "level": 2,
+      "name": {
+        "local": "Mufulira",
+        "en": "Mufulira",
+        "slug": "mufulira-zm102009"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM102",
+        "level": 1,
+        "name": {
+          "local": "Copperbelt",
+          "en": "Copperbelt",
+          "slug": "copperbelt-zm102"
+        }
+      },
+      {
+        "id": "ZM102009",
+        "level": 2,
+        "name": {
+          "local": "Mufulira",
+          "en": "Mufulira",
+          "slug": "mufulira-zm102009"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 9
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-12.469",
+      "lon": "28.168"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM102009032",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Kantanshi",
+      "en": "Kantanshi",
+      "slug": "kantanshi-zm102009032"
+    },
+    "code": {
+      "id": "ZM102009032",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM102009",
+      "level": 2,
+      "name": {
+        "local": "Mufulira",
+        "en": "Mufulira",
+        "slug": "mufulira-zm102009"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM102",
+        "level": 1,
+        "name": {
+          "local": "Copperbelt",
+          "en": "Copperbelt",
+          "slug": "copperbelt-zm102"
+        }
+      },
+      {
+        "id": "ZM102009",
+        "level": 2,
+        "name": {
+          "local": "Mufulira",
+          "en": "Mufulira",
+          "slug": "mufulira-zm102009"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 11
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-12.511",
+      "lon": "28.343"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM102009033",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Mufulira",
+      "en": "Mufulira",
+      "slug": "mufulira-zm102009033"
+    },
+    "code": {
+      "id": "ZM102009033",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM102009",
+      "level": 2,
+      "name": {
+        "local": "Mufulira",
+        "en": "Mufulira",
+        "slug": "mufulira-zm102009"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM102",
+        "level": 1,
+        "name": {
+          "local": "Copperbelt",
+          "en": "Copperbelt",
+          "slug": "copperbelt-zm102"
+        }
+      },
+      {
+        "id": "ZM102009",
+        "level": 2,
+        "name": {
+          "local": "Mufulira",
+          "en": "Mufulira",
+          "slug": "mufulira-zm102009"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 10
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-12.648",
+      "lon": "28.349"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM102010034",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Bwana Mkubwa",
+      "en": "Bwana Mkubwa",
+      "slug": "bwana-mkubwa-zm102010034"
+    },
+    "code": {
+      "id": "ZM102010034",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM102010",
+      "level": 2,
+      "name": {
+        "local": "Ndola",
+        "en": "Ndola",
+        "slug": "ndola-zm102010"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM102",
+        "level": 1,
+        "name": {
+          "local": "Copperbelt",
+          "en": "Copperbelt",
+          "slug": "copperbelt-zm102"
+        }
+      },
+      {
+        "id": "ZM102010",
+        "level": 2,
+        "name": {
+          "local": "Ndola",
+          "en": "Ndola",
+          "slug": "ndola-zm102010"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 8
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-13.07",
+      "lon": "28.649"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM102010035",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Chifubu",
+      "en": "Chifubu",
+      "slug": "chifubu-zm102010035"
+    },
+    "code": {
+      "id": "ZM102010035",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM102010",
+      "level": 2,
+      "name": {
+        "local": "Ndola",
+        "en": "Ndola",
+        "slug": "ndola-zm102010"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM102",
+        "level": 1,
+        "name": {
+          "local": "Copperbelt",
+          "en": "Copperbelt",
+          "slug": "copperbelt-zm102"
+        }
+      },
+      {
+        "id": "ZM102010",
+        "level": 2,
+        "name": {
+          "local": "Ndola",
+          "en": "Ndola",
+          "slug": "ndola-zm102010"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 7
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-12.896",
+      "lon": "28.621"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM102010036",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Kabushi",
+      "en": "Kabushi",
+      "slug": "kabushi-zm102010036"
+    },
+    "code": {
+      "id": "ZM102010036",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM102010",
+      "level": 2,
+      "name": {
+        "local": "Ndola",
+        "en": "Ndola",
+        "slug": "ndola-zm102010"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM102",
+        "level": 1,
+        "name": {
+          "local": "Copperbelt",
+          "en": "Copperbelt",
+          "slug": "copperbelt-zm102"
+        }
+      },
+      {
+        "id": "ZM102010",
+        "level": 2,
+        "name": {
+          "local": "Ndola",
+          "en": "Ndola",
+          "slug": "ndola-zm102010"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 8
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-13.001",
+      "lon": "28.627"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM102010037",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Ndola Central",
+      "en": "Ndola Central",
+      "slug": "ndola-central-zm102010037"
+    },
+    "code": {
+      "id": "ZM102010037",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM102010",
+      "level": 2,
+      "name": {
+        "local": "Ndola",
+        "en": "Ndola",
+        "slug": "ndola-zm102010"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM102",
+        "level": 1,
+        "name": {
+          "local": "Copperbelt",
+          "en": "Copperbelt",
+          "slug": "copperbelt-zm102"
+        }
+      },
+      {
+        "id": "ZM102010",
+        "level": 2,
+        "name": {
+          "local": "Ndola",
+          "en": "Ndola",
+          "slug": "ndola-zm102010"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 7
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-12.87",
+      "lon": "28.422"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM103001038",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Chadiza",
+      "en": "Chadiza",
+      "slug": "chadiza-zm103001038"
+    },
+    "code": {
+      "id": "ZM103001038",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM103001",
+      "level": 2,
+      "name": {
+        "local": "Chadiza",
+        "en": "Chadiza",
+        "slug": "chadiza-zm103001"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM103",
+        "level": 1,
+        "name": {
+          "local": "Eastern",
+          "en": "Eastern",
+          "slug": "eastern-zm103"
+        }
+      },
+      {
+        "id": "ZM103001",
+        "level": 2,
+        "name": {
+          "local": "Chadiza",
+          "en": "Chadiza",
+          "slug": "chadiza-zm103001"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 20
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-14.113",
+      "lon": "32.476"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM103002040",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Chipata Central",
+      "en": "Chipata Central",
+      "slug": "chipata-central-zm103002040"
+    },
+    "code": {
+      "id": "ZM103002040",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM103002",
+      "level": 2,
+      "name": {
+        "local": "Chipata",
+        "en": "Chipata",
+        "slug": "chipata-zm103002"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM103",
+        "level": 1,
+        "name": {
+          "local": "Eastern",
+          "en": "Eastern",
+          "slug": "eastern-zm103"
+        }
+      },
+      {
+        "id": "ZM103002",
+        "level": 2,
+        "name": {
+          "local": "Chipata",
+          "en": "Chipata",
+          "slug": "chipata-zm103002"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 5
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-13.61",
+      "lon": "32.612"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM103002042",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Luangeni",
+      "en": "Luangeni",
+      "slug": "luangeni-zm103002042"
+    },
+    "code": {
+      "id": "ZM103002042",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM103002",
+      "level": 2,
+      "name": {
+        "local": "Chipata",
+        "en": "Chipata",
+        "slug": "chipata-zm103002"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM103",
+        "level": 1,
+        "name": {
+          "local": "Eastern",
+          "en": "Eastern",
+          "slug": "eastern-zm103"
+        }
+      },
+      {
+        "id": "ZM103002",
+        "level": 2,
+        "name": {
+          "local": "Chipata",
+          "en": "Chipata",
+          "slug": "chipata-zm103002"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 6
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-13.836",
+      "lon": "32.595"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM103003043",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Milanzi",
+      "en": "Milanzi",
+      "slug": "milanzi-zm103003043"
+    },
+    "code": {
+      "id": "ZM103003043",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM103003",
+      "level": 2,
+      "name": {
+        "local": "Katete",
+        "en": "Katete",
+        "slug": "katete-zm103003"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM103",
+        "level": 1,
+        "name": {
+          "local": "Eastern",
+          "en": "Eastern",
+          "slug": "eastern-zm103"
+        }
+      },
+      {
+        "id": "ZM103003",
+        "level": 2,
+        "name": {
+          "local": "Katete",
+          "en": "Katete",
+          "slug": "katete-zm103003"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 12
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-14.149",
+      "lon": "32.168"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM103003044",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Mkaika",
+      "en": "Mkaika",
+      "slug": "mkaika-zm103003044"
+    },
+    "code": {
+      "id": "ZM103003044",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM103003",
+      "level": 2,
+      "name": {
+        "local": "Katete",
+        "en": "Katete",
+        "slug": "katete-zm103003"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM103",
+        "level": 1,
+        "name": {
+          "local": "Eastern",
+          "en": "Eastern",
+          "slug": "eastern-zm103"
+        }
+      },
+      {
+        "id": "ZM103003",
+        "level": 2,
+        "name": {
+          "local": "Katete",
+          "en": "Katete",
+          "slug": "katete-zm103003"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 10
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-13.961",
+      "lon": "31.987"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM103004047",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Lundazi",
+      "en": "Lundazi",
+      "slug": "lundazi-zm103004047"
+    },
+    "code": {
+      "id": "ZM103004047",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM103004",
+      "level": 2,
+      "name": {
+        "local": "Lundazi",
+        "en": "Lundazi",
+        "slug": "lundazi-zm103004"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM103",
+        "level": 1,
+        "name": {
+          "local": "Eastern",
+          "en": "Eastern",
+          "slug": "eastern-zm103"
+        }
+      },
+      {
+        "id": "ZM103004",
+        "level": 2,
+        "name": {
+          "local": "Lundazi",
+          "en": "Lundazi",
+          "slug": "lundazi-zm103004"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 10
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-12.415",
+      "lon": "33.337"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM103005048",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Malambo",
+      "en": "Malambo",
+      "slug": "malambo-zm103005048"
+    },
+    "code": {
+      "id": "ZM103005048",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM103005",
+      "level": 2,
+      "name": {
+        "local": "Mambwe",
+        "en": "Mambwe",
+        "slug": "mambwe-zm103005"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM103",
+        "level": 1,
+        "name": {
+          "local": "Eastern",
+          "en": "Eastern",
+          "slug": "eastern-zm103"
+        }
+      },
+      {
+        "id": "ZM103005",
+        "level": 2,
+        "name": {
+          "local": "Mambwe",
+          "en": "Mambwe",
+          "slug": "mambwe-zm103005"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 15
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-13.357",
+      "lon": "32.024"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM103006049",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Nyimba",
+      "en": "Nyimba",
+      "slug": "nyimba-zm103006049"
+    },
+    "code": {
+      "id": "ZM103006049",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM103006",
+      "level": 2,
+      "name": {
+        "local": "Nyimba",
+        "en": "Nyimba",
+        "slug": "nyimba-zm103006"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM103",
+        "level": 1,
+        "name": {
+          "local": "Eastern",
+          "en": "Eastern",
+          "slug": "eastern-zm103"
+        }
+      },
+      {
+        "id": "ZM103006",
+        "level": 2,
+        "name": {
+          "local": "Nyimba",
+          "en": "Nyimba",
+          "slug": "nyimba-zm103006"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 15
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-14.393",
+      "lon": "30.582"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM103007050",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Kaumbwe",
+      "en": "Kaumbwe",
+      "slug": "kaumbwe-zm103007050"
+    },
+    "code": {
+      "id": "ZM103007050",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM103007",
+      "level": 2,
+      "name": {
+        "local": "Petauke",
+        "en": "Petauke",
+        "slug": "petauke-zm103007"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM103",
+        "level": 1,
+        "name": {
+          "local": "Eastern",
+          "en": "Eastern",
+          "slug": "eastern-zm103"
+        }
+      },
+      {
+        "id": "ZM103007",
+        "level": 2,
+        "name": {
+          "local": "Petauke",
+          "en": "Petauke",
+          "slug": "petauke-zm103007"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 5
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-14.604",
+      "lon": "31.268"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM103007052",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Petauke",
+      "en": "Petauke",
+      "slug": "petauke-zm103007052"
+    },
+    "code": {
+      "id": "ZM103007052",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM103007",
+      "level": 2,
+      "name": {
+        "local": "Petauke",
+        "en": "Petauke",
+        "slug": "petauke-zm103007"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM103",
+        "level": 1,
+        "name": {
+          "local": "Eastern",
+          "en": "Eastern",
+          "slug": "eastern-zm103"
+        }
+      },
+      {
+        "id": "ZM103007",
+        "level": 2,
+        "name": {
+          "local": "Petauke",
+          "en": "Petauke",
+          "slug": "petauke-zm103007"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 13
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-14.245",
+      "lon": "31.3"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM103008053",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Kapoche",
+      "en": "Kapoche",
+      "slug": "kapoche-zm103008053"
+    },
+    "code": {
+      "id": "ZM103008053",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM103008",
+      "level": 2,
+      "name": {
+        "local": "Sinda",
+        "en": "Sinda",
+        "slug": "sinda-zm103008"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM103",
+        "level": 1,
+        "name": {
+          "local": "Eastern",
+          "en": "Eastern",
+          "slug": "eastern-zm103"
+        }
+      },
+      {
+        "id": "ZM103008",
+        "level": 2,
+        "name": {
+          "local": "Sinda",
+          "en": "Sinda",
+          "slug": "sinda-zm103008"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 11
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-14.369",
+      "lon": "31.768"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM103008054",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Sinda",
+      "en": "Sinda",
+      "slug": "sinda-zm103008054"
+    },
+    "code": {
+      "id": "ZM103008054",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM103008",
+      "level": 2,
+      "name": {
+        "local": "Sinda",
+        "en": "Sinda",
+        "slug": "sinda-zm103008"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM103",
+        "level": 1,
+        "name": {
+          "local": "Eastern",
+          "en": "Eastern",
+          "slug": "eastern-zm103"
+        }
+      },
+      {
+        "id": "ZM103008",
+        "level": 2,
+        "name": {
+          "local": "Sinda",
+          "en": "Sinda",
+          "slug": "sinda-zm103008"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 8
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-14.132",
+      "lon": "31.66"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM103009055",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Vubwi",
+      "en": "Vubwi",
+      "slug": "vubwi-zm103009055"
+    },
+    "code": {
+      "id": "ZM103009055",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM103009",
+      "level": 2,
+      "name": {
+        "local": "Vubwi",
+        "en": "Vubwi",
+        "slug": "vubwi-zm103009"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM103",
+        "level": 1,
+        "name": {
+          "local": "Eastern",
+          "en": "Eastern",
+          "slug": "eastern-zm103"
+        }
+      },
+      {
+        "id": "ZM103009",
+        "level": 2,
+        "name": {
+          "local": "Vubwi",
+          "en": "Vubwi",
+          "slug": "vubwi-zm103009"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 9
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-13.994",
+      "lon": "32.906"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM103010045",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Chasefu",
+      "en": "Chasefu",
+      "slug": "chasefu-zm103010045"
+    },
+    "code": {
+      "id": "ZM103010045",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM103010",
+      "level": 2,
+      "name": {
+        "local": "Chasefu",
+        "en": "Chasefu",
+        "slug": "chasefu-zm103010"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM103",
+        "level": 1,
+        "name": {
+          "local": "Eastern",
+          "en": "Eastern",
+          "slug": "eastern-zm103"
+        }
+      },
+      {
+        "id": "ZM103010",
+        "level": 2,
+        "name": {
+          "local": "Chasefu",
+          "en": "Chasefu",
+          "slug": "chasefu-zm103010"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 10
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-11.922",
+      "lon": "33.154"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM103011039",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Chipangali",
+      "en": "Chipangali",
+      "slug": "chipangali-zm103011039"
+    },
+    "code": {
+      "id": "ZM103011039",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM103011",
+      "level": 2,
+      "name": {
+        "local": "Chipangali",
+        "en": "Chipangali",
+        "slug": "chipangali-zm103011"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM103",
+        "level": 1,
+        "name": {
+          "local": "Eastern",
+          "en": "Eastern",
+          "slug": "eastern-zm103"
+        }
+      },
+      {
+        "id": "ZM103011",
+        "level": 2,
+        "name": {
+          "local": "Chipangali",
+          "en": "Chipangali",
+          "slug": "chipangali-zm103011"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 8
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-13.319",
+      "lon": "32.68"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM103012041",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Kasenengwa",
+      "en": "Kasenengwa",
+      "slug": "kasenengwa-zm103012041"
+    },
+    "code": {
+      "id": "ZM103012041",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM103012",
+      "level": 2,
+      "name": {
+        "local": "Kasenengwa",
+        "en": "Kasenengwa",
+        "slug": "kasenengwa-zm103012"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM103",
+        "level": 1,
+        "name": {
+          "local": "Eastern",
+          "en": "Eastern",
+          "slug": "eastern-zm103"
+        }
+      },
+      {
+        "id": "ZM103012",
+        "level": 2,
+        "name": {
+          "local": "Kasenengwa",
+          "en": "Kasenengwa",
+          "slug": "kasenengwa-zm103012"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 8
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-13.666",
+      "lon": "32.265"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM103013046",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Lumezi",
+      "en": "Lumezi",
+      "slug": "lumezi-zm103013046"
+    },
+    "code": {
+      "id": "ZM103013046",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM103013",
+      "level": 2,
+      "name": {
+        "local": "Lumezi",
+        "en": "Lumezi",
+        "slug": "lumezi-zm103013"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM103",
+        "level": 1,
+        "name": {
+          "local": "Eastern",
+          "en": "Eastern",
+          "slug": "eastern-zm103"
+        }
+      },
+      {
+        "id": "ZM103013",
+        "level": 2,
+        "name": {
+          "local": "Lumezi",
+          "en": "Lumezi",
+          "slug": "lumezi-zm103013"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 11
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-12.696",
+      "lon": "32.539"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM103014051",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Msanzala",
+      "en": "Msanzala",
+      "slug": "msanzala-zm103014051"
+    },
+    "code": {
+      "id": "ZM103014051",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM103014",
+      "level": 2,
+      "name": {
+        "local": "Lusangazi",
+        "en": "Lusangazi",
+        "slug": "lusangazi-zm103014"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM103",
+        "level": 1,
+        "name": {
+          "local": "Eastern",
+          "en": "Eastern",
+          "slug": "eastern-zm103"
+        }
+      },
+      {
+        "id": "ZM103014",
+        "level": 2,
+        "name": {
+          "local": "Lusangazi",
+          "en": "Lusangazi",
+          "slug": "lusangazi-zm103014"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 6
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-13.775",
+      "lon": "31.409"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM103015085",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Chama North",
+      "en": "Chama North",
+      "slug": "chama-north-zm103015085"
+    },
+    "code": {
+      "id": "ZM103015085",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM103015",
+      "level": 2,
+      "name": {
+        "local": "Chama",
+        "en": "Chama",
+        "slug": "chama-zm103015"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM103",
+        "level": 1,
+        "name": {
+          "local": "Eastern",
+          "en": "Eastern",
+          "slug": "eastern-zm103"
+        }
+      },
+      {
+        "id": "ZM103015",
+        "level": 2,
+        "name": {
+          "local": "Chama",
+          "en": "Chama",
+          "slug": "chama-zm103015"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 13
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-10.954",
+      "lon": "32.82"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM103015086",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Chama South",
+      "en": "Chama South",
+      "slug": "chama-south-zm103015086"
+    },
+    "code": {
+      "id": "ZM103015086",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM103015",
+      "level": 2,
+      "name": {
+        "local": "Chama",
+        "en": "Chama",
+        "slug": "chama-zm103015"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM103",
+        "level": 1,
+        "name": {
+          "local": "Eastern",
+          "en": "Eastern",
+          "slug": "eastern-zm103"
+        }
+      },
+      {
+        "id": "ZM103015",
+        "level": 2,
+        "name": {
+          "local": "Chama",
+          "en": "Chama",
+          "slug": "chama-zm103015"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 11
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-11.726",
+      "lon": "32.832"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM104001056",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Chembe",
+      "en": "Chembe",
+      "slug": "chembe-zm104001056"
+    },
+    "code": {
+      "id": "ZM104001056",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM104001",
+      "level": 2,
+      "name": {
+        "local": "Chembe",
+        "en": "Chembe",
+        "slug": "chembe-zm104001"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM104",
+        "level": 1,
+        "name": {
+          "local": "Luapula",
+          "en": "Luapula",
+          "slug": "luapula-zm104"
+        }
+      },
+      {
+        "id": "ZM104001",
+        "level": 2,
+        "name": {
+          "local": "Chembe",
+          "en": "Chembe",
+          "slug": "chembe-zm104001"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 8
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-11.746",
+      "lon": "28.642"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM104002057",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Chienge",
+      "en": "Chienge",
+      "slug": "chienge-zm104002057"
+    },
+    "code": {
+      "id": "ZM104002057",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM104002",
+      "level": 2,
+      "name": {
+        "local": "Chienge",
+        "en": "Chienge",
+        "slug": "chienge-zm104002"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM104",
+        "level": 1,
+        "name": {
+          "local": "Luapula",
+          "en": "Luapula",
+          "slug": "luapula-zm104"
+        }
+      },
+      {
+        "id": "ZM104002",
+        "level": 2,
+        "name": {
+          "local": "Chienge",
+          "en": "Chienge",
+          "slug": "chienge-zm104002"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 15
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-8.777",
+      "lon": "29.11"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM104003058",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Chipili",
+      "en": "Chipili",
+      "slug": "chipili-zm104003058"
+    },
+    "code": {
+      "id": "ZM104003058",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM104003",
+      "level": 2,
+      "name": {
+        "local": "Chipili",
+        "en": "Chipili",
+        "slug": "chipili-zm104003"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM104",
+        "level": 1,
+        "name": {
+          "local": "Luapula",
+          "en": "Luapula",
+          "slug": "luapula-zm104"
+        }
+      },
+      {
+        "id": "ZM104003",
+        "level": 2,
+        "name": {
+          "local": "Chipili",
+          "en": "Chipili",
+          "slug": "chipili-zm104003"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 12
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-10.48",
+      "lon": "29.14"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM104004059",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Kawambwa",
+      "en": "Kawambwa",
+      "slug": "kawambwa-zm104004059"
+    },
+    "code": {
+      "id": "ZM104004059",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM104004",
+      "level": 2,
+      "name": {
+        "local": "Kawambwa",
+        "en": "Kawambwa",
+        "slug": "kawambwa-zm104004"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM104",
+        "level": 1,
+        "name": {
+          "local": "Luapula",
+          "en": "Luapula",
+          "slug": "luapula-zm104"
+        }
+      },
+      {
+        "id": "ZM104004",
+        "level": 2,
+        "name": {
+          "local": "Kawambwa",
+          "en": "Kawambwa",
+          "slug": "kawambwa-zm104004"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 9
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-9.673",
+      "lon": "29.123"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM104004060",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Pambashe",
+      "en": "Pambashe",
+      "slug": "pambashe-zm104004060"
+    },
+    "code": {
+      "id": "ZM104004060",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM104004",
+      "level": 2,
+      "name": {
+        "local": "Kawambwa",
+        "en": "Kawambwa",
+        "slug": "kawambwa-zm104004"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM104",
+        "level": 1,
+        "name": {
+          "local": "Luapula",
+          "en": "Luapula",
+          "slug": "luapula-zm104"
+        }
+      },
+      {
+        "id": "ZM104004",
+        "level": 2,
+        "name": {
+          "local": "Kawambwa",
+          "en": "Kawambwa",
+          "slug": "kawambwa-zm104004"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 9
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-9.916",
+      "lon": "29.616"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM104005061",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Luapula",
+      "en": "Luapula",
+      "slug": "luapula-zm104005061"
+    },
+    "code": {
+      "id": "ZM104005061",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM104005",
+      "level": 2,
+      "name": {
+        "local": "Lunga",
+        "en": "Lunga",
+        "slug": "lunga-zm104005"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM104",
+        "level": 1,
+        "name": {
+          "local": "Luapula",
+          "en": "Luapula",
+          "slug": "luapula-zm104"
+        }
+      },
+      {
+        "id": "ZM104005",
+        "level": 2,
+        "name": {
+          "local": "Lunga",
+          "en": "Lunga",
+          "slug": "lunga-zm104005"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 10
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-11.57",
+      "lon": "30.123"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM104006062",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Bahati",
+      "en": "Bahati",
+      "slug": "bahati-zm104006062"
+    },
+    "code": {
+      "id": "ZM104006062",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM104006",
+      "level": 2,
+      "name": {
+        "local": "Mansa",
+        "en": "Mansa",
+        "slug": "mansa-zm104006"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM104",
+        "level": 1,
+        "name": {
+          "local": "Luapula",
+          "en": "Luapula",
+          "slug": "luapula-zm104"
+        }
+      },
+      {
+        "id": "ZM104006",
+        "level": 2,
+        "name": {
+          "local": "Mansa",
+          "en": "Mansa",
+          "slug": "mansa-zm104006"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 10
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-11.003",
+      "lon": "29"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM104006063",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Mansa Central",
+      "en": "Mansa Central",
+      "slug": "mansa-central-zm104006063"
+    },
+    "code": {
+      "id": "ZM104006063",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM104006",
+      "level": 2,
+      "name": {
+        "local": "Mansa",
+        "en": "Mansa",
+        "slug": "mansa-zm104006"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM104",
+        "level": 1,
+        "name": {
+          "local": "Luapula",
+          "en": "Luapula",
+          "slug": "luapula-zm104"
+        }
+      },
+      {
+        "id": "ZM104006",
+        "level": 2,
+        "name": {
+          "local": "Mansa",
+          "en": "Mansa",
+          "slug": "mansa-zm104006"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 10
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-11.395",
+      "lon": "28.96"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM104007064",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Milenge",
+      "en": "Milenge",
+      "slug": "milenge-zm104007064"
+    },
+    "code": {
+      "id": "ZM104007064",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM104007",
+      "level": 2,
+      "name": {
+        "local": "Milenge",
+        "en": "Milenge",
+        "slug": "milenge-zm104007"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM104",
+        "level": 1,
+        "name": {
+          "local": "Luapula",
+          "en": "Luapula",
+          "slug": "luapula-zm104"
+        }
+      },
+      {
+        "id": "ZM104007",
+        "level": 2,
+        "name": {
+          "local": "Milenge",
+          "en": "Milenge",
+          "slug": "milenge-zm104007"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 15
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-11.938",
+      "lon": "29.212"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM104008065",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Mwansabombwe",
+      "en": "Mwansabombwe",
+      "slug": "mwansabombwe-zm104008065"
+    },
+    "code": {
+      "id": "ZM104008065",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM104008",
+      "level": 2,
+      "name": {
+        "local": "Mwansabombwe",
+        "en": "Mwansabombwe",
+        "slug": "mwansabombwe-zm104008"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM104",
+        "level": 1,
+        "name": {
+          "local": "Luapula",
+          "en": "Luapula",
+          "slug": "luapula-zm104"
+        }
+      },
+      {
+        "id": "ZM104008",
+        "level": 2,
+        "name": {
+          "local": "Mwansabombwe",
+          "en": "Mwansabombwe",
+          "slug": "mwansabombwe-zm104008"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 12
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-9.955",
+      "lon": "28.778"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM104009066",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Mambilima",
+      "en": "Mambilima",
+      "slug": "mambilima-zm104009066"
+    },
+    "code": {
+      "id": "ZM104009066",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM104009",
+      "level": 2,
+      "name": {
+        "local": "Mwense",
+        "en": "Mwense",
+        "slug": "mwense-zm104009"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM104",
+        "level": 1,
+        "name": {
+          "local": "Luapula",
+          "en": "Luapula",
+          "slug": "luapula-zm104"
+        }
+      },
+      {
+        "id": "ZM104009",
+        "level": 2,
+        "name": {
+          "local": "Mwense",
+          "en": "Mwense",
+          "slug": "mwense-zm104009"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 10
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-10.7",
+      "lon": "28.72"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM104009067",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Mwense",
+      "en": "Mwense",
+      "slug": "mwense-zm104009067"
+    },
+    "code": {
+      "id": "ZM104009067",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM104009",
+      "level": 2,
+      "name": {
+        "local": "Mwense",
+        "en": "Mwense",
+        "slug": "mwense-zm104009"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM104",
+        "level": 1,
+        "name": {
+          "local": "Luapula",
+          "en": "Luapula",
+          "slug": "luapula-zm104"
+        }
+      },
+      {
+        "id": "ZM104009",
+        "level": 2,
+        "name": {
+          "local": "Mwense",
+          "en": "Mwense",
+          "slug": "mwense-zm104009"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 11
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-10.234",
+      "lon": "28.741"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM104010068",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Nchelenge",
+      "en": "Nchelenge",
+      "slug": "nchelenge-zm104010068"
+    },
+    "code": {
+      "id": "ZM104010068",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM104010",
+      "level": 2,
+      "name": {
+        "local": "Nchelenge",
+        "en": "Nchelenge",
+        "slug": "nchelenge-zm104010"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM104",
+        "level": 1,
+        "name": {
+          "local": "Luapula",
+          "en": "Luapula",
+          "slug": "luapula-zm104"
+        }
+      },
+      {
+        "id": "ZM104010",
+        "level": 2,
+        "name": {
+          "local": "Nchelenge",
+          "en": "Nchelenge",
+          "slug": "nchelenge-zm104010"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 15
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-9.368",
+      "lon": "28.727"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM104011069",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Bangweulu",
+      "en": "Bangweulu",
+      "slug": "bangweulu-zm104011069"
+    },
+    "code": {
+      "id": "ZM104011069",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM104011",
+      "level": 2,
+      "name": {
+        "local": "Samfya",
+        "en": "Samfya",
+        "slug": "samfya-zm104011"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM104",
+        "level": 1,
+        "name": {
+          "local": "Luapula",
+          "en": "Luapula",
+          "slug": "luapula-zm104"
+        }
+      },
+      {
+        "id": "ZM104011",
+        "level": 2,
+        "name": {
+          "local": "Samfya",
+          "en": "Samfya",
+          "slug": "samfya-zm104011"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 10
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-11.747",
+      "lon": "29.648"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM104012070",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Chifunabuli",
+      "en": "Chifunabuli",
+      "slug": "chifunabuli-zm104012070"
+    },
+    "code": {
+      "id": "ZM104012070",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM104012",
+      "level": 2,
+      "name": {
+        "local": "Chifunabuli",
+        "en": "Chifunabuli",
+        "slug": "chifunabuli-zm104012"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM104",
+        "level": 1,
+        "name": {
+          "local": "Luapula",
+          "en": "Luapula",
+          "slug": "luapula-zm104"
+        }
+      },
+      {
+        "id": "ZM104012",
+        "level": 2,
+        "name": {
+          "local": "Chifunabuli",
+          "en": "Chifunabuli",
+          "slug": "chifunabuli-zm104012"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 13
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-11.09",
+      "lon": "29.657"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM105001071",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Chilanga",
+      "en": "Chilanga",
+      "slug": "chilanga-zm105001071"
+    },
+    "code": {
+      "id": "ZM105001071",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM105001",
+      "level": 2,
+      "name": {
+        "local": "Chilanga",
+        "en": "Chilanga",
+        "slug": "chilanga-zm105001"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM105",
+        "level": 1,
+        "name": {
+          "local": "Lusaka",
+          "en": "Lusaka",
+          "slug": "lusaka-zm105"
+        }
+      },
+      {
+        "id": "ZM105001",
+        "level": 2,
+        "name": {
+          "local": "Chilanga",
+          "en": "Chilanga",
+          "slug": "chilanga-zm105001"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 12
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-15.451",
+      "lon": "28.088"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM105002072",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Chirundu",
+      "en": "Chirundu",
+      "slug": "chirundu-zm105002072"
+    },
+    "code": {
+      "id": "ZM105002072",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM105002",
+      "level": 2,
+      "name": {
+        "local": "Chirundu",
+        "en": "Chirundu",
+        "slug": "chirundu-zm105002"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM105",
+        "level": 1,
+        "name": {
+          "local": "Lusaka",
+          "en": "Lusaka",
+          "slug": "lusaka-zm105"
+        }
+      },
+      {
+        "id": "ZM105002",
+        "level": 2,
+        "name": {
+          "local": "Chirundu",
+          "en": "Chirundu",
+          "slug": "chirundu-zm105002"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 12
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-16.104",
+      "lon": "28.642"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM105003073",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Chongwe",
+      "en": "Chongwe",
+      "slug": "chongwe-zm105003073"
+    },
+    "code": {
+      "id": "ZM105003073",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM105003",
+      "level": 2,
+      "name": {
+        "local": "Chongwe",
+        "en": "Chongwe",
+        "slug": "chongwe-zm105003"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM105",
+        "level": 1,
+        "name": {
+          "local": "Lusaka",
+          "en": "Lusaka",
+          "slug": "lusaka-zm105"
+        }
+      },
+      {
+        "id": "ZM105003",
+        "level": 2,
+        "name": {
+          "local": "Chongwe",
+          "en": "Chongwe",
+          "slug": "chongwe-zm105003"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 21
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-15.39",
+      "lon": "28.62"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM105004074",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Kafue",
+      "en": "Kafue",
+      "slug": "kafue-zm105004074"
+    },
+    "code": {
+      "id": "ZM105004074",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM105004",
+      "level": 2,
+      "name": {
+        "local": "Kafue",
+        "en": "Kafue",
+        "slug": "kafue-zm105004"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM105",
+        "level": 1,
+        "name": {
+          "local": "Lusaka",
+          "en": "Lusaka",
+          "slug": "lusaka-zm105"
+        }
+      },
+      {
+        "id": "ZM105004",
+        "level": 2,
+        "name": {
+          "local": "Kafue",
+          "en": "Kafue",
+          "slug": "kafue-zm105004"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 18
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-15.723",
+      "lon": "28.677"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM105005075",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Feira",
+      "en": "Feira",
+      "slug": "feira-zm105005075"
+    },
+    "code": {
+      "id": "ZM105005075",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM105005",
+      "level": 2,
+      "name": {
+        "local": "Luangwa",
+        "en": "Luangwa",
+        "slug": "luangwa-zm105005"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM105",
+        "level": 1,
+        "name": {
+          "local": "Lusaka",
+          "en": "Lusaka",
+          "slug": "lusaka-zm105"
+        }
+      },
+      {
+        "id": "ZM105005",
+        "level": 2,
+        "name": {
+          "local": "Luangwa",
+          "en": "Luangwa",
+          "slug": "luangwa-zm105005"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 17
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-15.353",
+      "lon": "30.068"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM105006076",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Chawama",
+      "en": "Chawama",
+      "slug": "chawama-zm105006076"
+    },
+    "code": {
+      "id": "ZM105006076",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM105006",
+      "level": 2,
+      "name": {
+        "local": "Lusaka",
+        "en": "Lusaka",
+        "slug": "lusaka-zm105006"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM105",
+        "level": 1,
+        "name": {
+          "local": "Lusaka",
+          "en": "Lusaka",
+          "slug": "lusaka-zm105"
+        }
+      },
+      {
+        "id": "ZM105006",
+        "level": 2,
+        "name": {
+          "local": "Lusaka",
+          "en": "Lusaka",
+          "slug": "lusaka-zm105006"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 4
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-15.487",
+      "lon": "28.274"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM105006077",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Kabwata",
+      "en": "Kabwata",
+      "slug": "kabwata-zm105006077"
+    },
+    "code": {
+      "id": "ZM105006077",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM105006",
+      "level": 2,
+      "name": {
+        "local": "Lusaka",
+        "en": "Lusaka",
+        "slug": "lusaka-zm105006"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM105",
+        "level": 1,
+        "name": {
+          "local": "Lusaka",
+          "en": "Lusaka",
+          "slug": "lusaka-zm105"
+        }
+      },
+      {
+        "id": "ZM105006",
+        "level": 2,
+        "name": {
+          "local": "Lusaka",
+          "en": "Lusaka",
+          "slug": "lusaka-zm105006"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 5
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-15.481",
+      "lon": "28.302"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM105006078",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Kanyama",
+      "en": "Kanyama",
+      "slug": "kanyama-zm105006078"
+    },
+    "code": {
+      "id": "ZM105006078",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM105006",
+      "level": 2,
+      "name": {
+        "local": "Lusaka",
+        "en": "Lusaka",
+        "slug": "lusaka-zm105006"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM105",
+        "level": 1,
+        "name": {
+          "local": "Lusaka",
+          "en": "Lusaka",
+          "slug": "lusaka-zm105"
+        }
+      },
+      {
+        "id": "ZM105006",
+        "level": 2,
+        "name": {
+          "local": "Lusaka",
+          "en": "Lusaka",
+          "slug": "lusaka-zm105006"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 6
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-15.464",
+      "lon": "28.243"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM105006079",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Lusaka Central",
+      "en": "Lusaka Central",
+      "slug": "lusaka-central-zm105006079"
+    },
+    "code": {
+      "id": "ZM105006079",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM105006",
+      "level": 2,
+      "name": {
+        "local": "Lusaka",
+        "en": "Lusaka",
+        "slug": "lusaka-zm105006"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM105",
+        "level": 1,
+        "name": {
+          "local": "Lusaka",
+          "en": "Lusaka",
+          "slug": "lusaka-zm105"
+        }
+      },
+      {
+        "id": "ZM105006",
+        "level": 2,
+        "name": {
+          "local": "Lusaka",
+          "en": "Lusaka",
+          "slug": "lusaka-zm105006"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 4
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-15.444",
+      "lon": "28.385"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM105006080",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Mandevu",
+      "en": "Mandevu",
+      "slug": "mandevu-zm105006080"
+    },
+    "code": {
+      "id": "ZM105006080",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM105006",
+      "level": 2,
+      "name": {
+        "local": "Lusaka",
+        "en": "Lusaka",
+        "slug": "lusaka-zm105006"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM105",
+        "level": 1,
+        "name": {
+          "local": "Lusaka",
+          "en": "Lusaka",
+          "slug": "lusaka-zm105"
+        }
+      },
+      {
+        "id": "ZM105006",
+        "level": 2,
+        "name": {
+          "local": "Lusaka",
+          "en": "Lusaka",
+          "slug": "lusaka-zm105006"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 8
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-15.353",
+      "lon": "28.307"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM105006081",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Matero",
+      "en": "Matero",
+      "slug": "matero-zm105006081"
+    },
+    "code": {
+      "id": "ZM105006081",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM105006",
+      "level": 2,
+      "name": {
+        "local": "Lusaka",
+        "en": "Lusaka",
+        "slug": "lusaka-zm105006"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM105",
+        "level": 1,
+        "name": {
+          "local": "Lusaka",
+          "en": "Lusaka",
+          "slug": "lusaka-zm105"
+        }
+      },
+      {
+        "id": "ZM105006",
+        "level": 2,
+        "name": {
+          "local": "Lusaka",
+          "en": "Lusaka",
+          "slug": "lusaka-zm105006"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 5
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-15.372",
+      "lon": "28.243"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM105006082",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Munali",
+      "en": "Munali",
+      "slug": "munali-zm105006082"
+    },
+    "code": {
+      "id": "ZM105006082",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM105006",
+      "level": 2,
+      "name": {
+        "local": "Lusaka",
+        "en": "Lusaka",
+        "slug": "lusaka-zm105006"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM105",
+        "level": 1,
+        "name": {
+          "local": "Lusaka",
+          "en": "Lusaka",
+          "slug": "lusaka-zm105"
+        }
+      },
+      {
+        "id": "ZM105006",
+        "level": 2,
+        "name": {
+          "local": "Lusaka",
+          "en": "Lusaka",
+          "slug": "lusaka-zm105006"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 6
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-15.369",
+      "lon": "28.367"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM105007083",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Rufunsa",
+      "en": "Rufunsa",
+      "slug": "rufunsa-zm105007083"
+    },
+    "code": {
+      "id": "ZM105007083",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM105007",
+      "level": 2,
+      "name": {
+        "local": "Rufunsa",
+        "en": "Rufunsa",
+        "slug": "rufunsa-zm105007"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM105",
+        "level": 1,
+        "name": {
+          "local": "Lusaka",
+          "en": "Lusaka",
+          "slug": "lusaka-zm105"
+        }
+      },
+      {
+        "id": "ZM105007",
+        "level": 2,
+        "name": {
+          "local": "Rufunsa",
+          "en": "Rufunsa",
+          "slug": "rufunsa-zm105007"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 12
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-15.164",
+      "lon": "29.465"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM106002087",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Chinsali",
+      "en": "Chinsali",
+      "slug": "chinsali-zm106002087"
+    },
+    "code": {
+      "id": "ZM106002087",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM106002",
+      "level": 2,
+      "name": {
+        "local": "Chinsali",
+        "en": "Chinsali",
+        "slug": "chinsali-zm106002"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM106",
+        "level": 1,
+        "name": {
+          "local": "Muchinga",
+          "en": "Muchinga",
+          "slug": "muchinga-zm106"
+        }
+      },
+      {
+        "id": "ZM106002",
+        "level": 2,
+        "name": {
+          "local": "Chinsali",
+          "en": "Chinsali",
+          "slug": "chinsali-zm106002"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 17
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-10.298",
+      "lon": "32.215"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM106003088",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Isoka",
+      "en": "Isoka",
+      "slug": "isoka-zm106003088"
+    },
+    "code": {
+      "id": "ZM106003088",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM106003",
+      "level": 2,
+      "name": {
+        "local": "Isoka",
+        "en": "Isoka",
+        "slug": "isoka-zm106003"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM106",
+        "level": 1,
+        "name": {
+          "local": "Muchinga",
+          "en": "Muchinga",
+          "slug": "muchinga-zm106"
+        }
+      },
+      {
+        "id": "ZM106003",
+        "level": 2,
+        "name": {
+          "local": "Isoka",
+          "en": "Isoka",
+          "slug": "isoka-zm106003"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 14
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-10.022",
+      "lon": "32.773"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM106004089",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Mafinga",
+      "en": "Mafinga",
+      "slug": "mafinga-zm106004089"
+    },
+    "code": {
+      "id": "ZM106004089",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM106004",
+      "level": 2,
+      "name": {
+        "local": "Mafinga",
+        "en": "Mafinga",
+        "slug": "mafinga-zm106004"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM106",
+        "level": 1,
+        "name": {
+          "local": "Muchinga",
+          "en": "Muchinga",
+          "slug": "muchinga-zm106"
+        }
+      },
+      {
+        "id": "ZM106004",
+        "level": 2,
+        "name": {
+          "local": "Mafinga",
+          "en": "Mafinga",
+          "slug": "mafinga-zm106004"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 13
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-10.323",
+      "lon": "33.263"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM106005092",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Mpika",
+      "en": "Mpika",
+      "slug": "mpika-zm106005092"
+    },
+    "code": {
+      "id": "ZM106005092",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM106005",
+      "level": 2,
+      "name": {
+        "local": "Mpika",
+        "en": "Mpika",
+        "slug": "mpika-zm106005"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM106",
+        "level": 1,
+        "name": {
+          "local": "Muchinga",
+          "en": "Muchinga",
+          "slug": "muchinga-zm106"
+        }
+      },
+      {
+        "id": "ZM106005",
+        "level": 2,
+        "name": {
+          "local": "Mpika",
+          "en": "Mpika",
+          "slug": "mpika-zm106005"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 12
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-12.05",
+      "lon": "31.764"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM106006093",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Nakonde",
+      "en": "Nakonde",
+      "slug": "nakonde-zm106006093"
+    },
+    "code": {
+      "id": "ZM106006093",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM106006",
+      "level": 2,
+      "name": {
+        "local": "Nakonde",
+        "en": "Nakonde",
+        "slug": "nakonde-zm106006"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM106",
+        "level": 1,
+        "name": {
+          "local": "Muchinga",
+          "en": "Muchinga",
+          "slug": "muchinga-zm106"
+        }
+      },
+      {
+        "id": "ZM106006",
+        "level": 2,
+        "name": {
+          "local": "Nakonde",
+          "en": "Nakonde",
+          "slug": "nakonde-zm106006"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 15
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-9.465",
+      "lon": "32.609"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM106007094",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Shiwang'andu",
+      "en": "Shiwang'andu",
+      "slug": "shiwangandu-zm106007094"
+    },
+    "code": {
+      "id": "ZM106007094",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM106007",
+      "level": 2,
+      "name": {
+        "local": "Shiwang'andu",
+        "en": "Shiwang'andu",
+        "slug": "shiwangandu-zm106007"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM106",
+        "level": 1,
+        "name": {
+          "local": "Muchinga",
+          "en": "Muchinga",
+          "slug": "muchinga-zm106"
+        }
+      },
+      {
+        "id": "ZM106007",
+        "level": 2,
+        "name": {
+          "local": "Shiwang'andu",
+          "en": "Shiwang'andu",
+          "slug": "shiwangandu-zm106007"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 17
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-11.088",
+      "lon": "31.835"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM106008090",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Kanchibiya",
+      "en": "Kanchibiya",
+      "slug": "kanchibiya-zm106008090"
+    },
+    "code": {
+      "id": "ZM106008090",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM106008",
+      "level": 2,
+      "name": {
+        "local": "Kanchibiya",
+        "en": "Kanchibiya",
+        "slug": "kanchibiya-zm106008"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM106",
+        "level": 1,
+        "name": {
+          "local": "Muchinga",
+          "en": "Muchinga",
+          "slug": "muchinga-zm106"
+        }
+      },
+      {
+        "id": "ZM106008",
+        "level": 2,
+        "name": {
+          "local": "Kanchibiya",
+          "en": "Kanchibiya",
+          "slug": "kanchibiya-zm106008"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 10
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-11.535",
+      "lon": "30.863"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM106009091",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Mfuwe",
+      "en": "Mfuwe",
+      "slug": "mfuwe-zm106009091"
+    },
+    "code": {
+      "id": "ZM106009091",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM106009",
+      "level": 2,
+      "name": {
+        "local": "Lavushimanda",
+        "en": "Lavushimanda",
+        "slug": "lavushimanda-zm106009"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM106",
+        "level": 1,
+        "name": {
+          "local": "Muchinga",
+          "en": "Muchinga",
+          "slug": "muchinga-zm106"
+        }
+      },
+      {
+        "id": "ZM106009",
+        "level": 2,
+        "name": {
+          "local": "Lavushimanda",
+          "en": "Lavushimanda",
+          "slug": "lavushimanda-zm106009"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 6
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-12.593",
+      "lon": "31.023"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM107001095",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Chilubi",
+      "en": "Chilubi",
+      "slug": "chilubi-zm107001095"
+    },
+    "code": {
+      "id": "ZM107001095",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM107001",
+      "level": 2,
+      "name": {
+        "local": "Chilubi",
+        "en": "Chilubi",
+        "slug": "chilubi-zm107001"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM107",
+        "level": 1,
+        "name": {
+          "local": "Northern",
+          "en": "Northern",
+          "slug": "northern-zm107"
+        }
+      },
+      {
+        "id": "ZM107001",
+        "level": 2,
+        "name": {
+          "local": "Chilubi",
+          "en": "Chilubi",
+          "slug": "chilubi-zm107001"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 24
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-11.09",
+      "lon": "30.295"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM107002096",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Kaputa",
+      "en": "Kaputa",
+      "slug": "kaputa-zm107002096"
+    },
+    "code": {
+      "id": "ZM107002096",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM107002",
+      "level": 2,
+      "name": {
+        "local": "Kaputa",
+        "en": "Kaputa",
+        "slug": "kaputa-zm107002"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM107",
+        "level": 1,
+        "name": {
+          "local": "Northern",
+          "en": "Northern",
+          "slug": "northern-zm107"
+        }
+      },
+      {
+        "id": "ZM107002",
+        "level": 2,
+        "name": {
+          "local": "Kaputa",
+          "en": "Kaputa",
+          "slug": "kaputa-zm107002"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 17
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-8.814",
+      "lon": "29.464"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM107003097",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Kasama Central",
+      "en": "Kasama Central",
+      "slug": "kasama-central-zm107003097"
+    },
+    "code": {
+      "id": "ZM107003097",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM107003",
+      "level": 2,
+      "name": {
+        "local": "Kasama",
+        "en": "Kasama",
+        "slug": "kasama-zm107003"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM107",
+        "level": 1,
+        "name": {
+          "local": "Northern",
+          "en": "Northern",
+          "slug": "northern-zm107"
+        }
+      },
+      {
+        "id": "ZM107003",
+        "level": 2,
+        "name": {
+          "local": "Kasama",
+          "en": "Kasama",
+          "slug": "kasama-zm107003"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 9
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-10.043",
+      "lon": "30.956"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM107003098",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Lukashya",
+      "en": "Lukashya",
+      "slug": "lukashya-zm107003098"
+    },
+    "code": {
+      "id": "ZM107003098",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM107003",
+      "level": 2,
+      "name": {
+        "local": "Kasama",
+        "en": "Kasama",
+        "slug": "kasama-zm107003"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM107",
+        "level": 1,
+        "name": {
+          "local": "Northern",
+          "en": "Northern",
+          "slug": "northern-zm107"
+        }
+      },
+      {
+        "id": "ZM107003",
+        "level": 2,
+        "name": {
+          "local": "Kasama",
+          "en": "Kasama",
+          "slug": "kasama-zm107003"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 10
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-10.746",
+      "lon": "30.937"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM107004099",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Lubansenshi",
+      "en": "Lubansenshi",
+      "slug": "lubansenshi-zm107004099"
+    },
+    "code": {
+      "id": "ZM107004099",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM107004",
+      "level": 2,
+      "name": {
+        "local": "Luwingu",
+        "en": "Luwingu",
+        "slug": "luwingu-zm107004"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM107",
+        "level": 1,
+        "name": {
+          "local": "Northern",
+          "en": "Northern",
+          "slug": "northern-zm107"
+        }
+      },
+      {
+        "id": "ZM107004",
+        "level": 2,
+        "name": {
+          "local": "Luwingu",
+          "en": "Luwingu",
+          "slug": "luwingu-zm107004"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 13
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-10.552",
+      "lon": "30.182"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM107005101",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Mbala",
+      "en": "Mbala",
+      "slug": "mbala-zm107005101"
+    },
+    "code": {
+      "id": "ZM107005101",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM107005",
+      "level": 2,
+      "name": {
+        "local": "Mbala",
+        "en": "Mbala",
+        "slug": "mbala-zm107005"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM107",
+        "level": 1,
+        "name": {
+          "local": "Northern",
+          "en": "Northern",
+          "slug": "northern-zm107"
+        }
+      },
+      {
+        "id": "ZM107005",
+        "level": 2,
+        "name": {
+          "local": "Mbala",
+          "en": "Mbala",
+          "slug": "mbala-zm107005"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 9
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-8.964",
+      "lon": "31.472"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM107006104",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Mporokoso",
+      "en": "Mporokoso",
+      "slug": "mporokoso-zm107006104"
+    },
+    "code": {
+      "id": "ZM107006104",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM107006",
+      "level": 2,
+      "name": {
+        "local": "Mporokoso",
+        "en": "Mporokoso",
+        "slug": "mporokoso-zm107006"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM107",
+        "level": 1,
+        "name": {
+          "local": "Northern",
+          "en": "Northern",
+          "slug": "northern-zm107"
+        }
+      },
+      {
+        "id": "ZM107006",
+        "level": 2,
+        "name": {
+          "local": "Mporokoso",
+          "en": "Mporokoso",
+          "slug": "mporokoso-zm107006"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 12
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-9.463",
+      "lon": "29.931"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM107007105",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Mpulungu",
+      "en": "Mpulungu",
+      "slug": "mpulungu-zm107007105"
+    },
+    "code": {
+      "id": "ZM107007105",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM107007",
+      "level": 2,
+      "name": {
+        "local": "Mpulungu",
+        "en": "Mpulungu",
+        "slug": "mpulungu-zm107007"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM107",
+        "level": 1,
+        "name": {
+          "local": "Northern",
+          "en": "Northern",
+          "slug": "northern-zm107"
+        }
+      },
+      {
+        "id": "ZM107007",
+        "level": 2,
+        "name": {
+          "local": "Mpulungu",
+          "en": "Mpulungu",
+          "slug": "mpulungu-zm107007"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 17
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-8.983",
+      "lon": "30.717"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM107008106",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Malole",
+      "en": "Malole",
+      "slug": "malole-zm107008106"
+    },
+    "code": {
+      "id": "ZM107008106",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM107008",
+      "level": 2,
+      "name": {
+        "local": "Mungwi",
+        "en": "Mungwi",
+        "slug": "mungwi-zm107008"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM107",
+        "level": 1,
+        "name": {
+          "local": "Northern",
+          "en": "Northern",
+          "slug": "northern-zm107"
+        }
+      },
+      {
+        "id": "ZM107008",
+        "level": 2,
+        "name": {
+          "local": "Mungwi",
+          "en": "Mungwi",
+          "slug": "mungwi-zm107008"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 15
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-9.992",
+      "lon": "31.684"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM107009107",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Chimbamilonga",
+      "en": "Chimbamilonga",
+      "slug": "chimbamilonga-zm107009107"
+    },
+    "code": {
+      "id": "ZM107009107",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM107009",
+      "level": 2,
+      "name": {
+        "local": "Nsama",
+        "en": "Nsama",
+        "slug": "nsama-zm107009"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM107",
+        "level": 1,
+        "name": {
+          "local": "Northern",
+          "en": "Northern",
+          "slug": "northern-zm107"
+        }
+      },
+      {
+        "id": "ZM107009",
+        "level": 2,
+        "name": {
+          "local": "Nsama",
+          "en": "Nsama",
+          "slug": "nsama-zm107009"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 17
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-8.814",
+      "lon": "29.948"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM107010102",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Senga Hill",
+      "en": "Senga Hill",
+      "slug": "senga-hill-zm107010102"
+    },
+    "code": {
+      "id": "ZM107010102",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM107010",
+      "level": 2,
+      "name": {
+        "local": "Senga Hill",
+        "en": "Senga Hill",
+        "slug": "senga-hill-zm107010"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM107",
+        "level": 1,
+        "name": {
+          "local": "Northern",
+          "en": "Northern",
+          "slug": "northern-zm107"
+        }
+      },
+      {
+        "id": "ZM107010",
+        "level": 2,
+        "name": {
+          "local": "Senga Hill",
+          "en": "Senga Hill",
+          "slug": "senga-hill-zm107010"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 10
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-9.277",
+      "lon": "31.826"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM107011103",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Lunte",
+      "en": "Lunte",
+      "slug": "lunte-zm107011103"
+    },
+    "code": {
+      "id": "ZM107011103",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM107011",
+      "level": 2,
+      "name": {
+        "local": "Lunte",
+        "en": "Lunte",
+        "slug": "lunte-zm107011"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM107",
+        "level": 1,
+        "name": {
+          "local": "Northern",
+          "en": "Northern",
+          "slug": "northern-zm107"
+        }
+      },
+      {
+        "id": "ZM107011",
+        "level": 2,
+        "name": {
+          "local": "Lunte",
+          "en": "Lunte",
+          "slug": "lunte-zm107011"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 14
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-9.828",
+      "lon": "30.257"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM107012100",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Lupososhi",
+      "en": "Lupososhi",
+      "slug": "lupososhi-zm107012100"
+    },
+    "code": {
+      "id": "ZM107012100",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM107012",
+      "level": 2,
+      "name": {
+        "local": "Lupososhi",
+        "en": "Lupososhi",
+        "slug": "lupososhi-zm107012"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM107",
+        "level": 1,
+        "name": {
+          "local": "Northern",
+          "en": "Northern",
+          "slug": "northern-zm107"
+        }
+      },
+      {
+        "id": "ZM107012",
+        "level": 2,
+        "name": {
+          "local": "Lupososhi",
+          "en": "Lupososhi",
+          "slug": "lupososhi-zm107012"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 13
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-10.656",
+      "lon": "29.599"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM108001108",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Chavuma",
+      "en": "Chavuma",
+      "slug": "chavuma-zm108001108"
+    },
+    "code": {
+      "id": "ZM108001108",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM108001",
+      "level": 2,
+      "name": {
+        "local": "Chavuma",
+        "en": "Chavuma",
+        "slug": "chavuma-zm108001"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM108",
+        "level": 1,
+        "name": {
+          "local": "North-Western",
+          "en": "North-Western",
+          "slug": "north-western-zm108"
+        }
+      },
+      {
+        "id": "ZM108001",
+        "level": 2,
+        "name": {
+          "local": "Chavuma",
+          "en": "Chavuma",
+          "slug": "chavuma-zm108001"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 15
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-13.293",
+      "lon": "22.32"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM108002109",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Ikeleng'i",
+      "en": "Ikeleng'i",
+      "slug": "ikelengi-zm108002109"
+    },
+    "code": {
+      "id": "ZM108002109",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM108002",
+      "level": 2,
+      "name": {
+        "local": "Ikelenge",
+        "en": "Ikelenge",
+        "slug": "ikelenge-zm108002"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM108",
+        "level": 1,
+        "name": {
+          "local": "North-Western",
+          "en": "North-Western",
+          "slug": "north-western-zm108"
+        }
+      },
+      {
+        "id": "ZM108002",
+        "level": 2,
+        "name": {
+          "local": "Ikelenge",
+          "en": "Ikelenge",
+          "slug": "ikelenge-zm108002"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 10
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-11.254",
+      "lon": "24.215"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM108003110",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Kabompo",
+      "en": "Kabompo",
+      "slug": "kabompo-zm108003110"
+    },
+    "code": {
+      "id": "ZM108003110",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM108003",
+      "level": 2,
+      "name": {
+        "local": "Kabompo",
+        "en": "Kabompo",
+        "slug": "kabompo-zm108003"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM108",
+        "level": 1,
+        "name": {
+          "local": "North-Western",
+          "en": "North-Western",
+          "slug": "north-western-zm108"
+        }
+      },
+      {
+        "id": "ZM108003",
+        "level": 2,
+        "name": {
+          "local": "Kabompo",
+          "en": "Kabompo",
+          "slug": "kabompo-zm108003"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 17
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-13.517",
+      "lon": "23.988"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM108004111",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Kasempa",
+      "en": "Kasempa",
+      "slug": "kasempa-zm108004111"
+    },
+    "code": {
+      "id": "ZM108004111",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM108004",
+      "level": 2,
+      "name": {
+        "local": "Kasempa",
+        "en": "Kasempa",
+        "slug": "kasempa-zm108004"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM108",
+        "level": 1,
+        "name": {
+          "local": "North-Western",
+          "en": "North-Western",
+          "slug": "north-western-zm108"
+        }
+      },
+      {
+        "id": "ZM108004",
+        "level": 2,
+        "name": {
+          "local": "Kasempa",
+          "en": "Kasempa",
+          "slug": "kasempa-zm108004"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 24
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-13.795",
+      "lon": "26.257"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM108005112",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Manyinga",
+      "en": "Manyinga",
+      "slug": "manyinga-zm108005112"
+    },
+    "code": {
+      "id": "ZM108005112",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM108005",
+      "level": 2,
+      "name": {
+        "local": "Manyinga",
+        "en": "Manyinga",
+        "slug": "manyinga-zm108005"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM108",
+        "level": 1,
+        "name": {
+          "local": "North-Western",
+          "en": "North-Western",
+          "slug": "north-western-zm108"
+        }
+      },
+      {
+        "id": "ZM108005",
+        "level": 2,
+        "name": {
+          "local": "Manyinga",
+          "en": "Manyinga",
+          "slug": "manyinga-zm108005"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 14
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-13.081",
+      "lon": "24.312"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM108006113",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Mufumbwe",
+      "en": "Mufumbwe",
+      "slug": "mufumbwe-zm108006113"
+    },
+    "code": {
+      "id": "ZM108006113",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM108006",
+      "level": 2,
+      "name": {
+        "local": "Mufumbwe",
+        "en": "Mufumbwe",
+        "slug": "mufumbwe-zm108006"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM108",
+        "level": 1,
+        "name": {
+          "local": "North-Western",
+          "en": "North-Western",
+          "slug": "north-western-zm108"
+        }
+      },
+      {
+        "id": "ZM108006",
+        "level": 2,
+        "name": {
+          "local": "Mufumbwe",
+          "en": "Mufumbwe",
+          "slug": "mufumbwe-zm108006"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 18
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-13.766",
+      "lon": "25.035"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM108007114",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Mwinilunga",
+      "en": "Mwinilunga",
+      "slug": "mwinilunga-zm108007114"
+    },
+    "code": {
+      "id": "ZM108007114",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM108007",
+      "level": 2,
+      "name": {
+        "local": "Mwinilunga",
+        "en": "Mwinilunga",
+        "slug": "mwinilunga-zm108007"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM108",
+        "level": 1,
+        "name": {
+          "local": "North-Western",
+          "en": "North-Western",
+          "slug": "north-western-zm108"
+        }
+      },
+      {
+        "id": "ZM108007",
+        "level": 2,
+        "name": {
+          "local": "Mwinilunga",
+          "en": "Mwinilunga",
+          "slug": "mwinilunga-zm108007"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 21
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-12.156",
+      "lon": "24.586"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM108008115",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Solwezi",
+      "en": "Solwezi",
+      "slug": "solwezi-zm108008115"
+    },
+    "code": {
+      "id": "ZM108008115",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM108008",
+      "level": 2,
+      "name": {
+        "local": "Solwezi",
+        "en": "Solwezi",
+        "slug": "solwezi-zm108008"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM108",
+        "level": 1,
+        "name": {
+          "local": "North-Western",
+          "en": "North-Western",
+          "slug": "north-western-zm108"
+        }
+      },
+      {
+        "id": "ZM108008",
+        "level": 2,
+        "name": {
+          "local": "Solwezi",
+          "en": "Solwezi",
+          "slug": "solwezi-zm108008"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 7
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-12.304",
+      "lon": "26.51"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM108009118",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Zambezi East",
+      "en": "Zambezi East",
+      "slug": "zambezi-east-zm108009118"
+    },
+    "code": {
+      "id": "ZM108009118",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM108009",
+      "level": 2,
+      "name": {
+        "local": "Zambezi",
+        "en": "Zambezi",
+        "slug": "zambezi-zm108009"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM108",
+        "level": 1,
+        "name": {
+          "local": "North-Western",
+          "en": "North-Western",
+          "slug": "north-western-zm108"
+        }
+      },
+      {
+        "id": "ZM108009",
+        "level": 2,
+        "name": {
+          "local": "Zambezi",
+          "en": "Zambezi",
+          "slug": "zambezi-zm108009"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 10
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-13.599",
+      "lon": "23.392"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM108009119",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Zambezi West",
+      "en": "Zambezi West",
+      "slug": "zambezi-west-zm108009119"
+    },
+    "code": {
+      "id": "ZM108009119",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM108009",
+      "level": 2,
+      "name": {
+        "local": "Zambezi",
+        "en": "Zambezi",
+        "slug": "zambezi-zm108009"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM108",
+        "level": 1,
+        "name": {
+          "local": "North-Western",
+          "en": "North-Western",
+          "slug": "north-western-zm108"
+        }
+      },
+      {
+        "id": "ZM108009",
+        "level": 2,
+        "name": {
+          "local": "Zambezi",
+          "en": "Zambezi",
+          "slug": "zambezi-zm108009"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 6
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-13.665",
+      "lon": "22.568"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM108010117",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Kalumbila",
+      "en": "Kalumbila",
+      "slug": "kalumbila-zm108010117"
+    },
+    "code": {
+      "id": "ZM108010117",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM108010",
+      "level": 2,
+      "name": {
+        "local": "Kalumbila",
+        "en": "Kalumbila",
+        "slug": "kalumbila-zm108010"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM108",
+        "level": 1,
+        "name": {
+          "local": "North-Western",
+          "en": "North-Western",
+          "slug": "north-western-zm108"
+        }
+      },
+      {
+        "id": "ZM108010",
+        "level": 2,
+        "name": {
+          "local": "Kalumbila",
+          "en": "Kalumbila",
+          "slug": "kalumbila-zm108010"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 12
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-12.362",
+      "lon": "25.671"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM108011116",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Mushindamo",
+      "en": "Mushindamo",
+      "slug": "mushindamo-zm108011116"
+    },
+    "code": {
+      "id": "ZM108011116",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM108011",
+      "level": 2,
+      "name": {
+        "local": "Mushindamo",
+        "en": "Mushindamo",
+        "slug": "mushindamo-zm108011"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM108",
+        "level": 1,
+        "name": {
+          "local": "North-Western",
+          "en": "North-Western",
+          "slug": "north-western-zm108"
+        }
+      },
+      {
+        "id": "ZM108011",
+        "level": 2,
+        "name": {
+          "local": "Mushindamo",
+          "en": "Mushindamo",
+          "slug": "mushindamo-zm108011"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 8
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-12.5",
+      "lon": "26.836"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM109001120",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Chikankata",
+      "en": "Chikankata",
+      "slug": "chikankata-zm109001120"
+    },
+    "code": {
+      "id": "ZM109001120",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM109001",
+      "level": 2,
+      "name": {
+        "local": "Chikankata",
+        "en": "Chikankata",
+        "slug": "chikankata-zm109001"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM109",
+        "level": 1,
+        "name": {
+          "local": "Southern",
+          "en": "Southern",
+          "slug": "southern-zm109"
+        }
+      },
+      {
+        "id": "ZM109001",
+        "level": 2,
+        "name": {
+          "local": "Chikankata",
+          "en": "Chikankata",
+          "slug": "chikankata-zm109001"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 14
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-16.032",
+      "lon": "28.22"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM109002121",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Choma Central",
+      "en": "Choma Central",
+      "slug": "choma-central-zm109002121"
+    },
+    "code": {
+      "id": "ZM109002121",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM109002",
+      "level": 2,
+      "name": {
+        "local": "Choma",
+        "en": "Choma",
+        "slug": "choma-zm109002"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM109",
+        "level": 1,
+        "name": {
+          "local": "Southern",
+          "en": "Southern",
+          "slug": "southern-zm109"
+        }
+      },
+      {
+        "id": "ZM109002",
+        "level": 2,
+        "name": {
+          "local": "Choma",
+          "en": "Choma",
+          "slug": "choma-zm109002"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 16
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-17.011",
+      "lon": "27.081"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM109002122",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Mbabala",
+      "en": "Mbabala",
+      "slug": "mbabala-zm109002122"
+    },
+    "code": {
+      "id": "ZM109002122",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM109002",
+      "level": 2,
+      "name": {
+        "local": "Choma",
+        "en": "Choma",
+        "slug": "choma-zm109002"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM109",
+        "level": 1,
+        "name": {
+          "local": "Southern",
+          "en": "Southern",
+          "slug": "southern-zm109"
+        }
+      },
+      {
+        "id": "ZM109002",
+        "level": 2,
+        "name": {
+          "local": "Choma",
+          "en": "Choma",
+          "slug": "choma-zm109002"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 12
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-16.416",
+      "lon": "26.893"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM109003123",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Gwembe",
+      "en": "Gwembe",
+      "slug": "gwembe-zm109003123"
+    },
+    "code": {
+      "id": "ZM109003123",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM109003",
+      "level": 2,
+      "name": {
+        "local": "Gwembe",
+        "en": "Gwembe",
+        "slug": "gwembe-zm109003"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM109",
+        "level": 1,
+        "name": {
+          "local": "Southern",
+          "en": "Southern",
+          "slug": "southern-zm109"
+        }
+      },
+      {
+        "id": "ZM109003",
+        "level": 2,
+        "name": {
+          "local": "Gwembe",
+          "en": "Gwembe",
+          "slug": "gwembe-zm109003"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 16
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-16.661",
+      "lon": "28.005"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM109004124",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Dundumwezi",
+      "en": "Dundumwezi",
+      "slug": "dundumwezi-zm109004124"
+    },
+    "code": {
+      "id": "ZM109004124",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM109004",
+      "level": 2,
+      "name": {
+        "local": "Kalomo",
+        "en": "Kalomo",
+        "slug": "kalomo-zm109004"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM109",
+        "level": 1,
+        "name": {
+          "local": "Southern",
+          "en": "Southern",
+          "slug": "southern-zm109"
+        }
+      },
+      {
+        "id": "ZM109004",
+        "level": 2,
+        "name": {
+          "local": "Kalomo",
+          "en": "Kalomo",
+          "slug": "kalomo-zm109004"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 8
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-16.624",
+      "lon": "26.355"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM109004125",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Kalomo Central",
+      "en": "Kalomo Central",
+      "slug": "kalomo-central-zm109004125"
+    },
+    "code": {
+      "id": "ZM109004125",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM109004",
+      "level": 2,
+      "name": {
+        "local": "Kalomo",
+        "en": "Kalomo",
+        "slug": "kalomo-zm109004"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM109",
+        "level": 1,
+        "name": {
+          "local": "Southern",
+          "en": "Southern",
+          "slug": "southern-zm109"
+        }
+      },
+      {
+        "id": "ZM109004",
+        "level": 2,
+        "name": {
+          "local": "Kalomo",
+          "en": "Kalomo",
+          "slug": "kalomo-zm109004"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 12
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-16.969",
+      "lon": "26.511"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM109005126",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Katombola",
+      "en": "Katombola",
+      "slug": "katombola-zm109005126"
+    },
+    "code": {
+      "id": "ZM109005126",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM109005",
+      "level": 2,
+      "name": {
+        "local": "Kazungula",
+        "en": "Kazungula",
+        "slug": "kazungula-zm109005"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM109",
+        "level": 1,
+        "name": {
+          "local": "Southern",
+          "en": "Southern",
+          "slug": "southern-zm109"
+        }
+      },
+      {
+        "id": "ZM109005",
+        "level": 2,
+        "name": {
+          "local": "Kazungula",
+          "en": "Kazungula",
+          "slug": "kazungula-zm109005"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 16
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-17.051",
+      "lon": "25.695"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM109006127",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Livingstone",
+      "en": "Livingstone",
+      "slug": "livingstone-zm109006127"
+    },
+    "code": {
+      "id": "ZM109006127",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM109006",
+      "level": 2,
+      "name": {
+        "local": "Livingstone",
+        "en": "Livingstone",
+        "slug": "livingstone-zm109006"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM109",
+        "level": 1,
+        "name": {
+          "local": "Southern",
+          "en": "Southern",
+          "slug": "southern-zm109"
+        }
+      },
+      {
+        "id": "ZM109006",
+        "level": 2,
+        "name": {
+          "local": "Livingstone",
+          "en": "Livingstone",
+          "slug": "livingstone-zm109006"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 20
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-17.81",
+      "lon": "25.825"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM109007128",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Magoye",
+      "en": "Magoye",
+      "slug": "magoye-zm109007128"
+    },
+    "code": {
+      "id": "ZM109007128",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM109007",
+      "level": 2,
+      "name": {
+        "local": "Mazabuka",
+        "en": "Mazabuka",
+        "slug": "mazabuka-zm109007"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM109",
+        "level": 1,
+        "name": {
+          "local": "Southern",
+          "en": "Southern",
+          "slug": "southern-zm109"
+        }
+      },
+      {
+        "id": "ZM109007",
+        "level": 2,
+        "name": {
+          "local": "Mazabuka",
+          "en": "Mazabuka",
+          "slug": "mazabuka-zm109007"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 11
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-15.894",
+      "lon": "27.558"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM109007129",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Mazabuka Central",
+      "en": "Mazabuka Central",
+      "slug": "mazabuka-central-zm109007129"
+    },
+    "code": {
+      "id": "ZM109007129",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM109007",
+      "level": 2,
+      "name": {
+        "local": "Mazabuka",
+        "en": "Mazabuka",
+        "slug": "mazabuka-zm109007"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM109",
+        "level": 1,
+        "name": {
+          "local": "Southern",
+          "en": "Southern",
+          "slug": "southern-zm109"
+        }
+      },
+      {
+        "id": "ZM109007",
+        "level": 2,
+        "name": {
+          "local": "Mazabuka",
+          "en": "Mazabuka",
+          "slug": "mazabuka-zm109007"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 9
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-15.868",
+      "lon": "27.878"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM109008130",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Bweengwa",
+      "en": "Bweengwa",
+      "slug": "bweengwa-zm109008130"
+    },
+    "code": {
+      "id": "ZM109008130",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM109008",
+      "level": 2,
+      "name": {
+        "local": "Monze",
+        "en": "Monze",
+        "slug": "monze-zm109008"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM109",
+        "level": 1,
+        "name": {
+          "local": "Southern",
+          "en": "Southern",
+          "slug": "southern-zm109"
+        }
+      },
+      {
+        "id": "ZM109008",
+        "level": 2,
+        "name": {
+          "local": "Monze",
+          "en": "Monze",
+          "slug": "monze-zm109008"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 8
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-16.03",
+      "lon": "27.349"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM109008131",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Monze Central",
+      "en": "Monze Central",
+      "slug": "monze-central-zm109008131"
+    },
+    "code": {
+      "id": "ZM109008131",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM109008",
+      "level": 2,
+      "name": {
+        "local": "Monze",
+        "en": "Monze",
+        "slug": "monze-zm109008"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM109",
+        "level": 1,
+        "name": {
+          "local": "Southern",
+          "en": "Southern",
+          "slug": "southern-zm109"
+        }
+      },
+      {
+        "id": "ZM109008",
+        "level": 2,
+        "name": {
+          "local": "Monze",
+          "en": "Monze",
+          "slug": "monze-zm109008"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 12
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-16.356",
+      "lon": "27.402"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM109008132",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Moomba",
+      "en": "Moomba",
+      "slug": "moomba-zm109008132"
+    },
+    "code": {
+      "id": "ZM109008132",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM109008",
+      "level": 2,
+      "name": {
+        "local": "Monze",
+        "en": "Monze",
+        "slug": "monze-zm109008"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM109",
+        "level": 1,
+        "name": {
+          "local": "Southern",
+          "en": "Southern",
+          "slug": "southern-zm109"
+        }
+      },
+      {
+        "id": "ZM109008",
+        "level": 2,
+        "name": {
+          "local": "Monze",
+          "en": "Monze",
+          "slug": "monze-zm109008"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 5
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-16.238",
+      "lon": "27.679"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM109009133",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Namwala",
+      "en": "Namwala",
+      "slug": "namwala-zm109009133"
+    },
+    "code": {
+      "id": "ZM109009133",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM109009",
+      "level": 2,
+      "name": {
+        "local": "Namwala",
+        "en": "Namwala",
+        "slug": "namwala-zm109009"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM109",
+        "level": 1,
+        "name": {
+          "local": "Southern",
+          "en": "Southern",
+          "slug": "southern-zm109"
+        }
+      },
+      {
+        "id": "ZM109009",
+        "level": 2,
+        "name": {
+          "local": "Namwala",
+          "en": "Namwala",
+          "slug": "namwala-zm109009"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 16
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-15.957",
+      "lon": "26.792"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM109010134",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Pemba",
+      "en": "Pemba",
+      "slug": "pemba-zm109010134"
+    },
+    "code": {
+      "id": "ZM109010134",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM109010",
+      "level": 2,
+      "name": {
+        "local": "Pemba",
+        "en": "Pemba",
+        "slug": "pemba-zm109010"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM109",
+        "level": 1,
+        "name": {
+          "local": "Southern",
+          "en": "Southern",
+          "slug": "southern-zm109"
+        }
+      },
+      {
+        "id": "ZM109010",
+        "level": 2,
+        "name": {
+          "local": "Pemba",
+          "en": "Pemba",
+          "slug": "pemba-zm109010"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 12
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-16.756",
+      "lon": "27.403"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM109011135",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Siavonga",
+      "en": "Siavonga",
+      "slug": "siavonga-zm109011135"
+    },
+    "code": {
+      "id": "ZM109011135",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM109011",
+      "level": 2,
+      "name": {
+        "local": "Siavonga",
+        "en": "Siavonga",
+        "slug": "siavonga-zm109011"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM109",
+        "level": 1,
+        "name": {
+          "local": "Southern",
+          "en": "Southern",
+          "slug": "southern-zm109"
+        }
+      },
+      {
+        "id": "ZM109011",
+        "level": 2,
+        "name": {
+          "local": "Siavonga",
+          "en": "Siavonga",
+          "slug": "siavonga-zm109011"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 12
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-16.408",
+      "lon": "28.478"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM109012136",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Sinazongwe",
+      "en": "Sinazongwe",
+      "slug": "sinazongwe-zm109012136"
+    },
+    "code": {
+      "id": "ZM109012136",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM109012",
+      "level": 2,
+      "name": {
+        "local": "Sinazongwe",
+        "en": "Sinazongwe",
+        "slug": "sinazongwe-zm109012"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM109",
+        "level": 1,
+        "name": {
+          "local": "Southern",
+          "en": "Southern",
+          "slug": "southern-zm109"
+        }
+      },
+      {
+        "id": "ZM109012",
+        "level": 2,
+        "name": {
+          "local": "Sinazongwe",
+          "en": "Sinazongwe",
+          "slug": "sinazongwe-zm109012"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 16
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-17.457",
+      "lon": "27.282"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM109013137",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Mapatizya",
+      "en": "Mapatizya",
+      "slug": "mapatizya-zm109013137"
+    },
+    "code": {
+      "id": "ZM109013137",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM109013",
+      "level": 2,
+      "name": {
+        "local": "Zimba",
+        "en": "Zimba",
+        "slug": "zimba-zm109013"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM109",
+        "level": 1,
+        "name": {
+          "local": "Southern",
+          "en": "Southern",
+          "slug": "southern-zm109"
+        }
+      },
+      {
+        "id": "ZM109013",
+        "level": 2,
+        "name": {
+          "local": "Zimba",
+          "en": "Zimba",
+          "slug": "zimba-zm109013"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 12
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-17.667",
+      "lon": "26.619"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM109014005",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Itezhi-Tezhi",
+      "en": "Itezhi-Tezhi",
+      "slug": "itezhi-tezhi-zm109014005"
+    },
+    "code": {
+      "id": "ZM109014005",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM109014",
+      "level": 2,
+      "name": {
+        "local": "Itezhi-Tezhi",
+        "en": "Itezhi-Tezhi",
+        "slug": "itezhi-tezhi-zm109014"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM109",
+        "level": 1,
+        "name": {
+          "local": "Southern",
+          "en": "Southern",
+          "slug": "southern-zm109"
+        }
+      },
+      {
+        "id": "ZM109014",
+        "level": 2,
+        "name": {
+          "local": "Itezhi-Tezhi",
+          "en": "Itezhi-Tezhi",
+          "slug": "itezhi-tezhi-zm109014"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 15
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-15.923",
+      "lon": "25.873"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM110001138",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Kalabo Central",
+      "en": "Kalabo Central",
+      "slug": "kalabo-central-zm110001138"
+    },
+    "code": {
+      "id": "ZM110001138",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM110001",
+      "level": 2,
+      "name": {
+        "local": "Kalabo",
+        "en": "Kalabo",
+        "slug": "kalabo-zm110001"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM110",
+        "level": 1,
+        "name": {
+          "local": "Western",
+          "en": "Western",
+          "slug": "western-zm110"
+        }
+      },
+      {
+        "id": "ZM110001",
+        "level": 2,
+        "name": {
+          "local": "Kalabo",
+          "en": "Kalabo",
+          "slug": "kalabo-zm110001"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 14
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-15.328",
+      "lon": "22.69"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM110001139",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Liuwa",
+      "en": "Liuwa",
+      "slug": "liuwa-zm110001139"
+    },
+    "code": {
+      "id": "ZM110001139",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM110001",
+      "level": 2,
+      "name": {
+        "local": "Kalabo",
+        "en": "Kalabo",
+        "slug": "kalabo-zm110001"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM110",
+        "level": 1,
+        "name": {
+          "local": "Western",
+          "en": "Western",
+          "slug": "western-zm110"
+        }
+      },
+      {
+        "id": "ZM110001",
+        "level": 2,
+        "name": {
+          "local": "Kalabo",
+          "en": "Kalabo",
+          "slug": "kalabo-zm110001"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 10
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-14.604",
+      "lon": "22.596"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM110002140",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Kaoma Central",
+      "en": "Kaoma Central",
+      "slug": "kaoma-central-zm110002140"
+    },
+    "code": {
+      "id": "ZM110002140",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM110002",
+      "level": 2,
+      "name": {
+        "local": "Kaoma",
+        "en": "Kaoma",
+        "slug": "kaoma-zm110002"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM110",
+        "level": 1,
+        "name": {
+          "local": "Western",
+          "en": "Western",
+          "slug": "western-zm110"
+        }
+      },
+      {
+        "id": "ZM110002",
+        "level": 2,
+        "name": {
+          "local": "Kaoma",
+          "en": "Kaoma",
+          "slug": "kaoma-zm110002"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 9
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-14.456",
+      "lon": "24.864"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM110002141",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Mangango",
+      "en": "Mangango",
+      "slug": "mangango-zm110002141"
+    },
+    "code": {
+      "id": "ZM110002141",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM110002",
+      "level": 2,
+      "name": {
+        "local": "Kaoma",
+        "en": "Kaoma",
+        "slug": "kaoma-zm110002"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM110",
+        "level": 1,
+        "name": {
+          "local": "Western",
+          "en": "Western",
+          "slug": "western-zm110"
+        }
+      },
+      {
+        "id": "ZM110002",
+        "level": 2,
+        "name": {
+          "local": "Kaoma",
+          "en": "Kaoma",
+          "slug": "kaoma-zm110002"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 9
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-14.635",
+      "lon": "24.237"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM110003142",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Luena",
+      "en": "Luena",
+      "slug": "luena-zm110003142"
+    },
+    "code": {
+      "id": "ZM110003142",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM110003",
+      "level": 2,
+      "name": {
+        "local": "Limulunga",
+        "en": "Limulunga",
+        "slug": "limulunga-zm110003"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM110",
+        "level": 1,
+        "name": {
+          "local": "Western",
+          "en": "Western",
+          "slug": "western-zm110"
+        }
+      },
+      {
+        "id": "ZM110003",
+        "level": 2,
+        "name": {
+          "local": "Limulunga",
+          "en": "Limulunga",
+          "slug": "limulunga-zm110003"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 13
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-14.96",
+      "lon": "23.389"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM110004143",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Luampa",
+      "en": "Luampa",
+      "slug": "luampa-zm110004143"
+    },
+    "code": {
+      "id": "ZM110004143",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM110004",
+      "level": 2,
+      "name": {
+        "local": "Luampa",
+        "en": "Luampa",
+        "slug": "luampa-zm110004"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM110",
+        "level": 1,
+        "name": {
+          "local": "Western",
+          "en": "Western",
+          "slug": "western-zm110"
+        }
+      },
+      {
+        "id": "ZM110004",
+        "level": 2,
+        "name": {
+          "local": "Luampa",
+          "en": "Luampa",
+          "slug": "luampa-zm110004"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 12
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-15.433",
+      "lon": "24.846"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM110005144",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Lukulu East",
+      "en": "Lukulu East",
+      "slug": "lukulu-east-zm110005144"
+    },
+    "code": {
+      "id": "ZM110005144",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM110005",
+      "level": 2,
+      "name": {
+        "local": "Lukulu",
+        "en": "Lukulu",
+        "slug": "lukulu-zm110005"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM110",
+        "level": 1,
+        "name": {
+          "local": "Western",
+          "en": "Western",
+          "slug": "western-zm110"
+        }
+      },
+      {
+        "id": "ZM110005",
+        "level": 2,
+        "name": {
+          "local": "Lukulu",
+          "en": "Lukulu",
+          "slug": "lukulu-zm110005"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 17
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-14.375",
+      "lon": "23.847"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM110006145",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Mitete",
+      "en": "Mitete",
+      "slug": "mitete-zm110006145"
+    },
+    "code": {
+      "id": "ZM110006145",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM110006",
+      "level": 2,
+      "name": {
+        "local": "Mitete",
+        "en": "Mitete",
+        "slug": "mitete-zm110006"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM110",
+        "level": 1,
+        "name": {
+          "local": "Western",
+          "en": "Western",
+          "slug": "western-zm110"
+        }
+      },
+      {
+        "id": "ZM110006",
+        "level": 2,
+        "name": {
+          "local": "Mitete",
+          "en": "Mitete",
+          "slug": "mitete-zm110006"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 13
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-14.284",
+      "lon": "22.938"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM110007146",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Mongu Central",
+      "en": "Mongu Central",
+      "slug": "mongu-central-zm110007146"
+    },
+    "code": {
+      "id": "ZM110007146",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM110007",
+      "level": 2,
+      "name": {
+        "local": "Mongu",
+        "en": "Mongu",
+        "slug": "mongu-zm110007"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM110",
+        "level": 1,
+        "name": {
+          "local": "Western",
+          "en": "Western",
+          "slug": "western-zm110"
+        }
+      },
+      {
+        "id": "ZM110007",
+        "level": 2,
+        "name": {
+          "local": "Mongu",
+          "en": "Mongu",
+          "slug": "mongu-zm110007"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 16
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-15.327",
+      "lon": "23.089"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM110007147",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Nalikwanda",
+      "en": "Nalikwanda",
+      "slug": "nalikwanda-zm110007147"
+    },
+    "code": {
+      "id": "ZM110007147",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM110007",
+      "level": 2,
+      "name": {
+        "local": "Mongu",
+        "en": "Mongu",
+        "slug": "mongu-zm110007"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM110",
+        "level": 1,
+        "name": {
+          "local": "Western",
+          "en": "Western",
+          "slug": "western-zm110"
+        }
+      },
+      {
+        "id": "ZM110007",
+        "level": 2,
+        "name": {
+          "local": "Mongu",
+          "en": "Mongu",
+          "slug": "mongu-zm110007"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 11
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-15.433",
+      "lon": "23.717"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM110008148",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Mulobezi",
+      "en": "Mulobezi",
+      "slug": "mulobezi-zm110008148"
+    },
+    "code": {
+      "id": "ZM110008148",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM110008",
+      "level": 2,
+      "name": {
+        "local": "Mulobezi",
+        "en": "Mulobezi",
+        "slug": "mulobezi-zm110008"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM110",
+        "level": 1,
+        "name": {
+          "local": "Western",
+          "en": "Western",
+          "slug": "western-zm110"
+        }
+      },
+      {
+        "id": "ZM110008",
+        "level": 2,
+        "name": {
+          "local": "Mulobezi",
+          "en": "Mulobezi",
+          "slug": "mulobezi-zm110008"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 9
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-16.28",
+      "lon": "24.727"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM110009149",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Mwandi",
+      "en": "Mwandi",
+      "slug": "mwandi-zm110009149"
+    },
+    "code": {
+      "id": "ZM110009149",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM110009",
+      "level": 2,
+      "name": {
+        "local": "Mwandi",
+        "en": "Mwandi",
+        "slug": "mwandi-zm110009"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM110",
+        "level": 1,
+        "name": {
+          "local": "Western",
+          "en": "Western",
+          "slug": "western-zm110"
+        }
+      },
+      {
+        "id": "ZM110009",
+        "level": 2,
+        "name": {
+          "local": "Mwandi",
+          "en": "Mwandi",
+          "slug": "mwandi-zm110009"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 12
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-17.112",
+      "lon": "24.684"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM110010150",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Nalolo",
+      "en": "Nalolo",
+      "slug": "nalolo-zm110010150"
+    },
+    "code": {
+      "id": "ZM110010150",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM110010",
+      "level": 2,
+      "name": {
+        "local": "Nalolo",
+        "en": "Nalolo",
+        "slug": "nalolo-zm110010"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM110",
+        "level": 1,
+        "name": {
+          "local": "Western",
+          "en": "Western",
+          "slug": "western-zm110"
+        }
+      },
+      {
+        "id": "ZM110010",
+        "level": 2,
+        "name": {
+          "local": "Nalolo",
+          "en": "Nalolo",
+          "slug": "nalolo-zm110010"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 12
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-15.831",
+      "lon": "22.879"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM110011151",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Nkeyema",
+      "en": "Nkeyema",
+      "slug": "nkeyema-zm110011151"
+    },
+    "code": {
+      "id": "ZM110011151",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM110011",
+      "level": 2,
+      "name": {
+        "local": "Nkeyema",
+        "en": "Nkeyema",
+        "slug": "nkeyema-zm110011"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM110",
+        "level": 1,
+        "name": {
+          "local": "Western",
+          "en": "Western",
+          "slug": "western-zm110"
+        }
+      },
+      {
+        "id": "ZM110011",
+        "level": 2,
+        "name": {
+          "local": "Nkeyema",
+          "en": "Nkeyema",
+          "slug": "nkeyema-zm110011"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 8
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-14.861",
+      "lon": "25.162"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM110012152",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Senanga",
+      "en": "Senanga",
+      "slug": "senanga-zm110012152"
+    },
+    "code": {
+      "id": "ZM110012152",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM110012",
+      "level": 2,
+      "name": {
+        "local": "Senanga",
+        "en": "Senanga",
+        "slug": "senanga-zm110012"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM110",
+        "level": 1,
+        "name": {
+          "local": "Western",
+          "en": "Western",
+          "slug": "western-zm110"
+        }
+      },
+      {
+        "id": "ZM110012",
+        "level": 2,
+        "name": {
+          "local": "Senanga",
+          "en": "Senanga",
+          "slug": "senanga-zm110012"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 14
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-16.023",
+      "lon": "23.693"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM110013153",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Sesheke",
+      "en": "Sesheke",
+      "slug": "sesheke-zm110013153"
+    },
+    "code": {
+      "id": "ZM110013153",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM110013",
+      "level": 2,
+      "name": {
+        "local": "Sesheke",
+        "en": "Sesheke",
+        "slug": "sesheke-zm110013"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM110",
+        "level": 1,
+        "name": {
+          "local": "Western",
+          "en": "Western",
+          "slug": "western-zm110"
+        }
+      },
+      {
+        "id": "ZM110013",
+        "level": 2,
+        "name": {
+          "local": "Sesheke",
+          "en": "Sesheke",
+          "slug": "sesheke-zm110013"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 10
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-16.931",
+      "lon": "23.864"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM110014154",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Shangombo",
+      "en": "Shangombo",
+      "slug": "shangombo-zm110014154"
+    },
+    "code": {
+      "id": "ZM110014154",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM110014",
+      "level": 2,
+      "name": {
+        "local": "Shangombo",
+        "en": "Shangombo",
+        "slug": "shangombo-zm110014"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM110",
+        "level": 1,
+        "name": {
+          "local": "Western",
+          "en": "Western",
+          "slug": "western-zm110"
+        }
+      },
+      {
+        "id": "ZM110014",
+        "level": 2,
+        "name": {
+          "local": "Shangombo",
+          "en": "Shangombo",
+          "slug": "shangombo-zm110014"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 12
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-16.495",
+      "lon": "22.485"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM110015155",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Sikongo",
+      "en": "Sikongo",
+      "slug": "sikongo-zm110015155"
+    },
+    "code": {
+      "id": "ZM110015155",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM110015",
+      "level": 2,
+      "name": {
+        "local": "Sikongo",
+        "en": "Sikongo",
+        "slug": "sikongo-zm110015"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM110",
+        "level": 1,
+        "name": {
+          "local": "Western",
+          "en": "Western",
+          "slug": "western-zm110"
+        }
+      },
+      {
+        "id": "ZM110015",
+        "level": 2,
+        "name": {
+          "local": "Sikongo",
+          "en": "Sikongo",
+          "slug": "sikongo-zm110015"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 14
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-15.323",
+      "lon": "22.247"
+    },
+    "metadata": {},
+    "source": {}
+  },
+  {
+    "id": "ZM110016156",
+    "level": 3,
+    "level_name": {
+      "local": "Constituency",
+      "en": "Constituency"
+    },
+    "name": {
+      "local": "Sioma",
+      "en": "Sioma",
+      "slug": "sioma-zm110016156"
+    },
+    "code": {
+      "id": "ZM110016156",
+      "iso": null
+    },
+    "parent": {
+      "id": "ZM110016",
+      "level": 2,
+      "name": {
+        "local": "Sioma",
+        "en": "Sioma",
+        "slug": "sioma-zm110016"
+      }
+    },
+    "ancestors": [
+      {
+        "id": "ZM110",
+        "level": 1,
+        "name": {
+          "local": "Western",
+          "en": "Western",
+          "slug": "western-zm110"
+        }
+      },
+      {
+        "id": "ZM110016",
+        "level": 2,
+        "name": {
+          "local": "Sioma",
+          "en": "Sioma",
+          "slug": "sioma-zm110016"
+        }
+      }
+    ],
+    "children_count": {
+      "ward": 12
+    },
+    "zip_codes": [],
+    "geo": {
+      "lat": "-16.757",
+      "lon": "23.145"
+    },
+    "metadata": {},
+    "source": {}
+  }
+]

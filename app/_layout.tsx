@@ -5,19 +5,24 @@ import { ThemeProvider } from '@/contexts/theme-context';
 import { useAuthDeepLinkHandler } from '@/hooks/use-auth-deep-link';
 import { Stack } from 'expo-router';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
+
+const queryClient = new QueryClient()
 
 export default function RootLayout() {
 
   useAuthDeepLinkHandler();
 
   return (
-    <AuthProvider>
-      <GestureHandlerRootView style={{ flex: 1 }}>
-        <ThemeProvider>
-          <RootNavigator />
-        </ThemeProvider>
-      </GestureHandlerRootView>
-    </AuthProvider>
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <GestureHandlerRootView style={{ flex: 1 }}>
+          <ThemeProvider>
+            <RootNavigator />
+          </ThemeProvider>
+        </GestureHandlerRootView>
+      </AuthProvider>
+    </QueryClientProvider>
   );
 };
 
@@ -51,6 +56,7 @@ function RootNavigator() {
           <Stack.Screen name="modals/userDescription" options={{ presentation: "modal" }} />
           <Stack.Screen name="modals/profile" options={{ presentation: "modal" }} />
           <Stack.Screen name="addListings" options={{ headerShown: false }} />
+          <Stack.Screen name="overview" options={{ headerShown: false }} />
           <Stack.Screen name="product/[id]" options={{ headerShown: false }} />
           <Stack.Screen name="me/settings" options={{ headerShown: false }} />
           <Stack.Screen name="me/profile" options={{ headerShown: false }} />
@@ -58,7 +64,9 @@ function RootNavigator() {
           <Stack.Screen name="me/saved" options={{ headerShown: false }} />
           <Stack.Screen name="editProfile" options={{ headerShown: false }} />
           <Stack.Screen name="settings/(account)/changePassword" options={{ headerShown: false }} />
-          <Stack.Screen name="settings/(account)/verification" options={{ headerShown: false }} />
+          <Stack.Screen name="settings/(account)/verification/[status]" options={{ headerShown: false }} />
+          <Stack.Screen name="settings/(account)/verification/submitted" options={{ headerShown: false }} />
+          <Stack.Screen name="settings/(account)/verification/verification" options={{ headerShown: false }} />
         </Stack.Protected>
       </Stack>
 

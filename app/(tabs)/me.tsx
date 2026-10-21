@@ -2,22 +2,18 @@ import Button from '@/components/Button';
 import { CardButtonRow } from '@/components/cardButtonRow';
 import { CustomHeader } from '@/components/customHeader';
 import { IconButton } from '@/components/iconButton';
-import { PfpItem } from '@/components/pfp-item';
 import { PfpRowItem } from '@/components/pfpRowItem';
 import { SettingsSection } from '@/components/settingsSection';
 import { RowProfile } from '@/components/skeletons/rowProfileSkeleton';
-import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { DarkModeToggle } from '@/components/toggleButton';
-import { VerifiedBadge } from '@/components/verified-badge';
 import { useAuth } from '@/contexts/auth-context';
+import { useCartIds } from '@/hooks/use-fetch-listing-details';
 import { useUser } from '@/hooks/use-user';
 import { useTheme } from '@/hooks/useTheme';
-import { getCartCount } from '@/services/cart';
-import { MaterialIcons } from '@expo/vector-icons';
 import { router, useFocusEffect } from 'expo-router';
-import { useCallback, useEffect, useState } from 'react';
-import { Image, ScrollView, TouchableOpacity, View } from 'react-native';
+import { useCallback, useState } from 'react';
+import { ScrollView, View } from 'react-native';
 
 export default function ProfileScreen() {
 
@@ -26,25 +22,12 @@ export default function ProfileScreen() {
   const { signOut, user, isLoading } = useAuth()
 
   const [isFetching, setIsFetching] = useState(false)
-  const [cartCount, setCartCount] = useState(0)
-  const { userData, loading } = useUser()
+  const { data, loading } = useUser()
 
-  const avatar = userData?.avatar_url ?? ""
+  const avatar = data?.avatar_url ?? ""
 
-  const loadCartCount = useCallback(async () => {
-    if (!user) return;
-    try {
-      setCartCount(await getCartCount(user.id));
-    } catch {
-      setCartCount(0);
-    }
-  }, [user]);
-
-  useFocusEffect(
-    useCallback(() => {
-      loadCartCount();
-    }, [loadCartCount])
-  );
+  const { data: cartData } = useCartIds()
+  const cartCount = cartData?.length ?? 0;
 
   return (
     <ThemedView isTabVisible style={{}}>
@@ -55,17 +38,17 @@ export default function ProfileScreen() {
         </View>
       </CustomHeader>
 
-      <ScrollView contentContainerStyle={{ paddingHorizontal: 20, gap: 16 }}>
+      <ScrollView contentContainerStyle={{ paddingHorizontal: 10, gap: 16 }}>
 
         {loading ?
           <RowProfile />
           :
-          <PfpRowItem 
-            imageUrl={`${avatar}?v=${userData?.updated_at}`}
-            fName={userData?.first_name ?? "unknown"}
-            lName={userData?.last_name ?? "unknown"}
-            username={userData?.username ?? "unknown123"}
-            isVerified={userData?.is_verified ?? false}
+          <PfpRowItem
+            imageUrl={`${avatar}?v=${data?.updated_at}`}
+            fName={data?.first_name ?? "unknown"}
+            lName={data?.last_name ?? "unknown"}
+            username={data?.username ?? "unknown123"}
+            isVerified={data?.is_verified ?? false}
             onPress={() => router.push('/me/profile')}
           />
         }
@@ -74,7 +57,6 @@ export default function ProfileScreen() {
           icon={isDark ? "dark-mode" : "light-mode"}
           label={isDark ? "Dark mode" : "Light mode"}
           right={<DarkModeToggle />}
-
         />
 
         <SettingsSection title='Shopping'>

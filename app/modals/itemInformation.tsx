@@ -8,6 +8,7 @@ import { router, useLocalSearchParams } from "expo-router";
 import { useEffect, useState } from "react";
 import { ActivityIndicator, FlatList, TouchableOpacity, View } from "react-native";
 
+
 const attributeLabels: Record<string, string> = {
     brand: "Brand",
     model: "Model",

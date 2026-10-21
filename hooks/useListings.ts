@@ -1,32 +1,26 @@
+import { useAuth } from "@/contexts/auth-context";
 import { getListings } from "@/services/listings";
 import { Listing } from "@/types/listing";
-import { useCallback, useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 
 export function useListings() {
-  const [listings, setListings] = useState<Listing[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [refreshing, setRefreshing] = useState(false);
-  const [error, setError] = useState<Error | null>(null);
+  const { user } = useAuth();
 
-  const load = useCallback(async (asRefresh = false) => {
-    if (asRefresh) setRefreshing(true);
-    try {
+  const { data, isLoading, isFetching, error, isRefetching, refetch } = useQuery({
+    queryKey: ["listings"],
+    queryFn: async () => {
       const data = await getListings();
-      setListings(data);
-      setError(null);
-    } catch (err) {
-      setError(err as Error);
-    } finally {
-      setLoading(false);
-      if (asRefresh) setRefreshing(false);
-    }
-  }, []);
+      return data;
+    },
+  });
 
-  useEffect(() => {
-    load();
-  }, [load]);
-
-  const refresh = useCallback(() => load(true), [load]);
-
-  return { listings, loading, refreshing, error, load, refresh };
+  return {
+    listings: data,
+    loading: isLoading,
+    fetching: isFetching,
+    refreshing: isRefetching,
+    error,
+    refresh: refetch,
+  };
 }
+

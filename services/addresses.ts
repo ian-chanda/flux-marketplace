@@ -1,3 +1,4 @@
+import { DeliveryAddressType } from "@/hooks/use-submit-address";
 import { supabase } from "@/lib/supabase";
 
 export async function getDeliveryAddresses(userId: string) {
@@ -23,8 +24,12 @@ export async function getDeliveryAddress(id: string, label: string) {
   return data;
 }
 
-export async function setAddressPrimary(id: string, label: string) {
-  //set it to false first
+export async function setAddressPrimary(
+  id: string,
+  addr_id: string,
+  isPrimary: boolean,
+) {
+  //set the one that true to false first
   const { error: checkErr } = await supabase
     .from("delivery_addresses")
     .update({
@@ -40,48 +45,19 @@ export async function setAddressPrimary(id: string, label: string) {
       is_primary: true,
     })
     .eq("user_id", id)
-    .eq("label", label);
+    .eq("id", addr_id);
 
   if (error) throw error;
 }
 
-export async function submitAddress({
-  id,
-  userId,
-  label,
-  name,
-  country,
-  province,
-  city,
-  streetAddress,
-  phoneNumber,
-}: {
-  id: string | null;
-  userId: string;
-  label: string;
-  name: string;
-  country: string;
-  province: string;
-  city: string;
-  streetAddress: string;
-  phoneNumber: string;
-}) {
-  const { error } = await supabase.from("delivery_addresses").upsert({
-    id: id ?? undefined,
-    user_id: userId,
-    label: label,
-    recipient_name: name,
-    country: country,
-    province: province,
-    city: city,
-    street_address: streetAddress,
-    phone_number: phoneNumber,
-  });
-
+export async function submitAddress(address_item: DeliveryAddressType) {
+  const { error } = await supabase
+    .from("delivery_addresses")
+    .upsert(address_item);
   if (error) throw error;
 }
 
-export async function deleteAddress({ addressId }: { addressId: string; }) {
+export async function deleteAddress({ addressId }: { addressId: string }) {
   const { error } = await supabase
     .from("delivery_addresses")
     .delete()

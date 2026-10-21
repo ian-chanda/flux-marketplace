@@ -7,13 +7,27 @@ import { ThemedView } from "@/components/themed-view";
 import { useListings } from "@/hooks/useListings";
 import { useTheme } from "@/hooks/useTheme";
 import { useAuth } from "@/contexts/auth-context";
-import { getCartCount } from "@/services/cart";
-import { getSavedListingIds, saveListing, unsaveListing } from "@/services/savedListings";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { router, useFocusEffect } from "expo-router";
-import { useCallback, useRef, useState } from "react";
+import { router, } from "expo-router";
+import { useCallback, useMemo, useState } from "react";
 import { ActivityIndicator, FlatList, RefreshControl, ScrollView, StatusBar, StyleSheet, TouchableOpacity, View } from "react-native";
+import { useCartIds, useSavedIds } from "@/hooks/use-fetch-listing-details";
+import { useSaveListing } from "@/hooks/use-save-listing";
 import { categories } from "@/lib/categories";
+
+// export function useBookmark(id: string) {
+//   const { data: savedIds } = useSavedIds();
+//   const { doSaveListings } = useSaveListing();
+//   const isSaved = savedIds?.includes(id) ?? false;
+//
+//   return { isSaved, toggle: () => doSaveListings.mutate({ id, saved: !isSaved }) };
+// }
+//
+//  export const ListingCard = ({ listing }: { listing: ListingWithSeller }) => {
+//   const { isSaved, toggle } = useBookmark(listing.id);
+//
+//   return <ProductCardH id={listing.id} bookmarked={isSaved} onBookmark={toggle} /* ...other props */ />;
+// };   
 
 type buttonTypes = {
     icon: any;
@@ -48,67 +62,26 @@ const SmallIconButton = ({ icon, title, active, onPress }: buttonTypes) => {
 
 export default function Index() {
     const { colors } = useTheme()
-    const { listings, loading, refreshing, error, load, refresh } = useListings();
+    const { listings, loading, refreshing, error, refresh } = useListings();
     const { user } = useAuth();
-const [bookmarked, setBookmarked] = useState<Record<string, boolean>>({});
-const [cartCount, setCartCount] = useState(0);
-const [activeFilter, setActiveFilter] = useState<string | null>(null);
-const isFirstFocus = useRef(true);
+    const { doSaveListings } = useSaveListing()
+    const [bookmarked, setBookmarked] = useState<Record<string, boolean>>({});
+    const [activeFilter, setActiveFilter] = useState<string | null>(null);
 
-    const loadSaved = useCallback(async () => {
-        if (!user) return;
-        try {
-            const ids = await getSavedListingIds(user.id);
-            setBookmarked(ids.reduce((acc, id) => ({ ...acc, [id]: true }), {}));
-        } catch {
-            setBookmarked({});
-        }
-    }, [user]);
+    const { data: cartData } = useCartIds()
+    const { data: savedData } = useSavedIds()
+    const savedIds = savedData as string[]
 
-    const loadCartCount = useCallback(async () => {
-        if (!user) return;
-        try {
-            setCartCount(await getCartCount(user.id));
-        } catch {
-            setCartCount(0);
-        }
-    }, [user]);
+    const savedSet = useMemo(() => new Set(savedIds ?? []), [savedIds]);
+    const cartCount = cartData?.length ?? 0;
 
-    useFocusEffect(
-        useCallback(() => {
-            loadSaved();
-            loadCartCount();
-            if (isFirstFocus.current) {
-                isFirstFocus.current = false;
-                return;
-            }
-            load(true);
-        }, [load, loadSaved, loadCartCount])
-    );
-
-    const toggleBookmark = useCallback(async (id: string) => {
-        if (!user) return;
-
-        const next = !bookmarked[id];
-        setBookmarked(prev => ({ ...prev, [id]: next }));
-
-        try {
-            if (next) {
-                await saveListing(user.id, id);
-            } else {
-                await unsaveListing(user.id, id);
-            }
-        } catch {
-            setBookmarked(prev => ({ ...prev, [id]: !next }));
-        }
-    }, [user, bookmarked]);
 
     const toggleFilter = useCallback((filter: string | null) => {
         setActiveFilter(prev => (prev === filter ? null : filter));
     }, []);
 
     const filteredListings = activeFilter
-        ? listings.filter((item) => {
+        ? listings?.filter((item) => {
             if (activeFilter === "saved") return !!bookmarked[item.id];
             if (activeFilter === "selling") return item.user_id === user?.id;
             return item.category === activeFilter;
@@ -153,15 +126,15 @@ const isFirstFocus = useRef(true);
                 ) : error ? (
                     <View style={styles.center}>
                         <ThemedText type="defaultFaded">Could not load listings</ThemedText>
-                        <TouchableOpacity onPress={refresh} style={{ marginTop: 10 }}>
+                        <TouchableOpacity onPress={() => refresh()} style={{ marginTop: 10 }}>
                             <ThemedText type="defaultBold" style={{ color: colors.accent }}>Try again</ThemedText>
                         </TouchableOpacity>
                     </View>
-                ) : listings.length === 0 ? (
+                ) : listings?.length === 0 ? (
                     <View style={styles.center}>
                         <ThemedText type="defaultFaded">No listings yet. Be the first to post one!</ThemedText>
                     </View>
-                ) : filteredListings.length === 0 ? (
+                ) : filteredListings?.length === 0 ? (
                     <View style={styles.center}>
                         <ThemedText type="defaultFaded">No {activeFilter} listings found.</ThemedText>
                     </View>
@@ -177,12 +150,12 @@ const isFirstFocus = useRef(true);
                         renderItem={({ item }) => (
                             <ProductCardV
                                 id={item.id}
-                                bookmarked={bookmarked[item.id]}
+                                bookmarked={savedSet.has(item.id)}
                                 img={item.images?.[0]}
                                 desc={item.condition ?? item.category}
                                 name={item.title}
-                                price={`K${item.price}`}
-                                onBookmark={() => toggleBookmark(item.id)}
+                                price={item.price}
+                                onBookmark={() => doSaveListings.mutate({ id: item.id, saved: !savedSet.has(item.id) })}
                             />
                         )}
                         keyExtractor={(item) => item.id}

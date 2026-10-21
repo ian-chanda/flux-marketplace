@@ -7,19 +7,21 @@ import {
 
 type searchTypes = {
 	width: any,
+	showSearch?: boolean,
 	searchValue: string;
 	setSearchValue: (text: string) => void;
 	onSearch: () => void;
 }
 
-export const CustomSearchBar = ({ width, searchValue, setSearchValue, onSearch }: searchTypes) => {
+export const CustomSearchBar = ({ width, showSearch=true, searchValue, setSearchValue, onSearch }: searchTypes) => {
 	const { colors } = useTheme()
 
 	return (
 		<View
 			style={[styles.search_container, {
-				width: '100%',
-				backgroundColor: colors.surface }]}>
+				width: width,
+				backgroundColor: colors.surface
+			}]}>
 			<TextInput
 				style={[styles.input, { color: colors.text, backgroundColor: colors.surface }]}
 				onChangeText={setSearchValue}
@@ -28,9 +30,11 @@ export const CustomSearchBar = ({ width, searchValue, setSearchValue, onSearch }
 				placeholder="Search.."
 			/>
 
-			<TouchableOpacity onPress={() => onSearch()}>
-				<MaterialIcons name="search" size={24} color={colors.accent} />
-			</TouchableOpacity>
+			{showSearch &&
+				<TouchableOpacity onPress={() => onSearch()}>
+					<MaterialIcons name="search" size={24} color={colors.accent} />
+				</TouchableOpacity>
+			}
 		</View>
 	)
 }

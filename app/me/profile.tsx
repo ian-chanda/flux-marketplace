@@ -24,7 +24,7 @@ type ProfileTab = typeof ProfileTabs[number]
 export default function ProfileScreen() {
 	const { colors } = useTheme()
 	const [selectedTab, setSelectedTab] = useState<ProfileTab>('About')
-	const { userData, loading: isLoading } = useUser()
+	const { data: userData, loading: isLoading } = useUser()
 
 
 	const avatar = userData?.avatar_url ?? ""
@@ -98,7 +98,7 @@ export default function ProfileScreen() {
 					About
 				</ThemedText>
 				<View style={{
-					backgroundColor: colors.surface, 
+					backgroundColor: colors.surface,
 					borderRadius: 12,
 					padding: 14,
 					gap: 10,
