@@ -4,9 +4,9 @@ import { ThemedText } from "@/components/themed-text"
 import { ThemedView } from "@/components/themed-view"
 import { useTheme } from "@/hooks/useTheme"
 import { getListingsByUser } from "@/services/listings"
-import { getUserProfile } from "@/services/users"
+import { getPublicSellerProfile } from "@/services/users"
 import { Listing } from "@/types/listing"
-import { UserData } from "@/types/user"
+import { PublicUser } from "@/types/user"
 import { MaterialIcons } from "@expo/vector-icons"
 import { useLocalSearchParams } from "expo-router"
 import { useEffect, useState } from "react"
@@ -16,7 +16,7 @@ export default function Profile() {
     const { colors } = useTheme();
     const { id } = useLocalSearchParams<{ id?: string }>();
 
-    const [seller, setSeller] = useState<UserData | null>(null);
+    const [seller, setSeller] = useState<PublicUser | null>(null);
     const [listings, setListings] = useState<Listing[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<Error | null>(null);
@@ -25,8 +25,8 @@ export default function Profile() {
         async function load() {
             if (!id) return;
             try {
-                const sellerProfile = await getUserProfile(id);
-                setSeller(sellerProfile as UserData);
+                const sellerProfile = await getPublicSellerProfile(id);
+                setSeller(sellerProfile);
 
                 const items = await getListingsByUser(id);
                 setListings(items);

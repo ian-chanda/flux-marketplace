@@ -9,9 +9,9 @@ import { addToCart, getCartListingIds } from "@/services/cart";
 import { getListing } from "@/services/listings";
 import { getSavedListingIds, saveListing, unsaveListing } from "@/services/savedListings";
 import { recordRecentView } from "@/services/recentlyViewed";
-import { getUserProfile } from "@/services/users";
+import { getPublicSellerProfile } from "@/services/users";
 import { Listing } from "@/types/listing";
-import { UserData } from "@/types/user";
+import { PublicUser } from "@/types/user";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { router, useLocalSearchParams } from "expo-router";
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -30,7 +30,7 @@ export default function Product() {
   const { width } = useWindowDimensions();
   const { id } = useLocalSearchParams<{ id: string }>();
   const [listing, setListing] = useState<Listing | null>(null);
-  const [seller, setSeller] = useState<UserData | null>(null);
+  const [seller, setSeller] = useState<PublicUser | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
   const [saved, setSaved] = useState(false);
@@ -48,8 +48,8 @@ export default function Product() {
         setListing(listingData);
 
         try {
-          const sellerData = await getUserProfile(listingData.user_id);
-          if (sellerData) setSeller(sellerData as UserData);
+          const sellerData = await getPublicSellerProfile(listingData.user_id);
+          if (sellerData) setSeller(sellerData);
         } catch {
           // seller is optional — don't block the listing
         }

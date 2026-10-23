@@ -7,10 +7,11 @@ import { ThemedText } from './themed-text';
 export type SmallIconButtonProps = {
   icon: ComponentProps<typeof Ionicons>['name'];
   title: string;
+  active?: boolean;
   onPress?: () => void;
 };
 
-export function SmallIconButton({ icon, title, onPress }: SmallIconButtonProps) {
+export function SmallIconButton({ icon, title, active, onPress }: SmallIconButtonProps) {
   const { colors } = useTheme();
 
   return (
@@ -25,9 +26,11 @@ export function SmallIconButton({ icon, title, onPress }: SmallIconButtonProps) 
         alignItems: 'center',
         backgroundColor: colors.surface,
         borderRadius: 100,
+        borderWidth: active ? 1.5 : 0,
+        borderColor: active ? colors.accent : "transparent",
       }}>
       <Ionicons name={icon} size={18} color={colors.accent} />
-      <ThemedText type="mediumFaded">{title}</ThemedText>
+      <ThemedText type="mediumFaded" style={active ? { color: colors.accent } : undefined}>{title}</ThemedText>
     </TouchableOpacity>
   );
 }
