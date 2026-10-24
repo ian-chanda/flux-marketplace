@@ -4,12 +4,12 @@ import { ThemedView } from "@/components/themed-view";
 import { TopBar } from '@/components/topBar';
 import { useTheme } from "@/hooks/useTheme";
 import { useAuth } from "@/contexts/auth-context";
-import { clearCart, getCartItems } from "@/services/cart";
+import { getCartItems } from "@/services/cart";
 import { getListing } from "@/services/listings";
-import { createOrder, OrderItemInput } from "@/services/orders";
+import { createOrder, newIdempotencyKey, OrderItemInput } from "@/services/orders";
 import { Listing } from "@/types/listing";
 import { router, useLocalSearchParams } from "expo-router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ActivityIndicator, Image, KeyboardAvoidingView, Platform, Pressable, ScrollView, StyleSheet, TextInput, TouchableOpacity, View } from "react-native";
 
 const formatK = (n: number) => `K${n.toLocaleString("en-ZM")}`;
@@ -23,6 +23,9 @@ const [total, setTotal] = useState(0);
 const [loading, setLoading] = useState(true);
 const [paying, setPaying] = useState(false);
 const { user } = useAuth();
+// One key per checkout attempt; reused across retries so the server can
+// dedupe a double-submit into a single order.
+const idempotencyKey = useRef(newIdempotencyKey()).current;
 
 useEffect(() => {
     let cancelled = false;
@@ -55,16 +58,20 @@ const handlePay = async () => {
         const items: OrderItemInput[] = [];
         if (listingId) {
             const listing: Listing = await getListing(listingId);
-            items.push({ listing_id: listing.id, price: Number(listing.price), title: listing.title, image_url: listing.images?.[0] ?? null });
+            items.push({ listing_id: listing.id });
         } else {
             const rows = await getCartItems(user.id);
-            rows.forEach(r => items.push({ listing_id: r.listing_id, price: Number(r.listings.price), title: r.listings.title, image_url: r.listings.images?.[0] ?? null }));
+            rows.forEach(r => items.push({ listing_id: r.listing_id }));
         }
-        await createOrder({ userId: user.id, items, total, paymentMethod: SelectPayment, phoneNumber: phone.trim() });
-        if (!listingId) {
-            await clearCart(user.id);
-        }
-        alert(`Order placed! Total ${formatK(total)}`);
+        // Totals are computed server-side; the RPC also clears the cart atomically.
+        const order = await createOrder({
+            items,
+            paymentMethod: SelectPayment,
+            phoneNumber: phone.trim(),
+            clearCart: !listingId,
+            idempotencyKey,
+        });
+        alert(`Order placed! Total ${formatK(Number(order.total))}`);
         router.replace("/");
     } catch (err) {
         alert("Payment failed: " + (err as Error).message);

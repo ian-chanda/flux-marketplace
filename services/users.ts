@@ -1,4 +1,5 @@
 import { supabase } from "@/lib/supabase";
+import { PublicUser } from "@/types/user";
 import { uploadImage } from "./storage";
 import { getVerificationStatus } from "./verifications";
 import { UserUpdateForm } from "@/types/user";
@@ -26,6 +27,24 @@ export async function getUserProfile(userId: string) {
           submitted_at: null,
         },
   };
+}
+
+// Cross-user reads go through the `public_profiles` view, which exposes only
+// non-sensitive seller fields (no email, phone, coordinates, or documents).
+export async function getPublicSellerProfile(
+  userId: string
+): Promise<PublicUser> {
+  const { data, error } = await supabase
+    .from("public_profiles")
+    .select(
+      "id, first_name, last_name, username, avatar_url, bio, location_city, location_province, location_country, is_verified, created_at"
+    )
+    .eq("id", userId)
+    .single();
+
+  if (error) throw error;
+
+  return data as PublicUser;
 }
 
 export async function updateProfile({

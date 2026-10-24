@@ -4,9 +4,9 @@ import { ThemedText } from "@/components/themed-text"
 import { ThemedView } from "@/components/themed-view"
 import { useTheme } from "@/hooks/useTheme"
 import { getListingsByUser } from "@/services/listings"
-import { getUserProfile } from "@/services/users"
+import { getPublicSellerProfile } from "@/services/users"
 import { Listing } from "@/types/listing"
-import { UserData } from "@/types/user"
+import { PublicUser } from "@/types/user"
 import { MaterialIcons } from "@expo/vector-icons"
 import { useLocalSearchParams } from "expo-router"
 import { useEffect, useState } from "react"
@@ -16,7 +16,7 @@ export default function Profile() {
     const { colors } = useTheme();
     const { id } = useLocalSearchParams<{ id?: string }>();
 
-    const [seller, setSeller] = useState<UserData | null>(null);
+    const [seller, setSeller] = useState<PublicUser | null>(null);
     const [listings, setListings] = useState<Listing[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<Error | null>(null);
@@ -25,8 +25,8 @@ export default function Profile() {
         async function load() {
             if (!id) return;
             try {
-                const data = await getUserProfile(id);
-                setSeller(data as UserData);
+                const sellerProfile = await getPublicSellerProfile(id);
+                setSeller(sellerProfile);
 
                 const items = await getListingsByUser(id);
                 setListings(items);
@@ -41,22 +41,17 @@ export default function Profile() {
 
     if (loading) {
         return (
-            <ThemedView isTabVisible={false}>
-                <CustomHeader title="Seller Profile" showBack />
-                <View style={{ flex: 1, alignItems: "center", justifyContent: "center", gap: 10 }}>
-                    <ActivityIndicator size="large" color={colors.accent} />
-                </View>
+            <ThemedView style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+                <ActivityIndicator size="large" color={colors.accent} />
             </ThemedView>
         );
     }
 
     if (error || !seller) {
         return (
-            <ThemedView isTabVisible={false}>
+            <ThemedView style={{ flex: 1, alignItems: "center", justifyContent: "center", gap: 10 }}>
                 <CustomHeader title="Seller Profile" showBack />
-                <View style={{ flex: 1, alignItems: "center", justifyContent: "center", gap: 10 }}>
-                    <ThemedText type="defaultFaded">Could not load seller profile.</ThemedText>
-                </View>
+                <ThemedText type="defaultFaded">Could not load seller profile.</ThemedText>
             </ThemedView>
         );
     }
@@ -67,12 +62,14 @@ export default function Profile() {
     });
 
     return (
-        <ThemedView>
+        <ThemedView
+            style={{
+                paddingHorizontal: 10
+            }}>
             <CustomHeader
                 title="Seller profile"
                 showBack />
             <ScrollView
-                contentContainerStyle={{ paddingHorizontal: 10 }}
                 showsVerticalScrollIndicator={false}>
                 <View>
                     <View style={[styles.container, styles.shadow, { backgroundColor: colors.background }]}>
@@ -108,19 +105,19 @@ export default function Profile() {
                         </View>
                     </View>
 
-                    <ThemedText type="subtitle" style={{ paddingVertical: 15 }}>
+                    <ThemedText type="subtitle" style={{ paddingHorizontal: 15, paddingVertical: 15 }}>
                         Reviews
                     </ThemedText>
-                    <View style={{}}>
+                    <View style={{ paddingHorizontal: 15 }}>
                         <ThemedText type="defaultFaded">No reviews yet.</ThemedText>
                     </View>
 
-                    <ThemedText type="subtitle" style={{ paddingVertical: 15 }}>
+                    <ThemedText type="subtitle" style={{ paddingHorizontal: 15, paddingVertical: 15 }}>
                         Other Products by seller
                     </ThemedText>
-                    <View style={{}}>
+                    <View style={{ paddingHorizontal: 10 }}>
                         {listings.length === 0 ? (
-                            <ThemedText type="defaultFaded" style={{}}>
+                            <ThemedText type="defaultFaded" style={{ paddingHorizontal: 5 }}>
                                 No listings yet.
                             </ThemedText>
                         ) : (
@@ -137,7 +134,7 @@ export default function Profile() {
                                         img={item.images?.[0]}
                                         desc={item.condition ?? item.category}
                                         name={item.title}
-                                        price={item.price}
+                                        price={`K${item.price}`}
                                     />
                                 )}
                                 keyExtractor={(item) => item.id}

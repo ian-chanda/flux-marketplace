@@ -7,6 +7,16 @@ import { ThemedView } from "@/components/themed-view";
 import { useAuth } from "@/contexts/auth-context";
 import { useCreateChannel } from "@/hooks/use-create-channel";
 import { useTheme } from "@/hooks/useTheme";
+<<<<<<< HEAD
+=======
+import { addToCart, getCartListingIds } from "@/services/cart";
+import { getListing } from "@/services/listings";
+import { getSavedListingIds, saveListing, unsaveListing } from "@/services/savedListings";
+import { recordRecentView } from "@/services/recentlyViewed";
+import { getPublicSellerProfile } from "@/services/users";
+import { Listing } from "@/types/listing";
+import { PublicUser } from "@/types/user";
+>>>>>>> tempKeep
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { router, useFocusEffect, useLocalSearchParams } from "expo-router";
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -29,6 +39,16 @@ export default function Product() {
   const { colors } = useTheme();
   const { width } = useWindowDimensions();
   const { id } = useLocalSearchParams<{ id: string }>();
+<<<<<<< HEAD
+=======
+  const [listing, setListing] = useState<Listing | null>(null);
+  const [seller, setSeller] = useState<PublicUser | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<Error | null>(null);
+  const [saved, setSaved] = useState(false);
+  const [cartCount, setCartCount] = useState(0);
+  const [inCart, setInCart] = useState(false);
+>>>>>>> tempKeep
   const [activeImage, setActiveImage] = useState(0);
   const mainListRef = useRef<FlatList | null>(null);
   const { user } = useAuth();
@@ -48,9 +68,18 @@ export default function Product() {
     doRecordView.mutate({ id: listing?.id })
   }, [listing?.id])
 
+<<<<<<< HEAD
   const handleCart = async () => {
     if (inCart) return router.push("/cart");
     if (!user) return alert("Please sign in first");
+=======
+        try {
+          const sellerData = await getPublicSellerProfile(listingData.user_id);
+          if (sellerData) setSeller(sellerData);
+        } catch {
+          // seller is optional — don't block the listing
+        }
+>>>>>>> tempKeep
 
     if (!listing?.id) return
     doAddToCart.mutate(listing?.id)
