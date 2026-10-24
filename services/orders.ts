@@ -1,44 +1,87 @@
 import { supabase } from "@/lib/supabase";
 
+// The client only sends listing ids. Prices/titles/images are snapshotted
+// server-side by the create_order RPC, so a tampered client cannot set prices.
 export type OrderItemInput = {
+  listing_id: string;
+};
+
+export type OrderItem = {
+  id: string;
+  order_id: string;
   listing_id: string;
   price: number;
   title: string;
   image_url: string | null;
+  listings: { category: string | null } | null;
 };
 
+export type Order = {
+  id: string;
+  user_id: string;
+  total: number;
+  status: string;
+  payment_method: string | null;
+  phone_number: string | null;
+  created_at: string;
+  order_items: OrderItem[];
+};
+
+// Server-side order creation. Totals, item snapshots, ownership and cart
+// clearing all happen inside the security-definer `create_order` RPC.
+// `idempotencyKey` makes a retried/double-submitted request return the
+// existing order instead of charging twice.
 export async function createOrder({
-  userId,
   items,
-  total,
   paymentMethod,
   phoneNumber,
+  clearCart = false,
+  idempotencyKey,
 }: {
-  userId: string;
   items: OrderItemInput[];
-  total: number;
   paymentMethod: string;
   phoneNumber?: string;
+  clearCart?: boolean;
+  idempotencyKey?: string;
 }): Promise<{ id: string; total: number; status: string }> {
-  const { data: order, error: orderError } = await supabase
+  const { data, error } = await supabase.rpc("create_order", {
+    p_items: items.map((item) => ({ listing_id: item.listing_id })),
+    p_payment_method: paymentMethod,
+    p_phone: phoneNumber ?? null,
+    p_clear_cart: clearCart,
+    p_idempotency_key: idempotencyKey ?? null,
+  });
+
+  if (error) throw error;
+
+  return data as { id: string; total: number; status: string };
+}
+
+export function newIdempotencyKey() {
+  return `${Date.now()}-${Math.random().toString(36).slice(2, 12)}`;
+}
+
+export async function getOrders(userId: string): Promise<Order[]> {
+  const { data, error } = await supabase
     .from("orders")
-    .insert({
-      user_id: userId,
-      total,
-      status: "pending",
-      payment_method: paymentMethod,
-      phone_number: phoneNumber ?? null,
-    })
-    .select()
-    .single();
+    .select(
+      "id, user_id, total, status, payment_method, phone_number, created_at, order_items(*, listings(category))"
+    )
+    .eq("user_id", userId)
+    .order("created_at", { ascending: false });
 
-  if (orderError) throw orderError;
+  if (error) throw error;
 
-  const { error: itemsError } = await supabase
-    .from("order_items")
-    .insert(items.map((item) => ({ order_id: order.id, ...item })));
+  return (data ?? []) as unknown as Order[];
+}
 
-  if (itemsError) throw itemsError;
+export async function getOrderCount(userId: string): Promise<number> {
+  const { count, error } = await supabase
+    .from("orders")
+    .select("id", { count: "exact", head: true })
+    .eq("user_id", userId);
 
-  return order;
+  if (error) throw error;
+
+  return count ?? 0;
 }

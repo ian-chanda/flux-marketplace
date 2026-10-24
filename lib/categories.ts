@@ -1,7 +1,10 @@
+import { ComponentProps } from "react";
+import { Ionicons } from "@expo/vector-icons";
+
 export type Category = {
   name: string;
   pill: string;
-  icon: string;
+  icon: ComponentProps<typeof Ionicons>["name"];
 };
 
 export const categories: Category[] = [

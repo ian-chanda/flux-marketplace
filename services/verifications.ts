@@ -1,6 +1,7 @@
 import { supabase } from "@/lib/supabase";
-import { uploadImage } from "./storage";
-import { verType } from "@/types/user";
+import { createSignedUrl, uploadPrivateFile } from "./storage";
+
+const VERIFICATION_BUCKET = "verification-docs";
 
 export const getVerificationStatus = async (userId: string) => {
   const { data, error: verError } = await supabase
@@ -25,19 +26,17 @@ export async function submitVerification({
   idUri: string;
   selfieUri: string;
 }) {
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  const idUrl = await uploadImage({
-    bucket_name: "verification-docs",
+  // Store object PATHS, not public URLs. The bucket is private and read via
+  // short-lived signed URLs (see getVerificationDocumentUrl).
+  const idPath = await uploadPrivateFile({
+    bucket_name: VERIFICATION_BUCKET,
     id: userId,
     uri: idUri,
     imageName: "id",
   });
 
-  const selfieUrl = await uploadImage({
-    bucket_name: "verification-docs",
+  const selfiePath = await uploadPrivateFile({
+    bucket_name: VERIFICATION_BUCKET,
     id: userId,
     uri: selfieUri,
     imageName: "selfie",
@@ -45,11 +44,23 @@ export async function submitVerification({
 
   const { data, error } = await supabase.from("verifications").insert({
     user_id: userId,
-    id_url: idUrl,
-    selfie_url: selfieUrl,
+    id_url: idPath,
+    selfie_url: selfiePath,
   });
 
   if (error) throw error;
 
   return data;
+}
+
+// Returns a short-lived URL for the owner (or an admin with read access) to
+// view a private verification document. `path` is the stored object path.
+export async function getVerificationDocumentUrl(path: string) {
+  if (!path || /^https?:\/\//i.test(path)) {
+    // Legacy rows may still hold a public URL; return it unchanged so the UI
+    // keeps working until the optional normalization migration is applied.
+    return path;
+  }
+
+  return createSignedUrl(VERIFICATION_BUCKET, path);
 }

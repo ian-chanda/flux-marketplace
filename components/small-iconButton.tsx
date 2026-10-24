@@ -5,13 +5,13 @@ import { TouchableOpacity } from 'react-native';
 import { ThemedText } from './themed-text';
 
 export type SmallIconButtonProps = {
-  icon?: ComponentProps<typeof Ionicons>['name'];
+  icon: ComponentProps<typeof Ionicons>['name'];
   title: string;
-  isSelected?: boolean;
+  active?: boolean;
   onPress?: () => void;
 };
 
-export function SmallIconButton({ icon, title, isSelected, onPress }: SmallIconButtonProps) {
+export function SmallIconButton({ icon, title, active, onPress }: SmallIconButtonProps) {
   const { colors } = useTheme();
 
   return (
@@ -21,16 +21,16 @@ export function SmallIconButton({ icon, title, isSelected, onPress }: SmallIconB
         flexShrink: 0,
         flexDirection: 'row',
         paddingHorizontal: 10,
-        minWidth: 50,
         height: 35,
         gap: 3,
         alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: isSelected ? colors.secondary : colors.surface,
+        backgroundColor: colors.surface,
         borderRadius: 100,
+        borderWidth: active ? 1.5 : 0,
+        borderColor: active ? colors.accent : "transparent",
       }}>
-      {icon && <Ionicons name={icon} size={18} color={colors.accent} />}
-      <ThemedText type="mediumFaded" style={{color: isSelected ? colors.background : colors.text}}>{title}</ThemedText>
+      <Ionicons name={icon} size={18} color={colors.accent} />
+      <ThemedText type="mediumFaded" style={active ? { color: colors.accent } : undefined}>{title}</ThemedText>
     </TouchableOpacity>
   );
 }
